@@ -1,0 +1,24 @@
+<!--pages/user/user.wxml-->
+<view class='user_container'>
+  <view class='weui-cells__title'>
+    <view>
+      <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+              <image class="weui-media-box__thumb user_avatar" src="{{userInfo.avatarUrl}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view class="weui-media-box__title">{{userInfo.nickName}}</view>
+              <view class="weui-media-box__desc">电话 13322221111</view>
+          </view>
+      </navigator>
+    </view>  
+  </view>
+  <view class="weui-cells weui-cells_after-title">
+    <block wx:for="{{userSections}}">
+      <navigator url="{{item.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd"> {{item.text}}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+    </block>
+  </view>
+</view>

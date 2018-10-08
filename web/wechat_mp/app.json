@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/user/user",
+    "pages/price/price",
+    "pages/address/index",
+    "pages/feedback/index",
+    "pages/invoice/index",
+    "pages/order/index",
+    "pages/index/city/city",
+    "pages/invoice/invoice_contact",
+    "pages/address/create_address",
+    "pages/order/order_detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#0F7B99",
+    "navigationBarTitleText": "驼飞轮",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/images/icon-search.png",
+        "selectedIconPath": "assets/images/icon-search-active.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "assets/images/icon-user.png",
+        "selectedIconPath": "assets/images/icon-user-active.png"
+      }
+    ],
+    "color": "#0f0f0f",
+    "selectedColor": "#0F7B99"
+  }
+}

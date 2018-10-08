@@ -1,0 +1,18 @@
+<view>
+  <view class="weui-flex">
+    <view class="weui-flex__item">
+      <view class="placeholder">{{startCityName}}->{{endCityName}}</view>
+    </view>
+  </view>
+  <view class="weui-flex">
+    <view class="weui-flex__item">
+      <view class="placeholder">{{carTypes[carType]}}</view>
+    </view>
+    <view class="weui-flex__item">
+      <view class="placeholder">{{sizeTypes[sizeType]}}</view>
+    </view>
+    <view class="weui-flex__item">
+      <view class="placeholder">{{serviceTypes[serviceType]}}</view>
+    </view>
+  </view>
+</view>
