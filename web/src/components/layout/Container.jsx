@@ -7,7 +7,6 @@ import {fileHost} from '../../config/HostConfig';
 import {connect} from 'react-redux';
 
 const routes = [
-
 ];
 
 class Container extends React.Component {
