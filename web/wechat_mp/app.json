@@ -1,8 +1,13 @@
 {
   "pages": [
-    "pages/index/print/print",
-    "pages/index/detail/detail",
+    "pages/index/addsite/addsite",
+    "pages/index/choose/choose",
+ 
     "pages/index/index",
+    "pages/index/print/print",
+    "pages/index/submit/submit",
+    "pages/index/detail/detail",
+    "pages/index/product-dt/product-dt",
     "pages/logs/logs",
     "pages/msg/msg",
     "pages/user/user",

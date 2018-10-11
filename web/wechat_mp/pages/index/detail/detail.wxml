@@ -1,0 +1,49 @@
+<view class="container"> 
+ <view class="code">
+  <image class='codeinfo' src='../../../assets/images/code-active.png'></image>
+ </view>
+
+ <view class='car'>
+  <image class='car-img' src='../../../assets/images/car.png'></image>
+  <text class='nub'>辽B12345</text>
+  </view>
+ <view class="divLine"></view>
+
+ <view class='car'>
+  <view class='car-msg'>
+   <view>品牌型号: 奥迪A6
+    </view>
+  </view>
+ </view>
+<view class="divLine01"></view>
+
+<view class='car'>
+  <view class='car-msg'>
+   <view>车辆识别码: UYWHRJF395793450
+   </view>
+   </view>
+ </view>
+<view class="divLine01"></view>
+
+ <view class='car'>
+  <view class='car-msg'>
+    <view>发动机号码: UYWHRJF395793450
+    </view>
+   </view>
+  </view>
+ <view class="divLine"></view>
+
+<view class='but-list'>
+  <button class='downlode'>
+    <image class='downlode-img' src='../../../assets/images/download.png'></image>
+    <text class='download-text'>下载二维码</text>
+  </button>
+
+   <button bindtap='print' class='downlode'>
+    <image class='downlode-img' src='../../../assets/images/print.png'></image>
+    <text class='download-text'>帮您打印</text>
+  </button>
+</view>
+
+
+</view>

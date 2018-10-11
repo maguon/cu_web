@@ -1,0 +1,8 @@
+ <view class="icon-box">
+  <icon type="success" size="93"></icon>
+    <view class="icon-box__ctn">
+      <view class="icon-box__title">提交成功</view>
+        <view class="icon-box__desc">内容详情，根据实际文案安排</view>
+    </view>
+     <button bindtap="returnHome" class="btn-area">回到首页</button>
+ </view>

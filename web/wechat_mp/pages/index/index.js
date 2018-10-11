@@ -52,5 +52,10 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  bindCarDetail:function(){
+    wx.navigateTo({
+      url: '/pages/index/detail/detail'
+    })
   }
 })
