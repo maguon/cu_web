@@ -1,35 +1,29 @@
 //index.js
 //获取应用实例
-const app = getApp();
-const config = require('../../config.js')
-const util = require('../../utils/util.js')
+const app = getApp()
+
 Page({
   data: {
-    motto: 'Hello World',
+    motto: '暂无关联车辆',
+    mottosmall: '请到 “我的-关联车辆” 栏目下将您的爱车关联到本软件以便您在停放车辆的时候随时可接收到交警的通知',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.contact'),
-    
-    sizeTypeIndex: 1,    
-    carTypeIndex: 1,    
-    serviceTypeIndex: 1,
-    startCity :{},
-    endCity:{}
+    flag: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
-  bindViewTap: function() {
+  bindViewTap: function () {
     wx.navigateTo({
-      url: '../price/price'
+      url: '../logs/logs'
     })
   },
   onLoad: function () {
-    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
+    } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -51,90 +45,12 @@ Page({
       })
     }
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    if (app.globalData.startCity) {
-      this.setData({
-        startCity: app.globalData.startCity,
-      })
-    }
-    if (app.globalData.endCity) {
-      this.setData({
-        endCity: app.globalData.endCity,
-      })
-    }
-    this.setData({
-      sizeTypes: config.priceConfig.sizeTypes,
-      carTypes: config.priceConfig.carTypes,
-      serviceTypes: config.priceConfig.serviceTypes,
-    })
-  },
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  },  
-  bindCarTypeChange: function (e) {    
-    this.setData({
-      carTypeIndex: e.detail.value
-    })
-  },
-  bindSizeTypeChange: function (e) {
-    this.setData({
-      sizeTypeIndex: e.detail.value
-    })
-  },
-  bindServiceTypeChange: function (e) {
-    this.setData({
-      serviceTypeIndex: e.detail.value
-    })
-  },
-  bindNaviStartCity :function(e){
-    wx.navigateTo({
-      url: '/pages/index/city/city?start=1'
-    })
-  },
-  bindNaviEndCity: function (e) {
-    wx.navigateTo({
-      url: '/pages/index/city/city?start=0'
-    })
-  },
-  bindQueryPrice: function(e){
-    let params ={
-      sizeType: this.data.sizeTypeIndex,
-      carType: this.data.carTypeIndex,
-      serviceType: this.data.serviceTypeIndex,
-      startCityId : this.data.startCity.cid,
-      startCityName : this.data.startCity.cname,
-      endCityId : this.data.endCity.cid,
-      endCityName: this.data.endCity.cname
-    }
-    if(util.objNullCheck(params)){
-      const paramsUrl = util.objToQueryString(params);
-
-      console.log(paramsUrl);
-      wx.navigateTo({
-        url: '/pages/price/price?' + paramsUrl
-      })
-    }else{
-      wx.showModal({
-        title: '错误',
-        showCancel: false,
-        content: '表单数据未完成'
-      })
-    }
-    
   }
 })

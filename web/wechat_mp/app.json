@@ -1,40 +1,49 @@
 {
   "pages": [
+    "pages/index/print/print",
+    "pages/index/detail/detail",
     "pages/index/index",
     "pages/logs/logs",
+    "pages/msg/msg",
     "pages/user/user",
     "pages/price/price",
     "pages/address/index",
     "pages/feedback/index",
     "pages/invoice/index",
     "pages/order/index",
-    "pages/index/city/city",
+    "pages/msg/city/city",
     "pages/invoice/invoice_contact",
     "pages/address/create_address",
     "pages/order/order_detail"
   ],
   "window": {
-    "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#0F7B99",
-    "navigationBarTitleText": "驼飞轮",
-    "navigationBarTextStyle": "white"
+   "backgroundTextStyle": "dark",
+   "navigationBarBackgroundColor": "white",
+   "navigationBarTitleText": "交通小程序",
+   "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "assets/images/icon-search.png",
-        "selectedIconPath": "assets/images/icon-search-active.png"
+        "iconPath": "assets/images/house.png",
+        "selectedIconPath": "assets/images/house-active.png"
+      },
+      {
+        "pagePath": "pages/msg/msg",
+        "text": "消息",
+        "iconPath": "assets/images/msg.png",
+        "selectedIconPath": "assets/images/msg-active.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的",
-        "iconPath": "assets/images/icon-user.png",
-        "selectedIconPath": "assets/images/icon-user-active.png"
+        "iconPath": "assets/images/user.png",
+        "selectedIconPath": "assets/images/user-active.png"
       }
     ],
     "color": "#0f0f0f",
-    "selectedColor": "#0F7B99"
+    "selectedColor": "#0f7f7fa"
   }
 }

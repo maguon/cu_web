@@ -5,10 +5,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    wx.setNavigationBarColor({
-      backgroundColor: "#0F7B99"
-      , frontColor:"#ffffff"})
-
+    
     // 登录
     wx.login({
       success: res => {
