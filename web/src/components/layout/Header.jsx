@@ -27,7 +27,7 @@ class Header extends React.Component {
         let userId = localUtil.getLocalItem(sysConst.USER_ID);
         const token = localUtil.getLocalItem(sysConst.AUTH_TOKEN);
         httpHeaders.set(sysConst.AUTH_TOKEN, token);
-        $("#sideNav").sideNav();
+        $("#sideNav").sideNav({closeOnClick: true});
         $('.collapsible').collapsible();
         // $('select').formSelect();
         if (userId == null || token == null) {
