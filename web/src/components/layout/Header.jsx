@@ -46,12 +46,15 @@ class Header extends React.Component {
         return (
             <div>
                 <nav>
-                    <div className="nav-wrapper z-depth-3 custom-purple">
+                    <div className="nav-wrapper z-depth-3 custom-blue">
 
                         <a href="#" id="sideNav" data-activates="slide-out" className="sidenav-trigger brand-logo"
-                           style={{display: 'block'}}>
+                           style={{display: 'block',paddingLeft: '10px'}}>
                             <i className="mdi mdi-menu mdi-36px"/>
                         </a>
+
+                        <span className="header-icon">icon位置</span>
+                        <span className="header-font">连惠车后台管理系统</span>
 
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
 
