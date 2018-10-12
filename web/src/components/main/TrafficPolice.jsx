@@ -112,7 +112,7 @@ class TrafficPolice extends React.Component {
                             {/* 查询条件：电话 */}
                             <div className="input-field col s4">
                                 <input id="phone" type="text" value={trafficPoliceReducer.conditionPhone} onChange={this.changeConditionPhone}/>
-                                <label htmlFor="phone">姓名</label>
+                                <label htmlFor="phone">电话</label>
                             </div>
 
                             {/* 查询条件：状态 */}
