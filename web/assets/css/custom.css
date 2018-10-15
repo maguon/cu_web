@@ -123,104 +123,23 @@ body {
 }
 
 /** Material补充样式 自定义字体大小 */
-.fz12 {
-    font-size: 12px;
-}
-
-.fz13 {
-    font-size: 13px;
-}
-
-.fz14 {
-    font-size: 14px;
-}
-
 .fz15 {
     font-size: 15px;
 }
 
-.fz16 {
-    font-size: 16px;
+.margin-top10 {
+    margin-top: 10px;
 }
 
-.fz17 {
-    font-size: 17px;
+.margin-top40 {
+    margin-top: 40px;
 }
 
-.fz18 {
-    font-size: 18px;
+.operation {
+    padding: 8px 5px 8px 5px;
 }
-
-.fz19 {
-    font-size: 19px;
-}
-
-.fz20 {
-    font-size: 20px;
-}
-
-.fz21 {
-    font-size: 21px;
-}
-
-.fz22 {
+.operation i {
     font-size: 22px;
-}
-
-.fz23 {
-    font-size: 23px;
-}
-
-.fz24 {
-    font-size: 24px;
-}
-
-.fz25 {
-    font-size: 25px;
-}
-
-.fz26 {
-    font-size: 26px;
-}
-
-.fz27 {
-    font-size: 27px;
-}
-
-.fz28 {
-    font-size: 28px;
-}
-
-.fz29 {
-    font-size: 29px;
-}
-
-.fz30 {
-    font-size: 30px;
-}
-
-.fz31 {
-    font-size: 31px;
-}
-
-.fz32 {
-    font-size: 32px;
-}
-
-.fz33 {
-    font-size: 33px;
-}
-
-.fz34 {
-    font-size: 34px;
-}
-
-.fz35 {
-    font-size: 35px;
-}
-
-.fz36 {
-    font-size: 36px;
 }
 
 /** modal 样式定义部分 start */
@@ -232,7 +151,7 @@ body {
     height: 50px;
     font-size: 18px;
     line-height: 50px;
-    background-color: #724278;
+    background-color: #0F4F94;
 }
 
 .modal .modal-footer {
@@ -254,13 +173,16 @@ body {
 
 .confirm-btn {
     width: 110px;
-    background-color: #724278;
+    background-color: #0F4F94;
 }
 
-.confirm-btn:hover {
-    background: #6E2678;
-}
+/*.confirm-btn:hover {*/
+    /*background: #1779E3;*/
+/*}*/
 
+#policeModal {
+    max-height: 556px;
+}
 /** modal 样式定义部分 end */
 
 /** react-select 错误信息样式 */
@@ -275,7 +197,7 @@ body {
 /** 标题：画面主体部分，标题部分样式 */
 .page-title {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     color: #0F4F94 !important;
 }
 
@@ -297,8 +219,14 @@ body {
 }
 
 /** 交警管理 画面 用 */
-.margin-top40 {
-    margin-top: 40px;
+.custom-divider {
+    background: #CBCBCB;
+    height: 2px;
+}
+
+.no-data-tr {
+    letter-spacing: 2px;
+    text-align: center;
 }
 
 .query-btn {

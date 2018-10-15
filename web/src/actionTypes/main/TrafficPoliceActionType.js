@@ -8,6 +8,6 @@ export const setConditionPhone = createAction('SET_CONDITION_PHONE');
 export const setConditionStatus = createAction('SET_CONDITION_STATUS');
 
 
-export const getCityInfo = createAction('GET_CITY_INFO');
+export const getPoliceList = createAction('GET_POLICE_LIST');
 export const addCityInfo = createAction('ADD_CITY_INFO');
 export const setCityFormFlag = createAction('SET_CITY_FORM_FLAG');
