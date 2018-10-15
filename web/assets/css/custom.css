@@ -15,11 +15,43 @@ body {
     font-size: 15px;
 }
 
-.custom-purple {
-    background-color: #724278 !important;
+/** 主画面 主体部分样式 */
+.main-body {
+    /** header height 64px + footer height: 50px + margin-top: 2px = 116px */
+    height: calc(100% - 116px);
+    overflow-y: auto;
+    margin-top: 2px;
+    padding-top: 20px;
 }
 
+/** 左侧导航 按钮样式 */
+#sideNav {
+     display: block;
+     padding-left: 10px;
+ }
 
+/** 标题：画面主体部分，标题部分样式 */
+.header-icon {
+    margin-left: 60px;
+}
+
+.header-font {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+/* 主画面 底部样式 (固定) */
+.footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    z-index: 10;
+    background: #6B7283;
+    padding-top: 12px;
+    text-align: right;
+}
 
 .footer-msg {
     color: white;
@@ -51,3 +83,204 @@ body {
     width: 9em;
     height: 9em;
 }
+/** 画面加载样式 End */
+
+/** Material样式 变更部分 Start */
+.input-field {
+    margin-bottom: 0;
+}
+
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn {
+    background: #0F4F94;
+}
+
+.btn:focus {
+    background-color: #388FEB !important;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #388FEB !important;
+    color: white;
+}
+
+.side-nav .divider {
+    margin: 0;
+}
+/** Material样式 变更部分 End */
+
+/** Material补充样式 左侧导航栏 自定义 顶层按钮 */
+.side-navigation {
+    padding: 0 16px !important;
+}
+
+.side-navigation i {
+    font-size: 1.6rem !important;
+}
+
+/** 自定义样式 */
+.fz15 {
+    font-size: 15px;
+}
+
+.margin-top10 {
+    margin-top: 10px;
+}
+
+.margin-top25 {
+    margin-top: 25px;
+}
+
+.margin-top40 {
+    margin-top: 40px;
+}
+
+.margin-left10 {
+    margin-left: 10px;
+}
+
+.margin-left50 {
+    margin-left: 50px;
+}
+
+.margin-right50 {
+    margin-right: 50px;
+}
+
+.margin-right10 {
+    margin-right: 10px;
+}
+
+/** 一览画面 操作按钮部 样式 */
+.operation {
+    padding: 8px 5px 8px 5px;
+}
+.operation i {
+    font-size: 22px;
+}
+
+/** modal 样式定义部分 start */
+.modal {
+    min-width: 900px;
+}
+
+.modal-title {
+    height: 50px;
+    font-size: 18px;
+    line-height: 50px;
+    background-color: #0F4F94;
+}
+
+.modal .modal-footer {
+    padding: 4px 20px;
+}
+
+.modal .modal-footer .btn {
+    margin: 6px 0 0 20px;
+}
+
+.close-btn {
+    width: 110px;
+    background-color: #9E9E9E;
+}
+
+.close-btn:hover {
+    background: #8D8D8D;
+}
+
+.confirm-btn {
+    width: 110px;
+    background-color: #0F4F94;
+}
+
+#policeModal {
+    max-height: 456px;
+}
+/** modal 样式定义部分 end */
+
+/** react-select 错误信息样式 */
+.error-msg {
+    position: relative;
+    min-height: 18px;
+    display: block;
+    font-size: 12px;
+    color: #F44336;
+}
+
+/** 标题：画面主体部分，标题部分样式 */
+.page-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #0F4F94 !important;
+}
+
+.blue-font {
+    color: #0F4F94 !important;
+}
+
+.pink-font {
+    color: #B6598F !important;
+}
+
+.red-font {
+    color: #F44336;
+    margin: 0 5px 0 5px;
+}
+
+.custom-blue {
+    background-color: #0F4F94 !important;
+}
+
+.custom-divider {
+    background: #CBCBCB;
+    height: 2px;
+}
+
+.context-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.no-data-tr {
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.query-btn {
+    margin-left: 20px;
+    margin-right: 10px;
+    background-color: #0F4F94;
+}
+
+.add-btn {
+    margin-right: 10px;
+    background-color: #2F7ED2;
+}
+
+.download-btn {
+    margin-right: 10px;
+    background-color: #fea353;
+}
+
+/** 交警管理 画面 用 */
+.detail-box {
+    border:1px solid #D4D4D4;
+}
+
+.detail-box-header {
+    height: 66px;
+    background-color: #EDEFF6;
+    padding-top: 22px;
+    padding-left: 10px;
+    border-bottom:1px solid #D4D4D4;
+    color: #0F4F94;
+    font-weight: bold;
+}
+
+

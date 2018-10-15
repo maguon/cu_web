@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {TrafficPolice, TrafficPoliceDetail} from '../main/index';
 import {HashRouter as Router, Route, Link} from "react-router-dom";
 
 import {fileHost} from '../../config/HostConfig';
@@ -7,7 +7,24 @@ import {fileHost} from '../../config/HostConfig';
 import {connect} from 'react-redux';
 
 const routes = [
-
+    // 默认打开画面 - 暂定面板画面
+    {
+        path: "/",
+        exact: true,
+        component: TrafficPolice
+    },
+    // 交警管理
+    {
+        path: "/traffic_police",
+        exact: true,
+        component: TrafficPolice
+    },
+    // 交警管理 - 交警资料
+    {
+        path: '/traffic_police/:id',
+        exact: true,
+        component: TrafficPoliceDetail
+    }
 ];
 
 class Container extends React.Component {
@@ -30,54 +47,49 @@ class Container extends React.Component {
         }
         return (
             <Router hashType={"hashbang"}>
-                <div className="context-height">
+                <div className="main-body">
                     <ul id="slide-out" className="side-nav">
                         <li>
                             <div className="user-view blue-grey">
-                                <a>
-
-                                    <img class="circle" src={avatarUrl}/>
-                                </a>
-                                <a>
-                                    <span className="white-text name">Name:{headerReducer.userInfo.real_name}</span>
-                                </a>
-                                <a>
-                                    <span className="white-text email">Phone:{headerReducer.userInfo.mobile}</span>
-                                </a>
+                                <img className="circle" src={avatarUrl}/>
+                                <span className="white-text name">Name:{headerReducer.userInfo.real_name}</span>
+                                <span className="white-text email">Phone:{headerReducer.userInfo.phone}</span>
                             </div>
                         </li>
-                        <li className="no-padding"><Link to="/temp" className="collapsible-header"><i
-                            className="mdi mdi-cards-variant"/>测试组件画面</Link></li>
-                        <li>
-                            <div className="divider"/>
-                        </li>
 
-                        <li className="no-padding"><Link to="/panel" className="collapsible-header"><i
-                            className="mdi mdi-cards-variant"/>面板</Link>
+                        <li>
+                            <Link to="/panel" className="side-navigation">
+                                <i className="mdi mdi-cards-variant"/>面板
+                            </Link>
                         </li>
                         <li>
                             <div className="divider"/>
                         </li>
 
-                        <li className="no-padding"><Link to="/user" className="collapsible-header"><i
-                            className="mdi mdi-account-group"/>用户</Link>
+                        <li>
+                            <Link to="/traffic_police" className="side-navigation">
+                                <i className="mdi mdi-account-group"/>交警管理
+                            </Link>
                         </li>
                         <li>
                             <div className="divider"/>
                         </li>
-                        <li className="no-padding">
+
+                        <li>
                             <ul className="collapsible collapsible-accordion">
                                 <li>
                                     <a className="collapsible-header"><i className="mdi mdi-lock"/>设置</a>
                                     <div className="collapsible-body">
                                         <ul>
-                                            <li><Link to="/city_setting">城市</Link></li>
-                                            <li><Link to="/route_setting">线路</Link></li>
+                                            <li><Link to="/city_setting"><i className="mdi mdi-chevron-right"/>城市</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/route_setting"><i className="mdi mdi-chevron-right"/>线路</Link></li>
                                         </ul>
                                     </div>
                                 </li>
                             </ul>
                         </li>
+
                     </ul>
                     {routes.map((route, index) => (
                         // Render more <Route>s with the same paths as
