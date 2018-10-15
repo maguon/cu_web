@@ -70,6 +70,9 @@ class TrafficPolice extends React.Component {
         this.props.getPoliceList();
     };
 
+    /**
+     * 显示 增加交警
+     */
     showAddPolice = () => {
         $('#policeModal').modal('open');
         this.props.setName('');
@@ -77,6 +80,9 @@ class TrafficPolice extends React.Component {
         this.props.changePolicePosition({value: '', label: '职务'});
         this.props.setPhone('');
         this.props.setPassword('');
+        $("#name").removeClass('active');
+        $("#phone").removeClass('active');
+        $("#password").removeClass('active');
     };
 
     /**
@@ -133,8 +139,8 @@ class TrafficPolice extends React.Component {
 
                             {/* 查询条件：姓名 */}
                             <div className="input-field col s4">
-                                <input id="name" type="text" value={trafficPoliceReducer.conditionName} onChange={this.changeConditionName}/>
-                                <label htmlFor="name">姓名</label>
+                                <input id="condition_name" type="text" value={trafficPoliceReducer.conditionName} onChange={this.changeConditionName}/>
+                                <label htmlFor="condition_name">姓名</label>
                             </div>
 
                             {/* 查询条件：性别 */}
@@ -167,8 +173,8 @@ class TrafficPolice extends React.Component {
 
                             {/* 查询条件：电话 */}
                             <div className="input-field col s4">
-                                <input id="phone" type="text" value={trafficPoliceReducer.conditionPhone} onChange={this.changeConditionPhone}/>
-                                <label htmlFor="phone">电话</label>
+                                <input id="condition_phone" type="text" value={trafficPoliceReducer.conditionPhone} onChange={this.changeConditionPhone}/>
+                                <label htmlFor="condition_phone">电话</label>
                             </div>
 
                             {/* 查询条件：状态 */}
@@ -183,7 +189,6 @@ class TrafficPolice extends React.Component {
                                 />
                             </div>
                         </div>
-
                     </div>
 
                     {/* 查询按钮 */}
