@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Input} from 'react-materialize';
 import Select from 'react-select';
 import {TrafficPoliceActionType} from '../../actionTypes';
 import {  Link } from "react-router-dom";
@@ -46,16 +45,70 @@ class TrafficPolice extends React.Component {
         this.props.setConditionPhone(event.target.value);
     };
 
+    /**
+     * 查询交警列表
+     */
     queryPoliceList = () => {
+        // 默认第一页
+        this.props.setStartNumber(0);
+        this.props.getPoliceList();
+    };
+
+    /**
+     * 上一页
+     */
+    preBtn = () => {
+        this.props.setStartNumber(this.props.trafficPoliceReducer.start - (this.props.trafficPoliceReducer.size - 1));
+        this.props.getPoliceList();
+    };
+
+    /**
+     * 下一页
+     */
+    nextBtn = () => {
+        this.props.setStartNumber(this.props.trafficPoliceReducer.start + (this.props.trafficPoliceReducer.size - 1));
         this.props.getPoliceList();
     };
 
     showAddPolice = () => {
         $('#policeModal').modal('open');
+        this.props.setName('');
+        this.props.setGender('0');
+        this.props.changePolicePosition({value: '', label: '职务'});
+        this.props.setPhone('');
+        this.props.setPassword('');
+    };
+
+    /**
+     * 更新 增加交警：姓名
+     */
+    changeName = (event) => {
+        this.props.setName(event.target.value);
+    };
+
+    /**
+     * 更新 增加交警：性别
+     */
+    changeGender = (event) => {
+        this.props.setGender(event.target.value);
+    };
+
+    /**
+     * 更新 增加交警：电话
+     */
+    changePhone = (event) => {
+        this.props.setPhone(event.target.value);
+    };
+
+    /**
+     * 更新 增加交警：密码
+     */
+    changePassword = (event) => {
+        this.props.setPassword(event.target.value);
     };
 
     render() {
-        const {trafficPoliceReducer, changeConditionGender, changeConditionPosition, changeConditionStatus, closeModal, addPolice} = this.props;
+        const {trafficPoliceReducer, changeConditionGender, changeConditionPosition, changeConditionStatus, changePolicePosition, closeModal, addPolice} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -174,7 +227,7 @@ class TrafficPolice extends React.Component {
                                                 <td>{item.user_name}</td>
                                                 <td>{trafficPoliceReducer.genderList[item.gender].label}</td>
                                                 <td>{item.phone}</td>
-                                                <td>{trafficPoliceReducer.policePositionList[item.type-1].label}</td>
+                                                <td>{trafficPoliceReducer.policePositionList[item.type].label}</td>
                                                 <td>{trafficPoliceReducer.policeStatusList[item.status].label}</td>
                                                 {/* 显示【交警资料】画面按钮 */}
                                                 <td className="operation center">
@@ -194,6 +247,18 @@ class TrafficPolice extends React.Component {
                             </tbody>
                         </table>
                     </div>
+
+                    {/* 上下页按钮 */}
+                    <div className="col s12 margin-top10">
+                        <div className="right">
+                            <a className="waves-light waves-effect custom-blue btn margin-right10" id="pre" onClick={this.preBtn}>
+                                上一页
+                            </a>
+                            <a className="waves-light waves-effect custom-blue btn" id="next" onClick={this.nextBtn}>
+                                下一页
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="policeModal" className="modal modal-fixed-footer row">
@@ -203,23 +268,24 @@ class TrafficPolice extends React.Component {
 
                     {/** Modal主体 */}
                     <div className="modal-content white">
-                        <div className="row">
+                        <div className="row margin-top40">
                             <div className="input-field col s4">
-                                <input id="name" type="text" value={trafficPoliceReducer.policeName} onChange={this.changeConditionName}/>
+                                <input id="name" type="text" maxLength="100" value={trafficPoliceReducer.name} onChange={this.changeName}/>
                                 <label htmlFor="name">姓名</label>
                             </div>
-                            <div className="input-field col s2">
-                                <input type="radio" id="male"   name="sex" value="male"   className='with-gap'/>
+                            <div className="col s2 margin-top25">
+                                <input type="radio" id="male"   value="0" className='with-gap' checked={trafficPoliceReducer.gender==='0'} onChange={this.changeGender}/>
                                 <label htmlFor="male">男</label>
 
-                                <input type="radio" id="female" name="sex" value="female" className='with-gap'/>
-                                <label htmlFor="female">女</label>
+                                <input type="radio" id="female" value="1" className='with-gap' checked={trafficPoliceReducer.gender==='1'} onChange={this.changeGender}/>
+                                <label htmlFor="female" className="margin-left10">女</label>
                             </div>
                             <div className="input-field col s6">
                                 <Select
                                     options={trafficPoliceReducer.policePositionList}
-                                    onChange={changeConditionPosition}
+                                    onChange={changePolicePosition}
                                     isSearchable={false}
+                                    value={trafficPoliceReducer.position}
                                     placeholder={"职务"}
                                     styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
@@ -228,11 +294,11 @@ class TrafficPolice extends React.Component {
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="phone" type="text" value={trafficPoliceReducer.policePhone} onChange={this.changeConditionName}/>
+                                <input id="phone" type="text" maxLength="11" value={trafficPoliceReducer.phone} onChange={this.changePhone}/>
                                 <label htmlFor="phone">电话(登录账号)</label>
                             </div>
                             <div className="input-field col s6">
-                                <input id="password" type="text" value={trafficPoliceReducer.policePassword} onChange={this.changeConditionName}/>
+                                <input id="password" type="password" maxLength="100" value={trafficPoliceReducer.password} onChange={this.changePassword}/>
                                 <label htmlFor="password">密码</label>
                             </div>
                         </div>
@@ -259,6 +325,9 @@ const mapDispatchToProps = (dispatch) => ({
     getPoliceList: () => {
         dispatch(trafficPoliceAction.getPoliceList())
     },
+    setStartNumber: (start) => {
+        dispatch(TrafficPoliceActionType.setStartNumber(start))
+    },
     setConditionNo: (policeNo) => {
         dispatch(TrafficPoliceActionType.setConditionNo(policeNo))
     },
@@ -277,15 +346,27 @@ const mapDispatchToProps = (dispatch) => ({
     changeConditionStatus: (status) => {
         dispatch(TrafficPoliceActionType.setConditionStatus(status))
     },
-
-
+    setName: (name) => {
+        dispatch(TrafficPoliceActionType.setName(name))
+    },
+    setGender: (gender) => {
+        dispatch(TrafficPoliceActionType.setGender(gender))
+    },
+    changePolicePosition: (policePosition) => {
+        dispatch(TrafficPoliceActionType.setPolicePosition(policePosition))
+    },
+    setPhone: (phone) => {
+        dispatch(TrafficPoliceActionType.setPhone(phone))
+    },
+    setPassword: (password) => {
+        dispatch(TrafficPoliceActionType.setPassword(password))
+    },
     addPolice: () => {
         dispatch(trafficPoliceAction.addPolice())
     },
     closeModal: () => {
         $('#policeModal').modal('close');
     }
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrafficPolice)

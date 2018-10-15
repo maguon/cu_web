@@ -1,5 +1,5 @@
 import React from 'react';
-import {TrafficPolice} from '../main/index';
+import {TrafficPolice, TrafficPoliceDetail} from '../main/index';
 import {HashRouter as Router, Route, Link} from "react-router-dom";
 
 import {fileHost} from '../../config/HostConfig';
@@ -13,11 +13,17 @@ const routes = [
         exact: true,
         component: TrafficPolice
     },
-    // 面板
+    // 交警管理
     {
         path: "/traffic_police",
         exact: true,
         component: TrafficPolice
+    },
+    // 交警管理 - 交警资料
+    {
+        path: '/traffic_police/:id',
+        exact: true,
+        component: TrafficPoliceDetail
     }
 ];
 
@@ -41,7 +47,7 @@ class Container extends React.Component {
         }
         return (
             <Router hashType={"hashbang"}>
-                <div className="context-height">
+                <div className="main-body">
                     <ul id="slide-out" className="side-nav">
                         <li>
                             <div className="user-view blue-grey">

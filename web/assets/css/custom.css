@@ -131,8 +131,20 @@ body {
     margin-top: 10px;
 }
 
+.margin-top25 {
+    margin-top: 25px;
+}
+
 .margin-top40 {
     margin-top: 40px;
+}
+
+.margin-left10 {
+    margin-left: 10px;
+}
+
+.margin-right10 {
+    margin-right: 10px;
 }
 
 .operation {
@@ -181,7 +193,7 @@ body {
 /*}*/
 
 #policeModal {
-    max-height: 556px;
+    max-height: 456px;
 }
 /** modal 样式定义部分 end */
 

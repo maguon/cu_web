@@ -33,15 +33,15 @@ const initialState = {
     policeArray: [],
 
     // 增加交警：姓名
-    policeName: '',
+    name: '',
     // 增加交警：性别
-    policeGender: '',
+    gender: '0',
     // 增加交警：职务
-    policePosition: {value: '', label: ''},
+    position: {value: '', label: ''},
     // 增加交警：电话
-    policePhone: '',
+    phone: '',
     // 增加交警：密码
-    policePassword: '',
+    password: '',
 
 
 
@@ -52,6 +52,12 @@ export default handleActions({
         return {
             ...state,
             policeArray: action.payload
+        }
+    },
+    [TrafficPoliceActionType.setStartNumber]: (state, action) => {
+        return {
+            ...state,
+            start: action.payload
         }
     },
     [TrafficPoliceActionType.setConditionNo]: (state, action) => {
@@ -89,6 +95,36 @@ export default handleActions({
             ...state,
             conditionStatus: action.payload
         }
-    }
+    },
+    [TrafficPoliceActionType.setName]: (state, action) => {
+        return {
+            ...state,
+            name: action.payload
+        }
+    },
+    [TrafficPoliceActionType.setGender]: (state, action) => {
+        return {
+            ...state,
+            gender: action.payload
+        }
+    },
+    [TrafficPoliceActionType.setPolicePosition]: (state, action) => {
+        return {
+            ...state,
+            position: action.payload
+        }
+    },
+    [TrafficPoliceActionType.setPhone]: (state, action) => {
+        return {
+            ...state,
+            phone: action.payload
+        }
+    },
+    [TrafficPoliceActionType.setPassword]: (state, action) => {
+        return {
+            ...state,
+            password: action.payload
+        }
+    },
 }, initialState)
 
