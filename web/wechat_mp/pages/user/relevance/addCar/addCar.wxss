@@ -1,0 +1,19 @@
+page{
+  background: #efeff4;
+}
+
+.car-msg{
+  margin-top: 20px;
+}
+.weui-btn{
+  position: fixed;
+  bottom: 20px;
+  left: 5%;
+  height: 40px;
+  width: 90%;
+  background: #0096e3;
+  color: white;
+}
+ .weui-cell_active{
+  background-color: #017ac0;
+  }

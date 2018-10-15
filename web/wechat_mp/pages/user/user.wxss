@@ -1,46 +1,88 @@
-.user_container {
-  padding:0;
+page{
+  background: #efeff4;
 }
-.user {
+
+.userinfo{
+  margin-top: 0px;
   display: flex;
-  flex-direction: column;
+  height: 100px;
+  flex-direction: row;
   align-items: center;
-  background: #0F7B99;
+  background:#008bed;
 }
-.user_avatar {
-  width: 128rpx;
-  height: 128rpx;
-  border-radius: 50%;
+
+.userinfo-avatar{
+  width: 80px;
+  height: 80px;
+  margin-left:0px;
 }
-.user_nickname {
-  color: #aaa;
+.userinfo-nickname{
+  color: #fff;
+  margin-left: 10px;
+  font-size: 18px;
 }
-.sections {
+.userinfo-phone{
+  color:#89d2f3;
+  font-size: 15px;
+  margin-top: 13px;
 }
-.section_item{
-    position: relative;
-    display: flex;
-    padding: 15px;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    border-bottom: 1px solid #dadada;
+.phone-img{
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+
 }
-.section_item_display{
-  display: inline-block;
+.phone{
+ width: 15px;
+ height: 15px;
+ margin-top: 13px;
+ margin-right: 5px;
 }
-.section_item_text{
-  font-size: 14px;
-  color: #939393;
+
+.weui-cell_access{
+   background: white;
 }
-.section_arrow{
-  position: absolute;
-  top: 18px;
-  right: 15px;
-  width: 15px;
-  height: 15px;
+.weui-cell__bd{
+  width: 30%;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 15px;
+  font-size: 15px;
+  color: #696868;
 }
 .arrow{
-  width: 15px;
-  height: 15px;
+  height: 20px;
+  width: 20px;
+  position: fixed;
+  right: 0px;
+  padding-top: 10px;
 }
+.weui-cells__title{
+  background: #008bde;
+  margin-top: 0px;  
+  
+}
+.access{
+background:#efeff4;
+height: 5px;
+}
+.weui-cell_active{
+  background-color:#ececec;
+  }
+  .content{
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+  }
+  .weui-cell__right{
+  width: 60%;
+  height: 40px;
+  font-size: 15px;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+  color: #b8b6b6;  
+  }

@@ -1,71 +1,20 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="weui-cells weui-cells_after-title">    
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after" >
-        <view class="weui-label">出发城市</view>        
-      </view>
-      <view class="weui-cell__bd" bindtap='bindNaviStartCity'>        
-          <view class="weui-select weui-select_in-select-after">{{startCity.cname}}</view>
-      </view>
-    </view>
-  </view>
-  <view class="weui-cells__title"></view>
-  <view class="weui-cells weui-cells_after-title">    
-    <view class="weui-cell weui-cell_select" >
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">目的城市</view>        
-      </view>
-      <view class="weui-cell__bd" bindtap='bindNaviEndCity'>        
-          <view class="weui-select weui-select_in-select-after">{{endCity.cname}}</view>
-      </view>
-    </view>
-  </view>
-  <view class="weui-cells__title"></view>
-  <view class="weui-cells weui-cells_after-title">    
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">车型尺寸</view>        
-      </view>
-      <view class="weui-cell__bd">        
-        <picker bindchange="bindSizeTypeChange" value="{{sizeTypeIndex}}" range="{{sizeTypes}}">
-          <view class="weui-select weui-select_in-select-after">{{sizeTypes[sizeTypeIndex]}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
-  <view class="weui-cells__title"></view>
-  <view class="weui-cells weui-cells_after-title">    
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">新旧程度</view>        
-      </view>
-      <view class="weui-cell__bd">        
-        <picker bindchange="bindCarTypeChange" value="{{carTypeIndex}}" range="{{carTypes}}">
-          <view class="weui-select weui-select_in-select-after">{{carTypes[carTypeIndex]}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
-  <view class="weui-cells__title"></view>
-  <view class="weui-cells weui-cells_after-title">    
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">服务方式</view>        
-      </view>
-      <view class="weui-cell__bd">        
-        <picker bindchange="bindServiceTypeChange" value="{{serviceTypeIndex}}" range="{{serviceTypes}}">
-          <view class="weui-select weui-select_in-select-after">{{serviceTypes[serviceTypeIndex]}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
-  <view class="weui-cells__title"></view>
-  <view class="weui-flex">
-    <view class="weui-flex__item">
-      <button class="weui-btn" type="primary" bindtap="bindQueryPrice">查询</button>
-    </view>
-  </view>
 
-  
-</view>
+<block wx:if="{{falg}}">
+ <view class="none-msg">
+  <view class="title">暂无消息</view>
+   <view class="motto">交警会通过短信方式向您发送通知</view>
+ </view>
+</block>
+<block wx:else>
+<view class="weui-panel weui-panel_access">
+  <view class="weui-panel__bd">
+    <view bindtap='bindMsg' class="weui-media-box weui-media-box_text">
+      <view class="weui-media-box__title weui-media-box__title_in-text">
+       <image class='point' src='../../../assets/images/point.png'></image>违停消息
+      <view class='time'>2018-09-23 11:30:24</view>
+      </view>
+      <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，有自己的运行轨道。由各种物质组成的巨型球状天体，有自己的运行轨道。由各种物质组成的巨型球状天体，有自己的运行轨道。</view>
+    </view>
+  </view>
+  </view>
+</block>

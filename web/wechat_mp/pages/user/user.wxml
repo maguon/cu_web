@@ -1,24 +1,57 @@
 <!--pages/user/user.wxml-->
 <view class='user_container'>
-  <view class='weui-cells__title'>
-    <view>
-      <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-              <image class="weui-media-box__thumb user_avatar" src="{{userInfo.avatarUrl}}" />
-          </view>
-          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-              <view class="weui-media-box__title">{{userInfo.nickName}}</view>
-              <view class="weui-media-box__desc">电话 13322221111</view>
-          </view>
-      </navigator>
-    </view>  
-  </view>
-  <view class="weui-cells weui-cells_after-title">
-    <block wx:for="{{userSections}}">
-      <navigator url="{{item.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__bd"> {{item.text}}</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      </navigator>
+  
+<view class="userinfo">
+  
+    <block wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 
+     <image  class="userinfo-avatar" src="../../../assets/images/player.png"></image>
+      <text class="userinfo-nickname">微信昵称
+       <text class="userinfo-phone">未绑定手机</text>
+      </text>
     </block>
+
+      <block wx:else>
+       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <view class="userinfo-nickname">{{userInfo.nickName}}
+       <view class="phone-img">
+      <image class="phone" src="../../../assets/images/phone.png"></image>
+      <text class="userinfo-phone">15840668526</text>
+      </view>
+      </view>
+    </block>
+  </view>
+
+
+  <view class="weui-cells_after-title">
+  
+      <navigator url="{{userSections[0].url}}" class="weui-cell_access" hover-class="weui-cell_active">
+      <view class='content'>
+          <view class="weui-cell__bd">{{userSections[0].text}}
+          <image class='arrow' src='../../../assets/images/arrow.png'></image>
+          </view>
+          <view class='weui-cell__right'></view>
+      </view>
+       <view class="access"></view>
+      </navigator>
+
+       <navigator url="{{userSections[1].url}}" class="weui-cell_access" hover-class="weui-cell_active">
+      <view class='content'>
+          <view class="weui-cell__bd">{{userSections[1].text}}
+          <image class='arrow' src='../../../assets/images/arrow.png'></image>
+          </view>
+          <view class='weui-cell__right'>未绑定手机</view>
+      </view>
+       <view class="access"></view>
+      </navigator>
+
+       <navigator url="{{userSections[2].url}}" class="weui-cell_access" hover-class="weui-cell_active">
+      <view class='content'>
+          <view class="weui-cell__bd">{{userSections[2].text}}
+          <image class='arrow' src='../../../assets/images/arrow.png'></image>
+          </view>
+          <view class='weui-cell__right'>未关联车辆</view>
+      </view>
+       <view class="access"></view>
+      </navigator>
   </view>
 </view>

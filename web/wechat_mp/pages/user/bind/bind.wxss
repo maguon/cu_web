@@ -1,0 +1,59 @@
+page{
+  background: #efeff4;
+}
+
+.logo-text{
+width: 100%;
+height: 200px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.logo{
+  width: 150rpx;
+  height: 150rpx;
+  font-size: 48px;
+  color: #0097e3;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50rpx;
+  border-radius: 50%;
+}
+
+
+.weui-vcode-btn{
+  color: #0097e3;
+}
+
+.weui-cells__tips{
+  color: #ffb100;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+.weui-cells{
+  margin-top: 0px;
+}
+
+
+.btn{
+  width: 100%;
+}
+.btn-area{
+    position: fixed;
+    left: 5%;
+    height: 40px;
+    width: 90%;
+    margin-top: 50px;
+    background: #0096e3;
+    color: white;
+}
+.weui-cell_active{
+  background-color: #017ac0;
+
+  }
+
+

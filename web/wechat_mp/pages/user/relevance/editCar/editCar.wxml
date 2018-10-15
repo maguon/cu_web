@@ -1,0 +1,51 @@
+<view class="container"> 
+ <view class="code">
+  <image class='codeinfo' src='../../../../assets/images/code-active.png'></image>
+ </view>
+
+<view class='but-list'>
+  <button class='downlode'>
+    <image class='downlode-img' src='../../../../assets/images/download.png'></image>
+    <text class='download-text'>下载二维码</text>
+  </button>
+
+   <button bindtap='print' class='downlode'>
+    <image class='downlode-img' src='../../../../assets/images/print.png'></image>
+    <text class='download-text'>帮您打印</text>
+  </button>
+</view>
+
+<view class="weui-cells weui-cells_after-title">
+ <view class="weui-cell weui-cell_input">
+  <view class="weui-cell__hd">
+      <view class="weui-label">车牌号</view>
+  </view>
+    <view class="weui-cell__bd">
+    <view class='text'>辽B12345</view>
+     </view>
+  </view>
+
+ <view class="weui-cell weui-cell_input">
+  <view class="weui-cell__hd">
+      <view class="weui-label">车辆识别码</view>
+  </view>
+    <view class="weui-cell__bd">
+    <view class='text'>UYWHRJF395793450</view>
+     </view>
+  </view>
+
+ <view class="weui-cell weui-cell_input">
+  <view class="weui-cell__hd">
+      <view class="weui-label">发动机号</view>
+  </view>
+    <view class="weui-cell__bd">
+    <view class='text'>UYWHRJF395793450</view>
+     </view>
+  </view>
+ </view>
+ 
+<button bindtap='sure' class="weui-btn" hover-class='weui-cell_active'>确定</button>
+<button bindtap='unbind' class="unbind" type="default" style='color:red; border:1rpx solid red'>解绑车辆</button>
+
+
+</view>

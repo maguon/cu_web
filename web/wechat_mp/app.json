@@ -1,25 +1,24 @@
 {
   "pages": [
-    "pages/index/addsite/addsite",
-    "pages/index/choose/choose",
+    "pages/msg/msg",
+    "pages/msg/read-msg/read-msg",
+   
+
+    "pages/user/user",
+    "pages/user/userMsg/userMsg",
+    "pages/user/bind/bind",
+    "pages/user/relevance/relevance",
+    "pages/user/relevance/editCar/editCar",
+    "pages/user/relevance/addCar/addCar",
  
     "pages/index/index",
+    "pages/index/addressList/addressList",    
+    "pages/index/address/address",
     "pages/index/print/print",
     "pages/index/submit/submit",
     "pages/index/detail/detail",
     "pages/index/product-dt/product-dt",
-    "pages/logs/logs",
-    "pages/msg/msg",
-    "pages/user/user",
-    "pages/price/price",
-    "pages/address/index",
-    "pages/feedback/index",
-    "pages/invoice/index",
-    "pages/order/index",
-    "pages/msg/city/city",
-    "pages/invoice/invoice_contact",
-    "pages/address/create_address",
-    "pages/order/order_detail"
+    "pages/logs/logs"
   ],
   "window": {
    "backgroundTextStyle": "dark",

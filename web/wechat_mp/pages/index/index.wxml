@@ -1,10 +1,10 @@
 <!--index.wxml-->
 <view class="container">
   <view class="userinfo">
-  
-    <block wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 
+    <block wx:if="{{!hasUserInfo && canIUse}}"> 
      <image bindtap="bindViewTap" class="userinfo-avatar" src="../../assets/images/player.png" mode="cover"></image>
-      <text class="userinfo-nickname">微信昵称</text>
+     <button class='userinfo-nickname' size='mini' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
+      <!-- <text class="userinfo-nickname">微信昵称</text> -->
       <text class="userinfo-phone">未绑定手机</text>
     </block>
 
@@ -12,7 +12,7 @@
        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
       <black class="phoneimg">
-      <image class="phone" src="../../img/phone.png"></image>
+      <image class="phone" src="../../assets/images/phone.png"></image>
       <text class="userinfo-phone">获取用户手机号码</text>
       </black>
     </block>

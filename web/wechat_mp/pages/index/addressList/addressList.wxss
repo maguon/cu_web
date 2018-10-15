@@ -1,0 +1,73 @@
+page{  
+  display: flex;  
+  flex-direction: column;  
+  height: 100%;  
+ background: #efeff4;
+}  
+.product-name-wrap{
+  margin: 0px 10px;
+  font-size: 14px;
+  color: #404040;
+}
+.ui-list-item-info{
+  margin: 5px 0px;
+}
+.ui-list-item-address{
+  color: #585c64;
+}
+.ui-list-item-time{
+  margin: 5px 0px;
+}
+.ui-list-item-del{
+  position: absolute;
+  right: 10px;
+  color: #585c64;
+}
+/* 分割线 */
+.separate {
+  margin: 5px 0px;
+  height: 2rpx;
+  background-color: #f2f2f2;
+}
+.add-address{
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-right: 10px;
+  width: 160px;
+  height: 30px;
+  background: white;
+  line-height: 30px;
+  text-align: center;
+  color: #009de6;
+  border-radius: 10rpx;
+  display: block;
+  font-size: 15px;
+
+}
+.add-img{
+  margin-right: 15rpx;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  left: 5px;
+  top: 5px;
+}
+ .weui-cell_active{
+  background-color:#ececec;
+  }
+  
+  .btnGroup {
+
+  }
+  .btn{
+    position: fixed;
+    bottom: 20px;
+    left: 5%;
+    height: 40px;
+    width: 90%;
+    background: #0096e3;
+    color: white;
+}
+  .weui-cell_active_btn{
+  background-color: #017ac0;
+  }

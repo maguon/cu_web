@@ -1,0 +1,34 @@
+
+<view class='logo-text'>
+ <view class='logo'>连</view>
+<view class="weui-cells__tips">请先绑定您的手机</view>
+</view>
+ 
+<view class='weui-cells'>
+<view class="weui-cell weui-cell_input weui-cell_vcode">
+ <view class="weui-cell__hd">
+   <view class="weui-label">手机号码</view>
+</view>
+<view class="weui-cell__bd">
+  <input class="weui-input" placeholder="请输入新手机号" />
+  </view>
+<view class="weui-cell__ft">
+  <view class="weui-vcode-btn">获取验证码</view>
+ </view>
+</view>
+
+
+ <view class="weui-cell weui-cell_input weui-cell_vcode">
+    <view class="weui-cell__hd">
+       <view class="weui-label">验证码</view>
+     </view>
+     <view class="weui-cell__bd">
+     <input class="weui-input" placeholder="请输入验证码" />
+     </view>       
+ </view>
+</view>
+  
+
+  <view class='btn'>
+    <button bindtap="bindTap" class="btn-area" hover-class="weui-cell_active" disabled="">确定</button>
+    </view>

@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<view class="container">
+    <view class='carbox'>
+      <view class='left'>
+        <image class='left-img' src='../../../assets/images/car.png'></image>
+          <text class='left-text'>辽B12345
+            <text  class='left-car'>奥迪A6</text></text>
+      </view>
+      <view class='right' bindtap='bindCarDetail'>
+      <view class='center'>
+        <image class='center-img' src='../../../assets/images/code.png'></image>
+      </view>
+      <view>
+        <image class='right-img' src='../../../assets/images/arrow.png'></image>
+      </view> 
+    </view>
+    </view>
+     <view class="divLine"></view>
+    
+
+<view bindtap='relevance' class='relevance'>
+<image class='relevance-img' src='../../../assets/images/add-car.png'></image>
+<text class='relevance-text'>关联车辆</text>
+</view>
+</view>
+

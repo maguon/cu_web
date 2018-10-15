@@ -1,21 +1,37 @@
-/**index.wxss**/
-.userinfo {
+
+.weui-media-box__title{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+}
+.point{
+  height: 8px;
+  width: 8px;
+  margin-top: 10px;
+  margin-right: 10px;
+ 
+  display: flex
+}
+.time{
+  color: #696868;
+  width: 80%;
+  text-align: right;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
 
-.userinfo-nickname {
-  color: #aaa;
+.none-msg{
+ height: 100px;
+ width: 100%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ color: #696868;
+ border-top:1px solid #ebe9e9;
 }
-
-.usermotto {
-  margin-top: 200px;
+.title{
+font-size: 20px;
+}
+.motto{
+font-size: 15px;
+margin-top: 10px;
 }

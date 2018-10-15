@@ -72,5 +72,10 @@ Page({
     wx.navigateTo({
       url: '/pages/index/product-dt/product-dt'
     })
+  },
+  addRess:function(){
+    wx.navigateTo({
+      url: '/pages/index/addressList/addressList'
+    })
   }
 })

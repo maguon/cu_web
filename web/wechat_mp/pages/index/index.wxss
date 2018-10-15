@@ -15,7 +15,8 @@
   border-radius: 50%;
 }
 .userinfo-nickname{
-  color: #fff;
+  color:#f9fafa;
+  background: rgba(0, 0, 255, 0);
   margin-top: 25rpx;
 }
 .userinfo-phone{

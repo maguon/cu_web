@@ -8,7 +8,6 @@ Page({
     mottosmall: '请到 “我的-关联车辆” 栏目下将您的爱车关联到本软件以便您在停放车辆的时候随时可接收到交警的通知',
     userInfo: {},
     hasUserInfo: false,
-    flag: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
@@ -45,17 +44,15 @@ Page({
       })
     }
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
+
   bindCarDetail:function(){
     wx.navigateTo({
       url: '/pages/index/detail/detail'
     })
   }
 })
+// module.exports = {
+//   userInfo:userInfo,
+//   hasUserInfo: hasUserInfo,
+//   canIUse:wx.canIUse,
+// }
