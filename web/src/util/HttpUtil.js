@@ -69,3 +69,15 @@ export const httpAsyncPost = (url, params,callback) => {
     })
 };
 
+/**
+ * 将 Obj 转化为 Url 格式的String
+ */
+export const objToUrl = (obj) => {
+    let str = "";
+    for (let i in obj) {
+        if (obj[i] !== undefined && obj[i] != null && obj[i] !== "") {
+            str = str + i + "=" + obj[i] + "&";
+        }
+    }
+    return str.substr(0, str.length - 1);
+};
