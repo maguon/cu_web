@@ -112,6 +112,13 @@ body {
 .side-nav .divider {
     margin: 0;
 }
+
+.switch label input[type=checkbox]:checked + .lever{
+    background-color:#0E4E92
+}
+.switch label input[type=checkbox]:checked + .lever:after{
+    background-color:#ffffff
+}
 /** Material样式 变更部分 End */
 
 /** Material补充样式 左侧导航栏 自定义 顶层按钮 */
@@ -142,6 +149,10 @@ body {
 
 .margin-left10 {
     margin-left: 10px;
+}
+
+.margin-left30 {
+    margin-left: 30px;
 }
 
 .margin-left50 {
@@ -215,7 +226,7 @@ body {
 /** 标题：画面主体部分，标题部分样式 */
 .page-title {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
     color: #0F4F94 !important;
 }
 
