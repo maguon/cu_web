@@ -139,7 +139,7 @@ class TrafficPolice extends React.Component {
                 {/* 标题部分 */}
                 <div className="row">
                     <div className="input-field col s12 page-title">
-                        交警管理
+                        <span className="margin-left10">交警管理</span>
                         <div className="divider custom-divider margin-top10"/>
                     </div>
                 </div>
