@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import Select from 'react-select';
 import {TrafficPoliceDetailActionType} from '../../actionTypes';
 import {Link} from "react-router-dom";
+import {Input} from 'react-materialize';
 import {fileHost} from "../../config/HostConfig";
+
 
 const trafficPoliceDetailAction = require('../../actions/main/TrafficPoliceDetailAction');
 const SysConst = require('../../util/SysConst');
@@ -89,11 +91,7 @@ class TrafficPolice extends React.Component {
 
                     <div className="col s10">
                         <div className="row margin-left10 margin-right10">
-                            <div className="input-field col s6">
-                                <input id="name" type="text" maxLength="100" value={trafficPoliceDetailReducer.name}
-                                       onChange={this.changeName}/>
-                                <label id="label_name" htmlFor="name">姓名</label>
-                            </div>
+                            <Input s={6} label="姓名" maxLength="100" labelClassName="label-active" value={trafficPoliceDetailReducer.name} onChange={this.changeName}/>
                             <div className="col s6 margin-top25">
                                 <input type="radio" id="male" value="0" className='with-gap'
                                        checked={trafficPoliceDetailReducer.gender == '0'} onChange={this.changeGender}/>
@@ -117,11 +115,7 @@ class TrafficPolice extends React.Component {
                                 />
                                 <label className="active">职务</label>
                             </div>
-                            <div className="input-field col s6">
-                                <input id="phone" type="text" maxLength="11" value={trafficPoliceDetailReducer.phone}
-                                       onChange={this.changePhone}/>
-                                <label id="label_phone" htmlFor="phone">电话(登录账号)</label>
-                            </div>
+                            <Input s={6} label="电话(登录账号)" maxLength="11" labelClassName="label-active" value={trafficPoliceDetailReducer.phone} onChange={this.changePhone}/>
                         </div>
                     </div>
                     <div className="col s2">

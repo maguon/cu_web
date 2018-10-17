@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Select from 'react-select';
 import {TrafficPoliceActionType} from '../../actionTypes';
 import {Link} from "react-router-dom";
-
+import {Input} from 'react-materialize';
 const trafficPoliceAction = require('../../actions/main/TrafficPoliceAction');
 const SysConst = require('../../util/SysConst');
 
@@ -29,16 +29,6 @@ class TrafficPolice extends React.Component {
             this.props.changeConditionPosition('');
             this.props.setConditionPhone('');
             this.props.changeConditionStatus('');
-        } else {
-            if (this.props.trafficPoliceReducer.conditionNo !== ''){
-                $("#label_police_no").addClass('active');
-            }
-            if (this.props.trafficPoliceReducer.conditionName !== ''){
-                $("#label_police_name").addClass('active');
-            }
-            if (this.props.trafficPoliceReducer.conditionPhone !== ''){
-                $("#label_police_phone").addClass('active');
-            }
         }
         this.props.getPoliceList();
     }
@@ -99,9 +89,6 @@ class TrafficPolice extends React.Component {
         this.props.changePolicePosition('');
         this.props.setPhone('');
         this.props.setPassword('');
-        $("#label_name").removeClass('active');
-        $("#label_phone").removeClass('active');
-        $("#label_password").removeClass('active');
     };
 
     /**
@@ -115,6 +102,7 @@ class TrafficPolice extends React.Component {
      * 更新 增加交警：性别
      */
     changeGender = (event) => {
+        // this.props.setGender(value);
         this.props.setGender(event.target.value);
     };
 
@@ -151,16 +139,10 @@ class TrafficPolice extends React.Component {
                         {/* 查询条件：第一行 */}
                         <div>
                             {/* 查询条件：编号 */}
-                            <div className="input-field col s4">
-                                <input id="police_no" type="text" value={trafficPoliceReducer.conditionNo} onChange={this.changeConditionNo}/>
-                                <label id="label_police_no" htmlFor="police_no">编号</label>
-                            </div>
+                            <Input s={4} label="编号" value={trafficPoliceReducer.conditionNo} onChange={this.changeConditionNo}/>
 
                             {/* 查询条件：姓名 */}
-                            <div className="input-field col s4">
-                                <input id="condition_name" type="text" value={trafficPoliceReducer.conditionName} onChange={this.changeConditionName}/>
-                                <label id="label_police_name" htmlFor="condition_name">姓名</label>
-                            </div>
+                            <Input s={4} label="姓名" value={trafficPoliceReducer.conditionName} onChange={this.changeConditionName}/>
 
                             {/* 查询条件：性别 */}
                             <div className="input-field col s4">
@@ -195,10 +177,7 @@ class TrafficPolice extends React.Component {
                             </div>
 
                             {/* 查询条件：电话 */}
-                            <div className="input-field col s4">
-                                <input id="condition_phone" type="text" value={trafficPoliceReducer.conditionPhone} onChange={this.changeConditionPhone}/>
-                                <label id="label_police_phone" htmlFor="condition_phone">电话</label>
-                            </div>
+                            <Input s={4} label="电话" value={trafficPoliceReducer.conditionPhone} onChange={this.changeConditionPhone}/>
 
                             {/* 查询条件：状态 */}
                             <div className="input-field col s4">
@@ -299,10 +278,8 @@ class TrafficPolice extends React.Component {
                     {/** Modal主体 */}
                     <div className="modal-content white">
                         <div className="row margin-top40">
-                            <div className="input-field col s4">
-                                <input id="name" type="text" maxLength="100" value={trafficPoliceReducer.name} onChange={this.changeName}/>
-                                <label id="label_name" htmlFor="name">姓名</label>
-                            </div>
+                            <Input s={4} label="姓名" maxLength="100" value={trafficPoliceReducer.name} onChange={this.changeName}/>
+
                             <div className="col s2 margin-top25">
                                 <input type="radio" id="male"   value="0" className='with-gap' checked={trafficPoliceReducer.gender==='0'} onChange={this.changeGender}/>
                                 <label htmlFor="male">男</label>
@@ -324,14 +301,8 @@ class TrafficPolice extends React.Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="input-field col s6">
-                                <input id="phone" type="text" maxLength="11" value={trafficPoliceReducer.phone} onChange={this.changePhone}/>
-                                <label id="label_phone" htmlFor="phone">电话(登录账号)</label>
-                            </div>
-                            <div className="input-field col s6">
-                                <input id="password" type="password" maxLength="100" value={trafficPoliceReducer.password} onChange={this.changePassword}/>
-                                <label id="label_password" htmlFor="password">密码</label>
-                            </div>
+                            <Input s={6} label="电话(登录账号)" type='tel' maxLength="11" value={trafficPoliceReducer.phone} onChange={this.changePhone}/>
+                            <Input s={6} label="密码" type="password" maxLength="100" value={trafficPoliceReducer.password} onChange={this.changePassword}/>
                         </div>
                     </div>
 

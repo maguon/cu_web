@@ -20,8 +20,6 @@ export const getPoliceInfo = (id) => async (dispatch, getState) => {
                 dispatch({type: TrafficPoliceDetailActionType.setPolicePosition, payload: selectedPos});
                 dispatch({type: TrafficPoliceDetailActionType.setPhone, payload: res.result[0].phone});
                 dispatch({type: TrafficPoliceDetailActionType.setAvatarImg, payload: res.result[0].avatar_image});
-                $("#label_name").addClass('active');
-                $("#label_phone").addClass('active');
             } else {
                 swal('未获取交警信息，请重新查询', res.msg, 'warning');
             }
