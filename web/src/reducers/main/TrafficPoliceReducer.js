@@ -21,13 +21,16 @@ const initialState = {
     // 检索条件：姓名
     conditionName: '',
     // 检索条件：性别
-    conditionGender: {value: '', label: ''},
+    conditionGender: {value: '', label: '请选择'},
+    conditionGenderList: [{value: '', label: '请选择'}, ...sysConst.GENDER],
     // 检索条件：职务
-    conditionPosition: {value: '', label: ''},
+    conditionPosition: {value: '', label: '请选择'},
+    conditionPositionList: [{value: '', label: '请选择'}, ...sysConst.POLICE_POSITION],
     // 检索条件：电话
     conditionPhone: '',
     // 检索条件：状态
-    conditionStatus: {value: '', label: ''},
+    conditionStatus: {value: '', label: '请选择'},
+    conditionStatusList: [{value: '', label: '请选择'}, ...sysConst.POLICE_STATUS],
 
     // 交警检索结果列表
     policeArray: [],
@@ -37,14 +40,11 @@ const initialState = {
     // 增加交警：性别
     gender: '0',
     // 增加交警：职务
-    position: {value: '', label: ''},
+    position: {value: '', label: '请选择'},
     // 增加交警：电话
     phone: '',
     // 增加交警：密码
-    password: '',
-
-
-
+    password: ''
 };
 
 export default handleActions({
@@ -125,6 +125,6 @@ export default handleActions({
             ...state,
             password: action.payload
         }
-    },
+    }
 }, initialState)
 

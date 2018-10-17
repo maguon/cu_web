@@ -96,7 +96,7 @@ class TrafficPolice extends React.Component {
         $('#policeModal').modal('open');
         this.props.setName('');
         this.props.setGender('0');
-        this.props.changePolicePosition({value: '', label: '职务'});
+        this.props.changePolicePosition('');
         this.props.setPhone('');
         this.props.setPassword('');
         $("#label_name").removeClass('active');
@@ -165,14 +165,15 @@ class TrafficPolice extends React.Component {
                             {/* 查询条件：性别 */}
                             <div className="input-field col s4">
                                 <Select
-                                    options={trafficPoliceReducer.genderList}
+                                    options={trafficPoliceReducer.conditionGenderList}
                                     onChange={changeConditionGender}
                                     value={trafficPoliceReducer.conditionGender}
                                     isSearchable={false}
-                                    placeholder={"性别"}
+                                    placeholder={"请选择"}
                                     styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
                                 />
+                                <label className="active">性别</label>
                             </div>
 
                         </div>
@@ -182,14 +183,15 @@ class TrafficPolice extends React.Component {
                             {/* 查询条件：职务 */}
                             <div className="input-field col s4">
                                 <Select
-                                    options={trafficPoliceReducer.policePositionList}
+                                    options={trafficPoliceReducer.conditionPositionList}
                                     onChange={changeConditionPosition}
                                     value={trafficPoliceReducer.conditionPosition}
                                     isSearchable={false}
-                                    placeholder={"职务"}
+                                    placeholder={"请选择"}
                                     styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
                                 />
+                                <label className="active">职务</label>
                             </div>
 
                             {/* 查询条件：电话 */}
@@ -201,14 +203,15 @@ class TrafficPolice extends React.Component {
                             {/* 查询条件：状态 */}
                             <div className="input-field col s4">
                                 <Select
-                                    options={trafficPoliceReducer.policeStatusList}
+                                    options={trafficPoliceReducer.conditionStatusList}
                                     onChange={changeConditionStatus}
                                     value={trafficPoliceReducer.conditionStatus}
                                     isSearchable={false}
-                                    placeholder={"状态"}
+                                    placeholder={"请选择"}
                                     styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
                                 />
+                                <label className="active">状态</label>
                             </div>
                         </div>
                     </div>
@@ -313,10 +316,11 @@ class TrafficPolice extends React.Component {
                                     onChange={changePolicePosition}
                                     isSearchable={false}
                                     value={trafficPoliceReducer.position}
-                                    placeholder={"职务"}
+                                    placeholder={"请选择"}
                                     styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
                                 />
+                                <label className="active">职务</label>
                             </div>
                         </div>
                         <div className="row">

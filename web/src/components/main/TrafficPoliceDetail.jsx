@@ -111,10 +111,11 @@ class TrafficPolice extends React.Component {
                                     onChange={changePolicePosition}
                                     isSearchable={false}
                                     value={trafficPoliceDetailReducer.position}
-                                    placeholder={"职务"}
+                                    placeholder={"请选择"}
                                     styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
                                 />
+                                <label className="active">职务</label>
                             </div>
                             <div className="input-field col s6">
                                 <input id="phone" type="text" maxLength="11" value={trafficPoliceDetailReducer.phone}
