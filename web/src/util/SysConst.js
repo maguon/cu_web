@@ -1,7 +1,7 @@
-export const USER_ID ='user-id';
-export const USER_TYPE ='user-type';
-export const USER_STATUS='user-status';
-export const AUTH_TOKEN ='auth-token';
+export const USER_ID = 'user-id';
+export const USER_TYPE = 'user-type';
+export const USER_STATUS = 'user-status';
+export const AUTH_TOKEN = 'auth-token';
 
 // 性别
 export const GENDER = [
@@ -32,6 +32,18 @@ export const POLICE_STATUS = [
     {
         value: 1,
         label: "开通"
+    }
+];
+
+// 绑定车辆管理：绑定状态
+export const BIND_STATUS = [
+    {
+        value: 0,
+        label: "解绑"
+    },
+    {
+        value: 1,
+        label: "绑定"
     }
 ];
 
