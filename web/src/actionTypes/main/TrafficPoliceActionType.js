@@ -1,4 +1,4 @@
-import { createAction } from 'redux-actions';
+import {createAction} from 'redux-actions';
 
 export const getPoliceList = createAction('GET_POLICE_LIST');
 export const setStartNumber = createAction('SET_START_NUMBER');

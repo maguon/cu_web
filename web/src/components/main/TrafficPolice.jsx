@@ -4,8 +4,9 @@ import Select from 'react-select';
 import {TrafficPoliceActionType} from '../../actionTypes';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
+
 const trafficPoliceAction = require('../../actions/main/TrafficPoliceAction');
-const SysConst = require('../../util/SysConst');
+const sysConst = require('../../util/SysConst');
 
 class TrafficPolice extends React.Component {
 
@@ -134,7 +135,7 @@ class TrafficPolice extends React.Component {
 
                 {/* 上部分：检索条件输入区域 */}
                 <div className="row grey-text text-darken-1">
-                    <div className="col s10 no-padding">
+                    <div className="col s10 search-condition-box">
 
                         {/* 查询条件：第一行 */}
                         <div>
@@ -152,7 +153,7 @@ class TrafficPolice extends React.Component {
                                     value={trafficPoliceReducer.conditionGender}
                                     isSearchable={false}
                                     placeholder={"请选择"}
-                                    styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
+                                    styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
                                 />
                                 <label className="active">性别</label>
@@ -170,7 +171,7 @@ class TrafficPolice extends React.Component {
                                     value={trafficPoliceReducer.conditionPosition}
                                     isSearchable={false}
                                     placeholder={"请选择"}
-                                    styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
+                                    styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
                                 />
                                 <label className="active">职务</label>
@@ -187,7 +188,7 @@ class TrafficPolice extends React.Component {
                                     value={trafficPoliceReducer.conditionStatus}
                                     isSearchable={false}
                                     placeholder={"请选择"}
-                                    styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
+                                    styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
                                 />
                                 <label className="active">状态</label>
@@ -294,7 +295,7 @@ class TrafficPolice extends React.Component {
                                     isSearchable={false}
                                     value={trafficPoliceReducer.position}
                                     placeholder={"请选择"}
-                                    styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
+                                    styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
                                 />
                                 <label className="active">职务</label>

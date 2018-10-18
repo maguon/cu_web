@@ -1,9 +1,9 @@
 import {HeaderActionType} from '../../actionTypes';
 import {apiHost} from '../../config/HostConfig';
 
-const SysConst = require('../../util/SysConst');
 const httpUtil = require('../../util/HttpUtil');
 const localUtil = require('../../util/LocalUtil');
+const sysConst = require('../../util/SysConst');
 
 export const getUserDetail = (params) => async (dispatch) => {
     try {
@@ -26,8 +26,8 @@ export const getUserDetail = (params) => async (dispatch) => {
 // };
 
 export const logout = () => {
-    localUtil.removeLocalItem(SysConst.USER_ID);
-    localUtil.removeLocalItem(SysConst.USER_TYPE);
-    localUtil.removeLocalItem(SysConst.AUTH_TOKEN);
+    localUtil.removeLocalItem(sysConst.USER_ID);
+    localUtil.removeLocalItem(sysConst.USER_TYPE);
+    localUtil.removeLocalItem(sysConst.AUTH_TOKEN);
     window.location.href = '/login.html';
 };

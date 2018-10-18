@@ -1,2 +1,3 @@
-import { createAction } from 'redux-actions';
+import {createAction} from 'redux-actions';
+
 export const loginInit = createAction('LOGIN_INIT');

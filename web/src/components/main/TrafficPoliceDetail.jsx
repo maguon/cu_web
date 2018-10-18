@@ -6,9 +6,8 @@ import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
 import {fileHost} from "../../config/HostConfig";
 
-
 const trafficPoliceDetailAction = require('../../actions/main/TrafficPoliceDetailAction');
-const SysConst = require('../../util/SysConst');
+const sysConst = require('../../util/SysConst');
 
 class TrafficPolice extends React.Component {
 
@@ -110,7 +109,7 @@ class TrafficPolice extends React.Component {
                                     isSearchable={false}
                                     value={trafficPoliceDetailReducer.position}
                                     placeholder={"请选择"}
-                                    styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
+                                    styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
                                 />
                                 <label className="active">职务</label>

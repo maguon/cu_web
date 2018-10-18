@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 
-const SysConst = require('../../util/SysConst');
+const sysConst = require('../../util/SysConst');
 
 /**
  * 自定义封装react-select组件
@@ -21,7 +21,7 @@ const ReactSelect = (props) => {
                 defaultValue={defaultValue}
                 isSearchable={searchable}
                 placeholder={placeholder}
-                styles={SysConst.CUSTOM_REACT_SELECT_STYLE}
+                styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                 isClearable={false}
             />
             {(touched && (error && <span className="error-msg">{error}</span>))}

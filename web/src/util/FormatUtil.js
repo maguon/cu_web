@@ -3,7 +3,7 @@
  * @param date 要格式化的日期
  * @param format 指定格式 例：FormatUtil.DateFormat(new Date(),'yyyy-MM-dd hh:mm:ss.S q') ==> 2018-09-19 13:33:17.148 3
  */
-export const DateFormat = (date, format) => {
+export const formatDate = (date, format) => {
     // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
     // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
     Date.prototype.Format = function (fmt) { //author: meizz
@@ -23,7 +23,20 @@ export const DateFormat = (date, format) => {
                 fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     };
-    return date.Format(format);
+
+    if (typeof date === 'string') {
+        return new Date(date).Format(format);
+    } else {
+        return date.Format(format);
+    }
+};
+
+export const getDateTime = (date) => {
+    return formatDate(date, 'yyyy-MM-dd hh:mm:ss');
+};
+
+export const getDate = (date) => {
+    return formatDate(date, 'yyyy-MM-dd');
 };
 
 // /**
@@ -41,7 +54,7 @@ export const DateFormat = (date, format) => {
  * @param decimals 保留小数位数
  * @returns {string} 标准格式 例：FormatUtil.NumberFormat(123456.789, 2) ==> 123,456.79
  */
-export const NumberFormat = (number, decimals) => {
+export const formatNumber = (number, decimals) => {
     decimals = typeof decimals === 'undefined'? 0 : decimals;
     // 保留指定小数点后位数，并分割数组
     let x = number.toFixed(decimals).split('.');
@@ -58,6 +71,6 @@ export const NumberFormat = (number, decimals) => {
  * @param amount 货币
  * @returns {string} 美元货币格式  例：FormatUtil.CurrencyFormat(123456.789) ==> $123,456.79
  */
-export const CurrencyFormat = (amount) => {
+export const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
 };

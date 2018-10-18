@@ -90,7 +90,7 @@ body {
     margin-bottom: 0;
 }
 
-.no-padding {
+.search-condition-box {
     padding-left: 0;
     padding-right: 0;
 }
@@ -133,6 +133,12 @@ body {
 /** 自定义样式 */
 .fz15 {
     font-size: 15px;
+}
+
+.custom-input-field {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-top: 0 !important;
 }
 
 .margin-top10 {
@@ -299,3 +305,4 @@ body {
     right: 12px;
     bottom: 30px;
 }
+
