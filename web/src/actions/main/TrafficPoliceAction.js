@@ -2,6 +2,8 @@ import {apiHost} from '../../config/HostConfig';
 import {TrafficPoliceActionType} from '../../actionTypes';
 
 const httpUtil = require('../../util/HttpUtil');
+const localUtil = require('../../util/LocalUtil');
+const sysConst = require('../../util/SysConst');
 
 export const getPoliceList = () => async (dispatch, getState) => {
     try {
@@ -24,7 +26,7 @@ export const getPoliceList = () => async (dispatch, getState) => {
         const conditionStatus = getState().TrafficPoliceReducer.conditionStatus.value;
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + getState().HeaderReducer.userInfo.id + '/supervise?start=' + start + '&size=' + size;
+        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/supervise?start=' + start + '&size=' + size;
 
         // 检索条件
         let conditionsObj = {
@@ -86,14 +88,14 @@ export const addPolice = () => async (dispatch, getState) => {
             swal('添加失败', '请输入完整的交警信息！', 'warning');
         } else {
             const params = {
-                userName : name,
-                gender : gender,
-                password : password,
-                phone : phone,
-                status : status,
-                type : position
+                userName: name,
+                gender: gender,
+                password: password,
+                phone: phone,
+                status: status,
+                type: position
             };
-            const url = apiHost + '/api/admin/' + getState().HeaderReducer.userInfo.id + '/supervise';
+            const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/supervise';
             const res = await httpUtil.httpPost(url, params);
 
             if (res.success === true) {

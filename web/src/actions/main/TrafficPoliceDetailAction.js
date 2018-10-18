@@ -2,11 +2,13 @@ import {apiHost} from '../../config/HostConfig';
 import {TrafficPoliceDetailActionType} from '../../actionTypes';
 
 const httpUtil = require('../../util/HttpUtil');
+const localUtil = require('../../util/LocalUtil');
+const sysConst = require('../../util/SysConst');
 
 export const getPoliceInfo = (id) => async (dispatch, getState) => {
     try {
         // 基本检索URL
-        const url = apiHost + '/api/admin/' + getState().HeaderReducer.userInfo.id + '/supervise?superviseId=' + id;
+        const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/supervise?superviseId=' + id;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
             if (res.result.length > 0) {
@@ -51,7 +53,7 @@ export const changeStatus = (id) => async (dispatch, getState) => {
                 // 停用
                 status = 0
             }
-            const url = apiHost + '/api/admin/' + getState().HeaderReducer.userInfo.id + '/supervise/' + id + '/updateSuperviseStatus/' + status;
+            const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/supervise/' + id + '/status/' + status;
             const res = await httpUtil.httpPut(url, {});
 
             if (res.success === true) {
@@ -85,7 +87,7 @@ export const updatePolice = (id) => async (dispatch, getState) => {
                 phone: phone,
                 type: position
             };
-            const url = apiHost + '/api/admin/' + getState().HeaderReducer.userInfo.id + '/supervise/' + id + '/updateSupervise';
+            const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/supervise/' + id;
             const res = await httpUtil.httpPut(url, params);
 
             if (res.success === true) {
