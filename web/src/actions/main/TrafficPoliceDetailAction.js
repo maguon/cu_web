@@ -6,7 +6,7 @@ const httpUtil = require('../../util/HttpUtil');
 export const getPoliceInfo = (id) => async (dispatch, getState) => {
     try {
         // 基本检索URL
-        const url = apiHost + '/api/querySupervise?superviseId=' + id;
+        const url = apiHost + '/api/admin/' + getState().HeaderReducer.userInfo.id + '/supervise?superviseId=' + id;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
             if (res.result.length > 0) {

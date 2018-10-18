@@ -24,7 +24,8 @@ export const getPoliceList = () => async (dispatch, getState) => {
         const conditionStatus = getState().TrafficPoliceReducer.conditionStatus.value;
 
         // 基本检索URL
-        let url = apiHost + '/api/querySupervise?start=' + start + '&size=' + size;
+        let url = apiHost + '/api/admin/' + getState().HeaderReducer.userInfo.id + '/supervise?start=' + start + '&size=' + size;
+
         // 检索条件
         let conditionsObj = {
             // 检索条件：编号
@@ -84,7 +85,6 @@ export const addPolice = () => async (dispatch, getState) => {
         if (name === '' || position === '' || phone === '' || password === '') {
             swal('添加失败', '请输入完整的交警信息！', 'warning');
         } else {
-            const userId = getState().HeaderReducer.userInfo.id;
             const params = {
                 userName : name,
                 gender : gender,
@@ -93,7 +93,7 @@ export const addPolice = () => async (dispatch, getState) => {
                 status : status,
                 type : position
             };
-            const url = apiHost + '/api/admin/' + userId + '/supervise';
+            const url = apiHost + '/api/admin/' + getState().HeaderReducer.userInfo.id + '/supervise';
             const res = await httpUtil.httpPost(url, params);
 
             if (res.success === true) {
