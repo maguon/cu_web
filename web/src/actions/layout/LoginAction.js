@@ -6,7 +6,7 @@ const SysConst = require('../../util/SysConst');
 
 export const login = (params) => async () => {
     try {
-        const res = await httpUtil.httpPost(apiHost + '/api/admin/do/login', params);
+        const res = await httpUtil.httpPost(apiHost + '/api/adminLogin', params);
 
         if (res.success === true) {
             LocalUtil.setLocalItem(SysConst.USER_ID, res.result.userId);
