@@ -173,6 +173,11 @@ body {
     margin-right: 10px !important;
 }
 
+.margin-right20 {
+    margin-right: 20px !important;
+}
+
+
 /** 一览画面 操作按钮部 样式 */
 .operation {
     padding: 8px 5px 8px 5px;
@@ -294,7 +299,8 @@ body {
     height: 66px;
     background-color: #EDEFF6;
     padding-top: 22px;
-    padding-left: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     border-bottom:1px solid #D4D4D4;
     color: #0F4F94;
     font-weight: bold;

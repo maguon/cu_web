@@ -9,7 +9,7 @@ import {fileHost} from "../../config/HostConfig";
 const trafficPoliceDetailAction = require('../../actions/main/TrafficPoliceDetailAction');
 const sysConst = require('../../util/SysConst');
 
-class TrafficPolice extends React.Component {
+class TrafficPoliceDetail extends React.Component {
 
     /**
      * 组件准备要挂载的最一开始，调用执行
@@ -120,7 +120,7 @@ class TrafficPolice extends React.Component {
                     <div className="col s2">
                         <img className="margin-top10 margin-left30" src={avatarUrl}/>
                     </div>
-                    <div className="row margin-left10 margin-right10">
+                    <div className="row margin-right20">
                         <div className="input-field col s12 right-align">
                             <button type="button" className="btn confirm-btn" onClick={updatePolice}>确定</button>
                         </div>
@@ -161,4 +161,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrafficPolice)
+export default connect(mapStateToProps, mapDispatchToProps)(TrafficPoliceDetail)

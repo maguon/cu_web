@@ -1,5 +1,5 @@
 import React from 'react';
-import {TrafficPolice, TrafficPoliceDetail} from '../main/index';
+import {TrafficPolice, TrafficPoliceDetail, UserCar, UserCarDetail} from '../main/index';
 import {HashRouter as Router, Route, Link} from "react-router-dom";
 
 import {fileHost} from '../../config/HostConfig';
@@ -24,6 +24,18 @@ const routes = [
         path: '/traffic_police/:id',
         exact: true,
         component: TrafficPoliceDetail
+    },
+    // 用户车辆管理
+    {
+        path: "/user_car",
+        exact: true,
+        component: UserCar
+    },
+    // 用户车辆管理 - 车辆信息
+    {
+        path: '/user_car/:id',
+        exact: true,
+        component: UserCarDetail
     }
 ];
 
@@ -67,8 +79,17 @@ class Container extends React.Component {
                         </li>
 
                         <li>
-                            <Link to="/traffic_police" className="side-navigation">
-                                <i className="mdi mdi-account-group"/>交警管理
+                            <Link to="/user" className="side-navigation">
+                                <i className="mdi mdi-account-group"/>用户管理
+                            </Link>
+                        </li>
+                        <li>
+                            <div className="divider"/>
+                        </li>
+
+                        <li>
+                            <Link to="/user_car" className="side-navigation">
+                                <i className="mdi mdi-car"/>用户车辆管理
                             </Link>
                         </li>
                         <li>
@@ -78,18 +99,17 @@ class Container extends React.Component {
                         <li>
                             <ul className="collapsible collapsible-accordion">
                                 <li>
-                                    <a className="collapsible-header"><i className="mdi mdi-lock"/>设置</a>
+                                    <a className="collapsible-header"><i className="mdi mdi-settings"/>交警设置</a>
                                     <div className="collapsible-body">
                                         <ul>
-                                            <li><Link to="/city_setting"><i className="mdi mdi-chevron-right"/>城市</Link></li>
+                                            <li><Link to="/traffic_police"><i className="mdi mdi-chevron-right"/>交警管理</Link></li>
                                             <li><div className="divider"/></li>
-                                            <li><Link to="/route_setting"><i className="mdi mdi-chevron-right"/>线路</Link></li>
+                                            <li><Link to="/scan_manager"><i className="mdi mdi-chevron-right"/>扫码管理</Link></li>
                                         </ul>
                                     </div>
                                 </li>
                             </ul>
                         </li>
-
                     </ul>
                     {routes.map((route, index) => (
                         // Render more <Route>s with the same paths as
