@@ -91,7 +91,7 @@ class TrafficPolice extends React.Component {
 
                     <div className="col s10">
                         <div className="row margin-left10 margin-right10">
-                            <Input s={6} label="姓名" maxLength="100" labelClassName="label-active" value={trafficPoliceDetailReducer.name} onChange={this.changeName}/>
+                            <Input s={6} label="姓名" maxLength="100" value={trafficPoliceDetailReducer.name} onChange={this.changeName}/>
                             <div className="col s6 margin-top25">
                                 <input type="radio" id="male" value="0" className='with-gap'
                                        checked={trafficPoliceDetailReducer.gender == '0'} onChange={this.changeGender}/>
@@ -115,7 +115,7 @@ class TrafficPolice extends React.Component {
                                 />
                                 <label className="active">职务</label>
                             </div>
-                            <Input s={6} label="电话(登录账号)" maxLength="11" labelClassName="label-active" value={trafficPoliceDetailReducer.phone} onChange={this.changePhone}/>
+                            <Input s={6} label="电话(登录账号)" maxLength="11" value={trafficPoliceDetailReducer.phone} onChange={this.changePhone}/>
                         </div>
                     </div>
                     <div className="col s2">
