@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {UserCarDetailActionType} from '../../actionTypes';
 import {Link} from "react-router-dom";
+import {Tabs,Tab} from 'react-materialize';
 
 const userCarDetailAction = require('../../actions/main/UserCarDetailAction');
 const sysConst = require('../../util/SysConst');
@@ -20,16 +21,56 @@ class UserCarDetail extends React.Component {
      * 组件完全挂载到页面上，调用执行
      */
     componentDidMount() {
-        // this.props.getUserCarInfo();
+        $('.modal').modal();
+        this.props.getUserCarInfo();
     }
 
+    /**
+     * 切换TAB
+     */
+    changeTab = (tabIndex, event) => {
+        if (event.target.text === '基本信息') {
+            this.props.setTabId('base');
+        } else if (event.target.text === '扫描记录') {
+            this.props.setTabId('scan');
+            // 默认第一页
+            this.props.setStartNumber(0);
+            this.props.getMessageList();
+        }
+    };
+
+    /**
+     * 上一页
+     */
+    preBtn = () => {
+        this.props.setStartNumber(this.props.userCarDetailReducer.start - (this.props.userCarDetailReducer.size - 1));
+        this.props.getMessageList();
+    };
+
+    /**
+     * 下一页
+     */
+    nextBtn = () => {
+        this.props.setStartNumber(this.props.userCarDetailReducer.start + (this.props.userCarDetailReducer.size - 1));
+        this.props.getMessageList();
+    };
+
+    /**
+     * 显示 增加交警
+     */
+    showMessageInfo = (messageId) => {
+        console.log('messageId is :',messageId);
+        $('#messageModal').modal('open');
+        this.props.getMessageInfo(messageId);
+    };
+
     render() {
-        const {userCarDetailReducer, updatePolice} = this.props;
+        const {userCarDetailReducer, closeModal} = this.props;
 
         return (
             <div>
                 {/* 标题部分 */}
-                <div className="row">
+                <div className="row margin-bottom0">
                     <div className="input-field col s12">
                         <Link to={{pathname: '/user_car', state: {fromDetail: true}}}>
                             <a className="btn-floating btn waves-effect custom-blue waves-light fz15">
@@ -41,49 +82,147 @@ class UserCarDetail extends React.Component {
                     </div>
                 </div>
 
-                {/* 车辆信息：明细 */}
-                <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
-                    <div className="row detail-box-header vc-center">
-                        {/* 车辆信息：车辆编号 */}
-                        <div className="col s6 context-ellipsis">车辆编号：{this.props.match.params.id}</div>
+                <Tabs onChange={this.changeTab}>
+                    <Tab title="基本信息" tabWidth={6} active={userCarDetailReducer.tabId === "base"}>
+                        {/* 车辆信息：明细 */}
+                        <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
+                            <div className="row detail-box-header vc-center">
+                                {/* 车辆信息：车辆编号 */}
+                                <div className="col s6">车辆编号：{this.props.match.params.id}</div>
 
-                        {/* 车辆信息：绑定时间 绑定状态 */}
-                        <div className="col s6 right-align">
-                            <span className="grey-text">绑定时间：{formatUtil.getDateTime(new Date())}</span>
-                            <span className="margin-left50">{userCarDetailReducer.bindList[1].label}</span>
+                                {/* 车辆信息：绑定时间 绑定状态 */}
+                                <div className="col s6 right-align">
+                                    <span className="grey-text">绑定时间：{formatUtil.getDateTime(userCarDetailReducer.createdOn)}</span>
+                                    <span className="margin-left50">{userCarDetailReducer.bindList[userCarDetailReducer.status].label}</span>
+                                </div>
+                            </div>
+
+                            <div className="col s12 grey-text fz18">
+                                <div className="row margin-left10 margin-right10">
+                                    {/* 车辆信息：车牌号码 */}
+                                    <div className="input-field col s4 blue-font fz20">
+                                        <i className="mdi mdi-car fz20 margin-right20"/>{userCarDetailReducer.plateNum}
+                                    </div>
+                                    {/* 车辆信息：联系电话 */}
+                                    <div className="input-field col s4">
+                                        <i className="mdi mdi-cellphone fz20 margin-right10"/>{userCarDetailReducer.phone}
+                                    </div>
+                                    {/* 车辆信息：绑定用户 */}
+                                    <div className="input-field col s4 right-align">
+                                        <i className="mdi mdi-account-outline fz20 margin-right10"/>{userCarDetailReducer.bindUser}
+                                    </div>
+                                </div>
+
+                                <div className="row divider custom-divider margin-top20 margin-left10 margin-right10"/>
+
+                                <div className="row margin-left10 margin-right10">
+                                    <div className="input-field col s6">
+                                        车辆识别码：{userCarDetailReducer.vin}
+                                    </div>
+                                    <div className="input-field col s6 right-align">
+                                        发动机号码：{userCarDetailReducer.engineNum}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </Tab>
+
+                    <Tab title="扫描记录" tabWidth={6} active={userCarDetailReducer.tabId === "scan"}>
+                        {/* 扫描记录：车辆信息 */}
+                        <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
+                            <div className="row margin-left10 margin-right10 margin-top20">
+                                {/* 车辆信息：车辆编号 */}
+                                <div className="col s6">车辆编号：{this.props.match.params.id}</div>
+                                {/* 车辆信息：绑定状态 */}
+                                <div className="col s6 right-align">
+                                    <span>{userCarDetailReducer.bindList[userCarDetailReducer.status].label}</span>
+                                </div>
+
+                                {/* 车辆信息：车牌号码 */}
+                                <div className="input-field col s6 fz20">
+                                    <i className="mdi mdi-car fz20 margin-right10"/>{userCarDetailReducer.plateNum}
+                                </div>
+                                {/* 车辆信息：绑定用户 */}
+                                <div className="input-field col s6 right-align grey-text fz18">
+                                    共接收消息 <span className="blue-font fz20">{userCarDetailReducer.bindUser}</span> 条
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 扫描记录：记录列表 */}
+                        <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
+                            <table className="bordered fixed-table">
+                                <thead className="blue-grey lighten-5">
+                                <tr className="grey-text text-darken-2">
+                                    <th className="padding-left20">消息编号</th>
+                                    <th>消息名称</th>
+                                    <th className="message-td context-ellipsis">消息内容</th>
+                                    <th>接收时间</th>
+                                    <th>扫描交警</th>
+                                    <th>是否成功</th>
+                                    <th className="center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {
+                                    userCarDetailReducer.messageArray.map(function (item) {
+                                        return (
+                                            <tr className="grey-text text-darken-1">
+                                                <td className="padding-left20">{item.id}</td>
+                                                <td>{item.message_name}</td>
+                                                <td className="message-td context-ellipsis">{item.message_order}</td>
+                                                <td>{formatUtil.getDateTime(item.created_on)}</td>
+                                                <td>{item.superviseName}</td>
+                                                <td>{userCarDetailReducer.messageStatus[item.status].label}</td>
+                                                <td className="operation center">
+                                                    <i className="mdi mdi-table-search cyan-text lighten-1 pointer" onClick={() => {this.showMessageInfo(item.id)}}/>
+                                                </td>
+                                            </tr>
+                                        )
+                                    },this)
+                                }
+                                { userCarDetailReducer.messageArray.length === 0 &&
+                                <tr className="grey-text text-darken-1">
+                                    <td className="no-data-tr" colSpan="9">暂无数据</td>
+                                </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {/* 上下页按钮 */}
+                        <div className="row margin-top10 margin-left50 margin-right50">
+                            <div className="right">
+                                <a className="waves-light waves-effect custom-blue btn margin-right10" id="pre" onClick={this.preBtn}>
+                                    上一页
+                                </a>
+                                <a className="waves-light waves-effect custom-blue btn" id="next" onClick={this.nextBtn}>
+                                    下一页
+                                </a>
+                            </div>
+                        </div>
+                    </Tab>
+                </Tabs>
+
+                <div id="messageModal" className="modal modal-fixed-footer row">
+
+                    {/** Modal头部：Title */}
+                    <div className="modal-title center-align white-text">消息详情</div>
+
+                    {/** Modal主体 */}
+                    <div className="modal-content white">
+
+                        <div>消息编号：{userCarDetailReducer.messageId}</div>
+                        <div>消息名称：{userCarDetailReducer.messageName}</div>
+                        <div>消息时间：{userCarDetailReducer.messageCreateOn}</div>
+                        <div>消息内容：{userCarDetailReducer.messageContent}</div>
+                        <div>消息地址：{userCarDetailReducer.messageAddress}</div>
+                        <div>扫描交警：{userCarDetailReducer.messageSuperviseName}</div>
                     </div>
 
-                    <div className="col s10">
-                        <div className="row margin-left10 margin-right10">
-                            <div className="input-field col s6">
-                                <input id="name" type="text" maxLength="100" value={userCarDetailReducer.name}
-                                       />
-                                <label id="label_name" htmlFor="name">姓名</label>
-                            </div>
-                            <div className="col s6 margin-top25">
-                                <input type="radio" id="male" value="0" className='with-gap'
-                                       checked={userCarDetailReducer.gender == '0'} />
-                                <label htmlFor="male">男</label>
-
-                                <input type="radio" id="female" value="1" className='with-gap'
-                                       checked={userCarDetailReducer.gender == '1'} />
-                                <label htmlFor="female" className="margin-left10">女</label>
-                            </div>
-                        </div>
-                        <div className="row margin-left10 margin-right10">
-                            <div className="input-field col s6">
-                                tttttttttt
-                            </div>
-                            <div className="input-field col s6">
-                                <input id="phone" type="text" maxLength="11" value={userCarDetailReducer.phone}
-                                       />
-                                <label id="label_phone" htmlFor="phone">电话(登录账号)</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col s2">
-                        ttttttttttttt
+                    {/** Modal固定底部：取消确定按钮 */}
+                    <div className="modal-footer">
+                        <button type="button" className="btn confirm-btn" onClick={closeModal}>确定</button>
                     </div>
                 </div>
             </div>
@@ -98,23 +237,23 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+    setTabId: (tabId) => {
+        dispatch(UserCarDetailActionType.setTabId(tabId))
+    },
     getUserCarInfo: () => {
         dispatch(userCarDetailAction.getUserCarInfo(ownProps.match.params.id))
     },
-    setName: (name) => {
-        dispatch(UserCarDetailActionType.setName(name))
+    getMessageList: () => {
+        dispatch(userCarDetailAction.getMessageList(ownProps.match.params.id))
     },
-    // setGender: (gender) => {
-    //     dispatch(UserCarDetailActionType.setGender(gender))
-    // },
-    changePolicePosition: (policePosition) => {
-        dispatch(UserCarDetailActionType.setPolicePosition(policePosition))
+    getMessageInfo: (messageId) => {
+        dispatch(userCarDetailAction.getMessageInfo(messageId))
     },
-    setPhone: (phone) => {
-        dispatch(UserCarDetailActionType.setPhone(phone))
+    setStartNumber: (start) => {
+        dispatch(UserCarDetailActionType.setStartNumber(start))
     },
-    updatePolice: () => {
-        dispatch(userCarDetailAction.updatePolice(ownProps.match.params.id))
+    closeModal: () => {
+        $('#messageModal').modal('close');
     }
 });
 

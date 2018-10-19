@@ -47,6 +47,17 @@ export const BIND_STATUS = [
     }
 ];
 
+// 消息：消息状态
+export const MESSAGE_STATUS = [
+    {
+        value: 0,
+        label: "失败"
+    },
+    {
+        value: 1,
+        label: "成功"
+    }
+];
 
 export const DATE_PICKER_OPTION = {
     // selectMonths: true,

@@ -6,7 +6,6 @@ const localUtil = require('../../util/LocalUtil');
 const sysConst = require('../../util/SysConst');
 
 export const getUserCarList = () => async (dispatch, getState) => {
-    console.log('getState',getState());
     try {
         // 检索条件：开始位置
         const start = getState().UserCarReducer.start;
@@ -33,8 +32,6 @@ export const getUserCarList = () => async (dispatch, getState) => {
         // 基本检索URL
         let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/userCar?start=' + start + '&size=' + size;
 
-        console.log('url',url);
-
         // 检索条件
         let conditionsObj = {
             // 检索条件：车辆编号
@@ -56,11 +53,7 @@ export const getUserCarList = () => async (dispatch, getState) => {
         let conditions = httpUtil.objToUrl(conditionsObj);
         // 检索URL
         url = conditions.length > 0 ? url + "&" + conditions : url;
-        console.log('url',url);
-
         const res = await httpUtil.httpGet(url);
-        console.log('res',res);
-
         if (res.success === true) {
             // 前一页
             if (start > 0) {

@@ -8,95 +8,97 @@ const sysConst = require('../../util/SysConst');
 export const getUserCarInfo = (id) => async (dispatch, getState) => {
     try {
         // 基本检索URL
-        const url = apiHost + '/api/querySupervise?superviseId=' + id;
+        const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/userCar?userCarId=' + id;
+
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
             if (res.result.length > 0) {
-                let selectedPos = {
-                    value: res.result[0].type,
-                    label: getState().TrafficPoliceDetailReducer.policePositionList[res.result[0].type].label
-                };
+                // 绑定时间
+                dispatch({type: UserCarDetailActionType.setCreatedOn, payload: res.result[0].created_on});
+                // 绑定状态
                 dispatch({type: UserCarDetailActionType.setStatus, payload: res.result[0].status});
-                dispatch({type: UserCarDetailActionType.setName, payload: res.result[0].user_name});
-                dispatch({type: UserCarDetailActionType.setGender, payload: res.result[0].gender});
-                dispatch({type: UserCarDetailActionType.setPolicePosition, payload: selectedPos});
+                // 车辆信息：车牌号码
+                dispatch({type: UserCarDetailActionType.setPlateNum, payload: res.result[0].license_plate});
+                // 车辆信息：联系电话
                 dispatch({type: UserCarDetailActionType.setPhone, payload: res.result[0].phone});
-                dispatch({type: UserCarDetailActionType.setAvatarImg, payload: res.result[0].avatar_image});
-                $("#label_name").addClass('active');
-                $("#label_phone").addClass('active');
+                // 车辆信息：绑定用户
+                dispatch({type: UserCarDetailActionType.setBindUser, payload: res.result[0].user_name});
+                // 车辆信息：车辆识别码
+                dispatch({type: UserCarDetailActionType.setVin, payload: res.result[0].vin});
+                // 车辆信息：发动机号码
+                dispatch({type: UserCarDetailActionType.setEngineNum, payload: res.result[0].engine_num});
             } else {
-                swal('未获取交警信息，请重新查询', res.msg, 'warning');
+                swal('未获取车辆信息，请重新查询', res.msg, 'warning');
             }
         } else if (res.success === false) {
-            swal('获取交警信息失败', res.msg, 'warning');
+            swal('获取车辆信息失败', res.msg, 'warning');
         }
     } catch (err) {
         swal('操作失败', err.message, 'error');
     }
 };
 
-export const changeStatus = (id) => async (dispatch, getState) => {
-    swal({
-        title: "",
-        text: "确认修改？",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消'
-    }).then(async function (isConfirm) {
-        if (isConfirm && isConfirm.value === true) {
-            // 状态
-            let status = 0;
-            if (getState().TrafficPoliceDetailReducer.status === 0) {
-                // 启用
-                status = 1
-            } else {
-                // 停用
-                status = 0
-            }
-            const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/supervise/' + id + '/updateSuperviseStatus/' + status;
-            const res = await httpUtil.httpPut(url, {});
+export const getMessageList = (id) => async (dispatch, getState) => {
+    try {
+        // 检索条件：开始位置
+        const start = getState().UserCarReducer.start;
+        // 检索条件：每页数量
+        const size = getState().UserCarReducer.size;
 
-            if (res.success === true) {
-                swal("修改成功", "", "success");
-                dispatch(getPoliceInfo(id));
-            } else if (res.success === false) {
-                swal('修改失败', res.msg, 'warning');
+        // 基本检索URL
+        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/getMessage?start=' + start + '&size=' + size + '&carId=' + id;
+        const res = await httpUtil.httpGet(url);
+        console.log(res);
+
+        if (res.success === true) {
+            dispatch({type: UserCarDetailActionType.getMessageList, payload: res.result.slice(0, 10)});
+            // 前一页
+            if (start > 0) {
+                $("#pre").show();
+            } else {
+                $("#pre").hide();
             }
+            // 下一页
+            if (res.result.length < size) {
+                $("#next").hide();
+            } else {
+                $("#next").show();
+            }
+        } else if (res.success === false) {
+            swal('获取扫描记录列表失败', res.msg, 'warning');
         }
-    });
+    } catch (err) {
+        swal('操作失败', err.message, 'error');
+    }
 };
 
-export const updateUserCar = (id) => async (dispatch, getState) => {
-
-    // 增加交警：姓名
-    const name = getState().TrafficPoliceDetailReducer.name.trim();
-    // 增加交警：性别
-    const gender = getState().TrafficPoliceDetailReducer.gender;
-    // 增加交警：职务
-    const position = getState().TrafficPoliceDetailReducer.position.value;
-    // 增加交警：电话
-    const phone = getState().TrafficPoliceDetailReducer.phone.trim();
-
+export const getMessageInfo = (messageId) => async (dispatch, getState) => {
     try {
-        if (name === '' || position === '' || phone === '') {
-            swal('修改失败', '请输入完整的交警信息！', 'warning');
-        } else {
-            const params = {
-                userName: name,
-                gender: gender,
-                phone: phone,
-                type: position
-            };
-            const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/supervise/' + id + '/updateSupervise';
-            const res = await httpUtil.httpPut(url, params);
+        // 检索条件：开始位置
+        const start = getState().UserCarReducer.start;
+        // 检索条件：每页数量
+        const size = getState().UserCarReducer.size;
 
-            if (res.success === true) {
-                swal("修改成功", "", "success");
-            } else if (res.success === false) {
-                swal('修改失败', res.msg, 'warning');
+        // 基本检索URL
+        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+            + '/getMessage?start=' + start + '&size=' + size + '&userMessageId=' + messageId;
+        const res = await httpUtil.httpGet(url);
+
+        console.log(res);
+
+        if (res.success === true) {
+            if (res.result.length > 0) {
+                dispatch({type: UserCarDetailActionType.setMsgId, payload: messageId});
+                dispatch({type: UserCarDetailActionType.setMsgName, payload: res.result[0].message_name});
+                dispatch({type: UserCarDetailActionType.setMsgCreatedOn, payload: res.result[0].created_on});
+                dispatch({type: UserCarDetailActionType.setMsgContent, payload: res.result[0].message_order});
+                dispatch({type: UserCarDetailActionType.setMsgAddress, payload: res.result[0].address});
+                dispatch({type: UserCarDetailActionType.setMsgSuperviseName, payload: res.result[0].superviseName});
+            } else {
+                swal('未获取消息详情，请重新查询', res.msg, 'warning');
             }
+        } else if (res.success === false) {
+            swal('获取消息详情失败', res.msg, 'warning');
         }
     } catch (err) {
         swal('操作失败', err.message, 'error');

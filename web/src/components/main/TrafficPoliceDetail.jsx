@@ -75,7 +75,7 @@ class TrafficPoliceDetail extends React.Component {
                 <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                     <div className="row detail-box-header vc-center">
                         {/* 交警资料：编号 */}
-                        <div className="col s6 context-ellipsis">编号：{this.props.match.params.id}</div>
+                        <div className="col s6">编号：{this.props.match.params.id}</div>
 
                         {/* 交警资料：开关 */}
                         <div className="col s6 right-align">
