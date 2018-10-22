@@ -58,7 +58,7 @@ export const getUserCarList = () => async (dispatch, getState) => {
             dispatch({type: UserCarActionType.setDataSize, payload: res.result.length});
             dispatch({type: UserCarActionType.getUserCarList, payload: res.result.slice(0, 10)})
         } else if (res.success === false) {
-            swal('获取交警列表信息失败', res.msg, 'warning');
+            swal('获取车辆列表信息失败', res.msg, 'warning');
         }
     } catch (err) {
         swal('操作失败', err.message, 'error');
