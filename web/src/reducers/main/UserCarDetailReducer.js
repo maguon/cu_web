@@ -28,7 +28,7 @@ const initialState = {
     // 开始位置
     start: 0,
     // 每页数量
-    size: 11,
+    size: 7,
     // 检索结果数量
     dataSize: 0,
     // 消息状态

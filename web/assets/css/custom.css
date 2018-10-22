@@ -187,10 +187,15 @@ body {
     font-weight: bold;
 }
 
+.fz14 {
+    font-size: 14px;
+}
 .fz15 {
     font-size: 15px;
 }
-
+.fz18 {
+    font-size: 18px;
+}
 .fz20 {
     font-size: 20px;
 }
@@ -203,6 +208,10 @@ body {
 
 .margin-top0 {
     margin-top: 0;
+}
+
+.margin-top3 {
+    margin-top: 3px;
 }
 
 .margin-top10 {
@@ -253,6 +262,15 @@ body {
     padding-left: 20px;
 }
 
+/** col 后 自定义宽度 */
+.s-percent-4 {
+    width:4%;
+}
+
+.s-percent-96 {
+    width:96%;
+}
+
 /** 一览画面 操作按钮部 样式 */
 .operation {
     padding: 8px 5px 8px 5px;
@@ -268,7 +286,7 @@ body {
 
 .modal-title {
     height: 50px;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 50px;
     background-color: #0F4F94;
 }
@@ -279,6 +297,12 @@ body {
 
 .modal .modal-footer .btn {
     margin: 6px 0 0 20px;
+}
+
+.word-wrap {
+    overflow: hidden;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .close-btn {
@@ -297,6 +321,13 @@ body {
 
 #policeModal {
     max-height: 456px;
+}
+
+#messageModal {
+    max-height: 606px;
+}
+#messageModal .modal-content {
+    max-height: 500px;
 }
 /** modal 样式定义部分 end */
 

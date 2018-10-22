@@ -21,7 +21,10 @@ class UserCarDetail extends React.Component {
      */
     componentDidMount() {
         $('.modal').modal();
+        // 取得车辆信息
         this.props.getUserCarInfo();
+        // 显示基本信息
+        this.props.setTabId('base');
     }
 
     /**
@@ -210,17 +213,47 @@ class UserCarDetail extends React.Component {
                     <div className="modal-title center-align white-text">消息详情</div>
 
                     {/** Modal主体 */}
-                    <div className="modal-content white">
+                    <div className="modal-content white grey-text">
 
-                        <div>消息编号：{userCarDetailReducer.messageId}</div>
-                        <div>消息名称：{userCarDetailReducer.messageName}</div>
-                        <div>消息时间：{userCarDetailReducer.messageCreateOn}</div>
-                        <div>消息内容：{userCarDetailReducer.messageContent}</div>
-                        <div>消息地址：{userCarDetailReducer.messageAddress}</div>
-                        <div>扫描交警：{userCarDetailReducer.messageSuperviseName}</div>
+                        {/** 消息编号 消息名称 */}
+                        <div className="row">
+                            <div className="col s12 fz14">消息编号：{userCarDetailReducer.messageId}</div>
+                            <div className="col s12 center blue-font fz18">{userCarDetailReducer.messageName}</div>
+                        </div>
+                        <div className="row divider margin-left10 margin-right10"/>
+
+                        {/** 消息时间 */}
+                        <div className="row">
+                            <div className="col s12 right-align fz14">{formatUtil.getDateTime(userCarDetailReducer.messageCreateOn)}</div>
+                        </div>
+
+                        {/** 消息内容 */}
+                        <div className="row">
+                            <div className="col s-percent-4"><i className="mdi mdi-comment-processing-outline blue-text text-lighten-1 fz20"/></div>
+                            <div className="col s-percent-96 word-wrap margin-top3">{userCarDetailReducer.messageContent}</div>
+                        </div>
+                        <div className="row divider margin-left10 margin-right10"/>
+
+                        {/** 地址 */}
+                        <div className="row">
+                            <div className="col s-percent-4"><i className="mdi mdi-map-marker-outline orange-text text-lighten-1 fz20"/></div>
+                            <div className="col s-percent-96 word-wrap margin-top3">{userCarDetailReducer.messageAddress}</div>
+                        </div>
+                        <div className="row divider margin-left10 margin-right10"/>
+
+                        {/** 图片显示 */}
+                        <div className="row">
+                            <div className="col s12">TODO IMG LIST</div>
+                        </div>
+                        <div className="row divider margin-left10 margin-right10"/>
+
+                        {/** 发送人 */}
+                        <div className="row">
+                            <div className="col s12 right-align blue-font">发送人：{userCarDetailReducer.messageSuperviseName}</div>
+                        </div>
                     </div>
 
-                    {/** Modal固定底部：取消确定按钮 */}
+                    {/** Modal固定底部：确定按钮 */}
                     <div className="modal-footer">
                         <button type="button" className="btn confirm-btn" onClick={closeModal}>确定</button>
                     </div>

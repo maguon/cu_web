@@ -4,9 +4,9 @@ import {TrafficPoliceActionType} from '../../actionTypes';
 const sysConst = require('../../util/SysConst');
 
 const initialState = {
-    // 检索条件：开始位置
+    // 开始位置
     start: 0,
-    // 检索条件：每页数量
+    // 每页数量
     size: 11,
     // 检索结果数量
     dataSize: 0,
