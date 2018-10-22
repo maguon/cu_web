@@ -11,6 +11,7 @@ export const setEngineNum = createAction('SET_ENGINE_NUM');
 
 export const getMessageList = createAction('GET_MESSAGE_LIST');
 export const setStartNumber = createAction('SET_START_NUMBER');
+export const setDataSize = createAction('SET_DATA_SIZE');
 
 export const setMsgId = createAction('SET_MESSAGE_ID');
 export const setMsgName = createAction('SET_MESSAGE_NAME');

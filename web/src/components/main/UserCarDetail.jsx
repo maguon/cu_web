@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import {Tabs,Tab} from 'react-materialize';
 
 const userCarDetailAction = require('../../actions/main/UserCarDetailAction');
-const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
 class UserCarDetail extends React.Component {
@@ -59,7 +58,6 @@ class UserCarDetail extends React.Component {
      * 显示 增加交警
      */
     showMessageInfo = (messageId) => {
-        console.log('messageId is :',messageId);
         $('#messageModal').modal('open');
         this.props.getMessageInfo(messageId);
     };
@@ -144,7 +142,7 @@ class UserCarDetail extends React.Component {
                                 </div>
                                 {/* 车辆信息：绑定用户 */}
                                 <div className="input-field col s6 right-align grey-text fz18">
-                                    共接收消息 <span className="blue-font fz20">{userCarDetailReducer.bindUser}</span> 条
+                                    共接收消息 <span className="blue-font fz20">{formatUtil.formatNumber(userCarDetailReducer.messageArray.length)}</span> 条
                                 </div>
                             </div>
                         </div>
@@ -193,12 +191,14 @@ class UserCarDetail extends React.Component {
                         {/* 上下页按钮 */}
                         <div className="row margin-top10 margin-left50 margin-right50">
                             <div className="right">
+                                {userCarDetailReducer.start > 0 &&
                                 <a className="waves-light waves-effect custom-blue btn margin-right10" id="pre" onClick={this.preBtn}>
                                     上一页
-                                </a>
+                                </a>}
+                                {userCarDetailReducer.dataSize >= userCarDetailReducer.size &&
                                 <a className="waves-light waves-effect custom-blue btn" id="next" onClick={this.nextBtn}>
                                     下一页
-                                </a>
+                                </a>}
                             </div>
                         </div>
                     </Tab>
@@ -246,11 +246,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     getMessageList: () => {
         dispatch(userCarDetailAction.getMessageList(ownProps.match.params.id))
     },
-    getMessageInfo: (messageId) => {
-        dispatch(userCarDetailAction.getMessageInfo(messageId))
-    },
     setStartNumber: (start) => {
         dispatch(UserCarDetailActionType.setStartNumber(start))
+    },
+    getMessageInfo: (messageId) => {
+        dispatch(userCarDetailAction.getMessageInfo(messageId))
     },
     closeModal: () => {
         $('#messageModal').modal('close');

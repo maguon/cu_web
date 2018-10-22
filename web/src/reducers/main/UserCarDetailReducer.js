@@ -7,7 +7,7 @@ const initialState = {
     // 绑定状态列表
     bindList: sysConst.BIND_STATUS,
     // 画面 TAB
-    tabId : 'base',
+    tabId: 'base',
     // 车辆信息：绑定时间
     createdOn: '',
     // 车辆信息：绑定状态
@@ -29,6 +29,8 @@ const initialState = {
     start: 0,
     // 每页数量
     size: 11,
+    // 检索结果数量
+    dataSize: 0,
     // 消息状态
     messageStatus: sysConst.MESSAGE_STATUS,
 
@@ -105,6 +107,12 @@ export default handleActions({
         return {
             ...state,
             start: action.payload
+        }
+    },
+    [UserCarDetailActionType.setDataSize]: (state, action) => {
+        return {
+            ...state,
+            dataSize: action.payload
         }
     },
     [UserCarDetailActionType.setMsgId]: (state, action) => {

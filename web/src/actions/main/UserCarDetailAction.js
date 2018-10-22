@@ -41,29 +41,17 @@ export const getUserCarInfo = (id) => async (dispatch, getState) => {
 export const getMessageList = (id) => async (dispatch, getState) => {
     try {
         // 检索条件：开始位置
-        const start = getState().UserCarReducer.start;
+        const start = getState().UserCarDetailReducer.start;
         // 检索条件：每页数量
-        const size = getState().UserCarReducer.size;
+        const size = getState().UserCarDetailReducer.size;
 
         // 基本检索URL
         let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/getMessage?start=' + start + '&size=' + size + '&carId=' + id;
         const res = await httpUtil.httpGet(url);
-        console.log(res);
 
         if (res.success === true) {
+            dispatch({type: UserCarDetailActionType.setDataSize, payload: res.result.length});
             dispatch({type: UserCarDetailActionType.getMessageList, payload: res.result.slice(0, 10)});
-            // 前一页
-            if (start > 0) {
-                $("#pre").show();
-            } else {
-                $("#pre").hide();
-            }
-            // 下一页
-            if (res.result.length < size) {
-                $("#next").hide();
-            } else {
-                $("#next").show();
-            }
         } else if (res.success === false) {
             swal('获取扫描记录列表失败', res.msg, 'warning');
         }
@@ -74,17 +62,10 @@ export const getMessageList = (id) => async (dispatch, getState) => {
 
 export const getMessageInfo = (messageId) => async (dispatch, getState) => {
     try {
-        // 检索条件：开始位置
-        const start = getState().UserCarReducer.start;
-        // 检索条件：每页数量
-        const size = getState().UserCarReducer.size;
-
         // 基本检索URL
         let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
-            + '/getMessage?start=' + start + '&size=' + size + '&userMessageId=' + messageId;
+            + '/getMessage?userMessageId=' + messageId;
         const res = await httpUtil.httpGet(url);
-
-        console.log(res);
 
         if (res.success === true) {
             if (res.result.length > 0) {

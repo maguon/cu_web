@@ -152,7 +152,6 @@ class UserCar extends React.Component {
                                 />
                                 <label className="active">绑定状态</label>
                             </div>
-
                         </div>
 
                         {/* 查询条件：第二行 */}
@@ -247,12 +246,14 @@ class UserCar extends React.Component {
                     {/* 上下页按钮 */}
                     <div className="col s12 margin-top10">
                         <div className="right">
+                            {userCarReducer.start > 0 &&
                             <a className="waves-light waves-effect custom-blue btn margin-right10" id="pre" onClick={this.preBtn}>
                                 上一页
-                            </a>
+                            </a>}
+                            {userCarReducer.dataSize >= userCarReducer.size &&
                             <a className="waves-light waves-effect custom-blue btn" id="next" onClick={this.nextBtn}>
                                 下一页
-                            </a>
+                            </a>}
                         </div>
                     </div>
                 </div>
@@ -266,8 +267,6 @@ const mapStateToProps = (state, ownProps) => {
     if (typeof ownProps.location.state !== 'undefined' && ownProps.location.state.fromDetail === true) {
         fromDetail = true;
     }
-    console.log('state.UserCarReducer',state.UserCarReducer)
-    console.log('state.fromDetail',fromDetail)
     return {
         userCarReducer: state.UserCarReducer,
         fromDetail: fromDetail

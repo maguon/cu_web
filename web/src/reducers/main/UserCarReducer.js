@@ -8,6 +8,8 @@ const initialState = {
     start: 0,
     // 检索条件：每页数量
     size: 11,
+    // 检索结果数量
+    dataSize: 0,
 
     // 绑定状态列表
     bindList: sysConst.BIND_STATUS,
@@ -46,6 +48,12 @@ export default handleActions({
         return {
             ...state,
             start: action.payload
+        }
+    },
+    [UserCarActionType.setDataSize]: (state, action) => {
+        return {
+            ...state,
+            dataSize: action.payload
         }
     },
     [UserCarActionType.setConditionNo]: (state, action) => {

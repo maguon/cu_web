@@ -158,7 +158,6 @@ class TrafficPolice extends React.Component {
                                 />
                                 <label className="active">性别</label>
                             </div>
-
                         </div>
 
                         {/* 查询条件：第二行 */}
@@ -261,12 +260,14 @@ class TrafficPolice extends React.Component {
                     {/* 上下页按钮 */}
                     <div className="col s12 margin-top10">
                         <div className="right">
+                            {trafficPoliceReducer.start > 0 &&
                             <a className="waves-light waves-effect custom-blue btn margin-right10" id="pre" onClick={this.preBtn}>
                                 上一页
-                            </a>
+                            </a>}
+                            {trafficPoliceReducer.dataSize >= trafficPoliceReducer.size &&
                             <a className="waves-light waves-effect custom-blue btn" id="next" onClick={this.nextBtn}>
                                 下一页
-                            </a>
+                            </a>}
                         </div>
                     </div>
                 </div>

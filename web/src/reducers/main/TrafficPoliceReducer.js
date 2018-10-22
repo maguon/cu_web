@@ -8,6 +8,8 @@ const initialState = {
     start: 0,
     // 检索条件：每页数量
     size: 11,
+    // 检索结果数量
+    dataSize: 0,
 
     // 性别列表
     genderList: sysConst.GENDER,
@@ -58,6 +60,12 @@ export default handleActions({
         return {
             ...state,
             start: action.payload
+        }
+    },
+    [TrafficPoliceActionType.setDataSize]: (state, action) => {
+        return {
+            ...state,
+            dataSize: action.payload
         }
     },
     [TrafficPoliceActionType.setConditionNo]: (state, action) => {

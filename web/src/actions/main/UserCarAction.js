@@ -55,18 +55,7 @@ export const getUserCarList = () => async (dispatch, getState) => {
         url = conditions.length > 0 ? url + "&" + conditions : url;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
-            // 前一页
-            if (start > 0) {
-                $("#pre").show();
-            } else {
-                $("#pre").hide();
-            }
-            // 下一页
-            if (res.result.length < size) {
-                $("#next").hide();
-            } else {
-                $("#next").show();
-            }
+            dispatch({type: UserCarActionType.setDataSize, payload: res.result.length});
             dispatch({type: UserCarActionType.getUserCarList, payload: res.result.slice(0, 10)})
         } else if (res.success === false) {
             swal('获取交警列表信息失败', res.msg, 'warning');

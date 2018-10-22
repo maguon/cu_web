@@ -2,6 +2,7 @@ import {createAction} from 'redux-actions';
 
 export const getPoliceList = createAction('GET_POLICE_LIST');
 export const setStartNumber = createAction('SET_START_NUMBER');
+export const setDataSize = createAction('SET_DATA_SIZE');
 export const setConditionNo = createAction('SET_CONDITION_NO');
 export const setConditionName = createAction('SET_CONDITION_NAME');
 export const setConditionGender = createAction('SET_CONDITION_GENDER');
