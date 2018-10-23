@@ -59,7 +59,7 @@ class UserCarDetail extends React.Component {
     };
 
     /**
-     * 显示 增加交警
+     * 显示 消息详情
      */
     showMessageInfo = (messageId) => {
         $('#messageModal').modal('open');
@@ -84,6 +84,7 @@ class UserCarDetail extends React.Component {
                     </div>
                 </div>
 
+                {/* 主体部分：基本信息 + 扫描记录 */}
                 <Tabs onChange={this.changeTab}>
                     <Tab title="基本信息" tabWidth={6} active={userCarDetailReducer.tabId === "base"}>
                         {/* 车辆信息：明细 */}
