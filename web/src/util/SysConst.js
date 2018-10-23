@@ -47,8 +47,8 @@ export const BIND_STATUS = [
     }
 ];
 
-// 消息：消息状态
-export const MESSAGE_STATUS = [
+// 状态：是否成功
+export const SUCCESS_STATUS = [
     {
         value: 0,
         label: "失败"
