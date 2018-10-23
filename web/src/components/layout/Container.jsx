@@ -1,5 +1,5 @@
 import React from 'react';
-import {TrafficPolice, TrafficPoliceDetail, UserCar, UserCarDetail} from '../main/index';
+import {TrafficPolice, TrafficPoliceDetail, UserCar, UserCarDetail, Message, MessageDetail} from '../main/index';
 import {HashRouter as Router, Route, Link} from "react-router-dom";
 
 import {fileHost} from '../../config/HostConfig';
@@ -13,18 +13,7 @@ const routes = [
         exact: true,
         component: TrafficPolice
     },
-    // 交警管理
-    {
-        path: "/traffic_police",
-        exact: true,
-        component: TrafficPolice
-    },
-    // 交警管理 - 交警资料
-    {
-        path: '/traffic_police/:id',
-        exact: true,
-        component: TrafficPoliceDetail
-    },
+
     // 用户车辆管理
     {
         path: "/user_car",
@@ -36,6 +25,30 @@ const routes = [
         path: '/user_car/:id',
         exact: true,
         component: UserCarDetail
+    },
+    // 消息记录
+    {
+        path: "/message",
+        exact: true,
+        component: Message
+    },
+    // 消息记录 - 消息详情
+    {
+        path: '/message/:id',
+        exact: true,
+        component: MessageDetail
+    },
+    // 交警管理
+    {
+        path: "/traffic_police",
+        exact: true,
+        component: TrafficPolice
+    },
+    // 交警管理 - 交警资料
+    {
+        path: '/traffic_police/:id',
+        exact: true,
+        component: TrafficPoliceDetail
     }
 ];
 
@@ -90,6 +103,15 @@ class Container extends React.Component {
                         <li>
                             <Link to="/user_car" className="side-navigation">
                                 <i className="mdi mdi-car"/>用户车辆管理
+                            </Link>
+                        </li>
+                        <li>
+                            <div className="divider"/>
+                        </li>
+
+                        <li>
+                            <Link to="/message" className="side-navigation">
+                                <i className="mdi mdi-comment-text-multiple"/>消息记录
                             </Link>
                         </li>
                         <li>

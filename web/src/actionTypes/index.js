@@ -4,6 +4,8 @@ import * as TrafficPoliceActionType  from './main/TrafficPoliceActionType';
 import * as TrafficPoliceDetailActionType  from './main/TrafficPoliceDetailActionType';
 import * as UserCarActionType  from './main/UserCarActionType';
 import * as UserCarDetailActionType  from './main/UserCarDetailActionType';
+import * as MessageActionType  from './main/MessageActionType';
+import * as MessageDetailActionType  from './main/MessageDetailActionType';
 
 export  {
     LoginActionType,
@@ -11,5 +13,7 @@ export  {
     TrafficPoliceActionType,
     TrafficPoliceDetailActionType,
     UserCarActionType,
-    UserCarDetailActionType
+    UserCarDetailActionType,
+    MessageActionType,
+    MessageDetailActionType
 }

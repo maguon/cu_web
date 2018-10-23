@@ -7,8 +7,17 @@ import TrafficPoliceReducer from './main/TrafficPoliceReducer';
 import TrafficPoliceDetailReducer from './main/TrafficPoliceDetailReducer';
 import UserCarReducer from './main/UserCarReducer';
 import UserCarDetailReducer from './main/UserCarDetailReducer';
+import MessageReducer from './main/MessageReducer';
+import MessageDetailReducer from './main/MessageDetailReducer';
 
 export default combineReducers({
     form: reduxFormReducer,
-    LoginReducer, HeaderReducer, TrafficPoliceReducer, TrafficPoliceDetailReducer, UserCarReducer, UserCarDetailReducer
+    LoginReducer,
+    HeaderReducer,
+    TrafficPoliceReducer,
+    TrafficPoliceDetailReducer,
+    UserCarReducer,
+    UserCarDetailReducer,
+    MessageReducer,
+    MessageDetailReducer
 })
