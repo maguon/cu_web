@@ -1,12 +1,7 @@
 import {handleActions} from 'redux-actions';
 import {TrafficPoliceDetailActionType} from '../../actionTypes';
 
-const sysConst = require('../../util/SysConst');
-
 const initialState = {
-    // 职务列表
-    policePositionList: sysConst.POLICE_POSITION,
-
     // 交警资料：状态
     status: '',
     // 交警资料：姓名

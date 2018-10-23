@@ -104,7 +104,7 @@ class TrafficPoliceDetail extends React.Component {
                         <div className="row margin-left10 margin-right10">
                             <div className="input-field col s6">
                                 <Select
-                                    options={trafficPoliceDetailReducer.policePositionList}
+                                    options={sysConst.POLICE_POSITION}
                                     onChange={changePolicePosition}
                                     isSearchable={false}
                                     value={trafficPoliceDetailReducer.position}

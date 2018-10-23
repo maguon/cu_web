@@ -1,8 +1,6 @@
 import {handleActions} from 'redux-actions';
 import {TrafficPoliceActionType} from '../../actionTypes';
 
-const sysConst = require('../../util/SysConst');
-
 const initialState = {
     // 开始位置
     start: 0,
@@ -11,28 +9,18 @@ const initialState = {
     // 检索结果数量
     dataSize: 0,
 
-    // 性别列表
-    genderList: sysConst.GENDER,
-    // 职务列表
-    policePositionList: sysConst.POLICE_POSITION,
-    // 状态列表
-    policeStatusList: sysConst.POLICE_STATUS,
-
     // 检索条件：编号
     conditionNo: '',
     // 检索条件：姓名
     conditionName: '',
     // 检索条件：性别
-    conditionGender: {value: '', label: '请选择'},
-    conditionGenderList: [{value: '', label: '请选择'}, ...sysConst.GENDER],
+    conditionGender: {value: '', label: ''},
     // 检索条件：职务
-    conditionPosition: {value: '', label: '请选择'},
-    conditionPositionList: [{value: '', label: '请选择'}, ...sysConst.POLICE_POSITION],
+    conditionPosition: {value: '', label: ''},
     // 检索条件：电话
     conditionPhone: '',
     // 检索条件：状态
-    conditionStatus: {value: '', label: '请选择'},
-    conditionStatusList: [{value: '', label: '请选择'}, ...sysConst.POLICE_STATUS],
+    conditionStatus: {value: '', label: ''},
 
     // 交警检索结果列表
     policeArray: [],
@@ -42,7 +30,7 @@ const initialState = {
     // 增加交警：性别
     gender: '0',
     // 增加交警：职务
-    position: {value: '', label: '请选择'},
+    position: {value: '', label: ''},
     // 增加交警：电话
     phone: '',
     // 增加交警：密码

@@ -14,7 +14,7 @@ export const getPoliceInfo = (id) => async (dispatch, getState) => {
             if (res.result.length > 0) {
                 let selectedPos = {
                     value: res.result[0].type,
-                    label: getState().TrafficPoliceDetailReducer.policePositionList[res.result[0].type].label
+                    label: sysConst.POLICE_POSITION[res.result[0].type].label
                 };
                 dispatch({type: TrafficPoliceDetailActionType.setStatus, payload: res.result[0].status});
                 dispatch({type: TrafficPoliceDetailActionType.setName, payload: res.result[0].user_name});
@@ -73,19 +73,19 @@ export const updatePolice = (id) => async (dispatch, getState) => {
     // 增加交警：性别
     const gender = getState().TrafficPoliceDetailReducer.gender;
     // 增加交警：职务
-    const position = getState().TrafficPoliceDetailReducer.position.value;
+    const position = getState().TrafficPoliceDetailReducer.position;
     // 增加交警：电话
     const phone = getState().TrafficPoliceDetailReducer.phone.trim();
 
     try {
-        if (name === '' || position === '' || phone === '') {
+        if (name === '' || phone === '') {
             swal('修改失败', '请输入完整的交警信息！', 'warning');
         } else {
             const params = {
                 userName: name,
                 gender: gender,
                 phone: phone,
-                type: position
+                type: position === null ? '' : position.value
             };
             const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/supervise/' + id;
             const res = await httpUtil.httpPut(url, params);

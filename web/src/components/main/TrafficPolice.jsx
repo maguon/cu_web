@@ -148,13 +148,13 @@ class TrafficPolice extends React.Component {
                             {/* 查询条件：性别 */}
                             <div className="input-field col s4">
                                 <Select
-                                    options={trafficPoliceReducer.conditionGenderList}
+                                    options={sysConst.GENDER}
                                     onChange={changeConditionGender}
                                     value={trafficPoliceReducer.conditionGender}
                                     isSearchable={false}
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
-                                    isClearable={false}
+                                    isClearable={true}
                                 />
                                 <label className="active">性别</label>
                             </div>
@@ -165,13 +165,13 @@ class TrafficPolice extends React.Component {
                             {/* 查询条件：职务 */}
                             <div className="input-field col s4">
                                 <Select
-                                    options={trafficPoliceReducer.conditionPositionList}
+                                    options={sysConst.POLICE_POSITION}
                                     onChange={changeConditionPosition}
                                     value={trafficPoliceReducer.conditionPosition}
                                     isSearchable={false}
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
-                                    isClearable={false}
+                                    isClearable={true}
                                 />
                                 <label className="active">职务</label>
                             </div>
@@ -182,13 +182,13 @@ class TrafficPolice extends React.Component {
                             {/* 查询条件：状态 */}
                             <div className="input-field col s4">
                                 <Select
-                                    options={trafficPoliceReducer.conditionStatusList}
+                                    options={sysConst.POLICE_STATUS}
                                     onChange={changeConditionStatus}
                                     value={trafficPoliceReducer.conditionStatus}
                                     isSearchable={false}
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
-                                    isClearable={false}
+                                    isClearable={true}
                                 />
                                 <label className="active">状态</label>
                             </div>
@@ -234,10 +234,10 @@ class TrafficPolice extends React.Component {
                                             <tr className="grey-text text-darken-1">
                                                 <td>{item.id}</td>
                                                 <td>{item.user_name}</td>
-                                                <td>{trafficPoliceReducer.genderList[item.gender].label}</td>
+                                                <td>{sysConst.GENDER[item.gender].label}</td>
                                                 <td>{item.phone}</td>
-                                                <td>{trafficPoliceReducer.policePositionList[item.type].label}</td>
-                                                <td>{trafficPoliceReducer.policeStatusList[item.status].label}</td>
+                                                <td>{sysConst.POLICE_POSITION[item.type].label}</td>
+                                                <td>{sysConst.POLICE_STATUS[item.status].label}</td>
                                                 {/* 显示【交警资料】画面按钮 */}
                                                 <td className="operation center">
                                                     <Link to={{pathname: '/traffic_police/'+ item.id}} >
@@ -291,7 +291,7 @@ class TrafficPolice extends React.Component {
                             </div>
                             <div className="input-field col s6">
                                 <Select
-                                    options={trafficPoliceReducer.policePositionList}
+                                    options={sysConst.POLICE_POSITION}
                                     onChange={changePolicePosition}
                                     isSearchable={false}
                                     value={trafficPoliceReducer.position}

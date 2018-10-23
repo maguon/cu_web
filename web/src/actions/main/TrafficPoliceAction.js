@@ -13,17 +13,17 @@ export const getPoliceList = () => async (dispatch, getState) => {
         const size = getState().TrafficPoliceReducer.size;
 
         // 检索条件：编号
-        const conditionNo = getState().TrafficPoliceReducer.conditionNo.trim();
+        const conditionNo = getState().TrafficPoliceReducer.conditionNo;
         // 检索条件：姓名
-        const conditionName = getState().TrafficPoliceReducer.conditionName.trim();
+        const conditionName = getState().TrafficPoliceReducer.conditionName;
         // 检索条件：性别
-        const conditionGender = getState().TrafficPoliceReducer.conditionGender.value;
+        const conditionGender = getState().TrafficPoliceReducer.conditionGender;
         // 检索条件：职务
-        const conditionPosition = getState().TrafficPoliceReducer.conditionPosition.value;
+        const conditionPosition = getState().TrafficPoliceReducer.conditionPosition;
         // 检索条件：电话
-        const conditionPhone = getState().TrafficPoliceReducer.conditionPhone.trim();
+        const conditionPhone = getState().TrafficPoliceReducer.conditionPhone;
         // 检索条件：状态
-        const conditionStatus = getState().TrafficPoliceReducer.conditionStatus.value;
+        const conditionStatus = getState().TrafficPoliceReducer.conditionStatus;
 
         // 基本检索URL
         let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/supervise?start=' + start + '&size=' + size;
@@ -31,17 +31,17 @@ export const getPoliceList = () => async (dispatch, getState) => {
         // 检索条件
         let conditionsObj = {
             // 检索条件：编号
-            superviseId: conditionNo,
+            superviseId: conditionNo.trim(),
             // 检索条件：姓名
-            userName: conditionName,
+            userName: conditionName.trim(),
             // 检索条件：性别
-            gender: conditionGender,
+            gender: conditionGender === null ? '' : conditionGender.value,
             // 检索条件：职务
-            type: conditionPosition,
+            type: conditionPosition === null ? '' : conditionPosition.value,
             // 检索条件：电话
-            phone: conditionPhone,
+            phone: conditionPhone.trim(),
             // 检索条件：状态
-            status: conditionStatus
+            status: conditionStatus === null ? '' : conditionStatus.value,
         };
         let conditions = httpUtil.objToUrl(conditionsObj);
         // 检索URL
@@ -71,7 +71,7 @@ export const addPolice = () => async (dispatch, getState) => {
     // 增加交警：密码
     const password = getState().TrafficPoliceReducer.password;
     // 增加交警：状态 开通
-    const status = getState().TrafficPoliceReducer.policeStatusList[1].value;
+    const status = sysConst.POLICE_STATUS[1].value;
     try {
         if (name === '' || position === '' || phone === '' || password === '') {
             swal('添加失败', '请输入完整的交警信息！', 'warning');
