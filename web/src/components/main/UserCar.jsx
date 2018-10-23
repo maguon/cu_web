@@ -22,7 +22,6 @@ class UserCar extends React.Component {
      * 组件完全挂载到页面上，调用执行
      */
     componentDidMount() {
-        $('.modal').modal();
         if (!this.props.fromDetail) {
             this.props.setStartNumber(0);
             this.props.setConditionNo('');
