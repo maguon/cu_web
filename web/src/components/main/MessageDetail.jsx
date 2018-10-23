@@ -64,7 +64,7 @@ class MessageDetail extends React.Component {
                         <div className="row">
                             {/* 车牌 */}
                             <div className="col s4">
-                                <i className="mdi mdi-car blue-text text-lighten-1 fz20"/>
+                                <i className="mdi mdi-car custom-indigo fz20"/>
                                 <span className="margin-left30 blue-font">{messageDetailReducer.plateNum}</span>
                             </div>
 
@@ -92,7 +92,7 @@ class MessageDetail extends React.Component {
                         {/** 地址 */}
                         <div className="row">
                             <div className="col s-percent-4"><i className="mdi mdi-map-marker-outline orange-text text-lighten-1 fz20"/></div>
-                            <div className="col s-percent-96 word-wrap margin-top3">{messageDetailReducer.messageAddress}</div>
+                            <div className="col s-percent-96 word-wrap margin-top3">{messageDetailReducer.address}</div>
                         </div>
                         <div className="row divider margin-left10 margin-right10"/>
 
@@ -104,7 +104,7 @@ class MessageDetail extends React.Component {
 
                         {/** 发送人 */}
                         <div className="row">
-                            <div className="col s12 right-align blue-font">扫描交警：{messageDetailReducer.messageSuperviseName}</div>
+                            <div className="col s12 right-align blue-font">扫描交警：{messageDetailReducer.superviseName}</div>
                         </div>
 
                     </div>

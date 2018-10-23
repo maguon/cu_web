@@ -42,7 +42,9 @@ class MessageInfoModal extends React.Component {
 
                         {/** 消息时间 */}
                         <div className="row">
-                            <div className="col s12 right-align fz14">{formatUtil.getDateTime(messageDetailReducer.messageCreateOn)}</div>
+                            <div className="col s-percent-4"><i className="mdi mdi-car custom-indigo fz20"/></div>
+                            <div className="col s-percent-46 margin-top3 blue-font">{messageDetailReducer.plateNum}</div>
+                            <div className="col s6 right-align fz14">{formatUtil.getDateTime(messageDetailReducer.messageCreateOn)}</div>
                         </div>
 
                         {/** 消息内容 */}

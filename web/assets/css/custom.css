@@ -270,7 +270,9 @@ body {
 .s-percent-4 {
     width:4%;
 }
-
+.s-percent-46 {
+    width:46%;
+}
 .s-percent-96 {
     width:96%;
 }
@@ -366,6 +368,10 @@ body {
 
 .custom-blue {
     background-color: #0F4F94 !important;
+}
+
+.custom-indigo {
+    color: #9DB8D2;
 }
 
 .custom-divider {
