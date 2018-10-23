@@ -145,7 +145,7 @@ class UserCarDetail extends React.Component {
                                 <div className="input-field col s6 fz20">
                                     <i className="mdi mdi-car fz20 margin-right10"/>{userCarDetailReducer.plateNum}
                                 </div>
-                                {/* 车辆信息：绑定用户 */}
+                                {/* 车辆信息：接收消息 */}
                                 <div className="input-field col s6 right-align grey-text">
                                     共接收消息 <span className="blue-font fz20">{formatUtil.formatNumber(userCarDetailReducer.messageArray.length)}</span> 条
                                 </div>
@@ -249,9 +249,9 @@ class UserCarDetail extends React.Component {
                         </div>
                         <div className="row divider margin-left10 margin-right10"/>
 
-                        {/** 发送人 */}
+                        {/** 扫描交警 */}
                         <div className="row">
-                            <div className="col s12 right-align blue-font">发送人：{userCarDetailReducer.messageSuperviseName}</div>
+                            <div className="col s12 right-align blue-font">扫描交警：{userCarDetailReducer.messageSuperviseName}</div>
                         </div>
                     </div>
 
