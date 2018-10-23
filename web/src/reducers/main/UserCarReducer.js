@@ -1,8 +1,6 @@
 import {handleActions} from 'redux-actions';
 import {UserCarActionType} from '../../actionTypes';
 
-const sysConst = require('../../util/SysConst');
-
 const initialState = {
     // 开始位置
     start: 0,
@@ -11,9 +9,6 @@ const initialState = {
     // 检索结果数量
     dataSize: 0,
 
-    // 绑定状态列表
-    bindList: sysConst.BIND_STATUS,
-
     // 检索条件：车辆编号
     conditionNo: '',
     // 检索条件：车辆号码
@@ -21,8 +16,7 @@ const initialState = {
     // 检索条件：车辆识别码
     conditionVin: '',
     // 检索条件：绑定状态
-    conditionBindStatus: {value: '', label: '请选择'},
-    conditionBindStatusList: [{value: '', label: '请选择'}, ...sysConst.BIND_STATUS],
+    conditionBindStatus: {value: '', label: ''},
 
     // 检索条件：绑定用户
     conditionBindUser: '',

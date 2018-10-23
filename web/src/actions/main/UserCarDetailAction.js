@@ -5,7 +5,7 @@ const httpUtil = require('../../util/HttpUtil');
 const localUtil = require('../../util/LocalUtil');
 const sysConst = require('../../util/SysConst');
 
-export const getUserCarInfo = (id) => async (dispatch, getState) => {
+export const getUserCarInfo = (id) => async (dispatch) => {
     try {
         // 基本检索URL
         const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/userCar?userCarId=' + id;
@@ -60,7 +60,7 @@ export const getMessageList = (id) => async (dispatch, getState) => {
     }
 };
 
-export const getMessageInfo = (messageId) => async (dispatch, getState) => {
+export const getMessageInfo = (messageId) => async (dispatch) => {
     try {
         // 基本检索URL
         let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)

@@ -1,11 +1,7 @@
 import {handleActions} from 'redux-actions';
 import {UserCarDetailActionType} from '../../actionTypes';
 
-const sysConst = require('../../util/SysConst');
-
 const initialState = {
-    // 绑定状态列表
-    bindList: sysConst.BIND_STATUS,
     // 画面 TAB
     tabId: 'base',
     // 车辆信息：绑定时间
@@ -31,8 +27,6 @@ const initialState = {
     size: 7,
     // 检索结果数量
     dataSize: 0,
-    // 消息状态
-    messageStatus: sysConst.MESSAGE_STATUS,
 
     // 消息详情：消息编号
     messageId: '',

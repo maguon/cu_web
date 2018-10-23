@@ -142,13 +142,13 @@ class UserCar extends React.Component {
                             {/* 查询条件：绑定状态 */}
                             <div className="input-field col s3">
                                 <Select
-                                    options={userCarReducer.conditionBindStatusList}
+                                    options={sysConst.BIND_STATUS}
                                     onChange={changeConditionBindStatus}
                                     value={userCarReducer.conditionBindStatus}
                                     isSearchable={false}
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
-                                    isClearable={false}
+                                    isClearable={true}
                                 />
                                 <label className="active">绑定状态</label>
                             </div>
@@ -224,7 +224,7 @@ class UserCar extends React.Component {
                                                 <td>{item.phone}</td>
                                                 <td>{item.user_name}</td>
                                                 <td>{formatUtil.getDateTime(item.created_on)}</td>
-                                                <td>{userCarReducer.bindList[item.status].label}</td>
+                                                <td>{sysConst.BIND_STATUS[item.status].label}</td>
                                                 <td className="operation center">
                                                     <Link to={{pathname: '/user_car/'+ item.id}} >
                                                         <i className="mdi mdi-table-search cyan-text lighten-1"/>

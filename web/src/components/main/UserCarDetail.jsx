@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {Tabs,Tab} from 'react-materialize';
 
 const userCarDetailAction = require('../../actions/main/UserCarDetailAction');
+const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
 class UserCarDetail extends React.Component {
@@ -94,11 +95,11 @@ class UserCarDetail extends React.Component {
                                 {/* 车辆信息：绑定时间 绑定状态 */}
                                 <div className="col s6 right-align">
                                     <span className="grey-text">绑定时间：{formatUtil.getDateTime(userCarDetailReducer.createdOn)}</span>
-                                    <span className="margin-left50">{userCarDetailReducer.bindList[userCarDetailReducer.status].label}</span>
+                                    <span className="margin-left50">{sysConst.BIND_STATUS[userCarDetailReducer.status].label}</span>
                                 </div>
                             </div>
 
-                            <div className="col s12 grey-text fz18">
+                            <div className="col s12 grey-text">
                                 <div className="row margin-left10 margin-right10">
                                     {/* 车辆信息：车牌号码 */}
                                     <div className="input-field col s4 blue-font fz20">
@@ -136,7 +137,7 @@ class UserCarDetail extends React.Component {
                                 <div className="col s6">车辆编号：{this.props.match.params.id}</div>
                                 {/* 车辆信息：绑定状态 */}
                                 <div className="col s6 right-align">
-                                    <span>{userCarDetailReducer.bindList[userCarDetailReducer.status].label}</span>
+                                    <span>{sysConst.BIND_STATUS[userCarDetailReducer.status].label}</span>
                                 </div>
 
                                 {/* 车辆信息：车牌号码 */}
@@ -144,7 +145,7 @@ class UserCarDetail extends React.Component {
                                     <i className="mdi mdi-car fz20 margin-right10"/>{userCarDetailReducer.plateNum}
                                 </div>
                                 {/* 车辆信息：绑定用户 */}
-                                <div className="input-field col s6 right-align grey-text fz18">
+                                <div className="input-field col s6 right-align grey-text">
                                     共接收消息 <span className="blue-font fz20">{formatUtil.formatNumber(userCarDetailReducer.messageArray.length)}</span> 条
                                 </div>
                             </div>
@@ -174,7 +175,7 @@ class UserCarDetail extends React.Component {
                                                 <td className="message-td context-ellipsis">{item.message_order}</td>
                                                 <td>{formatUtil.getDateTime(item.created_on)}</td>
                                                 <td>{item.superviseName}</td>
-                                                <td>{userCarDetailReducer.messageStatus[item.status].label}</td>
+                                                <td>{sysConst.SUCCESS_STATUS[item.status].label}</td>
                                                 <td className="operation center">
                                                     <i className="mdi mdi-table-search cyan-text lighten-1 pointer" onClick={() => {this.showMessageInfo(item.id)}}/>
                                                 </td>

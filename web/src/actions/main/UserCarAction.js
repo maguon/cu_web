@@ -19,7 +19,7 @@ export const getUserCarList = () => async (dispatch, getState) => {
         // 检索条件：车辆识别码
         const conditionVin = getState().UserCarReducer.conditionVin.trim();
         // 检索条件：绑定状态
-        const conditionBindStatus = getState().UserCarReducer.conditionBindStatus.value;
+        const conditionBindStatus = getState().UserCarReducer.conditionBindStatus;
 
         // 检索条件：绑定用户
         const conditionBindUser = getState().UserCarReducer.conditionBindUser.trim();
@@ -41,7 +41,7 @@ export const getUserCarList = () => async (dispatch, getState) => {
             // 检索条件：车辆识别码
             vin: conditionVin,
             // 检索条件：绑定状态
-            status: conditionBindStatus,
+            status: conditionBindStatus === null ? '' : conditionBindStatus.value,
             // 检索条件：绑定用户
             userName: conditionBindUser,
             // 检索条件：联系电话
