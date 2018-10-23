@@ -4,6 +4,7 @@ import {UserCarDetailActionType} from '../../actionTypes';
 const initialState = {
     // 画面 TAB
     tabId: 'base',
+
     // 车辆信息：绑定时间
     createdOn: '',
     // 车辆信息：绑定状态
@@ -26,20 +27,7 @@ const initialState = {
     // 每页数量
     size: 7,
     // 检索结果数量
-    dataSize: 0,
-
-    // 消息详情：消息编号
-    messageId: '',
-    // 消息详情：消息名称
-    messageName: '',
-    // 消息详情：消息时间
-    messageCreateOn: '',
-    // 消息详情：消息内容
-    messageContent: '',
-    // 消息详情：消息地址
-    messageAddress: '',
-    // 消息详情：扫描交警
-    messageSuperviseName: ''
+    dataSize: 0
 };
 
 export default handleActions({
@@ -107,42 +95,6 @@ export default handleActions({
         return {
             ...state,
             dataSize: action.payload
-        }
-    },
-    [UserCarDetailActionType.setMsgId]: (state, action) => {
-        return {
-            ...state,
-            messageId: action.payload
-        }
-    },
-    [UserCarDetailActionType.setMsgName]: (state, action) => {
-        return {
-            ...state,
-            messageName: action.payload
-        }
-    },
-    [UserCarDetailActionType.setMsgCreatedOn]: (state, action) => {
-        return {
-            ...state,
-            messageCreateOn: action.payload
-        }
-    },
-    [UserCarDetailActionType.setMsgContent]: (state, action) => {
-        return {
-            ...state,
-            messageContent: action.payload
-        }
-    },
-    [UserCarDetailActionType.setMsgAddress]: (state, action) => {
-        return {
-            ...state,
-            messageAddress: action.payload
-        }
-    },
-    [UserCarDetailActionType.setMsgSuperviseName]: (state, action) => {
-        return {
-            ...state,
-            messageSuperviseName: action.payload
         }
     }
 }, initialState)

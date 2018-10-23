@@ -59,29 +59,3 @@ export const getMessageList = (id) => async (dispatch, getState) => {
         swal('操作失败', err.message, 'error');
     }
 };
-
-export const getMessageInfo = (messageId) => async (dispatch) => {
-    try {
-        // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
-            + '/getMessage?userMessageId=' + messageId;
-        const res = await httpUtil.httpGet(url);
-
-        if (res.success === true) {
-            if (res.result.length > 0) {
-                dispatch({type: UserCarDetailActionType.setMsgId, payload: messageId});
-                dispatch({type: UserCarDetailActionType.setMsgName, payload: res.result[0].message_name});
-                dispatch({type: UserCarDetailActionType.setMsgCreatedOn, payload: res.result[0].created_on});
-                dispatch({type: UserCarDetailActionType.setMsgContent, payload: res.result[0].message_order});
-                dispatch({type: UserCarDetailActionType.setMsgAddress, payload: res.result[0].address});
-                dispatch({type: UserCarDetailActionType.setMsgSuperviseName, payload: res.result[0].superviseName});
-            } else {
-                swal('未获取消息详情，请重新查询', res.msg, 'warning');
-            }
-        } else if (res.success === false) {
-            swal('获取消息详情失败', res.msg, 'warning');
-        }
-    } catch (err) {
-        swal('操作失败', err.message, 'error');
-    }
-};
