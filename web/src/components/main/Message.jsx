@@ -119,7 +119,7 @@ class Message extends React.Component {
 
                 {/* 上部分：检索条件输入区域 */}
                 <div className="row grey-text text-darken-1">
-                    <div className="col s10 search-condition-box">
+                    <div className="col s11 search-condition-box">
 
                         {/* 查询条件：第一行 */}
                         <div>
@@ -183,8 +183,8 @@ class Message extends React.Component {
                     </div>
 
                     {/* 查询按钮 */}
-                    <div className="col s2 padding-left50">
-                        <a className="btn-floating btn-large waves-light waves-effect btn margin-top40 margin-left50 query-btn" onClick={this.queryMessageList}>
+                    <div className="col s1">
+                        <a className="btn-floating btn-large waves-light waves-effect btn margin-top40 query-btn" onClick={this.queryMessageList}>
                             <i className="mdi mdi-magnify"/>
                         </a>
                     </div>
