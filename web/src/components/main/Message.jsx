@@ -219,7 +219,7 @@ class Message extends React.Component {
                                                 <td>{item.license_plate}</td>
                                                 <td>{item.phone}</td>
                                                 <td>{item.user_name}</td>
-                                                <td>{item.superviseName}</td>
+                                                <td>{item.supervise_name}</td>
                                                 <td>{formatUtil.getDateTime(item.created_on)}</td>
                                                 <td>{sysConst.SUCCESS_STATUS[item.status].label}</td>
                                                 <td className="operation center">

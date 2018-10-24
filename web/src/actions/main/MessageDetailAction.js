@@ -22,7 +22,7 @@ export const getMessageInfo = (messageId) => async (dispatch) => {
                 dispatch({type: MessageDetailActionType.setPhone, payload: res.result[0].phone});
                 dispatch({type: MessageDetailActionType.setMsgContent, payload: res.result[0].message_order});
                 dispatch({type: MessageDetailActionType.setAddress, payload: res.result[0].address});
-                dispatch({type: MessageDetailActionType.setSuperviseName, payload: res.result[0].superviseName});
+                dispatch({type: MessageDetailActionType.setSuperviseName, payload: res.result[0].supervise_name});
             } else {
                 swal('未获取消息详情，请重新查询', res.msg, 'warning');
             }

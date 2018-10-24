@@ -176,7 +176,7 @@ class UserCarDetail extends React.Component {
                                                 <td>{item.message_name}</td>
                                                 <td className="message-td context-ellipsis">{item.message_order}</td>
                                                 <td>{formatUtil.getDateTime(item.created_on)}</td>
-                                                <td>{item.superviseName}</td>
+                                                <td>{item.supervise_name}</td>
                                                 <td>{sysConst.SUCCESS_STATUS[item.status].label}</td>
                                                 <td className="operation center">
                                                     <i className="mdi mdi-table-search cyan-text lighten-1 pointer" onClick={() => {this.showMessageInfo(item.id)}}/>
