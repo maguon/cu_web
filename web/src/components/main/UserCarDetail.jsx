@@ -187,7 +187,7 @@ class UserCarDetail extends React.Component {
                                 }
                                 { userCarDetailReducer.messageArray.length === 0 &&
                                 <tr className="grey-text text-darken-1">
-                                    <td className="no-data-tr" colSpan="9">暂无数据</td>
+                                    <td className="no-data-tr" colSpan="7">暂无数据</td>
                                 </tr>
                                 }
                                 </tbody>

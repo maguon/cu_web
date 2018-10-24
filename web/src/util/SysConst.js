@@ -47,6 +47,18 @@ export const BIND_STATUS = [
     }
 ];
 
+// 消息类型
+export const MESSAGE_TYPE = [
+    {
+        value: 0,
+        label: "验证码"
+    },
+    {
+        value: 1,
+        label: "违停"
+    }
+];
+
 // 状态：是否成功
 export const SUCCESS_STATUS = [
     {

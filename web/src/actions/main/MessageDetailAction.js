@@ -16,13 +16,10 @@ export const getMessageInfo = (messageId) => async (dispatch) => {
             if (res.result.length > 0) {
                 dispatch({type: MessageDetailActionType.setMsgId, payload: messageId});
                 dispatch({type: MessageDetailActionType.setMsgCreatedOn, payload: res.result[0].created_on});
-                dispatch({type: MessageDetailActionType.setMsgName, payload: res.result[0].message_name});
-                dispatch({type: MessageDetailActionType.setPlateNum, payload: res.result[0].license_plate});
+                dispatch({type: MessageDetailActionType.setMsgType, payload: res.result[0].type});
                 dispatch({type: MessageDetailActionType.setBindUser, payload: res.result[0].user_name});
                 dispatch({type: MessageDetailActionType.setPhone, payload: res.result[0].phone});
-                dispatch({type: MessageDetailActionType.setMsgContent, payload: res.result[0].message_order});
-                dispatch({type: MessageDetailActionType.setAddress, payload: res.result[0].address});
-                dispatch({type: MessageDetailActionType.setSuperviseName, payload: res.result[0].supervise_name});
+                dispatch({type: MessageDetailActionType.setMsgContent, payload: res.result[0].content});
             } else {
                 swal('未获取消息详情，请重新查询', res.msg, 'warning');
             }

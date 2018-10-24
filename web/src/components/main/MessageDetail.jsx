@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 
 const messageDetailAction = require('../../actions/main/MessageDetailAction');
+const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
 class MessageDetail extends React.Component {
@@ -54,22 +55,16 @@ class MessageDetail extends React.Component {
 
                     <div className="col s12 grey-text">
 
-                        {/** 消息名称 */}
+                        {/** 消息类型 */}
                         <div className="row">
-                            <div className="col s12 center blue-font fz18">{messageDetailReducer.messageName}</div>
+                            <div className="col s12 center blue-font fz18">{sysConst.MESSAGE_TYPE[messageDetailReducer.messageType].label}</div>
                         </div>
                         <div className="row divider margin-left10 margin-right10"/>
 
                         {/** 车牌 用户 电话 */}
                         <div className="row">
-                            {/* 车牌 */}
-                            <div className="col s4">
-                                <i className="mdi mdi-car custom-indigo fz20"/>
-                                <span className="margin-left30 blue-font">{messageDetailReducer.plateNum}</span>
-                            </div>
-
                             {/* 用户 */}
-                            <div className="col s6 right-align">
+                            <div className="col s10 right-align">
                                 <i className="mdi mdi-account-outline fz20"/>
                                 <span className="margin-left20">{messageDetailReducer.bindUser}</span>
                             </div>
@@ -87,25 +82,7 @@ class MessageDetail extends React.Component {
                             <div className="col s-percent-4"><i className="mdi mdi-comment-processing-outline blue-text text-lighten-1 fz20"/></div>
                             <div className="col s-percent-96 word-wrap margin-top3">{messageDetailReducer.messageContent}</div>
                         </div>
-                        <div className="row divider margin-left10 margin-right10"/>
 
-                        {/** 地址 */}
-                        <div className="row">
-                            <div className="col s-percent-4"><i className="mdi mdi-map-marker-outline orange-text text-lighten-1 fz20"/></div>
-                            <div className="col s-percent-96 word-wrap margin-top3">{messageDetailReducer.address}</div>
-                        </div>
-                        <div className="row divider margin-left10 margin-right10"/>
-
-                        {/** 图片显示 */}
-                        <div className="row">
-                            <div className="col s12">TODO IMG LIST</div>
-                        </div>
-                        <div className="row divider margin-left10 margin-right10"/>
-
-                        {/** 扫描交警 */}
-                        <div className="row">
-                            <div className="col s12 right-align blue-font">扫描交警：{messageDetailReducer.superviseName}</div>
-                        </div>
                     </div>
                 </div>
             </div>

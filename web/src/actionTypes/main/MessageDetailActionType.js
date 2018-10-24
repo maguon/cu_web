@@ -1,7 +1,7 @@
 import {createAction} from 'redux-actions';
 
 export const setMsgId = createAction('SET_MESSAGE_ID');
-export const setMsgName = createAction('SET_MESSAGE_NAME');
+export const setMsgType = createAction('SET_MESSAGE_TYPE');
 export const setMsgContent = createAction('SET_MESSAGE_CONTENT');
 export const setMsgCreatedOn = createAction('SET_MESSAGE_CREATED_ON');
 

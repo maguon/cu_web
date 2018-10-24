@@ -11,15 +11,13 @@ const initialState = {
 
     // 检索条件：消息编号
     conditionNo: '',
-    // 检索条件：被通知车辆
-    conditionPlateNum: '',
     // 检索条件：接收电话
     conditionPhone: '',
     // 检索条件：接收用户
     conditionBindUser: '',
+    // 检索条件：消息类型
+    conditionMsgType: {value: '', label: ''},
 
-    // 检索条件：扫描交警
-    conditionTrafficPolice: {value: '', label: ''},
     // 检索条件：发送时间(始)
     conditionStartDate: '',
     // 检索条件：发送时间(终)
@@ -27,23 +25,11 @@ const initialState = {
     // 检索条件：是否成功
     conditionStatus: {value: '', label: ''},
 
-    // 消息记录 检索条件交警列表
-    trafficPoliceArray: [],
     // 消息记录 检索结果列表
     messageArray: []
 };
 
 export default handleActions({
-    [MessageActionType.getPoliceList]: (state, action) => {
-        let policeList = [];
-        action.payload.forEach((value) => {
-            policeList.push({value: value.id, label: value.user_name})
-        });
-        return {
-            ...state,
-            trafficPoliceArray: policeList
-        }
-    },
     [MessageActionType.getMessageList]: (state, action) => {
         return {
             ...state,
@@ -68,12 +54,6 @@ export default handleActions({
             conditionNo: action.payload
         }
     },
-    [MessageActionType.setConditionPlateNum]: (state, action) => {
-        return {
-            ...state,
-            conditionPlateNum: action.payload
-        }
-    },
     [MessageActionType.setConditionPhone]: (state, action) => {
         return {
             ...state,
@@ -86,10 +66,10 @@ export default handleActions({
             conditionBindUser: action.payload
         }
     },
-    [MessageActionType.setConditionTrafficPolice]: (state, action) => {
+    [MessageActionType.setConditionMsgType]: (state, action) => {
         return {
             ...state,
-            conditionTrafficPolice: action.payload
+            conditionMsgType: action.payload
         }
     },
     [MessageActionType.setConditionStartDate]: (state, action) => {

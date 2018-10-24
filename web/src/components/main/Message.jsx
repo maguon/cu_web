@@ -16,8 +16,6 @@ class Message extends React.Component {
      */
     constructor(props) {
         super(props);
-        // 取得交警列表
-        this.props.getPoliceList();
     }
 
     /**
@@ -27,10 +25,9 @@ class Message extends React.Component {
         if (!this.props.fromDetail) {
             this.props.setStartNumber(0);
             this.props.setConditionNo('');
-            this.props.setConditionPlateNum('');
             this.props.setConditionPhone('');
             this.props.setConditionBindUser('');
-            this.props.changeConditionTrafficPolice('');
+            this.props.changeConditionMsgType('');
             this.props.setConditionStartDate('');
             this.props.setConditionEndDate('');
             this.props.changeConditionStatus('');
@@ -43,13 +40,6 @@ class Message extends React.Component {
      */
     changeConditionNo = (event) => {
         this.props.setConditionNo(event.target.value);
-    };
-
-    /**
-     * 更新 检索条件：被通知车辆
-     */
-    changeConditionPlateNum = (event) => {
-        this.props.setConditionPlateNum(event.target.value);
     };
 
     /**
@@ -106,7 +96,7 @@ class Message extends React.Component {
     };
 
     render() {
-        const {messageReducer, changeConditionTrafficPolice, changeConditionStatus} = this.props;
+        const {messageReducer, changeConditionMsgType, changeConditionStatus} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -126,32 +116,30 @@ class Message extends React.Component {
                             {/* 查询条件：消息编号 */}
                             <Input s={3} label="消息编号" value={messageReducer.conditionNo} onChange={this.changeConditionNo}/>
 
-                            {/* 查询条件：被通知车辆 */}
-                            <Input s={3} label="被通知车辆" value={messageReducer.conditionPlateNum} onChange={this.changeConditionPlateNum}/>
-
                             {/* 查询条件：接收电话 */}
                             <Input s={3} label="接收电话" type='tel' value={messageReducer.conditionPhone} onChange={this.changeConditionPhone}/>
 
                             {/* 查询条件：接收用户 */}
                             <Input s={3} label="接收用户" value={messageReducer.conditionBindUser} onChange={this.changeConditionBindUser}/>
-                        </div>
 
-                        {/* 查询条件：第二行 */}
-                        <div>
-                            {/* 查询条件：扫描交警 */}
+                            {/* 查询条件：消息类型 */}
                             <div className="input-field col s3">
                                 <Select
-                                    options={messageReducer.trafficPoliceArray}
-                                    onChange={changeConditionTrafficPolice}
-                                    value={messageReducer.conditionTrafficPolice}
+                                    options={sysConst.MESSAGE_TYPE}
+                                    onChange={changeConditionMsgType}
+                                    value={messageReducer.conditionMsgType}
                                     isSearchable={true}
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
                                 />
-                                <label className="active">扫描交警</label>
+                                <label className="active">消息类型</label>
                             </div>
 
+                        </div>
+
+                        {/* 查询条件：第二行 */}
+                        <div>
                             {/* 查询条件：发送时间(始) */}
                             <div className="input-field col s3 custom-input-field">
                                 <Input s={12} label="发送时间(始)" type='date' options={sysConst.DATE_PICKER_OPTION}
@@ -195,17 +183,16 @@ class Message extends React.Component {
                     <div className="col s12">
 
                         <div className="divider custom-divider"/>
-                        <table className="bordered striped">
+                        <table className="fixed-table bordered striped">
                             <thead className="blue-grey lighten-5">
                             <tr className="grey-text text-darken-2">
                                 <th>消息编号</th>
-                                <th>消息名称</th>
-                                <th>被通知车辆</th>
+                                <th>消息类型</th>
+                                <th className="message-td context-ellipsis">消息内容</th>
                                 <th>接收电话</th>
                                 <th>接收用户</th>
-                                <th>扫描交警</th>
                                 <th>发送时间</th>
-                                <th>是否成功</th>
+                                <th className="center">是否成功</th>
                                 <th className="center">操作</th>
                             </tr>
                             </thead>
@@ -215,13 +202,12 @@ class Message extends React.Component {
                                     return (
                                             <tr className="grey-text text-darken-1">
                                                 <td>{item.id}</td>
-                                                <td>{item.message_name}</td>
-                                                <td>{item.license_plate}</td>
+                                                <td>{sysConst.MESSAGE_TYPE[item.type].label}</td>
+                                                <td className="message-td context-ellipsis">{item.content}</td>
                                                 <td>{item.phone}</td>
                                                 <td>{item.user_name}</td>
-                                                <td>{item.supervise_name}</td>
                                                 <td>{formatUtil.getDateTime(item.created_on)}</td>
-                                                <td>{sysConst.SUCCESS_STATUS[item.status].label}</td>
+                                                <td className="center">{sysConst.SUCCESS_STATUS[item.status].label}</td>
                                                 <td className="operation center">
                                                     <Link to={{pathname: '/message/'+ item.id}} >
                                                         <i className="mdi mdi-table-search cyan-text lighten-1"/>
@@ -233,7 +219,7 @@ class Message extends React.Component {
                             }
                             { messageReducer.messageArray.length === 0 &&
                                 <tr className="grey-text text-darken-1">
-                                    <td className="no-data-tr" colSpan="9">暂无数据</td>
+                                    <td className="no-data-tr" colSpan="8">暂无数据</td>
                                 </tr>
                             }
                             </tbody>
@@ -271,9 +257,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    getPoliceList: () => {
-        dispatch(messageAction.getPoliceList())
-    },
     getMessageList: () => {
         dispatch(messageAction.getMessageList())
     },
@@ -283,17 +266,14 @@ const mapDispatchToProps = (dispatch) => ({
     setConditionNo: (carNo) => {
         dispatch(MessageActionType.setConditionNo(carNo))
     },
-    setConditionPlateNum: (plateNum) => {
-        dispatch(MessageActionType.setConditionPlateNum(plateNum))
-    },
     setConditionPhone: (phone) => {
         dispatch(MessageActionType.setConditionPhone(phone))
     },
     setConditionBindUser: (user) => {
         dispatch(MessageActionType.setConditionBindUser(user))
     },
-    changeConditionTrafficPolice: (vin) => {
-        dispatch(MessageActionType.setConditionTrafficPolice(vin))
+    changeConditionMsgType: (vin) => {
+        dispatch(MessageActionType.setConditionMsgType(vin))
     },
     setConditionStartDate: (time) => {
         dispatch(MessageActionType.setConditionStartDate(time))
