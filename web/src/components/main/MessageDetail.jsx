@@ -44,10 +44,10 @@ class MessageDetail extends React.Component {
                 <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                     <div className="row detail-box-header vc-center">
                         {/* 消息信息：消息编号 */}
-                        <div className="col s6">消息编号：{this.props.match.params.id}</div>
+                        <div className="col s6 no-padding">消息编号：{this.props.match.params.id}</div>
 
                         {/* 消息信息：发送时间 */}
-                        <div className="col s6 right-align">
+                        <div className="col s6 no-padding right-align">
                             <span className="grey-text">发送时间：{formatUtil.getDateTime(messageDetailReducer.messageCreateOn)}</span>
                         </div>
                     </div>
@@ -102,11 +102,10 @@ class MessageDetail extends React.Component {
                         </div>
                         <div className="row divider margin-left10 margin-right10"/>
 
-                        {/** 发送人 */}
+                        {/** 扫描交警 */}
                         <div className="row">
                             <div className="col s12 right-align blue-font">扫描交警：{messageDetailReducer.superviseName}</div>
                         </div>
-
                     </div>
                 </div>
             </div>
