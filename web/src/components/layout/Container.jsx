@@ -1,31 +1,27 @@
 import React from 'react';
-import {TrafficPolice, TrafficPoliceDetail, UserCar, UserCarDetail, Message, MessageDetail} from '../main/index';
 import {HashRouter as Router, Route, Link} from "react-router-dom";
-
-import {fileHost} from '../../config/HostConfig';
-
 import {connect} from 'react-redux';
+import {fileHost} from '../../config/HostConfig';
+import {
+    Message,
+    MessageDetail,
+    TrafficPolice,
+    TrafficPoliceDetail,
+    UserAddressDetail,
+    UserAddress,
+    UserCar,
+    UserCarDetail
+} from '../main/index';
 
 const routes = [
-    // 默认打开画面 - 暂定面板画面
+    // 默认打开画面 - 暂定：用户收货地址
     {
         path: "/",
         exact: true,
-        component: TrafficPolice
+        component: UserAddress
     },
 
-    // 用户车辆管理
-    {
-        path: "/user_car",
-        exact: true,
-        component: UserCar
-    },
-    // 用户车辆管理 - 车辆信息
-    {
-        path: '/user_car/:id',
-        exact: true,
-        component: UserCarDetail
-    },
+
     // 消息记录
     {
         path: "/message",
@@ -49,7 +45,31 @@ const routes = [
         path: '/traffic_police/:id',
         exact: true,
         component: TrafficPoliceDetail
-    }
+    },
+    // 用户收货地址
+    {
+        path: "/user_address",
+        exact: true,
+        component: UserAddress
+    },
+    // 用户收货地址 - 地址详情
+    {
+        path: '/user_address/:id',
+        exact: true,
+        component: UserAddressDetail
+    },
+    // 用户车辆
+    {
+        path: "/user_car",
+        exact: true,
+        component: UserCar
+    },
+    // 用户车辆 - 车辆信息
+    {
+        path: '/user_car/:id',
+        exact: true,
+        component: UserCarDetail
+    },
 ];
 
 class Container extends React.Component {
@@ -92,24 +112,6 @@ class Container extends React.Component {
                         </li>
 
                         <li>
-                            <Link to="/user" className="side-navigation">
-                                <i className="mdi mdi-account-group"/>用户管理
-                            </Link>
-                        </li>
-                        <li>
-                            <div className="divider"/>
-                        </li>
-
-                        <li>
-                            <Link to="/user_car" className="side-navigation">
-                                <i className="mdi mdi-car"/>用户车辆管理
-                            </Link>
-                        </li>
-                        <li>
-                            <div className="divider"/>
-                        </li>
-
-                        <li>
                             <Link to="/message" className="side-navigation">
                                 <i className="mdi mdi-comment-text-multiple"/>消息记录
                             </Link>
@@ -124,14 +126,40 @@ class Container extends React.Component {
                                     <a className="collapsible-header"><i className="mdi mdi-settings"/>交警设置</a>
                                     <div className="collapsible-body">
                                         <ul>
-                                            <li><Link to="/traffic_police"><i className="mdi mdi-chevron-right"/>交警管理</Link></li>
-                                            <li><div className="divider"/></li>
-                                            <li><Link to="/scan_manager"><i className="mdi mdi-chevron-right"/>扫码管理</Link></li>
+                                            <li><Link to="/traffic_police"><i
+                                                className="mdi mdi-chevron-right"/>交警管理</Link></li>
+                                            <li>
+                                                <div className="divider"/>
+                                            </li>
+                                            <li><Link to="/scan_manager"><i
+                                                className="mdi mdi-chevron-right"/>扫码管理</Link></li>
                                         </ul>
                                     </div>
                                 </li>
                             </ul>
                         </li>
+
+                        <li>
+                            <div className="divider"/>
+                        </li>
+
+                        <li>
+                            <ul className="collapsible collapsible-accordion">
+                                <li>
+                                    <a className="collapsible-header"><i className="mdi mdi-account-group"/>用户信息</a>
+                                    <div className="collapsible-body">
+                                        <ul>
+                                            <li><Link to="/user"><i className="mdi mdi-chevron-right"/>用户管理</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/user_address"><i className="mdi mdi-chevron-right"/>收货地址</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/user_car"><i className="mdi mdi-chevron-right"/>用户车辆管理</Link></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
                     </ul>
                     {routes.map((route, index) => (
                         // Render more <Route>s with the same paths as
@@ -156,14 +184,12 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-
     getUserDetail: (userId) => {
         dispatch(headerAction.getUserDetail({userId: userId}))
     },
     logout: () => {
         dispatch(headerAction.logout())
     }
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container)
