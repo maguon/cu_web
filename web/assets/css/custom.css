@@ -59,6 +59,12 @@ body {
     font-size: 15px;
 }
 
+.dotted-line {
+    height: 1px;
+    border-bottom: 1px dotted #ccc;
+    width: calc(100% - 20px);
+    margin-left:10px;
+}
 /** 画面加载样式 Start */
 .c-loader-wrapper {
     display: none;
@@ -186,7 +192,9 @@ body {
 .bold-font {
     font-weight: bold;
 }
-
+.fz12 {
+    font-size: 12px;
+}
 .fz14 {
     font-size: 14px;
 }
@@ -425,6 +433,18 @@ body {
     background-color: #fea353;
 }
 
+.custom-btn {
+    padding:3px 10px 3px 20px;
+    background: #E3E8ED;
+    border:1px solid #dadfe4;
+    height: 70%;
+    cursor: pointer;
+    border-radius: 40px;
+}
+.custom-btn i {
+    margin-left: 5px;
+}
+
 /** 详细信息 画面 用 */
 .detail-box {
     border:1px solid #D4D4D4;
@@ -455,7 +475,7 @@ body {
     table-layout: fixed;
 }
 
-.message-td {
+.ellipsis-td {
     width:300px;
 }
 

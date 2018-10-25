@@ -71,6 +71,18 @@ export const SUCCESS_STATUS = [
     }
 ];
 
+// 违停扫码状态
+export const CHECK_CAR_STATUS = [
+    {
+        value: 0,
+        label: "未结束"
+    },
+    {
+        value: 1,
+        label: "结束"
+    }
+];
+
 export const DATE_PICKER_OPTION = {
     // selectMonths: true,
     // selectYears: 15,

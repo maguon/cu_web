@@ -3,6 +3,8 @@ import {reducer as reduxFormReducer} from 'redux-form';
 
 import HeaderReducer from './layout/HeaderReducer';
 import LoginReducer from './layout/LoginReducer';
+import CheckCarReducer from './main/CheckCarReducer';
+import CheckCarDetailReducer from './main/CheckCarDetailReducer'
 import MessageReducer from './main/MessageReducer';
 import MessageDetailReducer from './main/MessageDetailReducer';
 import TrafficPoliceReducer from './main/TrafficPoliceReducer';
@@ -16,6 +18,8 @@ export default combineReducers({
     form: reduxFormReducer,
     LoginReducer,
     HeaderReducer,
+    CheckCarReducer,
+    CheckCarDetailReducer,
     MessageReducer,
     MessageDetailReducer,
     TrafficPoliceReducer,

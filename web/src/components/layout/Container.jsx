@@ -3,6 +3,8 @@ import {HashRouter as Router, Route, Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {fileHost} from '../../config/HostConfig';
 import {
+    CheckCar,
+    CheckCarDetail,
     Message,
     MessageDetail,
     TrafficPolice,
@@ -46,6 +48,20 @@ const routes = [
         exact: true,
         component: TrafficPoliceDetail
     },
+    // 违停扫码管理
+    {
+        path: "/check_car",
+        exact: true,
+        component: CheckCar
+    },
+    // 违停扫码管理 - 记录详情
+    {
+        path: '/check_car/:id',
+        exact: true,
+        component: CheckCarDetail
+    },
+
+
     // 用户收货地址
     {
         path: "/user_address",
@@ -126,13 +142,9 @@ class Container extends React.Component {
                                     <a className="collapsible-header"><i className="mdi mdi-settings"/>交警设置</a>
                                     <div className="collapsible-body">
                                         <ul>
-                                            <li><Link to="/traffic_police"><i
-                                                className="mdi mdi-chevron-right"/>交警管理</Link></li>
-                                            <li>
-                                                <div className="divider"/>
-                                            </li>
-                                            <li><Link to="/scan_manager"><i
-                                                className="mdi mdi-chevron-right"/>扫码管理</Link></li>
+                                            <li><Link to="/traffic_police"><i className="mdi mdi-chevron-right"/>交警管理</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/check_car"><i className="mdi mdi-chevron-right"/>扫码管理</Link></li>
                                         </ul>
                                     </div>
                                 </li>
