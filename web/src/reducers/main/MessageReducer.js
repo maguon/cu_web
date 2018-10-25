@@ -16,14 +16,14 @@ const initialState = {
     // 检索条件：接收用户
     conditionBindUser: '',
     // 检索条件：消息类型
-    conditionMsgType: {value: '', label: ''},
+    conditionMsgType: null,
 
     // 检索条件：发送时间(始)
     conditionStartDate: '',
     // 检索条件：发送时间(终)
     conditionEndDate: '',
     // 检索条件：是否成功
-    conditionStatus: {value: '', label: ''},
+    conditionStatus: null,
 
     // 消息记录 检索结果列表
     messageArray: []

@@ -1,9 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import Select from 'react-select';
-import {TrafficPoliceActionType} from '../../actionTypes';
+import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
+import {TrafficPoliceActionType} from '../../actionTypes';
 
 const trafficPoliceAction = require('../../actions/main/TrafficPoliceAction');
 const sysConst = require('../../util/SysConst');
@@ -26,10 +26,10 @@ class TrafficPolice extends React.Component {
             this.props.setStartNumber(0);
             this.props.setConditionNo('');
             this.props.setConditionName('');
-            this.props.changeConditionGender('');
-            this.props.changeConditionPosition('');
+            this.props.changeConditionGender(null);
+            this.props.changeConditionPosition(null);
             this.props.setConditionPhone('');
-            this.props.changeConditionStatus('');
+            this.props.changeConditionStatus(null);
         }
         this.props.getPoliceList();
     }
@@ -87,7 +87,7 @@ class TrafficPolice extends React.Component {
         $('#policeModal').modal('open');
         this.props.setName('');
         this.props.setGender('0');
-        this.props.changePolicePosition('');
+        this.props.changePolicePosition(null);
         this.props.setPhone('');
         this.props.setPassword('');
     };

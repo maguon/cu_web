@@ -16,7 +16,7 @@ const initialState = {
     // 检索条件：车辆识别码
     conditionVin: '',
     // 检索条件：绑定状态
-    conditionBindStatus: {value: '', label: ''},
+    conditionBindStatus: null,
 
     // 检索条件：绑定用户
     conditionBindUser: '',

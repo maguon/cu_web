@@ -1,9 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import Select from 'react-select';
-import {UserCarActionType} from '../../actionTypes';
+import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
+import {UserCarActionType} from '../../actionTypes';
 
 const userCarAction = require('../../actions/main/UserCarAction');
 const sysConst = require('../../util/SysConst');
@@ -27,7 +27,7 @@ class UserCar extends React.Component {
             this.props.setConditionNo('');
             this.props.setConditionPlateNum('');
             this.props.setConditionVin('');
-            this.props.changeConditionBindStatus('');
+            this.props.changeConditionBindStatus(null);
             this.props.setConditionBindUser('');
             this.props.setConditionPhone('');
             this.props.setConditionBindTimeStart('');

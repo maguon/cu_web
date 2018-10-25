@@ -9,7 +9,7 @@ const initialState = {
     // 交警资料：性别
     gender: '0',
     // 交警资料：职务
-    position: {value: '', label: ''},
+    position: null,
     // 交警资料：电话
     phone: '',
     // 交警资料：头像

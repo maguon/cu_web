@@ -1,9 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import Select from 'react-select';
-import {MessageActionType} from '../../actionTypes';
+import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
+import {MessageActionType} from '../../actionTypes';
 
 const messageAction = require('../../actions/main/MessageAction');
 const sysConst = require('../../util/SysConst');
@@ -27,10 +27,10 @@ class Message extends React.Component {
             this.props.setConditionNo('');
             this.props.setConditionPhone('');
             this.props.setConditionBindUser('');
-            this.props.changeConditionMsgType('');
+            this.props.changeConditionMsgType(null);
             this.props.setConditionStartDate('');
             this.props.setConditionEndDate('');
-            this.props.changeConditionStatus('');
+            this.props.changeConditionStatus(null);
         }
         this.props.getMessageList();
     }
@@ -128,7 +128,7 @@ class Message extends React.Component {
                                     options={sysConst.MESSAGE_TYPE}
                                     onChange={changeConditionMsgType}
                                     value={messageReducer.conditionMsgType}
-                                    isSearchable={true}
+                                    isSearchable={false}
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
