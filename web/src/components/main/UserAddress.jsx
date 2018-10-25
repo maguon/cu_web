@@ -108,9 +108,9 @@ class UserAddress extends React.Component {
                     <div className="col s11 search-condition-box">
                         <Input s={2} label="地址编号" value={userAddressReducer.conditionNo} onChange={this.changeConditionNo}/>
                         <Input s={3} label="收货人" value={userAddressReducer.conditionShipName} onChange={this.changeConditionShipName}/>
-                        <Input s={2} label="收货电话" type='tel' value={userAddressReducer.conditionShipPhone} onChange={this.changeConditionShipPhone}/>
+                        <Input s={2} label="收货电话" value={userAddressReducer.conditionShipPhone} onChange={this.changeConditionShipPhone}/>
                         <Input s={3} label="用户" value={userAddressReducer.conditionBindUser} onChange={this.changeConditionBindUser}/>
-                        <Input s={2} label="绑定手机" type='tel' value={userAddressReducer.conditionBindPhone} onChange={this.changeConditionBindPhone}/>
+                        <Input s={2} label="绑定手机" value={userAddressReducer.conditionBindPhone} onChange={this.changeConditionBindPhone}/>
                     </div>
 
                     {/* 查询按钮 */}

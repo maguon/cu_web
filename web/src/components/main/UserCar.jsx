@@ -159,7 +159,7 @@ class UserCar extends React.Component {
                             <Input s={3} label="绑定用户" value={userCarReducer.conditionBindUser} onChange={this.changeConditionBindUser}/>
 
                             {/* 查询条件：联系电话 */}
-                            <Input s={3} label="联系电话" type='tel' value={userCarReducer.conditionPhone} onChange={this.changeConditionPhone}/>
+                            <Input s={3} label="联系电话" value={userCarReducer.conditionPhone} onChange={this.changeConditionPhone}/>
 
                             {/* 查询条件：绑定时间(始) */}
                             <div className="input-field col s3 custom-input-field">
