@@ -5,7 +5,7 @@ const initialState = {
     // 消息详情：消息编号
     messageId: '',
     // 消息详情：消息类型
-    messageType: 0,
+    messageType: 1,
     // 消息详情：消息时间
     messageCreateOn: '',
     // 消息详情：消息内容
