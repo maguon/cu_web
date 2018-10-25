@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {UserCarDetailActionType} from '../../actionTypes';
 import {Link} from "react-router-dom";
 import {Tabs,Tab} from 'react-materialize';
+import {UserCarDetailActionType} from '../../actionTypes';
 import {MessageInfoModal} from '../modules/index';
 
 const userCarDetailAction = require('../../actions/main/UserCarDetailAction');
@@ -160,7 +160,7 @@ class UserCarDetail extends React.Component {
                                 <tr className="grey-text text-darken-2">
                                     <th className="padding-left20">消息编号</th>
                                     <th>消息名称</th>
-                                    <th className="message-td context-ellipsis">消息内容</th>
+                                    <th className="ellipsis-td context-ellipsis">消息内容</th>
                                     <th>接收时间</th>
                                     <th>扫描交警</th>
                                     <th>是否成功</th>
@@ -174,7 +174,7 @@ class UserCarDetail extends React.Component {
                                             <tr className="grey-text text-darken-1">
                                                 <td className="padding-left20">{item.id}</td>
                                                 <td>{item.message_name}</td>
-                                                <td className="message-td context-ellipsis">{item.message_order}</td>
+                                                <td className="ellipsis-td context-ellipsis">{item.message_order}</td>
                                                 <td>{formatUtil.getDateTime(item.created_on)}</td>
                                                 <td>{item.supervise_name}</td>
                                                 <td>{sysConst.SUCCESS_STATUS[item.status].label}</td>
