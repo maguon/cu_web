@@ -22,6 +22,7 @@ class MessageDetail extends React.Component {
     componentDidMount() {
         // 取得消息信息
         this.props.getCheckCarInfo();
+        this.props.setShowCarInfoFlag(false);
     }
 
     /**
