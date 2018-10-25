@@ -50,11 +50,11 @@ export const BIND_STATUS = [
 // 消息类型
 export const MESSAGE_TYPE = [
     {
-        value: 0,
+        value: 1,
         label: "验证码"
     },
     {
-        value: 1,
+        value: 2,
         label: "违停"
     }
 ];

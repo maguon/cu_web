@@ -188,7 +188,7 @@ class Message extends React.Component {
                             <tr className="grey-text text-darken-2">
                                 <th>消息编号</th>
                                 <th>消息类型</th>
-                                <th className="message-td context-ellipsis">消息内容</th>
+                                <th className="ellipsis-td context-ellipsis">消息内容</th>
                                 <th>接收电话</th>
                                 <th>接收用户</th>
                                 <th>发送时间</th>
@@ -202,8 +202,8 @@ class Message extends React.Component {
                                     return (
                                             <tr className="grey-text text-darken-1">
                                                 <td>{item.id}</td>
-                                                <td>{sysConst.MESSAGE_TYPE[item.type].label}</td>
-                                                <td className="message-td context-ellipsis">{item.content}</td>
+                                                <td>{sysConst.MESSAGE_TYPE[item.type-1].label}</td>
+                                                <td className="ellipsis-td context-ellipsis">{item.content}</td>
                                                 <td>{item.phone}</td>
                                                 <td>{item.user_name}</td>
                                                 <td>{formatUtil.getDateTime(item.created_on)}</td>

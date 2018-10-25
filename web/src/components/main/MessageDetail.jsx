@@ -62,7 +62,7 @@ class MessageDetail extends React.Component {
                                     <i className="mdi mdi-comment-processing-outline blue-text text-lighten-1 fz20"/>
                                 </div>
                                 <div className="col s8 right-align margin-top3 no-padding blue-font">
-                                    【{sysConst.MESSAGE_TYPE[messageDetailReducer.messageType].label}】
+                                    【{sysConst.MESSAGE_TYPE[messageDetailReducer.messageType-1].label}】
                                 </div>
                             </div>
                             {/** 消息内容 */}
