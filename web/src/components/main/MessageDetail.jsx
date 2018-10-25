@@ -54,35 +54,37 @@ class MessageDetail extends React.Component {
                     </div>
 
                     <div className="col s12 grey-text">
-
-                        {/** 消息类型 */}
+                        {/** 消息 */}
                         <div className="row">
-                            <div className="col s12 center blue-font fz18">{sysConst.MESSAGE_TYPE[messageDetailReducer.messageType].label}</div>
+                            {/** 消息图标 消息类型 */}
+                            <div className="col s-percent-10 no-padding">
+                                <div className="col s4">
+                                    <i className="mdi mdi-comment-processing-outline blue-text text-lighten-1 fz20"/>
+                                </div>
+                                <div className="col s8 right-align margin-top3 no-padding blue-font">
+                                    【{sysConst.MESSAGE_TYPE[messageDetailReducer.messageType].label}】
+                                </div>
+                            </div>
+                            {/** 消息内容 */}
+                            <div className="col s-percent-90 word-wrap margin-top3">{messageDetailReducer.messageContent}</div>
                         </div>
+
                         <div className="row divider margin-left10 margin-right10"/>
 
-                        {/** 车牌 用户 电话 */}
+                        {/** 用户 电话 */}
                         <div className="row">
                             {/* 用户 */}
                             <div className="col s10 right-align">
-                                <i className="mdi mdi-account-outline fz20"/>
+                                <i className="mdi mdi-account-outline blue-font fz20"/>
                                 <span className="margin-left20">{messageDetailReducer.bindUser}</span>
                             </div>
 
                             {/* 电话 */}
                             <div className="col s2 right-align">
-                                <i className="mdi mdi-cellphone fz20"/>
+                                <i className="mdi mdi-cellphone blue-font fz20"/>
                                 <span className="margin-left20">{messageDetailReducer.phone}</span>
                             </div>
                         </div>
-                        <div className="row divider margin-left10 margin-right10"/>
-
-                        {/** 消息内容 */}
-                        <div className="row">
-                            <div className="col s-percent-4"><i className="mdi mdi-comment-processing-outline blue-text text-lighten-1 fz20"/></div>
-                            <div className="col s-percent-96 word-wrap margin-top3">{messageDetailReducer.messageContent}</div>
-                        </div>
-
                     </div>
                 </div>
             </div>

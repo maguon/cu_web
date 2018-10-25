@@ -274,11 +274,17 @@ body {
 .s-percent-4 {
     width:4%;
 }
+.s-percent-10 {
+    width:10%;
+}
 .s-percent-20 {
     width:20%;
 }
 .s-percent-46 {
     width:46%;
+}
+.s-percent-90{
+    width:90%;
 }
 .s-percent-96 {
     width:96%;
