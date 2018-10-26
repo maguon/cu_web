@@ -3,10 +3,8 @@ import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Tabs,Tab} from 'react-materialize';
 import {UserCarDetailActionType} from '../../actionTypes';
-import {MessageInfoModal} from '../modules/index';
 
 const userCarDetailAction = require('../../actions/main/UserCarDetailAction');
-const messageDetailAction = require('../../actions/main/MessageDetailAction');
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
@@ -39,7 +37,7 @@ class UserCarDetail extends React.Component {
             this.props.setTabId('scan');
             // 默认第一页
             this.props.setStartNumber(0);
-            this.props.getMessageList();
+            this.props.getCheckCarList();
         }
     };
 
@@ -48,7 +46,7 @@ class UserCarDetail extends React.Component {
      */
     preBtn = () => {
         this.props.setStartNumber(this.props.userCarDetailReducer.start - (this.props.userCarDetailReducer.size - 1));
-        this.props.getMessageList();
+        this.props.getCheckCarList();
     };
 
     /**
@@ -56,15 +54,7 @@ class UserCarDetail extends React.Component {
      */
     nextBtn = () => {
         this.props.setStartNumber(this.props.userCarDetailReducer.start + (this.props.userCarDetailReducer.size - 1));
-        this.props.getMessageList();
-    };
-
-    /**
-     * 显示 消息详情
-     */
-    showMessageInfo = (messageId) => {
-        $('#messageModal').modal('open');
-        this.props.getMessageInfo(messageId);
+        this.props.getCheckCarList();
     };
 
     render() {
@@ -146,50 +136,43 @@ class UserCarDetail extends React.Component {
                                 <div className="input-field col s6 fz20">
                                     <i className="mdi mdi-car fz20 margin-right10"/>{userCarDetailReducer.plateNum}
                                 </div>
-                                {/* 车辆信息：接收消息 */}
+                                {/* 车辆信息：扫描记录 */}
                                 <div className="input-field col s6 right-align grey-text">
-                                    共接收消息 <span className="blue-font fz20">{formatUtil.formatNumber(userCarDetailReducer.messageArray.length)}</span> 条
+                                    {/*扫描记录： <span className="blue-font fz20">{formatUtil.formatNumber(userCarDetailReducer.checkCarArray.length)}</span> 条*/}
                                 </div>
                             </div>
                         </div>
 
                         {/* 扫描记录：记录列表 */}
                         <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
-                            <table className="bordered fixed-table">
+                            <table className="bordered">
                                 <thead className="blue-grey lighten-5">
                                 <tr className="grey-text text-darken-2">
-                                    <th className="padding-left20">消息编号</th>
-                                    <th>消息名称</th>
-                                    <th className="ellipsis-td context-ellipsis">消息内容</th>
-                                    <th>接收时间</th>
-                                    <th>扫描交警</th>
-                                    <th>是否成功</th>
-                                    <th className="center">操作</th>
+                                    <th className="padding-left20">编号</th>
+                                    <th>地址</th>
+                                    <th>扫码交警</th>
+                                    <th className="center">扫码时间</th>
+                                    <th>状态</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {
-                                    userCarDetailReducer.messageArray.map(function (item) {
+                                    userCarDetailReducer.checkCarArray.map(function (item) {
                                         return (
                                             <tr className="grey-text text-darken-1">
                                                 <td className="padding-left20">{item.id}</td>
-                                                <td>{item.message_name}</td>
-                                                <td className="ellipsis-td context-ellipsis">{item.message_order}</td>
-                                                <td>{formatUtil.getDateTime(item.created_on)}</td>
+                                                <td>{item.address}</td>
                                                 <td>{item.supervise_name}</td>
-                                                <td>{sysConst.SUCCESS_STATUS[item.status].label}</td>
-                                                <td className="operation center">
-                                                    <i className="mdi mdi-table-search cyan-text lighten-1 pointer" onClick={() => {this.showMessageInfo(item.id)}}/>
-                                                </td>
+                                                <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
+                                                <td>{sysConst.CHECK_CAR_STATUS[item.status].label}</td>
                                             </tr>
                                         )
                                     },this)
                                 }
-                                { userCarDetailReducer.messageArray.length === 0 &&
+                                { userCarDetailReducer.checkCarArray.length === 0 &&
                                 <tr className="grey-text text-darken-1">
-                                    <td className="no-data-tr" colSpan="7">暂无数据</td>
-                                </tr>
-                                }
+                                    <td className="no-data-tr" colSpan="5">暂无数据</td>
+                                </tr>}
                                 </tbody>
                             </table>
                         </div>
@@ -209,8 +192,6 @@ class UserCarDetail extends React.Component {
                         </div>
                     </Tab>
                 </Tabs>
-
-                <MessageInfoModal/>
             </div>
         )
     }
@@ -229,14 +210,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     getUserCarInfo: () => {
         dispatch(userCarDetailAction.getUserCarInfo(ownProps.match.params.id))
     },
-    getMessageList: () => {
-        dispatch(userCarDetailAction.getMessageList(ownProps.match.params.id))
+    getCheckCarList: () => {
+        dispatch(userCarDetailAction.getCheckCarList(ownProps.match.params.id))
     },
     setStartNumber: (start) => {
         dispatch(UserCarDetailActionType.setStartNumber(start))
-    },
-    getMessageInfo: (messageId) => {
-        dispatch(messageDetailAction.getMessageInfo(messageId))
     }
 });
 

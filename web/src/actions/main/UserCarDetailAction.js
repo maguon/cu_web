@@ -38,7 +38,7 @@ export const getUserCarInfo = (id) => async (dispatch) => {
     }
 };
 
-export const getMessageList = (id) => async (dispatch, getState) => {
+export const getCheckCarList = (id) => async (dispatch, getState) => {
     try {
         // 检索条件：开始位置
         const start = getState().UserCarDetailReducer.start;
@@ -46,12 +46,13 @@ export const getMessageList = (id) => async (dispatch, getState) => {
         const size = getState().UserCarDetailReducer.size;
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/getMessage?start=' + start + '&size=' + size + '&carId=' + id;
+        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+            + '/checkCar?start=' + start + '&size=' + size + '&userCarId=' + id;
         const res = await httpUtil.httpGet(url);
 
         if (res.success === true) {
             dispatch({type: UserCarDetailActionType.setDataSize, payload: res.result.length});
-            dispatch({type: UserCarDetailActionType.getMessageList, payload: res.result.slice(0, 10)});
+            dispatch({type: UserCarDetailActionType.getCheckCarList, payload: res.result.slice(0, size - 1)});
         } else if (res.success === false) {
             swal('获取扫描记录列表失败', res.msg, 'warning');
         }

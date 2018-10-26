@@ -9,6 +9,6 @@ export const setBindUser = createAction('SET_BIND_USER');
 export const setVin = createAction('SET_VIN');
 export const setEngineNum = createAction('SET_ENGINE_NUM');
 
-export const getMessageList = createAction('GET_MESSAGE_LIST');
+export const getCheckCarList = createAction('GET_CHECK_CAR_LIST');
 export const setStartNumber = createAction('SET_START_NUMBER');
 export const setDataSize = createAction('SET_DATA_SIZE');

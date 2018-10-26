@@ -21,7 +21,7 @@ const initialState = {
     engineNum: '',
 
     // 扫描记录列表
-    messageArray: [],
+    checkCarArray: [],
     // 开始位置
     start: 0,
     // 每页数量
@@ -79,10 +79,10 @@ export default handleActions({
             engineNum: action.payload
         }
     },
-    [UserCarDetailActionType.getMessageList]: (state, action) => {
+    [UserCarDetailActionType.getCheckCarList]: (state, action) => {
         return {
             ...state,
-            messageArray: action.payload
+            checkCarArray: action.payload
         }
     },
     [UserCarDetailActionType.setStartNumber]: (state, action) => {
