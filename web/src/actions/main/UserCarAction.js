@@ -56,7 +56,7 @@ export const getUserCarList = () => async (dispatch, getState) => {
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
             dispatch({type: UserCarActionType.setDataSize, payload: res.result.length});
-            dispatch({type: UserCarActionType.getUserCarList, payload: res.result.slice(0, 10)})
+            dispatch({type: UserCarActionType.getUserCarList, payload: res.result.slice(0, size - 1)});
         } else if (res.success === false) {
             swal('获取车辆列表信息失败', res.msg, 'warning');
         }

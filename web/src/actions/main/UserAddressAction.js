@@ -45,7 +45,7 @@ export const getUserAddressList = () => async (dispatch, getState) => {
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
             dispatch({type: UserAddressActionType.setDataSize, payload: res.result.length});
-            dispatch({type: UserAddressActionType.getUserAddressList, payload: res.result.slice(0, 10)})
+            dispatch({type: UserAddressActionType.getUserAddressList, payload: res.result.slice(0, size - 1)});
         } else if (res.success === false) {
             swal('获取收货地址列表信息失败', res.msg, 'warning');
         }

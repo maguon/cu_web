@@ -48,7 +48,7 @@ export const getCheckCarList = () => async (dispatch, getState) => {
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
             dispatch({type: CheckCarActionType.setDataSize, payload: res.result.length});
-            dispatch({type: CheckCarActionType.getCheckCarList, payload: res.result.slice(0, 10)})
+            dispatch({type: CheckCarActionType.getCheckCarList, payload: res.result.slice(0, size - 1)});
         } else if (res.success === false) {
             swal('获取违停扫码列表信息失败', res.msg, 'warning');
         }
