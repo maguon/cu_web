@@ -136,7 +136,7 @@ class UserAddress extends React.Component {
                                 <th>微信</th>
                                 <th>用户姓名</th>
                                 <th>绑定手机</th>
-                                <th>最后修改时间</th>
+                                <th className="center">最后修改时间</th>
                                 <th className="center">操作</th>
                             </tr>
                             </thead>
@@ -152,7 +152,7 @@ class UserAddress extends React.Component {
                                                 <td>{item.wechat_name}</td>
                                                 <td>{item.user_name}</td>
                                                 <td>{item.phone}</td>
-                                                <td>{formatUtil.getDateTime(item.updated_on)}</td>
+                                                <td className="center">{formatUtil.getDateTime(item.updated_on)}</td>
                                                 <td className="operation center">
                                                     <Link to={{pathname: '/user_address/'+ item.id}} >
                                                         <i className="mdi mdi-table-search cyan-text lighten-1"/>

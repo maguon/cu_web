@@ -187,11 +187,11 @@ class Message extends React.Component {
                             <thead className="blue-grey lighten-5">
                             <tr className="grey-text text-darken-2">
                                 <th>消息编号</th>
-                                <th>消息类型</th>
+                                <th className="center">消息类型</th>
                                 <th className="ellipsis-td context-ellipsis">消息内容</th>
-                                <th>接收电话</th>
-                                <th>接收用户</th>
-                                <th>发送时间</th>
+                                <th className="center">接收电话</th>
+                                <th className="center">接收用户</th>
+                                <th className="center">发送时间</th>
                                 <th className="center">是否成功</th>
                                 <th className="center">操作</th>
                             </tr>
@@ -202,11 +202,11 @@ class Message extends React.Component {
                                     return (
                                             <tr className="grey-text text-darken-1">
                                                 <td>{item.id}</td>
-                                                <td>{sysConst.MESSAGE_TYPE[item.type-1].label}</td>
+                                                <td className="center">{sysConst.MESSAGE_TYPE[item.type-1].label}</td>
                                                 <td className="ellipsis-td context-ellipsis">{item.content}</td>
-                                                <td>{item.phone}</td>
-                                                <td>{item.user_name}</td>
-                                                <td>{formatUtil.getDateTime(item.created_on)}</td>
+                                                <td className="center">{item.phone}</td>
+                                                <td className="center">{item.user_name}</td>
+                                                <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
                                                 <td className="center">{sysConst.SUCCESS_STATUS[item.status].label}</td>
                                                 <td className="operation center">
                                                     <Link to={{pathname: '/message/'+ item.id}} >

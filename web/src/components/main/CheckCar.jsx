@@ -171,7 +171,7 @@ class Message extends React.Component {
                                 <th>车主电话</th>
                                 <th>车主</th>
                                 <th>交警</th>
-                                <th>扫码时间</th>
+                                <th className="center">扫码时间</th>
                                 <th className="center">状态</th>
                                 <th className="center">操作</th>
                             </tr>
@@ -187,7 +187,7 @@ class Message extends React.Component {
                                                 <td>{item.phone}</td>
                                                 <td>{item.user_name}</td>
                                                 <td>{item.supervise_name}</td>
-                                                <td>{formatUtil.getDateTime(item.created_on)}</td>
+                                                <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
                                                 <td className="center">{sysConst.CHECK_CAR_STATUS[item.status].label}</td>
                                                 <td className="operation center">
                                                     <Link to={{pathname: '/check_car/'+ item.id}} >

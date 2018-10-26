@@ -206,8 +206,8 @@ class UserCar extends React.Component {
                                 <th>发动机号码</th>
                                 <th>绑定手机</th>
                                 <th>绑定用户</th>
-                                <th>绑定时间</th>
-                                <th>绑定状态</th>
+                                <th className="center">绑定时间</th>
+                                <th className="center">绑定状态</th>
                                 <th className="center">操作</th>
                             </tr>
                             </thead>
@@ -222,8 +222,8 @@ class UserCar extends React.Component {
                                                 <td>{item.engine_num}</td>
                                                 <td>{item.phone}</td>
                                                 <td>{item.user_name}</td>
-                                                <td>{formatUtil.getDateTime(item.created_on)}</td>
-                                                <td>{sysConst.BIND_STATUS[item.status].label}</td>
+                                                <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
+                                                <td className="center">{sysConst.BIND_STATUS[item.status].label}</td>
                                                 <td className="operation center">
                                                     <Link to={{pathname: '/user_car/'+ item.id}} >
                                                         <i className="mdi mdi-table-search cyan-text lighten-1"/>
