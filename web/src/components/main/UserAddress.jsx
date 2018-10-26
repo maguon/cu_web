@@ -134,7 +134,7 @@ class UserAddress extends React.Component {
                                 <th>收货人</th>
                                 <th>收货人电话</th>
                                 <th>微信</th>
-                                <th>姓名</th>
+                                <th>用户姓名</th>
                                 <th>绑定手机</th>
                                 <th>最后修改时间</th>
                                 <th className="center">操作</th>
