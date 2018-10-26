@@ -11,6 +11,8 @@ import * as UserAddressActionType from './main/UserAddressActionType';
 import * as UserAddressDetailActionType from './main/UserAddressDetailActionType';
 import * as UserCarActionType from './main/UserCarActionType';
 import * as UserCarDetailActionType from './main/UserCarDetailActionType';
+import * as UserManagerActionType from './main/UserManagerActionType';
+import * as UserManagerDetailActionType from './main/UserManagerDetailActionType';
 
 export {
     LoginActionType,
@@ -24,5 +26,7 @@ export {
     UserAddressActionType,
     UserAddressDetailActionType,
     UserCarActionType,
-    UserCarDetailActionType
+    UserCarDetailActionType,
+    UserManagerActionType,
+    UserManagerDetailActionType
 }

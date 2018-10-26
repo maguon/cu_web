@@ -12,7 +12,9 @@ import {
     UserAddressDetail,
     UserAddress,
     UserCar,
-    UserCarDetail
+    UserCarDetail,
+    UserManager,
+    UserManagerDetail
 } from '../main/index';
 
 const routes = [
@@ -30,7 +32,7 @@ const routes = [
         exact: true,
         component: Message
     },
-    // 消息记录 - 消息详情
+    // 消息记录 - 详情
     {
         path: '/message/:id',
         exact: true,
@@ -42,7 +44,7 @@ const routes = [
         exact: true,
         component: TrafficPolice
     },
-    // 交警管理 - 交警资料
+    // 交警管理 - 详情
     {
         path: '/traffic_police/:id',
         exact: true,
@@ -54,21 +56,32 @@ const routes = [
         exact: true,
         component: CheckCar
     },
-    // 违停扫码管理 - 记录详情
+    // 违停扫码管理 - 详情
     {
         path: '/check_car/:id',
         exact: true,
         component: CheckCarDetail
     },
 
-
+    // 用户管理
+    {
+        path: "/user",
+        exact: true,
+        component: UserManager
+    },
+    // 用户管理 - 详情
+    {
+        path: '/user/:id',
+        exact: true,
+        component: UserManagerDetail
+    },
     // 用户收货地址
     {
         path: "/user_address",
         exact: true,
         component: UserAddress
     },
-    // 用户收货地址 - 地址详情
+    // 用户收货地址 - 详情
     {
         path: '/user_address/:id',
         exact: true,
@@ -80,7 +93,7 @@ const routes = [
         exact: true,
         component: UserCar
     },
-    // 用户车辆 - 车辆信息
+    // 用户车辆 - 详情
     {
         path: '/user_car/:id',
         exact: true,

@@ -83,6 +83,30 @@ export const CHECK_CAR_STATUS = [
     }
 ];
 
+// 认证状态
+export const AUTH_STATUS = [
+    {
+        value: 0,
+        label: "未认证"
+    },
+    {
+        value: 1,
+        label: "已认证"
+    }
+];
+
+// 关注状态
+export const WE_CHAT_STATUS = [
+    {
+        value: 0,
+        label: "取消"
+    },
+    {
+        value: 1,
+        label: "关注"
+    }
+];
+
 export const DATE_PICKER_OPTION = {
     // selectMonths: true,
     // selectYears: 15,
@@ -104,7 +128,7 @@ export const DATE_PICKER_OPTION = {
 export const CUSTOM_REACT_SELECT_STYLE = {
     control: (styles, {isFocused}) => ({
         ...styles,
-        height: '46px',
+        height: 'calc(3rem + 1px)',
         borderRadius: '0',
         boxShadow: '0',
         borderTop: '0',

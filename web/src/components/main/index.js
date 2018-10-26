@@ -8,3 +8,5 @@ export UserAddress from "./UserAddress";
 export UserAddressDetail from "./UserAddressDetail";
 export UserCar from "./UserCar";
 export UserCarDetail from "./UserCarDetail";
+export UserManager from "./UserManager";
+export UserManagerDetail from "./UserManagerDetail";

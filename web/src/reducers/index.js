@@ -13,6 +13,8 @@ import UserAddressReducer from './main/UserAddressReducer';
 import UserAddressDetailReducer from './main/UserAddressDetailReducer';
 import UserCarReducer from './main/UserCarReducer';
 import UserCarDetailReducer from './main/UserCarDetailReducer';
+import UserManagerReducer from './main/UserManagerReducer';
+import UserManagerDetailReducer from './main/UserManagerDetailReducer';
 
 export default combineReducers({
     form: reduxFormReducer,
@@ -27,5 +29,7 @@ export default combineReducers({
     UserAddressReducer,
     UserAddressDetailReducer,
     UserCarReducer,
-    UserCarDetailReducer
+    UserCarDetailReducer,
+    UserManagerReducer,
+    UserManagerDetailReducer
 })
