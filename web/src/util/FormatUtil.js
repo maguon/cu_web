@@ -24,10 +24,14 @@ export const formatDate = (date, format) => {
         return fmt;
     };
 
-    if (typeof date === 'string') {
+    // string类型时，不能纯数字，并且Date.parse有正常值
+    if (typeof date === 'string' && isNaN(date) && !isNaN(Date.parse(date))) {
         return new Date(date).Format(format);
-    } else {
+    } else if (date instanceof Date) {
         return date.Format(format);
+    } else {
+        // 非法日期参数，则返回空
+        return '';
     }
 };
 
