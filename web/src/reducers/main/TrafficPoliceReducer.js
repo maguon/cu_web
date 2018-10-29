@@ -1,33 +1,26 @@
 import {handleActions} from 'redux-actions';
 import {TrafficPoliceActionType} from '../../actionTypes';
 
-const sysConst = require('../../util/SysConst');
-
 const initialState = {
-    // 检索条件：开始位置
+    // 开始位置
     start: 0,
-    // 检索条件：每页数量
+    // 每页数量
     size: 11,
-
-    // 性别列表
-    genderList: sysConst.GENDER,
-    // 职务列表
-    policePositionList: sysConst.POLICE_POSITION,
-    // 状态列表
-    policeStatusList: sysConst.POLICE_STATUS,
+    // 检索结果数量
+    dataSize: 0,
 
     // 检索条件：编号
     conditionNo: '',
     // 检索条件：姓名
     conditionName: '',
     // 检索条件：性别
-    conditionGender: {value: '', label: ''},
+    conditionGender: null,
     // 检索条件：职务
-    conditionPosition: {value: '', label: ''},
+    conditionPosition: null,
     // 检索条件：电话
     conditionPhone: '',
     // 检索条件：状态
-    conditionStatus: {value: '', label: ''},
+    conditionStatus: null,
 
     // 交警检索结果列表
     policeArray: [],
@@ -37,14 +30,11 @@ const initialState = {
     // 增加交警：性别
     gender: '0',
     // 增加交警：职务
-    position: {value: '', label: ''},
+    position: null,
     // 增加交警：电话
     phone: '',
     // 增加交警：密码
-    password: '',
-
-
-
+    password: ''
 };
 
 export default handleActions({
@@ -58,6 +48,12 @@ export default handleActions({
         return {
             ...state,
             start: action.payload
+        }
+    },
+    [TrafficPoliceActionType.setDataSize]: (state, action) => {
+        return {
+            ...state,
+            dataSize: action.payload
         }
     },
     [TrafficPoliceActionType.setConditionNo]: (state, action) => {
@@ -125,6 +121,6 @@ export default handleActions({
             ...state,
             password: action.payload
         }
-    },
+    }
 }, initialState)
 

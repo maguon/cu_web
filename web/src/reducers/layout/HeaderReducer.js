@@ -1,8 +1,9 @@
-import { handleActions } from 'redux-actions';
+import {handleActions} from 'redux-actions';
 import {HeaderActionType} from '../../actionTypes';
+
 const initialState = {
-    userInfo :{}
-}
+    userInfo: {}
+};
 
 export default handleActions({
     [HeaderActionType.getUserInfo]: (state, action) => {
@@ -11,5 +12,6 @@ export default handleActions({
             ...state,
             userInfo: action.payload
         }
-    }} , initialState)
+    }
+}, initialState)
 

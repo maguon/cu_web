@@ -1,17 +1,17 @@
 import {apiHost} from '../../config/HostConfig';
 
 const httpUtil = require('../../util/HttpUtil');
-const LocalUtil = require('../../util/LocalUtil');
-const SysConst = require('../../util/SysConst');
+const localUtil = require('../../util/LocalUtil');
+const sysConst = require('../../util/SysConst');
 
 export const login = (params) => async () => {
     try {
-        const res = await httpUtil.httpPost(apiHost + '/api/admin/do/login', params);
+        const res = await httpUtil.httpPost(apiHost + '/api/adminLogin', params);
 
         if (res.success === true) {
-            LocalUtil.setLocalItem(SysConst.USER_ID, res.result.userId);
-            LocalUtil.setLocalItem(SysConst.USER_TYPE, res.result.type);
-            LocalUtil.setLocalItem(SysConst.AUTH_TOKEN, res.result.accessToken);
+            localUtil.setLocalItem(sysConst.USER_ID, res.result.userId);
+            localUtil.setLocalItem(sysConst.USER_TYPE, res.result.type);
+            localUtil.setLocalItem(sysConst.AUTH_TOKEN, res.result.accessToken);
 
             window.location.href = '/index.html';
         } else if (res.success === false) {

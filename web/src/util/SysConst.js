@@ -1,7 +1,7 @@
-export const USER_ID ='user-id';
-export const USER_TYPE ='user-type';
-export const USER_STATUS='user-status';
-export const AUTH_TOKEN ='auth-token';
+export const USER_ID = 'user-id';
+export const USER_TYPE = 'user-type';
+export const USER_STATUS = 'user-status';
+export const AUTH_TOKEN = 'auth-token';
 
 // 性别
 export const GENDER = [
@@ -35,6 +35,77 @@ export const POLICE_STATUS = [
     }
 ];
 
+// 绑定车辆管理：绑定状态
+export const BIND_STATUS = [
+    {
+        value: 0,
+        label: "解绑"
+    },
+    {
+        value: 1,
+        label: "绑定"
+    }
+];
+
+// 消息类型
+export const MESSAGE_TYPE = [
+    {
+        value: 1,
+        label: "验证码"
+    },
+    {
+        value: 2,
+        label: "违停"
+    }
+];
+
+// 状态：是否成功
+export const SUCCESS_STATUS = [
+    {
+        value: 0,
+        label: "失败"
+    },
+    {
+        value: 1,
+        label: "成功"
+    }
+];
+
+// 违停扫码状态
+export const CHECK_CAR_STATUS = [
+    {
+        value: 0,
+        label: "未结束"
+    },
+    {
+        value: 1,
+        label: "结束"
+    }
+];
+
+// 认证状态
+export const AUTH_STATUS = [
+    {
+        value: 0,
+        label: "未认证"
+    },
+    {
+        value: 1,
+        label: "已认证"
+    }
+];
+
+// 关注状态
+export const WE_CHAT_STATUS = [
+    {
+        value: 0,
+        label: "取消"
+    },
+    {
+        value: 1,
+        label: "关注"
+    }
+];
 
 export const DATE_PICKER_OPTION = {
     // selectMonths: true,
@@ -57,7 +128,7 @@ export const DATE_PICKER_OPTION = {
 export const CUSTOM_REACT_SELECT_STYLE = {
     control: (styles, {isFocused}) => ({
         ...styles,
-        height: '46px',
+        height: 'calc(3rem + 1px)',
         borderRadius: '0',
         boxShadow: '0',
         borderTop: '0',

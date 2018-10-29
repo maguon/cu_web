@@ -59,6 +59,12 @@ body {
     font-size: 15px;
 }
 
+.dotted-line {
+    height: 1px;
+    border-bottom: 1px dotted #ccc;
+    width: calc(100% - 20px);
+    margin-left:10px;
+}
 /** 画面加载样式 Start */
 .c-loader-wrapper {
     display: none;
@@ -90,9 +96,9 @@ body {
     margin-bottom: 0;
 }
 
-.no-padding {
-    padding-left: 0;
-    padding-right: 0;
+.search-condition-box {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
 }
 
 .btn {
@@ -112,6 +118,65 @@ body {
 .side-nav .divider {
     margin: 0;
 }
+
+.switch label input[type=checkbox]:checked + .lever{
+    background-color:#0E4E92
+}
+.switch label input[type=checkbox]:checked + .lever:after{
+    background-color:#ffffff
+}
+
+.tabs {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 48px;
+    width: 100%;
+    background-color: #fff;
+    margin: 0 auto;
+    white-space: nowrap;
+    border-bottom: 1px solid #0F4F94;
+}
+
+.tabs .tab {
+    display: inline-block;
+    text-align: center;
+    line-height: 48px;
+    height: 48px;
+    padding: 0;
+    margin: 0;
+}
+
+.tabs .tab a {
+    color: grey;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0 24px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-transition: color .28s ease;
+    transition: color .28s ease;
+}
+
+.tabs .tab a:hover {
+    background-color: transparent;
+    color: #0F4F94;
+}
+
+.tabs .tab a.active {
+    background-color: #0F4F94;
+    color: white;
+}
+
+.tabs .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 0;
+    will-change: left, right;
+}
+
 /** Material样式 变更部分 End */
 
 /** Material补充样式 左侧导航栏 自定义 顶层按钮 */
@@ -124,12 +189,45 @@ body {
 }
 
 /** 自定义样式 */
+.bold-font {
+    font-weight: bold;
+}
+.fz12 {
+    font-size: 12px;
+}
+.fz14 {
+    font-size: 14px;
+}
 .fz15 {
     font-size: 15px;
+}
+.fz18 {
+    font-size: 18px;
+}
+.fz20 {
+    font-size: 20px;
+}
+
+.custom-input-field {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-top: 0 !important;
+}
+
+.margin-top0 {
+    margin-top: 0;
+}
+
+.margin-top3 {
+    margin-top: 3px;
 }
 
 .margin-top10 {
     margin-top: 10px;
+}
+
+.margin-top20 {
+    margin-top: 20px;
 }
 
 .margin-top25 {
@@ -140,20 +238,64 @@ body {
     margin-top: 40px;
 }
 
+.margin-bottom0 {
+    margin-bottom: 0;
+}
+
 .margin-left10 {
     margin-left: 10px;
 }
 
+.margin-left20 {
+    margin-left: 20px;
+}
+
+.margin-left30 {
+    margin-left: 30px;
+}
+
 .margin-left50 {
-    margin-left: 50px;
+    margin-left: 50px !important;
 }
 
 .margin-right50 {
-    margin-right: 50px;
+    margin-right: 50px !important;
 }
 
 .margin-right10 {
-    margin-right: 10px;
+    margin-right: 10px !important;
+}
+
+.margin-right20 {
+    margin-right: 20px !important;
+}
+
+.padding-left20 {
+    padding-left: 20px;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+/** col 后 自定义宽度 */
+.s-percent-4 {
+    width:4%;
+}
+.s-percent-10 {
+    width:10%;
+}
+.s-percent-20 {
+    width:20%;
+}
+.s-percent-46 {
+    width:46%;
+}
+.s-percent-90{
+    width:90%;
+}
+.s-percent-96 {
+    width:96%;
 }
 
 /** 一览画面 操作按钮部 样式 */
@@ -171,7 +313,7 @@ body {
 
 .modal-title {
     height: 50px;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 50px;
     background-color: #0F4F94;
 }
@@ -182,6 +324,12 @@ body {
 
 .modal .modal-footer .btn {
     margin: 6px 0 0 20px;
+}
+
+.word-wrap {
+    overflow: hidden;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .close-btn {
@@ -201,6 +349,13 @@ body {
 #policeModal {
     max-height: 456px;
 }
+
+#messageModal {
+    max-height: 606px;
+}
+#messageModal .modal-content {
+    max-height: 500px;
+}
 /** modal 样式定义部分 end */
 
 /** react-select 错误信息样式 */
@@ -215,7 +370,7 @@ body {
 /** 标题：画面主体部分，标题部分样式 */
 .page-title {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
     color: #0F4F94 !important;
 }
 
@@ -236,16 +391,26 @@ body {
     background-color: #0F4F94 !important;
 }
 
+.custom-indigo {
+    color: #9DB8D2;
+}
+
 .custom-divider {
     background: #CBCBCB;
     height: 2px;
 }
 
+/** 数据过长时，隐藏部分内容 */
 .context-ellipsis {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+/** 鼠标悬停在TD上，显示隐藏内容 */
+/*td:hover {*/
+/*text-overflow: inherit;*/
+/*overflow: visible;*/
+/*}*/
 
 .no-data-tr {
     letter-spacing: 2px;
@@ -268,19 +433,54 @@ body {
     background-color: #fea353;
 }
 
-/** 交警管理 画面 用 */
+.custom-btn {
+    padding:3px 10px 3px 20px;
+    background: #E3E8ED;
+    border:1px solid #dadfe4;
+    height: 70%;
+    cursor: pointer;
+    border-radius: 40px;
+}
+.custom-btn i {
+    margin-left: 5px;
+}
+
+/** 详细信息 画面 用 */
 .detail-box {
     border:1px solid #D4D4D4;
 }
 
 .detail-box-header {
-    height: 66px;
+    height: 52px;
     background-color: #EDEFF6;
-    padding-top: 22px;
-    padding-left: 10px;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
     border-bottom:1px solid #D4D4D4;
     color: #0F4F94;
     font-weight: bold;
+}
+
+/** 日期控件 图片 样式 */
+.data-icon{
+    position: absolute;
+    right: 12px;
+    bottom: 30px;
+}
+
+/** 固定表格样式 */
+.fixed-table {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+
+.ellipsis-td {
+    width:300px;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 
