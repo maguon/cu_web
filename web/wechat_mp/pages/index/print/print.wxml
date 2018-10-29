@@ -4,17 +4,31 @@
   <view class='code'>
   <image class='code-img' src='../../../assets/images/icon.png'></image>
 
-  <view class='choose'>
-  <view class='left'>连惠车挪车二维码贴</view>
-  <view class='right'>
-  <image class='right-img' src='../../../assets/images/money.png'></image>
-  <view class='right-text'>5.00</view>
-  </view>
-  </view>
-
   <text class='code-text'>请填写下列信息，我们会按照您的要求将二维码打印好送到您的手上</text>
+  <view class='choose'>
+      <view class='left'>连惠车挪车二维码贴</view>
+      <view class='right'>
+      <image class='right-img' src='../../../assets/images/money.png'></image>
+      <view class='right-text'>5.00</view>
+    </view>
+   </view>
   </view>
-   
+  <view class='divline'></view>
+<view class='count'>
+<view class='left'>
+  <view class="stepper">  
+    <text class="{{minusStatus}}" bindtap="bindMinus">-</text>  
+    <input type="number" bindinput="bindManual" value="{{num}}" />  
+    <text class="normal" bindtap="bindPlus">+</text>  
+ </view> 
+ </view>
+ <view class='right'>
+      <image class='right-img' src='../../../assets/images/money.png'></image>
+      <view class='right-text'>{{price}}.00</view>
+    </view> 
+</view>
+
+   <view class='divline'></view>
   <view class='choose'>
   <view class='left'>商品详情 </view>
   <view bindtap='product' class='right'>
@@ -25,8 +39,8 @@
   <view class='mail'>收货地址</view>
   <block wx:if="{{!flag}}">
   <view class='input'>
-  <view class="section">用户地址信息接口
-   </view>
+  <view hidden='{{!hidden}}' class="section">{{addressList.address+"  "+addressList.ship_name+"  "+addressList.phone}}</view>
+  <view hidden='{{hidden}}' class="section">请选择您的收货地址</view>
     <view bindtap='addRess' class='address'>
   <image class='site' src='../../../assets/images/arrow.png'></image>
   </view>

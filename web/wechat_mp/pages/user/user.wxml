@@ -6,16 +6,16 @@
     <block wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 
      <image  class="userinfo-avatar" src="../../../assets/images/player.png"></image>
       <text class="userinfo-nickname">微信昵称
-       <text class="userinfo-phone">未绑定手机</text>
+       <text class="userinfo-phone">{{nullPhone}}</text>
       </text>
     </block>
 
       <block wx:else>
-       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <view class="userinfo-nickname">{{userInfo.nickName}}
+       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{avatarUrl}}" mode="cover"></image>
+      <view class="userinfo-nickname">{{wechatName}}
        <view class="phone-img">
       <image class="phone" src="../../../assets/images/phone.png"></image>
-      <text class="userinfo-phone">15840668526</text>
+      <text class="userinfo-phone">{{nullPhone}}</text>
       </view>
       </view>
     </block>
@@ -39,7 +39,7 @@
           <view class="weui-cell__bd">{{userSections[1].text}}
           <image class='arrow' src='../../../assets/images/arrow.png'></image>
           </view>
-          <view class='weui-cell__right'>未绑定手机</view>
+          <view class='weui-cell__right'>{{nullPhone}}</view>
       </view>
        <view class="access"></view>
       </navigator>
@@ -49,7 +49,37 @@
           <view class="weui-cell__bd">{{userSections[2].text}}
           <image class='arrow' src='../../../assets/images/arrow.png'></image>
           </view>
-          <view class='weui-cell__right'>未关联车辆</view>
+          <view class='weui-cell__right'>{{myCar}}</view>
+      </view>
+       <view class="access"></view>
+      </navigator>
+
+      <navigator url="{{userSections[3].url}}" class="weui-cell_access" hover-class="weui-cell_active">
+      <view class='content'>
+          <view class="weui-cell__bd">{{userSections[3].text}}
+          <image class='arrow' src='../../../assets/images/arrow.png'></image>
+          </view>
+          <view class='weui-cell__right'></view>
+      </view>
+       <view class="access"></view>
+      </navigator>
+
+      <navigator url="{{userSections[4].url}}" class="weui-cell_access" hover-class="weui-cell_active">
+      <view class='content'>
+          <view class="weui-cell__bd">{{userSections[4].text}}
+          <image class='arrow' src='../../../assets/images/arrow.png'></image>
+          </view>
+          <view class='weui-cell__right'></view>
+      </view>
+       <view class="access"></view>
+      </navigator>
+
+      <navigator url="{{userSections[5].url}}" class="weui-cell_access" hover-class="weui-cell_active">
+      <view class='content'>
+          <view class="weui-cell__bd">{{userSections[5].text}}
+          <image class='arrow' src='../../../assets/images/arrow.png'></image>
+          </view>
+          <view class='weui-cell__right'>{{userSections[5].version}}</view>
       </view>
        <view class="access"></view>
       </navigator>

@@ -1,6 +1,6 @@
 // pages/user/user.js
 var app = getApp()
-// const index = require('../index/index.js')
+ const index = require('../index/index.js')
 Page({
 
   /**
@@ -8,9 +8,13 @@ Page({
    */
   data: {
     userInfo: {},
+    avatarUrl:'',
+    wechatName:'',
+    phoneNumber:'',
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-
+    
+    myCar:'未关联车辆',
+    nullPhone:'未绑定手机',
     userSections: [{
       text: '个人资料',
       isunread: true,
@@ -23,13 +27,37 @@ Page({
       }, {
         text: '关联车辆',
         url: "/pages/user/relevance/relevance"
-      }]
+      },{
+        text: '我的订单',
+        url: ""
+      },{
+        text: '收货地址',
+        url: "/pages/index/addressList/addressList"
+      },
+      {
+        text: '当前版本',
+        version:'1.0.1',
+        url: ""
+      }
+      ]
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
-    this.setData({ userInfo: app.globalData.userInfo })
+    this.setData({ 
+      userInfo: app.globalData.userInfo,
+      wechatName: app.globalData.userInfo.result[0].wechat_name,
+      avatarUrl: app.globalData.userInfo.result[0].avatar_image,
+      myCar: "相关车辆" + app.globalData.count + "台",
+      hasUserInfo: true,
+       })
+  
+    //获取绑定手机
+    var bindPhone = wx.getStorageSync("bindPhone") || '未绑定手机';
+      this.setData({
+        nullPhone:bindPhone,
+      })
   },
 
   /**
@@ -43,7 +71,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**

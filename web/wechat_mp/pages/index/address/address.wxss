@@ -6,6 +6,7 @@ background: #efeff4;
     height: 120rpx;
     line-height: 120rpx;
     border-top: 1rpx solid #f3f3f3;
+    font-size: 18px;
 }
 .wraper .listItems .listLeft{
     float: left;
@@ -17,6 +18,7 @@ background: #efeff4;
     width: 420rpx;
 }
 .text{
+    font-size: 18px;
     padding: 0 30rpx;
     height: 100rpx;
     line-height: 100rpx;
@@ -24,9 +26,11 @@ background: #efeff4;
 .listItems{
   background: white;
 }
+
 .listRight{
  position: absolute;
  right: 10px;
+ font-size: 15px;
  color:#9b9898;
  text-align: right;
 }
@@ -39,10 +43,9 @@ background: #efeff4;
   height: 170rpx;
   color:#9b9898;
   padding-top: 8px;
+  font-size: 15px;
 }
-.btnGroup{
 
-} 
 .btn{
     position: fixed;
     bottom: 20px;

@@ -1,24 +1,40 @@
 <scroll-view class="scroll" scroll-y="true">
-  <view wx:for="{{addressList}}">
-    <view class="product-name-wrap">
-      <view class="ui-list-item-info">{{item.consignee}}
-        <text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text> {{item.mobile}}
-      </view>
-      <view class="ui-list-item-address">
-        {{item.address}}
-      </view>
-      <view class="ui-list-item-time">
-        <p>{{item.transportDay}}</p>
-        <p class="ui-list-item-del" data-id="{{index}}" bindtap="delAddress">删除</p>
-      </view>
-      <view class="separate"></view>
+<view class="weui-cells weui-cells_after-title">
+ <radio-group bindchange="radioChange">
+ <label class="weui-cell weui-check__label" wx:for="{{addressList}}" wx:key='u'>
+    <radio class="weui-check" value="{{index}}"  checked="{{item.checked}}"/>
+  
+ <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                        <icon class="weui-icon-checkbox_circle" type="circle" size="18" wx:if="{{!item.checked}}"></icon>
+                        <icon class="weui-icon-checkbox_success" type="success" size="18" wx:if="{{item.checked}}"></icon>
+                    </view>
+
+<view class="weui-cell__bd">
+     <view class="product-name-wrap">
+         <view class='default'>
+             <view hidden='{{!item.checked}}' class='default-item'>默认</view>
+             <view hidden='{{item.checked}}' class='default-item-two'>设为默认</view>
+             <view class='default-redact'data-id="{{index}}" bindtap="editorAddress">修改</view>
+             <view class="ui-list-item-del" data-id="{{index}}" bindtap="delAddress">删除</view>
+         </view>
+
+         <view class="ui-list-item-address">{{item.address}}
+               <text decode="{{true}}" space="{{true}}">&nbsp;</text> {{item.ship_name}}
+               <text decode="{{true}}" space="{{true}}">&nbsp;</text> {{item.phone}}
+          </view>
+     </view>
     </view>
-  </view>
-</scroll-view>
-<view class="add-address" bindtap="addAddress" hover-class="weui-cell_active">
-  <image class="add-img"  src="../../../assets/images/add.png"></image>
-  添加收货地址
+
+  </label>
+ </radio-group>
 </view>
+
+<view class="add-address" bindtap="addAddress" hover-class="weui-cell_active">
+  <image class="add-img"  src="../../../assets/images/add.png"></image>添加收货地址
+</view>
+
 <view class="btnGroup">
  <button bindtap='useRess' class="btn" hover-class="weui-cell_active_btn">确定</button>
 </view>
+
+</scroll-view>

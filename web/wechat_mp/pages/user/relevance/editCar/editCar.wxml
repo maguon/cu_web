@@ -21,7 +21,7 @@
       <view class="weui-label">车牌号</view>
   </view>
     <view class="weui-cell__bd">
-    <view class='text'>辽B12345</view>
+    <view class='text'>{{queryBean.license_plate}}</view>
      </view>
   </view>
 
@@ -30,7 +30,7 @@
       <view class="weui-label">车辆识别码</view>
   </view>
     <view class="weui-cell__bd">
-    <view class='text'>UYWHRJF395793450</view>
+    <view class='text'>{{queryBean.vin}}</view>
      </view>
   </view>
 
@@ -39,7 +39,7 @@
       <view class="weui-label">发动机号</view>
   </view>
     <view class="weui-cell__bd">
-    <view class='text'>UYWHRJF395793450</view>
+    <view class='text'>{{queryBean.engine_num}}</view>
      </view>
   </view>
  </view>

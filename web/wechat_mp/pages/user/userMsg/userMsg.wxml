@@ -1,7 +1,8 @@
 <!--pages/user/user.wxml-->
+
 <view class='user_container'>
 
-<view class="weui-cell__ft">认证时间：2018-08-25 11:32:24</view>
+<view class="weui-cell__ft">{{determineTime}}</view>
   
   <view class='name'>
   <view class="weui-cells_after-title">
@@ -10,7 +11,7 @@
       <view class="weui-label">姓名</view>
   </view>
   <view class="weui-cell__bd">
-   <input class="weui-input" placeholder="请输入您的姓名"/>
+   <input class="weui-input" bindblur="listenerReciverInput" placeholder="请输入您的姓名" value="{{name}}" name="name"/>
      </view>   
    </view>
   </view>
@@ -23,7 +24,8 @@
     <view class="weui-label">性别</view>
 </view>
 <view class="weui-cell__bd">
- <picker bindchange="bindCountryChange" value="{{index}}" range="{{itemList}}">
+ <picker bindchange="bindSexChange" value="{{index}}" range="{{itemList}}"
+ name="sex">
   <view class="weui-select">{{itemList[index]}}</view>
   </picker>
    </view>
@@ -35,7 +37,7 @@
 <view class='time'>
   <view class="weui-cell weui-cell_input">
     <view class="weui-cell__hd">
-      <view class="weui-label">日期</view>
+      <view class="weui-label">出生日期</view>
   </view>
     <view class="weui-cell__bd">
       <picker mode="date" value="{{date}}" start="1950-01-01" end="2018-12-30" bindchange="bindDateChange">
@@ -47,7 +49,7 @@
  </view>
 
 <view class='btn'>
-    <button bindtap="bindBntTap" class="btn-area" hover-class="weui-cell_active">确定</button>
+    <button bindtap='bindBntTap' class="btn-area" hover-class="weui-cell_active">确定</button>
     </view>
 
 </view>

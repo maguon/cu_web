@@ -27,7 +27,7 @@ margin-left: 15px;
 }
 .left-car{
   color: #8a8a8a;
-  font-size: 15px;
+  font-size: 12px;
   line-height:40px;
 }
 

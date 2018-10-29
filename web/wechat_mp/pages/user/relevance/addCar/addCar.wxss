@@ -1,10 +1,15 @@
 page{
   background: #efeff4;
 }
-
-.car-msg{
-  margin-top: 20px;
+.weui-cells__title{
+  height: 30px;
+  color: #ffb100;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin-top: 0px;
 }
+
 .weui-btn{
   position: fixed;
   bottom: 20px;

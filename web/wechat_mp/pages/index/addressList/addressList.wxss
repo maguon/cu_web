@@ -4,36 +4,64 @@ page{
   height: 100%;  
  background: #efeff4;
 }  
+.scroll{
+height: 85%;
+}
 .product-name-wrap{
-  margin: 0px 10px;
+  margin: 0px 0px;
   font-size: 14px;
-  color: #404040;
+  color: #8a8a8a;
+  background: white;
+  width: 100%;
 }
-.ui-list-item-info{
-  margin: 5px 0px;
+.default{
+  display: flex;
+  flex-direction: row;
 }
-.ui-list-item-address{
-  color: #585c64;
+.default-item{
+  width: 88%;
+  color: #feb100;
+  margin-left: 30px;
 }
-.ui-list-item-time{
-  margin: 5px 0px;
+.default-item-two{
+  width: 88%;
+  color: #8a8988;
+  margin-left: 30px;
+}
+.default-redact{
+  text-align: center;
+  width: 12%;
+  color: white;
+  background:rgb(201, 201, 247); 
+  opacity: 0.9;  
+  transform: scale(0.9,0.9); 
 }
 .ui-list-item-del{
-  position: absolute;
-  right: 10px;
-  color: #585c64;
+  width: 12%;
+  opacity: 0.9;      /*透明度变化*/
+  transform: scale(0.9,0.9); /*缩放*/
+  text-align: center;
+  color: white;
+  background:rgb(201, 201, 247); 
 }
-/* 分割线 */
-.separate {
-  margin: 5px 0px;
-  height: 2rpx;
-  background-color: #f2f2f2;
+
+.ui-list-item-info{
+  margin: 0px 0px;
 }
+.ui-list-item-address{
+  margin: 10px 25px;
+  color: #8a8a8a;
+}
+.weui-check__hd_in-checkbox{
+ position: absolute;
+ top: 5px;
+}
+
 .add-address{
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right: 10px;
-  width: 160px;
+  width: 140px;
   height: 30px;
   background: white;
   line-height: 30px;
@@ -56,9 +84,6 @@ page{
   background-color:#ececec;
   }
   
-  .btnGroup {
-
-  }
   .btn{
     position: fixed;
     bottom: 20px;
@@ -71,3 +96,4 @@ page{
   .weui-cell_active_btn{
   background-color: #017ac0;
   }
+  

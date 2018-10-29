@@ -5,20 +5,23 @@
      <image bindtap="bindViewTap" class="userinfo-avatar" src="../../assets/images/player.png" mode="cover"></image>
      <button class='userinfo-nickname' size='mini' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
       <!-- <text class="userinfo-nickname">微信昵称</text> -->
-      <text class="userinfo-phone">未绑定手机</text>
+     <button class='userinfo-nickname' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button>
     </block>
 
       <block wx:else>
-       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{wechatName}}</text>
       <black class="phoneimg">
       <image class="phone" src="../../assets/images/phone.png"></image>
-      <text class="userinfo-phone">获取用户手机号码</text>
+      <!-- <text class="userinfo-phone">{{userPhone}}</text> -->
+           <button class='userinfo-nickname' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button>
       </black>
     </block>
   </view>
 
-  <block wx:if="{{hasUserInfo && canIUse}}"> 
+  <loading hidden="{{loadingHidden}}">加载中</loading>
+
+  <block wx:if="{{!bindCar}}"> 
       <view class="usermotto">
       <text class="user-motto">{{motto}}</text>
     </view>
@@ -27,24 +30,31 @@
     </view>
   </block>
   
-  <block wx:else>
+<block wx:else>
+  <block wx:for='{{carList}}'  wx:key='u'>
+  <view  class='item'>
     <view class='carbox'>
       <view class='left'>
         <image class='left-img' src='../../assets/images/car.png'></image>
-          <text class='left-text'>辽B12345
-            <text  class='left-car'>奥迪A6</text></text>
+        <text class='left-text'>{{item.license_plate}}
+        <text  class='left-car'>编号：{{item.id}}</text>
+        </text>
       </view>
-      <view class='right' bindtap='bindCarDetail'>
-      <view class='center'>
-        <image class='center-img' src='../../assets/images/code.png'></image>
+
+      <view bindtap='bindCarDetail' data-index='{{index}}' class='right'>
+        <view class='center'>
+         <image class='center-img' src='../../assets/images/code.png'></image>
+        </view>
+
+        <view>
+         <image class='right-img' src='../../assets/images/arrow.png'></image>
+        </view> 
       </view>
-      <view>
-        <image class='right-img' src='../../assets/images/arrow.png'></image>
-      </view> 
     </view>
-    </view>
-     <view class="divLine"></view>
-  </block>
- 
+  <view class="divLine"></view>
+  </view>
+ </block>
+</block>
+   <!-- <button  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机登录</button> -->
 </view>
 

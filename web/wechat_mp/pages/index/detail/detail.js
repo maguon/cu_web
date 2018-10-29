@@ -5,14 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    queryBean:[],
+    carNumber:'',
+    vin:'',
+    engineNumber:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    var queryBean = JSON.parse(options.queryBean);
+    that.setData({
+      queryBean: queryBean
+    })
   },
 
   /**

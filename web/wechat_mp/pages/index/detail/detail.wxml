@@ -5,13 +5,13 @@
 
  <view class='car'>
   <image class='car-img' src='../../../assets/images/car.png'></image>
-  <text class='nub'>辽B12345</text>
+  <text class='nub'>{{queryBean.license_plate}}</text>
   </view>
  <view class="divLine"></view>
 
  <view class='car'>
   <view class='car-msg'>
-   <view>品牌型号: 奥迪A6
+   <view>车辆编号: {{queryBean.id}}
     </view>
   </view>
  </view>
@@ -19,7 +19,7 @@
 
 <view class='car'>
   <view class='car-msg'>
-   <view>车辆识别码: UYWHRJF395793450
+   <view>车辆识别码: {{queryBean.vin}}
    </view>
    </view>
  </view>
@@ -27,7 +27,7 @@
 
  <view class='car'>
   <view class='car-msg'>
-    <view>发动机号码: UYWHRJF395793450
+    <view>发动机号码: {{queryBean.engine_num}}
     </view>
    </view>
   </view>

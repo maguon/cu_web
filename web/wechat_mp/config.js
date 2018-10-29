@@ -1,5 +1,5 @@
 export const host = {
-    "apiHost" : "http://stg.myxxjs.com:9001/api"
+  "apiHost": "http://stg.myxxjs.com:9201"
 }
 export const priceConfig = {
   sizeTypes: ["紧凑车型", "中型车", "商务车", "其他大型"],
