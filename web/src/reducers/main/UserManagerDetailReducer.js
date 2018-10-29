@@ -9,11 +9,23 @@ const initialState = {
     createdOn: '',
     // 用户详情：微信昵称
     weChatName: '',
-
     // 用户详情：关注状态
     weChatStatus: 0,
     // 用户详情：认证状态
     authStatus: 0,
+    // 用户详情：手机
+    phone: '',
+    // 用户详情：姓名
+    userName: '',
+    // 用户详情：性别
+    gender: 0,
+    // 用户详情：出生年月日
+    birth: '',
+    // 用户详情：认证时间
+    authTime: '',
+
+    // 绑定车辆：列表
+    userCarArray: [],
 
     // 消息记录：列表
     messageArray: [],
@@ -44,9 +56,6 @@ export default handleActions({
             weChatName: action.payload
         }
     },
-
-
-
     [UserManagerDetailActionType.setWeChatStatus]: (state, action) => {
         return {
             ...state,
@@ -60,7 +69,45 @@ export default handleActions({
         }
     },
 
+    [UserManagerDetailActionType.setPhone]: (state, action) => {
+        return {
+            ...state,
+            phone: action.payload
+        }
+    },
+    [UserManagerDetailActionType.setUserName]: (state, action) => {
+        return {
+            ...state,
+            userName: action.payload
+        }
+    },
+    [UserManagerDetailActionType.setGender]: (state, action) => {
+        return {
+            ...state,
+            gender: action.payload
+        }
+    },
+    [UserManagerDetailActionType.setBirth]: (state, action) => {
+        return {
+            ...state,
+            birth: action.payload
+        }
+    },
+    [UserManagerDetailActionType.setAuthTime]: (state, action) => {
+        return {
+            ...state,
+            authTime: action.payload
+        }
+    },
 
+
+
+    [UserManagerDetailActionType.getUserCarList]: (state, action) => {
+        return {
+            ...state,
+            userCarArray: action.payload
+        }
+    },
 
 
 
