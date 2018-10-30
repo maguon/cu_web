@@ -202,6 +202,9 @@ body {
 .fz15 {
     font-size: 15px;
 }
+.fz16 {
+    font-size: 16px;
+}
 .fz18 {
     font-size: 18px;
 }
@@ -358,7 +361,7 @@ body {
 }
 
 #messageModal {
-    max-height: 606px;
+    max-height: 450px;
 }
 #messageModal .modal-content {
     max-height: 500px;
@@ -486,6 +489,10 @@ body {
     width: 100%;
     display: table;
     table-layout: fixed;
+}
+
+.message-td {
+    width:700px;
 }
 
 .ellipsis-td {

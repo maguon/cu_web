@@ -1,12 +1,14 @@
 import React from 'react';
+import Select from 'react-select';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
-import {Tabs, Tab} from 'react-materialize';
+import {Input, Tabs, Tab} from 'react-materialize';
 import {UserManagerDetailActionType, CarQRCodeModalActionType} from '../../actionTypes';
-import {CarQRCodeModal} from '../modules/index'
+import {CarQRCodeModal, MessageInfoModal} from '../modules/index'
 
 const userManagerDetailAction = require('../../actions/main/UserManagerDetailAction');
 const carQRCodeModalAction = require('../../actions/modules/CarQRCodeModalAction');
+const messageDetailAction = require('../../actions/main/MessageDetailAction');
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
@@ -43,7 +45,12 @@ class UserManagerDetail extends React.Component {
             this.props.setTabId('message');
             // 默认第一页
             this.props.setMsgStartNumber(0);
-            this.props.getCheckCarList();
+            // 清空检索条件
+            this.props.changeMsgConditionType(null);
+            this.props.setMsgConditionStartDate('');
+            this.props.setMsgConditionEndDate('');
+            // 检索消息记录列表
+            this.props.getMessageList();
         } else if (event.target.text === '交易记录') {
             this.props.setTabId('transaction');
         } else if (event.target.text === '收货地址') {
@@ -51,9 +58,8 @@ class UserManagerDetail extends React.Component {
         }
     };
 
-
     /**
-     * 显示车辆二维码
+     * 绑定车辆TAB：显示车辆二维码
      */
     showCarQRCode = (event, carId, plateNum) => {
         this.props.setUserId(this.props.match.params.id);
@@ -63,29 +69,55 @@ class UserManagerDetail extends React.Component {
         $('#carQRCodeModal').modal('open');
     };
 
-
-
-
-
     /**
-     * 上一页
+     * 消息记录TAB：更新 检索条件：发送时间(始)
      */
-    msgPreBtn = () => {
-        this.props.setMsgStartNumber(this.props.userManagerDetailReducer.start - (this.props.userManagerDetailReducer.size - 1));
-        this.props.getCheckCarList();
+    changeMsgConditionStartDate = (event, value) => {
+        this.props.setMsgConditionStartDate(value);
     };
 
     /**
-     * 下一页
+     * 消息记录TAB：更新 检索条件：发送时间(始)
+     */
+    changeMsgConditionEndDate = (event, value) => {
+        this.props.setMsgConditionEndDate(value);
+    };
+
+    /**
+     * 消息记录TAB：查询消息记录列表
+     */
+    queryMessageList = () => {
+        // 默认第一页
+        this.props.setMsgStartNumber(0);
+        this.props.getMessageList();
+    };
+
+    /**
+     * 消息记录TAB：上一页
+     */
+    msgPreBtn = () => {
+        this.props.setMsgStartNumber(this.props.userManagerDetailReducer.msgStart - (this.props.userManagerDetailReducer.msgSize - 1));
+        this.props.getMessageList();
+    };
+
+    /**
+     * 消息记录TAB：下一页
      */
     msgNextBtn = () => {
-        this.props.setMsgStartNumber(this.props.userManagerDetailReducer.start + (this.props.userManagerDetailReducer.size - 1));
-        this.props.getCheckCarList();
+        this.props.setMsgStartNumber(this.props.userManagerDetailReducer.msgStart + (this.props.userManagerDetailReducer.msgSize - 1));
+        this.props.getMessageList();
+    };
+
+    /**
+     * 消息记录TAB：显示消息详细内容
+     */
+    showMessageModal = (messageId) => {
+        this.props.getMessageInfo(messageId);
+        $('#messageModal').modal('open');
     };
 
     render() {
-        const {userManagerDetailReducer} = this.props;
-
+        const {userManagerDetailReducer, changeMsgConditionType} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -158,11 +190,9 @@ class UserManagerDetail extends React.Component {
                                     </div>
                                 </div>}
                                 {userManagerDetailReducer.authStatus === sysConst.AUTH_STATUS[1].value && <div className="row divider margin-top20 margin-left10 margin-right10"/>}
-
                             </div>
                         </div>
                     </Tab>
-
 
                     <Tab title="绑定车辆" tabWidth={2} active={userManagerDetailReducer.tabId === "bindCar"}>
                         {userManagerDetailReducer.userCarArray.length === 0 &&
@@ -209,46 +239,60 @@ class UserManagerDetail extends React.Component {
                                             <div><a className="qr-link" onClick={() => {this.showCarQRCode(event, item.id, item.license_plate)}}>查看二维码</a></div>
                                         </div>
                                     </div>
-
                                 </div>
                             )
                         }, this)}
-
-
-
                     </Tab>
-
 
                     <Tab title="消息记录" tabWidth={2} active={userManagerDetailReducer.tabId === "message"}>
                         {/* 扫描记录：车辆信息 */}
                         <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
-                            <div className="row margin-left10 margin-right10 margin-top20">
-                                {/* 车辆信息：车辆编号 */}
-                                <div className="col s6">车辆编号：{this.props.match.params.id}</div>
-                                {/* 车辆信息：绑定状态 */}
-                                <div className="col s6 right-align">
+                            <div className="col s11 search-condition-box margin-top20">
+                                {/* 查询条件：消息类型 */}
+                                <div className="input-field col s4">
+                                    <Select
+                                        options={sysConst.MESSAGE_TYPE}
+                                        onChange={changeMsgConditionType}
+                                        value={userManagerDetailReducer.msgConditionType}
+                                        isSearchable={false}
+                                        placeholder={"请选择"}
+                                        styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
+                                        isClearable={true}
+                                    />
+                                    <label className="active">消息类型</label>
                                 </div>
 
-                                {/* 车辆信息：车牌号码 */}
-                                <div className="input-field col s6 fz20">
+                                {/* 查询条件：发送时间(始) */}
+                                <div className="input-field col s4 custom-input-field">
+                                    <Input s={12} label="发送时间(始)" type='date' options={sysConst.DATE_PICKER_OPTION}
+                                           value={userManagerDetailReducer.msgConditionStartDate} onChange={this.changeMsgConditionStartDate} />
+                                    <span className="mdi data-icon mdi-table-large"/>
                                 </div>
-                                {/* 车辆信息：扫描记录 */}
-                                <div className="input-field col s6 right-align grey-text">
-                                    {/*扫描记录： <span className="blue-font fz20">{formatUtil.formatNumber(userManagerDetailReducer.messageArray.length)}</span> 条*/}
+
+                                {/* 查询条件：发送时间(终) */}
+                                <div className="input-field col s4 custom-input-field">
+                                    <Input s={12} label="发送时间(终)" type='date' options={sysConst.DATE_PICKER_OPTION}
+                                           value={userManagerDetailReducer.msgConditionEndDate} onChange={this.changeMsgConditionEndDate} />
+                                    <span className="mdi data-icon mdi-table-large"/>
                                 </div>
+                            </div>
+                            {/* 查询按钮 */}
+                            <div className="col s1">
+                                <a className="btn-floating btn-large waves-light waves-effect btn margin-top20 query-btn" onClick={this.queryMessageList}>
+                                    <i className="mdi mdi-magnify"/>
+                                </a>
                             </div>
                         </div>
 
                         {/* 扫描记录：记录列表 */}
                         <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
-                            <table className="bordered">
+                            <table className="fixed-table bordered">
                                 <thead className="blue-grey lighten-5">
                                 <tr className="grey-text text-darken-2">
-                                    <th className="padding-left20">编号</th>
-                                    <th>地址</th>
-                                    <th>扫码交警</th>
-                                    <th className="center">扫码时间</th>
-                                    <th>状态</th>
+                                    <th className="padding-left20">消息类型</th>
+                                    <th className="message-td context-ellipsis">消息内容</th>
+                                    <th className="center">发送时间</th>
+                                    <th className="center">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -256,18 +300,19 @@ class UserManagerDetail extends React.Component {
                                     userManagerDetailReducer.messageArray.map(function (item) {
                                         return (
                                             <tr className="grey-text text-darken-1">
-                                                <td className="padding-left20">{item.id}</td>
-                                                <td>{item.address}</td>
-                                                <td>{item.supervise_name}</td>
+                                                <td className="padding-left20">{sysConst.MESSAGE_TYPE[item.type-1].label}</td>
+                                                <td className="message-td context-ellipsis">{item.content}</td>
                                                 <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
-                                                <td>{sysConst.CHECK_CAR_STATUS[item.status].label}</td>
+                                                <td className="operation center">
+                                                    <i className="mdi mdi-table-search cyan-text lighten-1 pointer" onClick={() => {this.showMessageModal(item.id)}}/>
+                                                </td>
                                             </tr>
                                         )
                                     },this)
                                 }
-                                { userManagerDetailReducer.messageArray.length === 0 &&
+                                {userManagerDetailReducer.messageArray.length === 0 &&
                                 <tr className="grey-text text-darken-1">
-                                    <td className="no-data-tr" colSpan="5">暂无数据</td>
+                                    <td className="no-data-tr" colSpan="4">暂无数据</td>
                                 </tr>}
                                 </tbody>
                             </table>
@@ -299,6 +344,7 @@ class UserManagerDetail extends React.Component {
                 </Tabs>
 
                 <CarQRCodeModal/>
+                <MessageInfoModal/>
             </div>
         )
     }
@@ -311,21 +357,21 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+    // 设定显示TAB
     setTabId: (tabId) => {
         dispatch(UserManagerDetailActionType.setTabId(tabId))
     },
+
+    // TAB1：基本信息
     getUserInfo: () => {
         dispatch(userManagerDetailAction.getUserInfo(ownProps.match.params.id))
     },
+
+    // TAB2：绑定车辆
     getUserCarList: () => {
         dispatch(userManagerDetailAction.getUserCarList(ownProps.match.params.id))
     },
-    getCheckCarList: () => {
-        dispatch(userManagerDetailAction.getCheckCarList(ownProps.match.params.id))
-    },
-    setMsgStartNumber: (start) => {
-        dispatch(UserManagerDetailActionType.setMsgStartNumber(start))
-    },
+    // TAB2：车辆二维码 Modal
     setUserId: (value) => {
         dispatch(CarQRCodeModalActionType.setUserId(value))
     },
@@ -338,6 +384,28 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     getQRCode: () => {
         dispatch(carQRCodeModalAction.getQRCode())
     },
+
+    // TAB3：消息记录
+    setMsgStartNumber: (start) => {
+        dispatch(UserManagerDetailActionType.setMsgStartNumber(start))
+    },
+    changeMsgConditionType: (type) => {
+        dispatch(UserManagerDetailActionType.setMsgConditionType(type))
+    },
+    setMsgConditionStartDate: (time) => {
+        dispatch(UserManagerDetailActionType.setMsgConditionStartDate(time))
+    },
+    setMsgConditionEndDate: (time) => {
+        dispatch(UserManagerDetailActionType.setMsgConditionEndDate(time))
+    },
+    getMessageList: () => {
+        dispatch(userManagerDetailAction.getMessageList(ownProps.match.params.id))
+    },
+    getMessageInfo: (messageId) => {
+        dispatch(messageDetailAction.getMessageInfo(messageId))
+    },
+
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserManagerDetail)
