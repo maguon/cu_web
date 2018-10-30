@@ -246,8 +246,11 @@ class UserManagerDetail extends React.Component {
 
                     <Tab title="消息记录" tabWidth={2} active={userManagerDetailReducer.tabId === "message"}>
                         {/* 扫描记录：车辆信息 */}
-                        <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
+                        <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50">
                             <div className="col s11 search-condition-box margin-top20">
+                                {/* 查询条件：消息编号 */}
+                                {/*<Input s={3} label="消息编号" value={userManagerDetailReducer.msgConditionNo} onChange={this.changeMsgConditionNo}/>*/}
+
                                 {/* 查询条件：消息类型 */}
                                 <div className="input-field col s4">
                                     <Select
@@ -289,7 +292,8 @@ class UserManagerDetail extends React.Component {
                             <table className="fixed-table bordered">
                                 <thead className="blue-grey lighten-5">
                                 <tr className="grey-text text-darken-2">
-                                    <th className="padding-left20">消息类型</th>
+                                    <th className="padding-left20">消息编号</th>
+                                    <th>消息类型</th>
                                     <th className="message-td context-ellipsis">消息内容</th>
                                     <th className="center">发送时间</th>
                                     <th className="center">操作</th>
@@ -300,7 +304,8 @@ class UserManagerDetail extends React.Component {
                                     userManagerDetailReducer.messageArray.map(function (item) {
                                         return (
                                             <tr className="grey-text text-darken-1">
-                                                <td className="padding-left20">{sysConst.MESSAGE_TYPE[item.type-1].label}</td>
+                                                <td className="padding-left20">{item.id}</td>
+                                                <td>{sysConst.MESSAGE_TYPE[item.type-1].label}</td>
                                                 <td className="message-td context-ellipsis">{item.content}</td>
                                                 <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
                                                 <td className="operation center">
@@ -312,7 +317,7 @@ class UserManagerDetail extends React.Component {
                                 }
                                 {userManagerDetailReducer.messageArray.length === 0 &&
                                 <tr className="grey-text text-darken-1">
-                                    <td className="no-data-tr" colSpan="4">暂无数据</td>
+                                    <td className="no-data-tr" colSpan="5">暂无数据</td>
                                 </tr>}
                                 </tbody>
                             </table>
@@ -389,6 +394,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setMsgStartNumber: (start) => {
         dispatch(UserManagerDetailActionType.setMsgStartNumber(start))
     },
+    // setMsgConditionNo: (msgNo) => {
+    //     dispatch(UserManagerDetailActionType.setMsgConditionNo(msgNo))
+    // },
     changeMsgConditionType: (type) => {
         dispatch(UserManagerDetailActionType.setMsgConditionType(type))
     },

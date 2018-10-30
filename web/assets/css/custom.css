@@ -252,6 +252,10 @@ body {
     margin-bottom: 0;
 }
 
+.margin-bottom10 {
+    margin-bottom: 10px;
+}
+
 .margin-left10 {
     margin-left: 10px;
 }
@@ -492,7 +496,7 @@ body {
 }
 
 .message-td {
-    width:700px;
+    width:650px;
 }
 
 .ellipsis-td {

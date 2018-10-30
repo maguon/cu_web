@@ -34,10 +34,11 @@ class MessageInfoModal extends React.Component {
                     <div className="modal-content white grey-text">
 
                         {/** 消息类型 */}
-                        <div className="row">
-                            <div className="col s12 blue-font fz16">{sysConst.MESSAGE_TYPE[messageDetailReducer.messageType-1].label}</div>
+                        <div className="row margin-top20 margin-bottom10">
+                            <div className="col s6 grey-text fz14">消息编号：{messageDetailReducer.messageId}</div>
+                            <div className="col s6 blue-font fz16 bold-font right-align">{sysConst.MESSAGE_TYPE[messageDetailReducer.messageType-1].label}</div>
                         </div>
-                        <div className="row divider margin-left10 margin-right10"/>
+                        <div className="row divider margin-left10 margin-right10 margin-bottom10"/>
 
                         {/** 消息时间 */}
                         <div className="row">
