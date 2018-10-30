@@ -13,6 +13,7 @@ import * as UserCarActionType from './main/UserCarActionType';
 import * as UserCarDetailActionType from './main/UserCarDetailActionType';
 import * as UserManagerActionType from './main/UserManagerActionType';
 import * as UserManagerDetailActionType from './main/UserManagerDetailActionType';
+import * as CarQRCodeModalActionType from './modules/CarQRCodeModalActionType';
 
 export {
     LoginActionType,
@@ -28,5 +29,6 @@ export {
     UserCarActionType,
     UserCarDetailActionType,
     UserManagerActionType,
-    UserManagerDetailActionType
+    UserManagerDetailActionType,
+    CarQRCodeModalActionType
 }

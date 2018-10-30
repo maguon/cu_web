@@ -363,6 +363,12 @@ body {
 #messageModal .modal-content {
     max-height: 500px;
 }
+
+#carQRCodeModal {
+    min-width: 500px;
+    max-height: 500px;
+}
+
 /** modal 样式定义部分 end */
 
 /** react-select 错误信息样式 */

@@ -2,10 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Tabs, Tab} from 'react-materialize';
-import {UserManagerDetailActionType} from '../../actionTypes';
+import {UserManagerDetailActionType, CarQRCodeModalActionType} from '../../actionTypes';
 import {CarQRCodeModal} from '../modules/index'
 
 const userManagerDetailAction = require('../../actions/main/UserManagerDetailAction');
+const carQRCodeModalAction = require('../../actions/modules/CarQRCodeModalAction');
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
@@ -55,8 +56,10 @@ class UserManagerDetail extends React.Component {
      * 显示车辆二维码
      */
     showCarQRCode = (event, carId, plateNum) => {
-        console.log('carId',carId);
-        console.log('plateNum',plateNum);
+        this.props.setUserId(this.props.match.params.id);
+        this.props.setCarNo(carId);
+        this.props.setPlateNum(plateNum);
+        this.props.getQRCode();
         $('#carQRCodeModal').modal('open');
     };
 
@@ -322,7 +325,19 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     setMsgStartNumber: (start) => {
         dispatch(UserManagerDetailActionType.setMsgStartNumber(start))
-    }
+    },
+    setUserId: (value) => {
+        dispatch(CarQRCodeModalActionType.setUserId(value))
+    },
+    setCarNo: (value) => {
+        dispatch(CarQRCodeModalActionType.setCarNo(value))
+    },
+    setPlateNum: (value) => {
+        dispatch(CarQRCodeModalActionType.setPlateNum(value))
+    },
+    getQRCode: () => {
+        dispatch(carQRCodeModalAction.getQRCode())
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserManagerDetail)
