@@ -24,17 +24,20 @@ class Header extends React.Component {
      */
     componentDidMount() {
         const {getUserDetail} = this.props;
-        let userId = localUtil.getLocalItem(sysConst.USER_ID);
+        const userId = localUtil.getLocalItem(sysConst.USER_ID);
+        const userType = localUtil.getLocalItem(sysConst.USER_TYPE);
         const token = localUtil.getLocalItem(sysConst.AUTH_TOKEN);
+        httpHeaders.set(sysConst.USER_ID, userId);
+        httpHeaders.set(sysConst.USER_TYPE, userType);
         httpHeaders.set(sysConst.AUTH_TOKEN, token);
-        $("#sideNav").sideNav({closeOnClick: true});
-        $('.collapsible').collapsible();
-        // $('select').formSelect();
-        if (userId == null || token == null) {
+        if (userId == null || userType == null || token == null) {
             window.location.href = '/login.html';
         } else {
             getUserDetail(userId);
         }
+        // $('select').formSelect();
+        $("#sideNav").sideNav({closeOnClick: true});
+        $('.collapsible').collapsible();
     }
 
     /**
