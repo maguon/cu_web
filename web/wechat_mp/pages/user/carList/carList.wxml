@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <block wx:for='{{carList}}' wx:key='u'>
+ <view class="divLine"></view>
     <view class='carbox'>
       <view class='left'>
         <image class='left-img' src='../../../assets/images/car.png'></image>
@@ -15,7 +16,6 @@
       </view> 
     </view>
     </view>
-     <view class="divLine"></view>
  </block>
 
 <view bindtap='carList' class='carList'>

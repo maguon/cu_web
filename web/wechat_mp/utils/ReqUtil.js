@@ -31,7 +31,7 @@ export const httpPost = (url, params,callback) => {
     }
   })
 }
-export const httpPut = (url, params) => {
+export const httpPut = (url, params, callback) => {
 
   wx.request({
     url: url,
@@ -40,6 +40,12 @@ export const httpPut = (url, params) => {
     },
     method: "PUT",
     data: params,
+    success: (res) => {
+      callback(null, res)
+    },
+    fail: (err) => {
+      callback(err, null)
+    }
   })
 }
 export const httpDel = (url) => {

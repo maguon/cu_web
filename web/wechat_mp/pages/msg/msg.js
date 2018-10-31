@@ -11,9 +11,16 @@ Page({
     var userId = app.globalData.userId;
 
     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/getMessage', (err, res) => {
+      if (res.data.result==''){
+        this.setData({
+          falg:true,
+        })
+        return;
+      }
       this.setData({
         msgList: res.data.result,
       })
+      console.log(res)
     })
   },
   //事件处理函数

@@ -11,7 +11,6 @@ Page({
     bindPhone:"请先绑定您的手机",
     userPhone:'',
     userCode:'',
-    trueCode:'',
 
     key:"获取验证码",
     gainFlag:false,
@@ -21,12 +20,13 @@ Page({
   },
 
 onLoad:function(e){
-  var bindPhone = wx.getStorageSync("bindPhone") ||'';
-  if (bindPhone!=''){
-   this.setData({
-   bindPhone: "当前绑定号码为" +bindPhone,
-   });
-}
+
+  if (app.globalData.userInfo.result[0].phone != '') {
+    this.setData({
+      bindPhone: "当前绑定号码为" +app.globalData.userInfo.result[0].phone,
+      hidden: true
+    })
+  }
 },
 /** 
  *  获取用户手机输入
@@ -62,22 +62,8 @@ gain:function(){
   var userid = app.globalData.userId;
  this.countDown(second);
 //请求验证码
-
-  //数据请求
-  // reqUtil.httpGet(config.host.apiHost + "/api/user/" + userid + '/phone/' + userPhone + "/userPhoneSms", (err, res) => {
-  //   this.setData({
-  //     //保存验证码
-  //     trueCode: res.data.result.code,
-  //   });
-  //   console.log(res.data)
-  // })
   var params='';
   reqUtil.httpPost(config.host.apiHost + "/api/user/" + userid + '/phone/' + userPhone + "/userPhoneSms", params, (err, res) => {
-    this.setData({
-      //保存验证码
-      trueCode: res.data.result.code,
-    });
-    console.log(res.data)
   })
 },
 
@@ -126,26 +112,29 @@ code:function(e){
  * 确认按钮
  */
  bindTap(e){ 
-   //判断用户输入
-    if (this.data.userCode.length!=4){
+   var userid = app.globalData.userId;
+   var userPhone=this.data.userPhone;
+   var userCode=this.data.userCode;
+   var params={
+     phone: userPhone,
+     signCode: userCode,
+     suthStatus:0
+   }
+    reqUtil.httpPut(config.host.apiHost + "/api/user/" + userid + '/userPhone', params,(err,res)=>{
+      if(res.data.success!=true){
       wx.showModal({
-        content: "您输入的验证码不正确",
+        title: '提示',
+        content: res.data.msg,
       })
       return;
-    }
-    //核对短信验证码与用户输入是否一致
-   var{userCode,trueCode}=this.data;
-   //不一致处理
-   if(userCode!=trueCode){
-     wx.showModal({
-       content: "您输入的验证码不正确",
-     })
-     return;
-   }
-   wx.setStorageSync('bindPhone', this.data.userPhone);
-   //一致后跳转界面
-    wx.reLaunch({
-      url: "/pages/user/user"
-    })
+      }else{
+        //一致后跳转界面
+        wx.reLaunch({
+          url: "/pages/user/user"
+        })
+      }
+ })
+ 
+  
   },
 })

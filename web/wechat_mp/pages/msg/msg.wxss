@@ -25,7 +25,7 @@
  flex-direction: column;
  align-items: center;
  justify-content: center;
- color: #696868;
+ color: #bebaba;
  border-top:1px solid #ebe9e9;
 }
 .title{

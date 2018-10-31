@@ -58,7 +58,7 @@ Page({
     }
     
     reqUtil.httpPut(
-      config.host.apiHost + '/api/user/' + userId, params);
+      config.host.apiHost + '/api/user/' + userId, params, (err, res)=>{});
 
     wx.reLaunch({
       url: "/pages/user/user"

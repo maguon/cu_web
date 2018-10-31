@@ -17,7 +17,7 @@ Page({
     userPhone:'',
     wechatName:'',
     avatarUrl:'',
-   
+    hidden:false,
   },
   //事件处理函数
   bindViewTap: function () {
@@ -35,11 +35,16 @@ Page({
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        userPhone:app.globalData.userInfo.result[0].phone,
         wechatName: app.globalData.userInfo.result[0].wechat_name,
         avatarUrl: app.globalData.userInfo.result[0].avatar_image,
         hasUserInfo: true
       })
+      if (app.globalData.userInfo.result[0].phone!=''){
+        this.setData({
+          userPhone: app.globalData.userInfo.result[0].phone,
+          hidden: true
+        })
+      }
       console.log('00000000000000000000000000000')
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -66,7 +71,7 @@ Page({
       console.log('222222222222222222222222222')
     }
 
-    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/msgStat', (err, res) => {
+    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/msgStat?userType='+1, (err, res) => {
       var count = String(res.data.result[0].count);
       //获得消息数量
       wx.setTabBarBadge({

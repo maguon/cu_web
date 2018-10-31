@@ -14,9 +14,10 @@ Page({
     wechatName:'',
     phoneNumber:'',
     hasUserInfo: false,
+    hidden:false,
     
     myCar:'未关联车辆',
-    nullPhone:'未绑定手机',
+    nullPhone:'',
     userSections: [{
       text: '个人资料',
       isunread: true,
@@ -47,12 +48,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
-    
-    //获取绑定手机
-    var bindPhone = wx.getStorageSync("bindPhone") || '未绑定手机';
-      this.setData({
-        nullPhone:bindPhone,
-      })
+
   },
 
   /**
@@ -75,13 +71,18 @@ Page({
         myCar: "相关车辆" + res.data.result.length + "台",
       })
     })
-
     this.setData({
       userInfo: app.globalData.userInfo,
       wechatName: app.globalData.userInfo.result[0].wechat_name,
       avatarUrl: app.globalData.userInfo.result[0].avatar_image,
       hasUserInfo: true,
     })
+    if (app.globalData.userInfo.result[0].phone != '') {
+      this.setData({
+        nullPhone: app.globalData.userInfo.result[0].phone,
+         hidden: true
+      })
+    }
   },
 
   /**

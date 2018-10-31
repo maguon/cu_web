@@ -26,10 +26,10 @@ onLoad: function (options) {
         key: 'ress',
         success: res => {
           for (var i = 0, len = addressList.length; i < len; ++i) {
-            addressList[i].checked = i == res.data;
+            addressList[i].status  = i == res.data;
           }
           if (addressList.length == 1) {
-            addressList[0].checked = 0 == res.data;
+            addressList[0].status  = 0 == res.data;
           }
           this.setData({
             addressList: addressList,
@@ -62,7 +62,7 @@ radioChange: function (e) {
     var addressList= this.data.addressList;
     console.log(addressList);
     for (var i = 0, len = addressList.length; i < len; ++i) {
-      addressList[i].checked = i== e.detail.value;
+      addressList[i].status = i== e.detail.value;
     }
     wx.setStorage({
       key: 'ress',

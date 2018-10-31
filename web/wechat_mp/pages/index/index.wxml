@@ -5,7 +5,7 @@
      <image bindtap="bindViewTap" class="userinfo-avatar" src="../../assets/images/player.png" mode="cover"></image>
      <button class='userinfo-nickname' size='mini' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
       <!-- <text class="userinfo-nickname">微信昵称</text> -->
-     <button class='userinfo-nickname' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button>
+     <button  class='userinfo-nickname' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button>
     </block>
 
       <block wx:else>
@@ -14,7 +14,8 @@
       <black class="phoneimg">
       <image class="phone" src="../../assets/images/phone.png"></image>
       <!-- <text class="userinfo-phone">{{userPhone}}</text> -->
-           <button class='userinfo-nickname' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button>
+           <button hidden='{{hidden}}' class='userinfo-nickname' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button>
+           <view hidden='{{!hidden}}' class='userinfo-phone' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">{{userPhone}}</view>
       </black>
     </block>
   </view>
