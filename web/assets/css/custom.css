@@ -512,4 +512,7 @@ body {
     color: #3370B2;
 }
 
+#map-container {
+    height: 280px;
+}
 

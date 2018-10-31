@@ -22,6 +22,27 @@ export const getCheckCarInfo = (id) => async (dispatch) => {
                 dispatch({type: CheckCarDetailActionType.setCarOwner, payload: res.result[0].user_name});
                 dispatch({type: CheckCarDetailActionType.setAddress, payload: res.result[0].address});
                 dispatch({type: CheckCarDetailActionType.setSuperviseName, payload: res.result[0].supervise_name});
+
+                let lon = res.result[0].lon;
+                let lat = res.result[0].lat;
+
+                if (lon === 0 && lat === 0) {
+                    // 如果没有经纬度，则默认显示大连
+                    new AMap.Map("map-container", {
+                        resizeEnable: true,
+                        center: [121.61476, 38.91369],
+                        zoom: 11
+                    });
+                } else {
+                    // 设置地图显示
+                    let map = new AMap.Map('map-container', {
+                        resizeEnable: true,
+                        zoom: 13,
+                        center: [lon, lat]
+                    });
+                    let marker = new AMap.Marker({position: [lon, lat]});
+                    map.add(marker);
+                }
             } else {
                 swal('未获取记录详情，请重新查询', res.msg, 'warning');
             }
