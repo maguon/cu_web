@@ -3,6 +3,9 @@ export const USER_TYPE = 'user-type';
 export const USER_STATUS = 'user-status';
 export const AUTH_TOKEN = 'auth-token';
 
+// 地图默认坐标：大连
+export const DEFAULT_LOCATION = [121.61476, 38.91369];
+
 // 性别
 export const GENDER = [
     {

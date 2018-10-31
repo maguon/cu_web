@@ -30,7 +30,7 @@ export const getCheckCarInfo = (id) => async (dispatch) => {
                     // 如果没有经纬度，则默认显示大连
                     new AMap.Map("map-container", {
                         resizeEnable: true,
-                        center: [121.61476, 38.91369],
+                        center: sysConst.DEFAULT_LOCATION,
                         zoom: 11
                     });
                 } else {
