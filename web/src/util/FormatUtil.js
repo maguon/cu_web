@@ -61,7 +61,7 @@ export const getDate = (date) => {
 export const formatNumber = (number, decimals) => {
     decimals = typeof decimals === 'undefined' ? 0 : decimals;
     // 保留指定小数点后位数，并分割数组
-    let x = number.toFixed(decimals).split('.');
+    let x = (number == null ? 0 : number).toFixed(decimals).split('.');
     let x1 = x[0];
     let x2 = x.length > 1 ? '.' + x[1] : '';
     let rgx = /(\d+)(\d{3})/;
@@ -73,8 +73,8 @@ export const formatNumber = (number, decimals) => {
 /**
  * 货币格式化。
  * @param amount 货币
- * @returns {string} 美元货币格式  例：FormatUtil.formatCurrency(123456.789) ==> $123,456.79
+ * @returns {string} 人民币货币格式  例：FormatUtil.formatCurrency(123456.789) ==> CN¥123,456.79
  */
 export const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(amount);
+    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'CNY',currencyDisplay: "symbol"}).format(amount);
 };
