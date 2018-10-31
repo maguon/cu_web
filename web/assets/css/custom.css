@@ -256,6 +256,10 @@ body {
     margin-bottom: 10px;
 }
 
+.margin-bottom20 {
+    margin-bottom: 20px;
+}
+
 .margin-left10 {
     margin-left: 10px;
 }
@@ -288,6 +292,10 @@ body {
     padding-left: 20px;
 }
 
+.padding-top20 {
+    padding-top: 20px;
+}
+
 .no-padding {
     padding: 0;
 }
@@ -299,17 +307,31 @@ body {
 .s-percent-10 {
     width:10%;
 }
+.s-percent-13 {
+    width:13%;
+}
 .s-percent-20 {
     width:20%;
 }
 .s-percent-46 {
     width:46%;
 }
+.s-percent-87{
+    width:87%;
+}
 .s-percent-90{
     width:90%;
 }
 .s-percent-96 {
     width:96%;
+}
+
+.img-size-100 {
+    height:100px;
+}
+
+.img-size-120 {
+    height:120px;
 }
 
 /** 一览画面 操作按钮部 样式 */
@@ -481,6 +503,14 @@ body {
     font-weight: bold;
 }
 
+.box-right-line {
+    border-right: 1px solid #D4D4D4;
+}
+
+.box-top-line {
+    border-top: 1px solid #D4D4D4;
+}
+
 /** 日期控件 图片 样式 */
 .data-icon{
     position: absolute;
@@ -496,7 +526,7 @@ body {
 }
 
 .message-td {
-    width:650px;
+    width:600px;
 }
 
 .ellipsis-td {

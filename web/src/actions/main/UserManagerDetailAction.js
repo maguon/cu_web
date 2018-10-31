@@ -98,3 +98,35 @@ export const getMessageList = (userId) => async (dispatch, getState) => {
         swal('操作失败', err.message, 'error');
     }
 };
+
+export const getTransactionList = (userId) => async (dispatch) => {
+    try {
+        // 基本检索URL
+        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+            + '/order?userId=' + userId;
+        const res = await httpUtil.httpGet(url);
+        if (res.success === true) {
+            dispatch({type: UserManagerDetailActionType.getTransactionList, payload: res.result});
+        } else if (res.success === false) {
+            swal('获取交易记录列表信息失败', res.msg, 'warning');
+        }
+    } catch (err) {
+        swal('操作失败', err.message, 'error');
+    }
+};
+
+export const getAddressList = (userId) => async (dispatch) => {
+    try {
+        // 基本检索URL
+        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+            + '/userShipAddress?userId=' + userId;
+        const res = await httpUtil.httpGet(url);
+        if (res.success === true) {
+            dispatch({type: UserManagerDetailActionType.getAddressList, payload: res.result});
+        } else if (res.success === false) {
+            swal('获取收货地址列表信息失败', res.msg, 'warning');
+        }
+    } catch (err) {
+        swal('操作失败', err.message, 'error');
+    }
+};
