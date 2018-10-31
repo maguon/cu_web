@@ -118,6 +118,12 @@ class MessageDetail extends React.Component {
                                 执行交警：{checkCarDetailReducer.superviseName}
                             </div>
                         </div>
+
+                        {/* 高德地图 */}
+                        <div className="row margin-left10 margin-right10">
+                            <div id="map-container" className="col s12 detail-box"/>
+                        </div>
+
                     </div>
                 </div>
             </div>

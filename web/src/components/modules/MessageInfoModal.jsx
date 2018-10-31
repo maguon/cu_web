@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 const formatUtil = require('../../util/FormatUtil');
+const sysConst = require('../../util/SysConst');
 
 class MessageInfoModal extends React.Component {
 
@@ -21,7 +22,6 @@ class MessageInfoModal extends React.Component {
 
     render() {
         const {messageDetailReducer, closeModal} = this.props;
-
         return (
             <div>
                 {/* 标题部分 */}
@@ -33,43 +33,22 @@ class MessageInfoModal extends React.Component {
                     {/** Modal主体 */}
                     <div className="modal-content white grey-text">
 
-                        {/** 消息编号 消息名称 */}
-                        <div className="row">
-                            <div className="col s12 fz14">消息编号：{messageDetailReducer.messageId}</div>
-                            <div className="col s12 center blue-font fz18">{messageDetailReducer.messageName}</div>
+                        {/** 消息类型 */}
+                        <div className="row margin-top20 margin-bottom10">
+                            <div className="col s6 grey-text fz14">消息编号：{messageDetailReducer.messageId}</div>
+                            <div className="col s6 blue-font fz16 bold-font right-align">{sysConst.MESSAGE_TYPE[messageDetailReducer.messageType-1].label}</div>
                         </div>
-                        <div className="row divider margin-left10 margin-right10"/>
+                        <div className="row divider margin-left10 margin-right10 margin-bottom10"/>
 
                         {/** 消息时间 */}
                         <div className="row">
-                            <div className="col s-percent-4"><i className="mdi mdi-car custom-indigo fz20"/></div>
-                            <div className="col s-percent-46 margin-top3 blue-font">{messageDetailReducer.plateNum}</div>
-                            <div className="col s6 right-align fz14">{formatUtil.getDateTime(messageDetailReducer.messageCreateOn)}</div>
+                            <div className="col s12 right-align fz14">{formatUtil.getDateTime(messageDetailReducer.messageCreateOn)}</div>
                         </div>
 
                         {/** 消息内容 */}
                         <div className="row">
                             <div className="col s-percent-4"><i className="mdi mdi-comment-processing-outline blue-text text-lighten-1 fz20"/></div>
                             <div className="col s-percent-96 word-wrap margin-top3">{messageDetailReducer.messageContent}</div>
-                        </div>
-                        <div className="row divider margin-left10 margin-right10"/>
-
-                        {/** 地址 */}
-                        <div className="row">
-                            <div className="col s-percent-4"><i className="mdi mdi-map-marker-outline orange-text text-lighten-1 fz20"/></div>
-                            <div className="col s-percent-96 word-wrap margin-top3">{messageDetailReducer.address}</div>
-                        </div>
-                        <div className="row divider margin-left10 margin-right10"/>
-
-                        {/** 图片显示 */}
-                        <div className="row">
-                            <div className="col s12">TODO IMG LIST</div>
-                        </div>
-                        <div className="row divider margin-left10 margin-right10"/>
-
-                        {/** 扫描交警 */}
-                        <div className="row">
-                            <div className="col s12 right-align blue-font">扫描交警：{messageDetailReducer.superviseName}</div>
                         </div>
                     </div>
 

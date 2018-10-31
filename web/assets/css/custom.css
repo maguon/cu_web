@@ -59,6 +59,7 @@ body {
     font-size: 15px;
 }
 
+/** 虚分割线 */
 .dotted-line {
     height: 1px;
     border-bottom: 1px dotted #ccc;
@@ -201,11 +202,20 @@ body {
 .fz15 {
     font-size: 15px;
 }
+.fz16 {
+    font-size: 16px;
+}
 .fz18 {
     font-size: 18px;
 }
 .fz20 {
     font-size: 20px;
+}
+.fz24 {
+    font-size: 24px;
+}
+.fz50 {
+    font-size: 50px;
 }
 
 .custom-input-field {
@@ -240,6 +250,10 @@ body {
 
 .margin-bottom0 {
     margin-bottom: 0;
+}
+
+.margin-bottom10 {
+    margin-bottom: 10px;
 }
 
 .margin-left10 {
@@ -351,11 +365,17 @@ body {
 }
 
 #messageModal {
-    max-height: 606px;
+    max-height: 450px;
 }
 #messageModal .modal-content {
     max-height: 500px;
 }
+
+#carQRCodeModal {
+    min-width: 500px;
+    max-height: 500px;
+}
+
 /** modal 样式定义部分 end */
 
 /** react-select 错误信息样式 */
@@ -475,6 +495,10 @@ body {
     table-layout: fixed;
 }
 
+.message-td {
+    width:650px;
+}
+
 .ellipsis-td {
     width:300px;
 }
@@ -483,4 +507,12 @@ body {
     cursor: pointer;
 }
 
+.qr-link {
+    cursor: pointer;
+    color: #3370B2;
+}
+
+#map-container {
+    height: 280px;
+}
 

@@ -272,8 +272,8 @@ const mapDispatchToProps = (dispatch) => ({
     setConditionBindUser: (user) => {
         dispatch(MessageActionType.setConditionBindUser(user))
     },
-    changeConditionMsgType: (vin) => {
-        dispatch(MessageActionType.setConditionMsgType(vin))
+    changeConditionMsgType: (type) => {
+        dispatch(MessageActionType.setConditionMsgType(type))
     },
     setConditionStartDate: (time) => {
         dispatch(MessageActionType.setConditionStartDate(time))
