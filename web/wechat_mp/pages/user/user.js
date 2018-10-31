@@ -67,6 +67,12 @@ Page({
       if (res.data.result == '') {
         return;
       }
+      if (res.data.result[0].phone != '') {
+        this.setData({
+          nullPhone: res.data.result[0].phone,
+          hidden: true
+        })
+      }
       this.setData({
         myCar: "相关车辆" + res.data.result.length + "台",
       })
@@ -77,12 +83,7 @@ Page({
       avatarUrl: app.globalData.userInfo.result[0].avatar_image,
       hasUserInfo: true,
     })
-    if (app.globalData.userInfo.result[0].phone != '') {
-      this.setData({
-        nullPhone: app.globalData.userInfo.result[0].phone,
-         hidden: true
-      })
-    }
+ 
   },
 
   /**

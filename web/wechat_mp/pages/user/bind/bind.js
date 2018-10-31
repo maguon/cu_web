@@ -20,13 +20,19 @@ Page({
   },
 
 onLoad:function(e){
+},
 
-  if (app.globalData.userInfo.result[0].phone != '') {
+
+onShow:function(){
+  var userId = app.globalData.userId;
+  reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userId, (err, res) => {
+  if(res.data.result[0].phone!=''){
     this.setData({
-      bindPhone: "当前绑定号码为" +app.globalData.userInfo.result[0].phone,
+      bindPhone: "当前绑定号码为" + res.data.result[0].phone,
       hidden: true
     })
-  }
+   }
+  })
 },
 /** 
  *  获取用户手机输入
