@@ -6,15 +6,17 @@
  </view>
 </block>
 <block wx:else>
+<block wx:for='{{msgList}}' wx:key='u'>
 <view class="weui-panel weui-panel_access">
   <view class="weui-panel__bd">
-    <view bindtap='bindMsg' class="weui-media-box weui-media-box_text">
+    <view bindtap='bindMsg' data-id="{{index}}" class="weui-media-box weui-media-box_text">
       <view class="weui-media-box__title weui-media-box__title_in-text">
        <image class='point' src='../../../assets/images/point.png'></image>违停消息
-      <view class='time'>2018-09-23 11:30:24</view>
+      <view class='time'>{{item.created_on}}</view>
       </view>
-      <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，有自己的运行轨道。由各种物质组成的巨型球状天体，有自己的运行轨道。由各种物质组成的巨型球状天体，有自己的运行轨道。</view>
+      <view class="weui-media-box__desc">{{item.content}}</view>
     </view>
   </view>
   </view>
+  </block>
 </block>

@@ -1,6 +1,6 @@
-
+var app = getApp();
 const config=require('../../../config.js');
-
+const reqUtil = require('../../../utils/ReqUtil.js')
 
 Page({
 
@@ -59,19 +59,26 @@ gain:function(){
   }
   //调用60秒验证码发送
  var second=60;
+  var userid = app.globalData.userId;
  this.countDown(second);
 //请求验证码
- wx.request({
-   url: config.host.apiHost+"/api/phone/"+userPhone+"/passwordSms",
-   method:"POST",
-   success:res=>{
-     this.setData({
-       //保存验证码
-       trueCode:res.data.result.code,
-     });
-     console.log(res.data)
-   }
- })
+
+  //数据请求
+  // reqUtil.httpGet(config.host.apiHost + "/api/user/" + userid + '/phone/' + userPhone + "/userPhoneSms", (err, res) => {
+  //   this.setData({
+  //     //保存验证码
+  //     trueCode: res.data.result.code,
+  //   });
+  //   console.log(res.data)
+  // })
+  var params='';
+  reqUtil.httpPost(config.host.apiHost + "/api/user/" + userid + '/phone/' + userPhone + "/userPhoneSms", params, (err, res) => {
+    this.setData({
+      //保存验证码
+      trueCode: res.data.result.code,
+    });
+    console.log(res.data)
+  })
 },
 
 /** 

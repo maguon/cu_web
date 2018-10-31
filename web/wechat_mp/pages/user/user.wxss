@@ -12,13 +12,14 @@ page{
 }
 
 .userinfo-avatar{
-  width: 80px;
-  height: 80px;
-  margin-left:0px;
+ width: 150rpx;
+  height: 150rpx;
+ margin-left: 20rpx;
+  border-radius: 50%;
 }
 .userinfo-nickname{
   color: #fff;
-  margin-left: 10px;
+  margin-left: 30px;
   font-size: 18px;
 }
 .userinfo-phone{
@@ -85,4 +86,10 @@ height: 5px;
   justify-content: flex-end;
   padding-right: 20px;
   color: #b8b6b6;  
+  }
+  .weui-footer{
+    position: fixed;
+    bottom: 15px;
+    right: 15%;
+    left: 15%
   }

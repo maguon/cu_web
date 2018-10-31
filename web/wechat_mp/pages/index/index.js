@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp();
 const config=require('../../config.js');
+const reqUtil = require('../../utils/ReqUtil.js')
 Page({
   data: {
     carList: [],
@@ -28,14 +29,7 @@ Page({
    * 加载界面处理
    */
   onLoad: function () {
-
-    //加载动画
-    setTimeout(() => {
-      this.setData({
-        loadingHidden: true,
-      })
-    }, 500);
-
+    var userId=app.globalData.userId;
     //获取信息
     console.log(app.globalData.userInfo)
     if (app.globalData.userInfo) {
@@ -46,6 +40,7 @@ Page({
         avatarUrl: app.globalData.userInfo.result[0].avatar_image,
         hasUserInfo: true
       })
+      console.log('00000000000000000000000000000')
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -55,6 +50,7 @@ Page({
           hasUserInfo: true
         })
       }
+      console.log('1111111111111111111111111111')
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
@@ -67,12 +63,16 @@ Page({
           })
         }
       })
+      console.log('222222222222222222222222222')
     }
-    
-    //获得消息数量
-    wx.setTabBarBadge({
-      index: 1,
-      text: '1',
+
+    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/msgStat', (err, res) => {
+      var count = String(res.data.result[0].count);
+      //获得消息数量
+      wx.setTabBarBadge({
+        index: 1,
+        text: count,
+      })
     })
   },
 
@@ -84,37 +84,37 @@ Page({
       })
     }, 500);
     var userId = app.globalData.userId;
-    wx.request({
-      url: config.host.apiHost + "/api/user/" + userId + "/userCar",
-      success: res => {
-        app.globalData.count = res.data.result.length;
-
-        if (res.data.result == '') {
-          return;
-        }
-        this.setData({
-          carList: res.data.result,
-          bindCar: true,
-        })
+    reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + "/userCar", (err, res) => {
+      if (res.data.result == '') {
+        return;
       }
+      this.setData({
+        carList: res.data.result,
+        bindCar: true,
+      })
     })
-    
   },
   //跳转详情界面
   bindCarDetail:function(e){
     var that = this
     //拿到点击的index下标
     var index = e.currentTarget.dataset.index;
+    var name=e.currentTarget.dataset.name;
     //将对象转为string
      var queryBean = JSON.stringify(that.data.carList[index]);
-    console.log(queryBean)
+    console.log(e)
     wx.navigateTo({
-      url: '/pages/index/detail/detail?queryBean='+queryBean
+      // url: '/pages/index/car-detail/car-detail?queryBean='+queryBean
+       url: '/pages/user/carList/editCar/editCar?queryBean=' + queryBean+"&name="+name
     })
   },
 
   getPhoneNumber:function(e){
-    console.log(e)
+   
+      console.log(e.detail.errMsg)
+      console.log(e.detail.iv)
+      console.log(e.detail.encryptedData)
+
   }
 })
 

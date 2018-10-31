@@ -14,13 +14,13 @@
          <view class='default'>
              <view hidden='{{!item.checked}}' class='default-item'>默认</view>
              <view hidden='{{item.checked}}' class='default-item-two'>设为默认</view>
-             <view class='default-redact'data-id="{{index}}" bindtap="editorAddress">修改</view>
+             <!-- <view class='default-redact'data-id="{{index}}" bindtap="editorAddress">修改</view> -->
              <view class="ui-list-item-del" data-id="{{index}}" bindtap="delAddress">删除</view>
          </view>
 
          <view class="ui-list-item-address">{{item.address}}
                <text decode="{{true}}" space="{{true}}">&nbsp;</text> {{item.ship_name}}
-               <text decode="{{true}}" space="{{true}}">&nbsp;</text> {{item.phone}}
+               <text decode="{{true}}" space="{{true}}">&nbsp;</text> {{item.ship_phone}}
           </view>
      </view>
     </view>

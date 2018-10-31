@@ -1,5 +1,6 @@
 const app = getApp();
 const config = require('../../../config.js');
+const reqUtil = require('../../../utils/ReqUtil.js')
 Page({
   // 页面的初始数据
   data: {
@@ -8,70 +9,49 @@ Page({
   
    //生命周期函数--监听页面加载
 onLoad: function (options) {
-  var userId = app.globalData.userId;
 
-   wx.request({
-     url: config.host.apiHost + '/api/user/' + userId +"/userShipAddress",
-     header: {
-       'Content-Type': 'application/json'
-     },
-     method: "GET",
-     success: res => {
-       this.setData({
-         addressList : res.data.result,
-       }) 
-       var addressList = this.data.addressList;
-       wx.getStorage({
-         key: 'ress',
-         success: res => {
-           for (var i = 0, len = addressList.length; i < len; ++i) {
-             addressList[i].checked = i == res.data;
-           }
-           this.setData({
-             addressList: addressList,
-           });
-         },
-       })
-     }
-   })
   },
 
   
   //生命周期函数--监听页面显示
   onShow: function () {
+
+    var userId = app.globalData.userId;
+    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/userShipAddress", (err, res) => {
+      this.setData({
+        addressList: res.data.result,
+      })
+      var addressList = this.data.addressList;
+      wx.getStorage({
+        key: 'ress',
+        success: res => {
+          for (var i = 0, len = addressList.length; i < len; ++i) {
+            addressList[i].checked = i == res.data;
+          }
+          if (addressList.length == 1) {
+            addressList[0].checked = 0 == res.data;
+          }
+          this.setData({
+            addressList: addressList,
+          });
+        },
+      })
+    })
   },
   
   addAddress: function () {
     wx.navigateTo({ url: '../address/address' });
   },
 
-//编辑item
-editorAddress:function(e){
-  var that = this
-  //拿到点击的index下标
-  var index = e.currentTarget.dataset.id;
-  //将对象转为string
-  var queryBean = JSON.stringify(that.data.addressList[index]);
-  wx.navigateTo({
-    url: '/pages/index/address/address?queryBean=' + queryBean
-  })
-  },
 
   // 删除item 
 delAddress: function (e) {
-    this.data.addressList.splice(e.target.id.substring(3), 1);
-    // 更新data数据对象  
-    if (this.data.addressList.length > 0) {
-      this.setData({
-        addressList: this.data.addressList
-      })
-      wx.setStorageSync('addressList', this.data.addressList);
-    } else {
-      this.setData({
-        addressList: this.data.addressList
-      })
-      wx.setStorageSync('addressList', []);
-    }
+  var index = e.currentTarget.dataset.id;
+  var userId = app.globalData.userId;
+  var addressList = this.data.addressList[index];
+
+  reqUtil.httpDel(config.host.apiHost + '/api/user/' + userId + "/shipAddress/" + addressList.id);
+    this.onShow();
   },
 
 

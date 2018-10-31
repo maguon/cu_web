@@ -6,7 +6,7 @@
     "pages/index/print/print",
     "pages/index/address/address",
     "pages/index/submit/submit",
-    "pages/index/detail/detail",
+    "pages/index/car-detail/car-detail",
     "pages/index/product-dt/product-dt",
     
     "pages/msg/msg",
@@ -15,9 +15,9 @@
     "pages/user/user",
     "pages/user/userMsg/userMsg",
     "pages/user/bind/bind",
-    "pages/user/relevance/relevance",
-    "pages/user/relevance/addCar/addCar",
-    "pages/user/relevance/editCar/editCar",
+    "pages/user/carList/carList",
+    "pages/user/carList/addCar/addCar",
+    "pages/user/carList/editCar/editCar",
 
     "pages/logs/logs"
   ],

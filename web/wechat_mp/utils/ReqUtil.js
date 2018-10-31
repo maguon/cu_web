@@ -1,3 +1,5 @@
+const config = require('../config.js')
+
 export const httpGet = (url,callback) => {
   wx.request({
     url: url,
@@ -13,31 +15,39 @@ export const httpGet = (url,callback) => {
     }
   })
 }
-export const httpPost = (url, params) => {
-  //console.log(httpHeaders.headers);
-  return fetch('http://' + url, {
-    method: 'POST',
-    body: JSON.stringify(params)
-  }).then((response) => {
-    let json = response.json()
-    return json;
+export const httpPost = (url, params,callback) => {
+  wx.request({
+    url: url,
+    header: {
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    data:params,
+    success: (res) => {
+      callback(null, res)
+    },
+    fail: (err) => {
+      callback(err, null)
+    }
   })
 }
 export const httpPut = (url, params) => {
-  //console.log(httpHeaders.headers);
-  return fetch('http://' + url, {
-    method: 'PUT',
-    body: JSON.stringify(params)
-  }).then((response) => {
-    let json = response.json()
-    return json;
+
+  wx.request({
+    url: url,
+    header: {
+      'Content-Type': 'application/json'
+    },
+    method: "PUT",
+    data: params,
   })
 }
 export const httpDel = (url) => {
-  return fetch('http://' + url, {
-    method: 'DELETE'
-  }).then((response) => {
-    let json = response.json()
-    return json
+  wx.request({
+    url: url,
+    header: {
+      'Content-Type': 'application/json'
+    },
+    method: "DELETE",
   })
 }

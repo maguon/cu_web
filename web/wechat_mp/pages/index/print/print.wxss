@@ -73,7 +73,7 @@ font-size: 15px;
   margin-left: 15px;
 }
 .input{
-  height: 90px;
+  height: 40px;
   width: 100%;
   margin-top: 5px;
   display: flex;
@@ -122,11 +122,13 @@ font-size: 15px;
   .section{
   color: #b3b0b0;
   font-size: 15px;
-  height: 80px;
+  height: 40px;
   width: 85%;
   margin-left: 15px;
   padding-top: 10px;
-
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  white-space:nowrap;  
   }
   .site{
   height: 15px;
@@ -135,7 +137,7 @@ font-size: 15px;
   right: 10px;
   }
  .address{
-  height: 90px;
+  height: 40px;
   width: 15%;
   display: flex;
   justify-content: center;

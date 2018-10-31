@@ -41,7 +41,7 @@
         </text>
       </view>
 
-      <view bindtap='bindCarDetail' data-index='{{index}}' class='right'>
+      <view bindtap='bindCarDetail' data-index='{{index}}' class='right'data-name='header'>
         <view class='center'>
          <image class='center-img' src='../../assets/images/code.png'></image>
         </view>

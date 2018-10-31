@@ -1,4 +1,5 @@
-var addressList=null;
+
+const reqUtil = require('../../../utils/ReqUtil.js')
 const app = getApp();
 const config = require('../../../config.js');
 var ressId='';
@@ -16,17 +17,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log(options)
-    if (options!="") {
-    var that = this
-    var queryBean = JSON.parse(options.queryBean);
-    that.setData({
-      userId: app.globalData.userId,
-      queryBean: queryBean,
-      add: "确定修改",
-    })
-    }
+  onLoad: function (e) {
   },
 
  
@@ -52,40 +43,15 @@ Page({
    }else{
      flag=false;
      var that=this;
-     if (that.data.queryBean != '') {
-     wx.request({
-       url: config.host.apiHost + '/api/user/' + userId +"/userShipAddress",
-       header: {
-         'Content-Type': 'application/json'
-       },
-       method: "POST",
-       data: {
-         userName: consignee,
-         phone: mobile,
-         address: address,
-       },
-       success: res => {
-         ressId = res.data.id;
-       }
-     });  
-     }else{
-       var userId=this.data.userId;
-       var id=this.data.id;
-       wx.request({
-         url: config.host.apiHost + '/api/user/' + userId + '/shipAddress/' + id + '/info',
-         header: {
-           'Content-Type': 'application/json'
-         },
-         method: "PUT",
-         data: {
-           userName: consignee,
-           phone: mobile,
-           address: address,
-         },
-       })
+     var params={
+       userName: consignee,
+       phone: mobile,
+       address: address
      }
+     reqUtil.httpPost(config.host.apiHost + '/api/user/' + userId + "/userShipAddress", params, (err, res)=>{
 
-
+     }
+     )
      wx.navigateBack({
        url: "/pages/index/addressList/addressList"
      })

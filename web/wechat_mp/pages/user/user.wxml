@@ -83,5 +83,11 @@
       </view>
        <view class="access"></view>
       </navigator>
-  </view>
+      
+       <view class="weui-footer">
+            <view class="weui-footer__text">Copyright © 2018</view>
+             <view class="weui-footer__text">洺源信息技术（大连）有限公司 保留所有权利</view>
+          </view>
+      
+   </view>
 </view>

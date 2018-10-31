@@ -6,7 +6,7 @@
           <text class='left-text'>{{item.license_plate}}
             <text  class='left-car'>编号：{{item.id}}</text></text>
       </view>
-      <view class='right' bindtap='bindCarDetail' data-index='{{index}}'>
+      <view class='right' bindtap='bindCarDetail' data-index='{{index}}'data-name='headers'>
       <view class='center'>
         <image class='center-img' src='../../../assets/images/code.png'></image>
       </view>
@@ -18,9 +18,9 @@
      <view class="divLine"></view>
  </block>
 
-<view bindtap='relevance' class='relevance'>
-<image class='relevance-img' src='../../../assets/images/add-car.png'></image>
-<text class='relevance-text'>关联车辆</text>
+<view bindtap='carList' class='carList'>
+<image class='carList-img' src='../../../assets/images/add-car.png'></image>
+<text class='carList-text'>关联车辆</text>
 </view>
 
 

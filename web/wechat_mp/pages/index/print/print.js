@@ -1,5 +1,6 @@
 const app = getApp();
 const config = require('../../../config.js');
+const reqUtil = require('../../../utils/ReqUtil.js')
 Page({
 
   /**
@@ -18,14 +19,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-   
-    // let data=wx.getStorageSync('addressList');
-
-    // console.log(data);
-    // this.setData({
-    //   addressList:data,
-    // })
   },
 
   /**
@@ -41,68 +34,26 @@ Page({
   onShow: function () {
     var len = 0;
     var userId = app.globalData.userId;
-    wx.request({
-      url: config.host.apiHost + '/api/user/' + userId + "/userShipAddress",
-      header: {
-        'Content-Type': 'application/json'
-      },
-      method: "GET",
-      success: res => {
-        var addressList = res.data.result;
-        wx.getStorage({
-          key: 'ress',
-          success: res => {
-            if (res.data == '') {
-              this.setData({
-                addressList: addressList[res.data],
-                hidden:false,
-              })
-              return;
-            }
+    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/userShipAddress", (err, res) => {
+      var addressList = res.data.result;
+      wx.getStorage({
+        key: 'ress',
+        success: res => {
+          if (res.data == '') {
             this.setData({
               addressList: addressList[res.data],
-              hidden: true,
+              hidden: false,
             })
-            
-          },
-        })
-      }
+            return;
+          }
+          this.setData({
+            addressList: addressList[res.data],
+            hidden: true,
+          })
+
+        },
+      })
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   },
 
   /* 点击减号 */

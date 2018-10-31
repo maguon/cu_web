@@ -1,6 +1,8 @@
 // pages/user/user.js
-var app = getApp()
- const index = require('../index/index.js')
+var app = getApp();
+const index = require('../index/index.js');
+const config = require('../../config.js');
+const reqUtil = require('../../utils/ReqUtil.js');
 Page({
 
   /**
@@ -26,7 +28,7 @@ Page({
         url: "/pages/user/bind/bind"
       }, {
         text: '关联车辆',
-        url: "/pages/user/relevance/relevance"
+        url: "/pages/user/carList/carList"
       },{
         text: '我的订单',
         url: ""
@@ -45,14 +47,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
-    this.setData({ 
-      userInfo: app.globalData.userInfo,
-      wechatName: app.globalData.userInfo.result[0].wechat_name,
-      avatarUrl: app.globalData.userInfo.result[0].avatar_image,
-      myCar: "相关车辆" + app.globalData.count + "台",
-      hasUserInfo: true,
-       })
-  
+    
     //获取绑定手机
     var bindPhone = wx.getStorageSync("bindPhone") || '未绑定手机';
       this.setData({
@@ -71,7 +66,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var userId = app.globalData.userId;
+    reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + "/userCar", (err, res) => {
+      if (res.data.result == '') {
+        return;
+      }
+      this.setData({
+        myCar: "相关车辆" + res.data.result.length + "台",
+      })
+    })
 
+    this.setData({
+      userInfo: app.globalData.userInfo,
+      wechatName: app.globalData.userInfo.result[0].wechat_name,
+      avatarUrl: app.globalData.userInfo.result[0].avatar_image,
+      hasUserInfo: true,
+    })
   },
 
   /**

@@ -1,4 +1,5 @@
-
+const config = require('../../config.js');
+const reqUtil = require('../../utils/ReqUtil.js')
 //获取应用实例
 const app = getApp()
 Page({
@@ -14,8 +15,10 @@ Page({
    //取出userid
     wx.getStorage({
       key: 'userId',
-      success: function (res) {
-        app.globalData.userId = res.data;
+      success: res=> {
+        app.globalData.userId = res.data.userid;
+        app.globalData.accessToken = res.data.accessToken;
+        console.log(res)
       },
     })
     
@@ -45,32 +48,29 @@ Page({
       //用户按了允许授权按钮
       var that = this;
       //插入登录的用户的相关信息到数据库
-      wx.request({
-        url: "http://stg.myxxjs.com:9201" + "/api" + "/userLogin",
-        method: "POST",
-        data: {
-          wechatId: app.globalData.openid,
-          wechatName: e.detail.userInfo.nickName,
-          gender:e.detail.userInfo.gender,
-          avatarImage: e.detail.userInfo.avatarUrl,
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          //userid保存到缓存
-          wx.setStorage({
-            key: 'userId',
-            data: res.data.result.userId,
-          })
-          app.globalData.userId = res.data.result.userId;
-          //从数据库获取用户信息
-          that.queryUsreInfo();
-          console.log(res.data.result.userId);
-          console.log("插入小程序登录用户信息成功！");
-        }
-      });
-      console.log(getApp().globalData.openid+"---openid")
+      var params={
+        wechatId: app.globalData.openid,
+        wechatName: e.detail.userInfo.nickName,
+        gender: e.detail.userInfo.gender,
+        avatarImage: e.detail.userInfo.avatarUrl,
+      }
+      reqUtil.httpPost(config.host.apiHost + "/api" + "/userLogin", params, (err, res) => {
+        console.log(res)
+        //userid保存到缓存
+        wx.setStorage({
+          key: 'userId',
+          data: {
+            userid: res.data.result.userId,
+            accessToken: res.data.result.accessToken,
+          }
+
+        })
+        app.globalData.userId = res.data.result.userId;
+        //从数据库获取用户信息
+        that.queryUsreInfo();
+        console.log(res.data.result.userId);
+        console.log("插入小程序登录用户信息成功！");
+      })
       //授权成功后，跳转进入小程序首页
       wx.switchTab({
         url: '/pages/index/index'
@@ -90,28 +90,15 @@ Page({
       })
     }
 
-    wx.getSetting({
-      success:res=>{
-        console.log(res.authSetting)
-      }
-    })
-  },
-  //获取用户信息接口
-  queryUsreInfo: function () {
-    wx.request({
-      url: "http://stg.myxxjs.com:9201" + "/api/user",
-      data: {
-        userId: app.globalData.userId,
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        // console.log(res.data);
-        getApp().globalData.userInfo = res.data;
-      }
-    });
   },
 
+
+  //获取用户信息接口
+  queryUsreInfo: function () {
+    var userId=app.globalData.userId;
+    reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userId, (err, res) => {
+      getApp().globalData.userInfo = res.data;
+    })
+  },
 })
 

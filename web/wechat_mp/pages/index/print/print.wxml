@@ -39,7 +39,7 @@
   <view class='mail'>收货地址</view>
   <block wx:if="{{!flag}}">
   <view class='input'>
-  <view hidden='{{!hidden}}' class="section">{{addressList.address+"  "+addressList.ship_name+"  "+addressList.phone}}</view>
+  <view hidden='{{!hidden}}' class="section">{{addressList.address+"  "+addressList.ship_name+"  "+addressList.ship_phone}}</view>
   <view hidden='{{hidden}}' class="section">请选择您的收货地址</view>
     <view bindtap='addRess' class='address'>
   <image class='site' src='../../../assets/images/arrow.png'></image>

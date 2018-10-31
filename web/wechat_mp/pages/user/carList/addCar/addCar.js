@@ -1,6 +1,7 @@
 var app = getApp();
-var carId = '';
+// var carId = '';
 const config = require('../../../../config.js');
+const reqUtil = require('../../../../utils/ReqUtil.js')
 Page({
 
   /**
@@ -44,21 +45,16 @@ Page({
           vin: vin,
         }]
       });  
-      wx.request({
-        url: config.host.apiHost + '/api/user/' + userId +'/userCar',
-        header: {
-          'Content-Type': 'application/json'
-        },
-        method:"POST",
-        data:{
-          vin:vin,
-          engineNum:carNumber,
-          licensePlate:header
-        },
-        success:res=>{
-          carId=res.data.id;
-        }
-      })
+     var params={
+        vin: vin,
+        engineNum: carNumber,
+        licensePlate: header
+      }
+      reqUtil.httpPost(
+        config.host.apiHost + '/api/user/' + userId + '/userCar', params,
+         (err, res) => {
+          //  carId = res.data.id;
+        })
        }
     
     //弹出提示框
@@ -69,13 +65,11 @@ Page({
       })
       return;
     }
+    var name="headers";
      var queryBean = JSON.stringify(that.data.carMsg[0]);
       wx.navigateTo({
-        url: "/pages/user/relevance/editCar/editCar?queryBean=" + queryBean,
-      })
-      
-     app.globalData.count++;
-    
+        url: "/pages/user/carList/editCar/editCar?queryBean=" + queryBean+'&name='+name,
+      })   
   },
 
 })
