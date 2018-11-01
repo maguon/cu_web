@@ -54,10 +54,10 @@ class MessageDetail extends React.Component {
                 <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                     <div className="row detail-box-header vc-center">
                         {/* 记录详情：编号 */}
-                        <div className="col s6">编号：{this.props.match.params.id}</div>
+                        <div className="col s6 no-padding">编号：{this.props.match.params.id}</div>
 
                         {/* 记录详情：扫描时间 状态 */}
-                        <div className="col s6 right-align">
+                        <div className="col s6 no-padding right-align">
                             <span className="grey-text">扫描时间：{formatUtil.getDateTime(checkCarDetailReducer.createOn)}</span>
                             <span className="margin-left50">{sysConst.CHECK_CAR_STATUS[checkCarDetailReducer.status].label}</span>
                         </div>
