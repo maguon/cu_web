@@ -18,3 +18,6 @@ export const setMsgConditionEndDate = createAction('SET_MSG_CONDITION_END_DATE')
 export const getMessageList = createAction('GET_CHECK_CAR_LIST');
 export const setMsgStartNumber = createAction('SET_MSG_START_NUMBER');
 export const setMsgDataSize = createAction('SET_MSG_DATA_SIZE');
+
+export const getTransactionList = createAction('GET_TRANSACTION_LIST');
+export const getAddressList = createAction('GET_ADDRESS_LIST');
