@@ -118,7 +118,7 @@ class TrafficPoliceDetail extends React.Component {
                         </div>
                     </div>
                     <div className="col s2">
-                        <img className="margin-top10 margin-left30" src={avatarUrl}/>
+                        <img className="margin-top10 margin-left30 img-size-120" src={avatarUrl}/>
                     </div>
                     <div className="row margin-right20">
                         <div className="input-field col s12 right-align">
