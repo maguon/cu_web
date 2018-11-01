@@ -27,23 +27,26 @@ const initialState = {
     // 绑定车辆TAB：列表
     userCarArray: [],
 
-
     // 消息记录TAB： 检索条件：消息类型
     msgConditionType: null,
     // 消息记录TAB： 检索条件：发送时间(始)
     msgConditionStartDate: '',
     // 消息记录TAB： 检索条件：发送时间(终)
     msgConditionEndDate: '',
-
     // 消息记录TAB：开始位置
     msgStart: 0,
     // 消息记录TAB：每页数量
     msgSize: 9,
     // 消息记录TAB：检索结果数量
     msgDataSize: 0,
-
     // 消息记录TAB：列表
     messageArray: [],
+
+    // 交易记录TAB：列表
+    transactionArray: [],
+
+    // 收货地址TAB：列表
+    addressArray: []
 };
 
 export default handleActions({
@@ -108,15 +111,12 @@ export default handleActions({
         }
     },
 
-
-
     [UserManagerDetailActionType.getUserCarList]: (state, action) => {
         return {
             ...state,
             userCarArray: action.payload
         }
     },
-
 
     [UserManagerDetailActionType.setMsgConditionType]: (state, action) => {
         return {
@@ -136,15 +136,6 @@ export default handleActions({
             msgConditionEndDate: action.payload
         }
     },
-
-
-
-
-
-
-
-
-
     [UserManagerDetailActionType.setMsgStartNumber]: (state, action) => {
         return {
             ...state,
@@ -163,4 +154,18 @@ export default handleActions({
             messageArray: action.payload
         }
     },
+
+    [UserManagerDetailActionType.getTransactionList]: (state, action) => {
+        return {
+            ...state,
+            transactionArray: action.payload
+        }
+    },
+
+    [UserManagerDetailActionType.getAddressList]: (state, action) => {
+        return {
+            ...state,
+            addressArray: action.payload
+        }
+    }
 }, initialState)

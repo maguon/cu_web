@@ -53,8 +53,10 @@ class UserManagerDetail extends React.Component {
             this.props.getMessageList();
         } else if (event.target.text === '交易记录') {
             this.props.setTabId('transaction');
+            this.props.getTransactionList();
         } else if (event.target.text === '收货地址') {
             this.props.setTabId('address');
+            this.props.getAddressList();
         }
     };
 
@@ -196,7 +198,7 @@ class UserManagerDetail extends React.Component {
 
                     <Tab title="绑定车辆" tabWidth={2} active={userManagerDetailReducer.tabId === "bindCar"}>
                         {userManagerDetailReducer.userCarArray.length === 0 &&
-                        <div className="row center grey-text margin-top40">
+                        <div className="row center grey-text margin-top40 fz18">
                             该用户暂未绑定车辆
                         </div>}
                         {userManagerDetailReducer.userCarArray.map(function (item) {
@@ -343,11 +345,22 @@ class UserManagerDetail extends React.Component {
                     </Tab>
 
                     <Tab title="收货地址" tabWidth={3} active={userManagerDetailReducer.tabId === "address"}>
-                        收货地址
+                        {userManagerDetailReducer.addressArray.length === 0 &&
+                        <div className="row center grey-text margin-top40 fz18">
+                            该用户暂未添加收货地址
+                        </div>}
+                        {userManagerDetailReducer.addressArray.map(function (item) {
+                            return (
+                                <div className="row z-depth-1 detail-box margin-top20 margin-left50 margin-right50">
+                                    <div className="col s11 margin-top20 margin-bottom20 padding-left30">{item.address} {item.ship_name} {item.ship_phone}</div>
+                                    <div className="col s1 margin-top20 margin-bottom20 center orange-text text-darken-1">
+                                        {item.status === 1 && '默认'}
+                                    </div>
+                                </div>
+                            )
+                        }, this)}
                     </Tab>
-
                 </Tabs>
-
                 <CarQRCodeModal/>
                 <MessageInfoModal/>
             </div>
@@ -413,7 +426,15 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(messageDetailAction.getMessageInfo(messageId))
     },
 
+    // TAB4：交易记录
+    getTransactionList: () => {
+        dispatch(userManagerDetailAction.getTransactionList(ownProps.match.params.id))
+    },
 
+    // TAB5：收货地址
+    getAddressList: () => {
+        dispatch(userManagerDetailAction.getAddressList(ownProps.match.params.id))
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserManagerDetail)
