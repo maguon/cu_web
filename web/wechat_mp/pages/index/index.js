@@ -17,7 +17,8 @@ Page({
     userPhone:'',
     wechatName:'',
     avatarUrl:'',
-    hidden:false,
+    hidden: false,
+   
   },
   //事件处理函数
   bindViewTap: function () {
@@ -39,8 +40,6 @@ Page({
         avatarUrl: app.globalData.userInfo.result[0].avatar_image,
         hasUserInfo: true
       })
-     
-      console.log('00000000000000000000000000000')
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -50,7 +49,6 @@ Page({
           hasUserInfo: true
         })
       }
-      console.log('1111111111111111111111111111')
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
@@ -63,7 +61,6 @@ Page({
           })
         }
       })
-      console.log('222222222222222222222222222')
     }
 
     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/msgStat?userType='+1, (err, res) => {

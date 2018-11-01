@@ -21,21 +21,21 @@ onLoad: function (options) {
       this.setData({
         addressList: res.data.result,
       })
-      var addressList = this.data.addressList;
-      wx.getStorage({
-        key: 'ress',
-        success: res => {
-          for (var i = 0, len = addressList.length; i < len; ++i) {
-            addressList[i].status  = i == res.data;
-          }
-          if (addressList.length == 1) {
-            addressList[0].status  = 0 == res.data;
-          }
-          this.setData({
-            addressList: addressList,
-          });
-        },
-      })
+      // var addressList = this.data.addressList;
+      // wx.getStorage({
+      //   key: 'ress',
+      //   success: res => {
+      //     for (var i = 0, len = addressList.length; i < len; ++i) {
+      //       addressList[i].status  = i == res.data;
+      //     }
+      //     if (addressList.length == 1) {
+      //       addressList[0].status  = 0 == res.data;
+      //     }
+      //     this.setData({
+      //       addressList: addressList,
+      //     });
+      //   },
+      // })
     })
   },
   
@@ -58,17 +58,20 @@ delAddress: function (e) {
   //单项选择控制
 radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
-     
+ 
     var addressList= this.data.addressList;
     console.log(addressList);
     for (var i = 0, len = addressList.length; i < len; ++i) {
       addressList[i].status = i== e.detail.value;
     }
-    wx.setStorage({
-      key: 'ress',
-      data: e.detail.value,
-    });
-  
+ 
+  var params = {
+    status: true
+  }
+  var userId = app.globalData.userId;
+  var shipAddressId=addressList[e.detail.value].id;
+  reqUtil.httpPut(config.host.apiHost + "/api/user/" + userId + '/shipAddress/' + shipAddressId+'/default', params, (err, res) => {})
+
     this.setData({
       addressList: addressList,
     });
