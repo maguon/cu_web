@@ -11,16 +11,9 @@ Page({
   },
   
   onLoad: function () {
+    app.userInfoReadyCallback = res => {
+      if (res != '') {
     var that = this;
-   //取出userid
-    wx.getStorage({
-      key: 'userId',
-      success: res=> {
-        app.globalData.userId = res.data.userid;
-        app.globalData.accessToken = res.data.accessToken;
-        console.log(res)
-      },
-    })
     
     // 查看是否授权
     wx.getSetting({
@@ -30,18 +23,34 @@ Page({
             loadingHidden: true,
           })
           wx.getUserInfo({
-            success: function (res) {
-              //从数据库获取用户信息
-               that.queryUsreInfo();
-              //用户已经授权过
-              wx.switchTab({
-                url: '/pages/index/index',
+            success: res=> {
+
+              var params = {
+                wechatId: app.globalData.openid,
+                wechatName:res.userInfo.nickName,
+                gender: res.userInfo.gender,
+                avatarImage: res.userInfo.avatarUrl,
+              }
+
+              reqUtil.httpPost(config.host.apiHost + "/api" + "/userLogin", params, (err, res) => {
+                //userid保存到全局
+                app.globalData.userId=res.data.result.userId;
+                app.globalData.accessToken=res.data.result.accessToken;
+                //从数据库获取用户信息
+                that.queryUsreInfo();
+                //用户已经授权过
+                wx.switchTab({
+                  url: '/pages/index/index',
+                })
               })
+              
             }
           });
         }
       }
     })
+   }
+  }
   },
   bindGetUserInfo: function (e) {
     if (e.detail.userInfo) {
@@ -55,17 +64,9 @@ Page({
         avatarImage: e.detail.userInfo.avatarUrl,
       }
       reqUtil.httpPost(config.host.apiHost + "/api" + "/userLogin", params, (err, res) => {
-        console.log(res)
-        //userid保存到缓存
-        wx.setStorage({
-          key: 'userId',
-          data: {
-            userid: res.data.result.userId,
-            accessToken: res.data.result.accessToken,
-          }
 
-        })
         app.globalData.userId = res.data.result.userId;
+        app.globalData.accessToken = res.data.result.accessToken;
         //从数据库获取用户信息
         that.queryUsreInfo();
         console.log(res.data.result.userId);
@@ -89,7 +90,6 @@ Page({
         }
       })
     }
-
   },
 
 
