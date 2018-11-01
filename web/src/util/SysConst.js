@@ -110,6 +110,30 @@ export const WE_CHAT_STATUS = [
     }
 ];
 
+// 支付状态
+export const PAYMENT_STATUS = [
+    {
+        value: 0,
+        label: "未支付"
+    },
+    {
+        value: 1,
+        label: "已支付"
+    }
+];
+
+// 货物发送状态
+export const SEND_STATUS = [
+    {
+        value: 0,
+        label: "未发货"
+    },
+    {
+        value: 1,
+        label: "已发货"
+    }
+];
+
 export const DATE_PICKER_OPTION = {
     // selectMonths: true,
     // selectYears: 15,
