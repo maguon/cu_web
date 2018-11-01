@@ -200,7 +200,7 @@ body {
     font-size: 14px;
 }
 .fz15 {
-    font-size: 15px;
+    font-size: 15px !important;
 }
 .fz16 {
     font-size: 16px;
@@ -276,8 +276,8 @@ body {
     margin-left: 50px !important;
 }
 
-.margin-right50 {
-    margin-right: 50px !important;
+.margin-right0 {
+    margin-right: 0 !important;
 }
 
 .margin-right10 {
@@ -286,6 +286,10 @@ body {
 
 .margin-right20 {
     margin-right: 20px !important;
+}
+
+.margin-right50 {
+    margin-right: 50px !important;
 }
 
 .padding-left20 {
@@ -297,7 +301,7 @@ body {
 }
 
 .padding-top20 {
-    padding-top: 20px;
+    padding-top: 20px !important;
 }
 
 .no-padding {
@@ -437,6 +441,10 @@ body {
     background-color: #0F4F94 !important;
 }
 
+.custom-grey {
+    background-color: #EDEFF6 !important;
+}
+
 .custom-indigo {
     color: #9DB8D2;
 }
@@ -479,15 +487,22 @@ body {
     background-color: #fea353;
 }
 
-.custom-btn {
+.custom-btn,.custom-detail-btn{
     padding:3px 10px 3px 20px;
     background: #E3E8ED;
     border:1px solid #dadfe4;
     height: 70%;
     cursor: pointer;
+}
+
+.custom-detail-btn {
+    border-radius: 20px;
+}
+
+.custom-btn {
     border-radius: 40px;
 }
-.custom-btn i {
+.custom-btn i{
     margin-left: 5px;
 }
 
@@ -500,8 +515,8 @@ body {
     height: 52px;
     background-color: #EDEFF6;
     padding-top: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     border-bottom:1px solid #D4D4D4;
     color: #0F4F94;
     font-weight: bold;
