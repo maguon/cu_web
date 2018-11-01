@@ -35,24 +35,15 @@ Page({
     var len = 0;
     var userId = app.globalData.userId;
     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/userShipAddress", (err, res) => {
-      var addressList = res.data.result;
-      wx.getStorage({
-        key: 'ress',
-        success: res => {
-          if (res.data == '') {
-            this.setData({
-              addressList: addressList[res.data],
-              hidden: false,
-            })
-            return;
-          }
+  
+      for(var i=0;i<=res.data.result.length;i++){
+        if (res.data.result[i].status==1){
           this.setData({
-            addressList: addressList[res.data],
+            addressList: res.data.result[i],
             hidden: true,
           })
-
-        },
-      })
+        }
+      }
     })
   },
 
