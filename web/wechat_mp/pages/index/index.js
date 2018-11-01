@@ -39,12 +39,7 @@ Page({
         avatarUrl: app.globalData.userInfo.result[0].avatar_image,
         hasUserInfo: true
       })
-      if (app.globalData.userInfo.result[0].phone!=''){
-        this.setData({
-          userPhone: app.globalData.userInfo.result[0].phone,
-          hidden: true
-        })
-      }
+     
       console.log('00000000000000000000000000000')
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -88,6 +83,12 @@ Page({
         loadingHidden: true,
       })
     }, 500);
+    if (app.globalData.userInfo.result[0].phone != '') {
+      this.setData({
+        userPhone: app.globalData.userInfo.result[0].phone,
+        hidden: true
+      })
+    }
     var userId = app.globalData.userId;
     reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + "/userCar", (err, res) => {
       if (res.data.result == '') {
