@@ -41,6 +41,7 @@ class UserAddressDetail extends React.Component {
                 </div>
 
                 {/* 主体部分：地址详情 */}
+                {userAddressDetailReducer.addressInfo.length > 0 &&
                 <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                     <div className="row detail-box-header vc-center">
                         {/* 地址详情：地址编号 */}
@@ -48,7 +49,7 @@ class UserAddressDetail extends React.Component {
 
                         {/* 地址详情：最后修改时间 */}
                         <div className="col s6 right-align no-padding">
-                            <span className="grey-text">最后修改时间：{formatUtil.getDateTime(userAddressDetailReducer.lastModifyTime)}</span>
+                            <span className="grey-text">最后修改时间：{formatUtil.getDateTime(userAddressDetailReducer.addressInfo[0].updated_on)}</span>
                         </div>
                     </div>
 
@@ -58,8 +59,8 @@ class UserAddressDetail extends React.Component {
                         <div className="row">
                             <div className="col s12 blue-font">
                                 <i className="mdi mdi-account-outline fz20"/>
-                                <span className="margin-left20">{userAddressDetailReducer.weChatName}</span>
-                                <span className="grey-text margin-left10">({userAddressDetailReducer.bindPhone})</span>
+                                <span className="margin-left20">{userAddressDetailReducer.addressInfo[0].wechat_name}</span>
+                                <span className="grey-text margin-left10">({userAddressDetailReducer.addressInfo[0].phone})</span>
                             </div>
                         </div>
 
@@ -67,17 +68,17 @@ class UserAddressDetail extends React.Component {
                             {/* 地址 */}
                             <div className="col s8">
                                 <i className="mdi mdi-map-marker-outline orange-text text-lighten-1 fz20"/>
-                                <span className="margin-left20">{userAddressDetailReducer.address}</span>
+                                <span className="margin-left20">{userAddressDetailReducer.addressInfo[0].address}</span>
                             </div>
 
                             {/* 收货人 收货人电话 */}
                             <div className="col s4 right-align">
-                                收货人：{userAddressDetailReducer.shipName}<span className="margin-left10">{userAddressDetailReducer.shipPhone}</span>
+                                收货人：{userAddressDetailReducer.addressInfo[0].ship_name}<span className="margin-left10">{userAddressDetailReducer.addressInfo[0].ship_phone}</span>
                             </div>
                         </div>
 
                     </div>
-                </div>
+                </div>}
             </div>
         )
     }
