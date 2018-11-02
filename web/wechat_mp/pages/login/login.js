@@ -80,10 +80,10 @@ Page({
         console.log(res.data.result.userId);
         console.log("插入小程序登录用户信息成功！");
       })
-      //授权成功后，跳转进入小程序首页
-      wx.switchTab({
-        url: '/pages/index/index'
-      })
+      // //授权成功后，跳转进入小程序首页
+      // wx.switchTab({
+      //   url: '/pages/index/index'
+      // })
     } else {
       //用户按了拒绝按钮
       wx.showModal({
