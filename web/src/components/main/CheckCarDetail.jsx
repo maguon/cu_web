@@ -34,7 +34,6 @@ class MessageDetail extends React.Component {
 
     render() {
         const {checkCarDetailReducer} = this.props;
-
         return (
             <div>
                 {/* 标题部分 */}
@@ -51,6 +50,7 @@ class MessageDetail extends React.Component {
                 </div>
 
                 {/* 主体部分 */}
+                {checkCarDetailReducer.checkCarInfo.length > 0 &&
                 <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                     <div className="row detail-box-header vc-center">
                         {/* 记录详情：编号 */}
@@ -58,8 +58,8 @@ class MessageDetail extends React.Component {
 
                         {/* 记录详情：扫描时间 状态 */}
                         <div className="col s6 no-padding right-align">
-                            <span className="grey-text">扫描时间：{formatUtil.getDateTime(checkCarDetailReducer.createOn)}</span>
-                            <span className="margin-left50">{sysConst.CHECK_CAR_STATUS[checkCarDetailReducer.status].label}</span>
+                            <span className="grey-text">扫描时间：{formatUtil.getDateTime(checkCarDetailReducer.checkCarInfo[0].created_on)}</span>
+                            <span className="margin-left50">{sysConst.CHECK_CAR_STATUS[checkCarDetailReducer.checkCarInfo[0].status].label}</span>
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@ class MessageDetail extends React.Component {
                         <div className="row">
                             {/* 车辆信息：车牌号码 */}
                             <div className="input-field col s6 fz20">
-                                <i className="mdi mdi-car fz20 margin-right20"/>{checkCarDetailReducer.plateNum}
+                                <i className="mdi mdi-car fz20 margin-right20"/>{checkCarDetailReducer.checkCarInfo[0].license_plate}
                             </div>
                             {/* 车辆信息：显示/隐藏 按钮 */}
                             <div className="input-field col s6 right-align">
@@ -84,10 +84,10 @@ class MessageDetail extends React.Component {
                         <div className="row margin-left10 margin-right10 detail-box grey-text">
                             <div className="row">
                                 <div className="input-field col s6">
-                                    车辆识别码：{checkCarDetailReducer.vin}
+                                    车辆识别码：{checkCarDetailReducer.checkCarInfo[0].vin}
                                 </div>
                                 <div className="input-field col s6 right-align">
-                                    发动机号码：{checkCarDetailReducer.engineNum}
+                                    发动机号码：{checkCarDetailReducer.checkCarInfo[0].engine_num}
                                 </div>
                             </div>
 
@@ -95,10 +95,10 @@ class MessageDetail extends React.Component {
 
                             <div className="row">
                                 <div className="input-field col s6">
-                                    联系电话：{checkCarDetailReducer.phone}
+                                    联系电话：{checkCarDetailReducer.checkCarInfo[0].phone}
                                 </div>
                                 <div className="input-field col s6 right-align">
-                                    车主：{checkCarDetailReducer.carOwner}
+                                    车主：{checkCarDetailReducer.checkCarInfo[0].user_name}
                                 </div>
                             </div>
                         </div>}
@@ -107,7 +107,7 @@ class MessageDetail extends React.Component {
                         {/* 记录详情：地址 */}
                         <div className="row">
                             <div className="input-field col s12">
-                                <i className="mdi mdi-map-marker-outline fz20 margin-right20"/>{checkCarDetailReducer.address}
+                                <i className="mdi mdi-map-marker-outline fz20 margin-right20"/>{checkCarDetailReducer.checkCarInfo[0].address}
                             </div>
                         </div>
                         <div className="row divider margin-top20 margin-left10 margin-right10"/>
@@ -115,7 +115,7 @@ class MessageDetail extends React.Component {
                         {/* 记录详情：执行交警 */}
                         <div className="row margin-left10 margin-right10">
                             <div className="col s12 right-align">
-                                执行交警：{checkCarDetailReducer.superviseName}
+                                执行交警：{checkCarDetailReducer.checkCarInfo[0].supervise_name}
                             </div>
                         </div>
 
@@ -125,7 +125,7 @@ class MessageDetail extends React.Component {
                         </div>
 
                     </div>
-                </div>
+                </div>}
             </div>
         )
     }
