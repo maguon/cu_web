@@ -18,20 +18,20 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (e) {
     //加载动画
     setTimeout(() => {
       this.setData({
         loadingHidden: true,
       })
     }, 500);
-    console.log(options)
     var that = this
-    var queryBean = JSON.parse(options.queryBean);
+    var queryBean = JSON.parse(e.queryBean);
     that.setData({
       queryBean: queryBean,
-      name:options.name
+      name:e.name
     })
+
   },
 
   print: function () {

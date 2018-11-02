@@ -64,7 +64,7 @@ Page({
         content: warn,
       })
       return;
-    }
+    } 
     var name="headers";
      var queryBean = JSON.stringify(that.data.carMsg[0]);
       wx.navigateTo({
