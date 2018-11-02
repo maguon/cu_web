@@ -24,9 +24,7 @@ Page({
       success: function (res) {
         //判断是否授权
         if (res.authSetting['scope.userInfo']) {
-          that.setData({
-            loadingHidden: true,
-          })
+        
           //获取用户信息
           wx.getUserInfo({
             success: res=> {
@@ -44,10 +42,10 @@ Page({
                 app.globalData.accessToken=res.data.result.accessToken;
                 //从数据库获取用户信息
                 that.queryUsreInfo();
-                //用户已经授权过
-                wx.switchTab({
-                  url: '/pages/index/index',
+                that.setData({
+                  loadingHidden: true,
                 })
+                
               })
               
             }
@@ -109,7 +107,11 @@ Page({
   queryUsreInfo: function () {
     var userId=app.globalData.userId;
     reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userId, (err, res) => {
-      getApp().globalData.userInfo = res.data;
+      app.globalData.userInfo = res.data;
+      //用户已经授权过
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
     })
   },
 })

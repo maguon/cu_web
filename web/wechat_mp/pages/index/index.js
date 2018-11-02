@@ -29,8 +29,21 @@ Page({
   /**
    * 加载界面处理
    */
-  onLoad: function () {
-    var userId=app.globalData.userId;
+  onLoad: function () { 
+  },
+
+/**
+ * 生命周期函数--监听页面初次渲染完成
+ */
+  onShow: function () {
+    //加载动画
+    setTimeout(() => {
+      this.setData({
+        loadingHidden: true,
+      })
+    }, 500);
+
+    var userId = app.globalData.userId;
     //获取信息
     console.log(app.globalData.userInfo)
     if (app.globalData.userInfo) {
@@ -49,11 +62,12 @@ Page({
           hasUserInfo: true
         })
       }
+      console.log(app.globalData.userInfo)
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          app.globalData.userInfo = res.userInfo 
+          app.globalData.userInfo = res.userInfo
           //保存信息
           this.setData({
             userInfo: res.userInfo,
@@ -61,9 +75,10 @@ Page({
           })
         }
       })
+
     }
-   //发送get请求
-    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/msgStat?userType='+1, (err, res) => {
+    //发送get请求
+    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/msgStat?userType=' + 1, (err, res) => {
       var count = String(res.data.result[0].count);
       //获得消息数量
       wx.setTabBarBadge({
@@ -71,18 +86,7 @@ Page({
         text: count,
       })
     })
-  },
 
-/**
- * 生命周期函数--监听页面初次渲染完成
- */
-  onShow: function () {
-    //加载动画
-    setTimeout(() => {
-      this.setData({
-        loadingHidden: true,
-      })
-    }, 500);
     //判断是否绑定手机
     if (app.globalData.userInfo.result[0].phone != '') {
       this.setData({
