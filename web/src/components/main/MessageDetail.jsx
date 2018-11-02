@@ -42,6 +42,7 @@ class MessageDetail extends React.Component {
                 </div>
 
                 {/* 主体部分：消息信息 */}
+                {messageDetailReducer.messageInfo.length > 0 &&
                 <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                     <div className="row detail-box-header vc-center">
                         {/* 消息信息：消息编号 */}
@@ -49,7 +50,7 @@ class MessageDetail extends React.Component {
 
                         {/* 消息信息：发送时间 */}
                         <div className="col s6 no-padding right-align">
-                            <span className="grey-text">发送时间：{formatUtil.getDateTime(messageDetailReducer.messageCreateOn)}</span>
+                            <span className="grey-text">发送时间：{formatUtil.getDateTime(messageDetailReducer.messageInfo[0].created_on)}</span>
                         </div>
                     </div>
 
@@ -62,11 +63,11 @@ class MessageDetail extends React.Component {
                                     <i className="mdi mdi-comment-processing-outline blue-text text-lighten-1 fz20"/>
                                 </div>
                                 <div className="col s8 right-align margin-top3 no-padding blue-font">
-                                    【{sysConst.MESSAGE_TYPE[messageDetailReducer.messageType-1].label}】
+                                    【{sysConst.MESSAGE_TYPE[messageDetailReducer.messageInfo[0].type-1].label}】
                                 </div>
                             </div>
                             {/** 消息内容 */}
-                            <div className="col s-percent-90 word-wrap margin-top3">{messageDetailReducer.messageContent}</div>
+                            <div className="col s-percent-90 word-wrap margin-top3">{messageDetailReducer.messageInfo[0].content}</div>
                         </div>
 
                         <div className="row divider margin-left10 margin-right10"/>
@@ -76,17 +77,17 @@ class MessageDetail extends React.Component {
                             {/* 用户 */}
                             <div className="col s10 right-align">
                                 <i className="mdi mdi-account-outline blue-font fz20"/>
-                                <span className="margin-left20">{messageDetailReducer.bindUser}</span>
+                                <span className="margin-left20">{messageDetailReducer.messageInfo[0].user_name}</span>
                             </div>
 
                             {/* 电话 */}
                             <div className="col s2 right-align">
                                 <i className="mdi mdi-cellphone blue-font fz20"/>
-                                <span className="margin-left20">{messageDetailReducer.phone}</span>
+                                <span className="margin-left20">{messageDetailReducer.messageInfo[0].phone}</span>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>}
             </div>
         )
     }

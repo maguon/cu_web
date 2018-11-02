@@ -2,20 +2,8 @@ import {handleActions} from 'redux-actions';
 import {UserCarDetailActionType} from '../../actionTypes';
 
 const initialState = {
-    // 车辆信息：绑定时间
-    createdOn: '',
-    // 车辆信息：绑定状态
-    status: 0,
-    // 车辆信息：车牌号码
-    plateNum: '',
-    // 车辆信息：联系电话
-    phone: '',
-    // 车辆信息：绑定用户
-    bindUser: '',
-    // 车辆信息：车辆识别码
-    vin: '',
-    // 车辆信息：发动机号码
-    engineNum: '',
+    // 绑定车辆管理 - 车辆信息
+    userCarInfo: [],
 
     // 扫描记录列表
     checkCarArray: [],
@@ -28,46 +16,10 @@ const initialState = {
 };
 
 export default handleActions({
-    [UserCarDetailActionType.setCreatedOn]: (state, action) => {
+    [UserCarDetailActionType.getUserCarInfo]: (state, action) => {
         return {
             ...state,
-            createdOn: action.payload
-        }
-    },
-    [UserCarDetailActionType.setStatus]: (state, action) => {
-        return {
-            ...state,
-            status: action.payload
-        }
-    },
-    [UserCarDetailActionType.setPlateNum]: (state, action) => {
-        return {
-            ...state,
-            plateNum: action.payload
-        }
-    },
-    [UserCarDetailActionType.setPhone]: (state, action) => {
-        return {
-            ...state,
-            phone: action.payload
-        }
-    },
-    [UserCarDetailActionType.setBindUser]: (state, action) => {
-        return {
-            ...state,
-            bindUser: action.payload
-        }
-    },
-    [UserCarDetailActionType.setVin]: (state, action) => {
-        return {
-            ...state,
-            vin: action.payload
-        }
-    },
-    [UserCarDetailActionType.setEngineNum]: (state, action) => {
-        return {
-            ...state,
-            engineNum: action.payload
+            userCarInfo: action.payload
         }
     },
     [UserCarDetailActionType.getCheckCarList]: (state, action) => {
