@@ -73,7 +73,7 @@ class UserCarDetail extends React.Component {
                     <div className="col s12">
                         <ul className="tabs">
                             <li className="tab col s6"><a className="active" href="#tab-base">基本信息</a></li>
-                            <li className="tab col s6"><a href="#tab-scan" onClick={this.onClickScanTab}>Test 2</a></li>
+                            <li className="tab col s6"><a href="#tab-scan" onClick={this.onClickScanTab}>扫描记录</a></li>
                         </ul>
                     </div>
 
