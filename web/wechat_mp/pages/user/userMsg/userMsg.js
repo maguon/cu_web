@@ -24,6 +24,11 @@ Page({
 
    reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userid, (err, res) => {
      console.log(res)
+     //UTC时间的转译
+     var date = new Date(res.data.result[0].auth_time);
+     var localeString = date.toLocaleString();
+     res.data.result[0].auth_time = localeString;
+
      that.setData({
        determineTime: "认证时间:" + res.data.result[0].auth_time,
        name: res.data.result[0].user_name,

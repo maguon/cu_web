@@ -9,12 +9,16 @@
 <block wx:for='{{msgList}}' wx:key='u'>
 <view class="weui-panel weui-panel_access" >
   <view class="weui-panel__bd">
-    <view bindtap='bindMsg' style='color:{{item.color}}' data-id="{{index}}" class="weui-media-box weui-media-box_text">
+    <view bindtap='bindMsg' data-id="{{index}}" class="weui-media-box weui-media-box_text">
       
-      <view class="weui-media-box__title weui-media-box__title_in-text">
- <view class='point'></view>违停消息
+  <view  hidden='{{item.status}}' class="weui-media-box__title weui-media-box__title_in-text">
+       <view class='point'></view>违停消息
       <view class='time'>{{item.created_on}}</view>
-      </view>
+  </view>
+  <view  hidden='{{!item.status}}' class="media bottom">
+  违停消息
+      <view class='time-one'>{{item.created_on}}</view>
+  </view>
       <view class="weui-media-box__desc">{{item.content}}</view>
     </view>
   </view>

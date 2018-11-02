@@ -5,12 +5,19 @@
 }
 
 .point{
-   height: 8px;
+  height: 8px;
   width: 8px;
   background: red;
   border-radius: 50%;
   margin-top: 8px;
-  margin-right: 10px;
+  margin-right: 5px;
+
+}
+.point-two{
+  height: 8px;
+  width: 8px;
+  margin-top: 8px;
+  margin-right: 5px;
 
 }
 .time{
@@ -21,7 +28,6 @@
 
 .weui-panel{
   margin-top: -1px;
-  /* color: #999999; */
 } 
 
 .none-msg{
@@ -41,3 +47,31 @@ font-size: 20px;
 font-size: 15px;
 margin-top: 10px;
 }
+.weui-media-box__desc{
+  margin-left: 15px;
+}
+.media{
+  color: #999999;
+  font-weight: 400;
+  font-size: 17px;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+  margin-left: 15px;
+}
+.bottom{
+margin-bottom: 8px;
+  }
+.time-one{
+  width: 80%;
+  text-align: right;
+  font-size: 12px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  }
