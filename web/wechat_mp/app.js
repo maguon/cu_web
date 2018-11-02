@@ -2,6 +2,7 @@ const reqUtil = require('utils/ReqUtil.js')
 const config = require('config.js');
 //app.js
 App({
+
   globalData: {
     userInfo: null,
     openid:'',

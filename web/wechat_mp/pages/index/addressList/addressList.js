@@ -21,21 +21,6 @@ onLoad: function (options) {
       this.setData({
         addressList: res.data.result,
       })
-      // var addressList = this.data.addressList;
-      // wx.getStorage({
-      //   key: 'ress',
-      //   success: res => {
-      //     for (var i = 0, len = addressList.length; i < len; ++i) {
-      //       addressList[i].status  = i == res.data;
-      //     }
-      //     if (addressList.length == 1) {
-      //       addressList[0].status  = 0 == res.data;
-      //     }
-      //     this.setData({
-      //       addressList: addressList,
-      //     });
-      //   },
-      // })
     })
   },
   

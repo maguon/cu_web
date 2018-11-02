@@ -36,7 +36,7 @@ Page({
     var userId = app.globalData.userId;
     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/userShipAddress", (err, res) => {
   
-      for(var i=0;i<=res.data.result.length;i++){
+      for(var i=0;i<res.data.result.length;i++){
         if (res.data.result[i].status==1){
           this.setData({
             addressList: res.data.result[i],
