@@ -2,7 +2,6 @@ const app = getApp();
 const config = require('../../../config.js');
 const reqUtil = require('../../../utils/ReqUtil.js')
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -20,22 +19,15 @@ Page({
    */
   onLoad: function (options) {
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     var len = 0;
     var userId = app.globalData.userId;
+    //发送get请求
     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/userShipAddress", (err, res) => {
-  
+     //遍历列表并设置默认
       for(var i=0;i<res.data.result.length;i++){
         if (res.data.result[i].status==1){
           this.setData({
@@ -47,7 +39,9 @@ Page({
     })
   },
 
-  /* 点击减号 */
+  /**
+   *  点击减号 
+   */
   bindMinus: function () {
     var num = this.data.num;
     // 如果大于1时，才可以减  
@@ -64,7 +58,10 @@ Page({
       minusStatus: minusStatus
     });
   },
-  /* 点击加号 */
+
+  /**
+  *点击加号
+   */
   bindPlus: function () {
     var num = this.data.num;
     // 不作过多考虑自增1  
@@ -86,9 +83,13 @@ Page({
       minusStatus: minusStatus
     });
   },
-  /* 输入框事件 */
+
+  /**
+  *输入框事件
+   */
   bindManual: function (e) {
     var num = e.detail.value;
+    //添加提示
     if (num >= 10) {
       num = 10;
       wx.showModal({
@@ -96,9 +97,7 @@ Page({
         content: "最多可打印数量为10个",
       })
     }
-   
     var price = num * 5;
-  
     // 将数值与状态写回  
     this.setData({
       num: num,
@@ -106,7 +105,9 @@ Page({
     });
   },
 
-
+/**
+ * 跳转
+ */
   bindButtonTap:function(){
     wx.navigateTo({
       url: '/pages/index/submit/submit'

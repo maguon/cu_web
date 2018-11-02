@@ -16,19 +16,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
-   
   },
+
+   /**
+   * 生命周期函数--监听页面显示
+   */
  onShow:function(){
    var userid = app.globalData.userId;
    var that=this;
-
+  //发送请求
    reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userid, (err, res) => {
      console.log(res)
      //UTC时间的转译
      var date = new Date(res.data.result[0].auth_time);
      var localeString = date.toLocaleString();
      res.data.result[0].auth_time = localeString;
-
+     //保存
      that.setData({
        determineTime: "认证时间:" + res.data.result[0].auth_time,
        name: res.data.result[0].user_name,
@@ -38,6 +41,7 @@ Page({
 
    })
  },
+ //判断用户输入
   listenerReciverInput(e) {
     this.setData({
       name: e.detail.value,
@@ -53,18 +57,21 @@ Page({
       index: e.detail.value
     })
   },
+  /**
+   * 点击确定
+   */
   bindBntTap: function (e) {
     var userId = app.globalData.userId;
-
+    //设置参数
     var params = {
       userName: this.data.name,
       gender: this.data.index,
       birth: this.data.date,
     }
-    
+    //发送请求
     reqUtil.httpPut(
       config.host.apiHost + '/api/user/' + userId, params, (err, res)=>{});
-
+    //跳转页面
     wx.reLaunch({
       url: "/pages/user/user"
     })

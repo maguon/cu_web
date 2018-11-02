@@ -62,7 +62,7 @@ Page({
         }
       })
     }
-
+   //发送get请求
     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/msgStat?userType='+1, (err, res) => {
       var count = String(res.data.result[0].count);
       //获得消息数量
@@ -73,6 +73,9 @@ Page({
     })
   },
 
+/**
+ * 生命周期函数--监听页面初次渲染完成
+ */
   onShow: function () {
     //加载动画
     setTimeout(() => {
@@ -80,12 +83,14 @@ Page({
         loadingHidden: true,
       })
     }, 500);
+    //判断是否绑定手机
     if (app.globalData.userInfo.result[0].phone != '') {
       this.setData({
         userPhone: app.globalData.userInfo.result[0].phone,
         hidden: true
       })
     }
+    //发送请求
     var userId = app.globalData.userId;
     reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + "/userCar", (err, res) => {
       if (res.data.result == '') {
@@ -112,8 +117,10 @@ Page({
     })
   },
 
+/**
+ * getPhoneNumber 信息
+ */
   getPhoneNumber:function(e){
-   
       console.log(e.detail.errMsg)
       console.log(e.detail.iv)
       console.log(e.detail.encryptedData)

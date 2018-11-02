@@ -20,7 +20,9 @@ Page({
   onLoad: function (e) {
   },
 
- 
+ /**
+   * 添加地址
+   */
   saveAddress: function (e) {
     var warn='';
     var flag=true;
@@ -43,20 +45,23 @@ Page({
    }else{
      flag=false;
      var that=this;
+     //获取要传递的参数
      var params={
        userName: consignee,
        phone: mobile,
        address: address
      }
+     //发送Post请求
      reqUtil.httpPost(config.host.apiHost + '/api/user/' + userId + "/userShipAddress", params, (err, res)=>{
 
      }
      )
+     //跳转地址管理界面
      wx.navigateBack({
        url: "/pages/index/addressList/addressList"
      })
    }
-   //弹出提示框
+   //输入错误弹窗提示
    if(flag==true){
     wx.showModal({
       title: '提示',

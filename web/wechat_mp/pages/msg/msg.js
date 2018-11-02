@@ -7,10 +7,12 @@ Page({
     msgList:[],
     color: '',
   },
-
+  /**
+   * 生命周期函数--监听页面显示
+   */
   onShow:function(){
     var userId = app.globalData.userId;
-
+    //发送请求
     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/getMessage', (err, res) => {
       if (res.data.result==''){
         this.setData({
@@ -24,16 +26,19 @@ Page({
         var date = new Date(res.data.result[i].created_on);
         var localeString = date.toLocaleString();
         res.data.result[i].created_on = localeString;
-        console.log(localeString);
       }
       //保存
       this.setData({
         msgList: res.data.result,
       })
+      //打印出来看一看
       console.log(res)
     })
   },
-  //事件处理函数
+
+  /**
+   * 事件处理函数
+   */
   bindMsg:function(e){
     console.log(e)
     var userId=app.globalData.userId;
@@ -42,12 +47,14 @@ Page({
     var len = this.data.msgList.length;
     var msgList=this.data.msgList;
     var params='';
-
+    //循环判断用户点击
     for (var i=0; i < len; i++) {
       msgList[i].status = i == index;
     }
+    //发送请求
     reqUtil.httpPut(config.host.apiHost + "/api/user/" + userId + '/msg/' + id + '/status/'+1, params, (err, res) => {})
     var queryBean = JSON.stringify(this.data.msgList[index]);
+    //实现跳转并传递参数
     wx.navigateTo({
       url: "/pages/msg/read-msg/read-msg?queryBean=" + queryBean
     })
