@@ -2,9 +2,9 @@ import React from 'react';
 import Select from 'react-select';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
-import {Input, Tabs, Tab} from 'react-materialize';
+import {Input} from 'react-materialize';
 import {UserManagerDetailActionType, CarQRCodeModalActionType} from '../../actionTypes';
-import {CarQRCodeModal, MessageInfoModal} from '../modules/index'
+import {CarQRCodeModal, MessageInfoModal} from '../modules/index';
 
 const userManagerDetailAction = require('../../actions/main/UserManagerDetailAction');
 const carQRCodeModalAction = require('../../actions/modules/CarQRCodeModalAction');
@@ -27,38 +27,9 @@ class UserManagerDetail extends React.Component {
     componentDidMount() {
         // 取得车辆信息
         this.props.getUserInfo();
-        // 显示基本信息
-        this.props.setTabId('base');
+        $('ul.tabs').tabs();
+        $('.collapsible').collapsible();
     }
-
-    /**
-     * 切换TAB
-     */
-    changeTab = (tabIndex, event) => {
-        // 点击不同的TAB，进行相应处理
-        if (event.target.text === '基本信息') {
-            this.props.setTabId('base');
-        } else if (event.target.text === '绑定车辆') {
-            this.props.setTabId('bindCar');
-            this.props.getUserCarList();
-        } else if (event.target.text === '消息记录') {
-            this.props.setTabId('message');
-            // 默认第一页
-            this.props.setMsgStartNumber(0);
-            // 清空检索条件
-            this.props.changeMsgConditionType(null);
-            this.props.setMsgConditionStartDate('');
-            this.props.setMsgConditionEndDate('');
-            // 检索消息记录列表
-            this.props.getMessageList();
-        } else if (event.target.text === '交易记录') {
-            this.props.setTabId('transaction');
-            this.props.getTransactionList();
-        } else if (event.target.text === '收货地址') {
-            this.props.setTabId('address');
-            this.props.getAddressList();
-        }
-    };
 
     /**
      * 绑定车辆TAB：显示车辆二维码
@@ -69,6 +40,20 @@ class UserManagerDetail extends React.Component {
         this.props.setPlateNum(plateNum);
         this.props.getQRCode();
         $('#carQRCodeModal').modal('open');
+    };
+
+    /**
+     * 消息记录TAB：点击事件
+     */
+    onClickMessageTab = () => {
+        // 默认第一页
+        this.props.setMsgStartNumber(0);
+        // 清空检索条件
+        this.props.changeMsgConditionType(null);
+        this.props.setMsgConditionStartDate('');
+        this.props.setMsgConditionEndDate('');
+        // 检索消息记录列表
+        this.props.getMessageList();
     };
 
     /**
@@ -118,8 +103,15 @@ class UserManagerDetail extends React.Component {
         $('#messageModal').modal('open');
     };
 
+    /**
+     * 交易记录TAB：显示订单内 商品详细信息
+     */
+    getOrderInfo = (event , orderId) => {
+        this.props.getOrderDetail(orderId);
+    };
+
     render() {
-        const {userManagerDetailReducer, changeMsgConditionType} = this.props;
+        const {userManagerDetailReducer, getUserCarList, changeMsgConditionType, getOrderList, getAddressList} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -135,10 +127,28 @@ class UserManagerDetail extends React.Component {
                     </div>
                 </div>
 
-                {/* 主体部分：基本信息 + 绑定车辆 + 消息记录 + 交易记录 + 收货地址 */}
-                <Tabs onChange={this.changeTab}>
-                    <Tab title="基本信息" tabWidth={3} active={userManagerDetailReducer.tabId === "base"}>
+                <div className="row">
+
+                    {/* TAB 头部 */}
+                    <div className="col s12">
+                        <ul className="tabs">
+                            <li className="tab col s-percent-20"><a className="active"  href="#tab-base">基本信息</a></li>
+                            <li className="tab col s-percent-20"><a href="#tab-bind-car" onClick={getUserCarList}>绑定车辆</a></li>
+                            <li className="tab col s-percent-20"><a href="#tab-message" onClick={this.onClickMessageTab}>消息记录</a></li>
+                            <li className="tab col s-percent-20"><a href="#tab-transaction" onClick={getOrderList}>交易记录</a></li>
+                            <li className="tab col s-percent-20"><a href="#tab-address" onClick={getAddressList}>收货地址</a></li>
+                        </ul>
+                    </div>
+
+                    {/* TAB 1 : 基本信息TAB */}
+                    <div id="tab-base" className="col s12">
+                        {userManagerDetailReducer.userInfo.length === 0 &&
+                        <div className="row center grey-text margin-top40 fz18">
+                            该用户暂无基本信息
+                        </div>}
+
                         {/* 基本信息：明细 */}
+                        {userManagerDetailReducer.userInfo.length > 0 &&
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                             <div className="row detail-box-header vc-center">
                                 {/* 基本信息：编号 */}
@@ -146,7 +156,7 @@ class UserManagerDetail extends React.Component {
 
                                 {/* 基本信息：绑定时间 绑定状态 */}
                                 <div className="col s6 right-align">
-                                    <span className="grey-text">授权时间：{formatUtil.getDateTime(userManagerDetailReducer.createdOn)}</span>
+                                    <span className="grey-text">授权时间：{formatUtil.getDateTime(userManagerDetailReducer.userInfo[0].created_on)}</span>
                                 </div>
                             </div>
 
@@ -154,49 +164,50 @@ class UserManagerDetail extends React.Component {
                                 <div className="row margin-left10 margin-right10">
                                     {/* 基本信息：微信昵称 */}
                                     <div className="input-field col s6">
-                                        昵称：{userManagerDetailReducer.weChatName}
+                                        昵称：{userManagerDetailReducer.userInfo[0].wechat_name}
                                     </div>
                                     {/* 基本信息：关注状态 */}
                                     <div className="input-field col s6 right-align blue-font">
-                                        {sysConst.WE_CHAT_STATUS[userManagerDetailReducer.weChatStatus].label}
+                                        {sysConst.WE_CHAT_STATUS[userManagerDetailReducer.userInfo[0].wechat_status].label}
                                     </div>
                                 </div>
                                 <div className="row divider margin-top20 margin-left10 margin-right10"/>
 
                                 <div className="row margin-left10 margin-right10">
                                     <div className="input-field col s6">
-                                        {userManagerDetailReducer.authStatus === sysConst.AUTH_STATUS[1].value && <span>手机：{userManagerDetailReducer.phone}</span>}
+                                        {userManagerDetailReducer.userInfo[0].auth_status === sysConst.AUTH_STATUS[1].value && <span>手机：{userManagerDetailReducer.userInfo[0].phone}</span>}
                                     </div>
                                     {/* 基本信息：认证状态 */}
                                     <div className="input-field col s6 right-align blue-font">
-                                        {sysConst.AUTH_STATUS[userManagerDetailReducer.authStatus].label}
+                                        {sysConst.AUTH_STATUS[userManagerDetailReducer.userInfo[0].auth_status].label}
                                     </div>
                                 </div>
                                 <div className="row divider margin-top20 margin-left10 margin-right10"/>
 
-                                {userManagerDetailReducer.authStatus === sysConst.AUTH_STATUS[1].value &&
+                                {userManagerDetailReducer.userInfo[0].auth_status === sysConst.AUTH_STATUS[1].value &&
                                 <div className="row margin-left10 margin-right10">
                                     <div className="input-field col s4 margin-top3">
-                                        姓名：{userManagerDetailReducer.userName}
-                                        {userManagerDetailReducer.gender === sysConst.GENDER[0].value ?
+                                        姓名：{userManagerDetailReducer.userInfo[0].user_name}
+                                        {userManagerDetailReducer.userInfo[0].gender === sysConst.GENDER[0].value ?
                                             <i className="mdi mdi-human-male margin-left20 blue-font fz24"/> :
                                             <i className="mdi mdi-human-female margin-left20 pink-text text-lighten-2 fz24"/>}
                                     </div>
                                     <div className="input-field col s3">
-                                        出生年月日：{formatUtil.getDate(userManagerDetailReducer.birth)}
+                                        出生年月日：{formatUtil.getDate(userManagerDetailReducer.userInfo[0].birth)}
                                     </div>
 
                                     {/* 基本信息：认证时间 */}
                                     <div className="input-field col s5 right-align">
-                                        认证时间：{formatUtil.getDateTime(userManagerDetailReducer.authTime)}
+                                        认证时间：{formatUtil.getDateTime(userManagerDetailReducer.userInfo[0].auth_time)}
                                     </div>
                                 </div>}
-                                {userManagerDetailReducer.authStatus === sysConst.AUTH_STATUS[1].value && <div className="row divider margin-top20 margin-left10 margin-right10"/>}
+                                {userManagerDetailReducer.userInfo[0].auth_status === sysConst.AUTH_STATUS[1].value && <div className="row divider margin-top20 margin-left10 margin-right10"/>}
                             </div>
-                        </div>
-                    </Tab>
+                        </div>}
+                    </div>
 
-                    <Tab title="绑定车辆" tabWidth={2} active={userManagerDetailReducer.tabId === "bindCar"}>
+                    {/* TAB 2 : 绑定车辆TAB */}
+                    <div id="tab-bind-car" className="col s12">
                         {userManagerDetailReducer.userCarArray.length === 0 &&
                         <div className="row center grey-text margin-top40 fz18">
                             该用户暂未绑定车辆
@@ -244,9 +255,10 @@ class UserManagerDetail extends React.Component {
                                 </div>
                             )
                         }, this)}
-                    </Tab>
+                    </div>
 
-                    <Tab title="消息记录" tabWidth={2} active={userManagerDetailReducer.tabId === "message"}>
+                    {/* TAB 3 : 消息记录TAB */}
+                    <div id="tab-message" className="col s12">
                         {/* 扫描记录：车辆信息 */}
                         <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50">
                             <div className="col s11 search-condition-box margin-top20">
@@ -338,13 +350,89 @@ class UserManagerDetail extends React.Component {
                                 </a>}
                             </div>
                         </div>
-                    </Tab>
+                    </div>
 
-                    <Tab title="交易记录" tabWidth={2} active={userManagerDetailReducer.tabId === "transaction"}>
-                        交易记录
-                    </Tab>
+                    {/* TAB 4 : 交易记录TAB */}
+                    <div id="tab-transaction" className="col s12">
+                        {userManagerDetailReducer.orderArray.length === 0 &&
+                        <div className="row center grey-text margin-top40 fz18">
+                            该用户暂无交易记录
+                        </div>}
 
-                    <Tab title="收货地址" tabWidth={3} active={userManagerDetailReducer.tabId === "address"}>
+                        <ul className={`collapsible margin-top40 margin-left50 margin-right50 ${userManagerDetailReducer.orderArray.length > 0 ?"":"border-top0"}`}>
+                            {userManagerDetailReducer.orderArray.map(function (item) {
+                                return (
+                                    <li>
+                                        {/* 订单记录：【订单编号 下单时间 支付状态】【订单描述 支付金额 详情按钮】 */}
+                                        {/*<div className="collapsible-header fz14 grey-text" onClick={()=>{this.getOrderInfo(event,item.id)}}>*/}
+                                        <div className="collapsible-header fz14 grey-text" onClick={()=>{this.getOrderInfo(event,item.id)}}>
+                                            <div className="col s6">
+                                                <div className="blue-font">编号：{item.id}</div>
+                                                <div className="margin-top10">{item.remark}</div>
+                                            </div>
+                                            <div className="col s5 right-align">
+                                                <div>下单时间：{formatUtil.getDateTime(item.created_on)}</div>
+                                                <div className="margin-top10">支付金额：¥<span className="red-font fz16">{formatUtil.formatNumber(item.total_price + item.total_freight, 2)}</span></div>
+                                            </div>
+                                            <div className="col s1 no-padding right-align blue-font">
+
+                                                <div className="margin-right10">{sysConst.PAYMENT_STATUS[item.payment_status].label}/{sysConst.SEND_STATUS[item.log_status].label}</div>
+                                                <div className="margin-top10">
+                                                    <span className="custom-detail-btn">
+                                                        <span className="fz12">详情</span>
+                                                        <i className="mdi mdi-chevron-down margin-right0 fz15"/>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="collapsible-body row custom-grey">
+                                            <div className="col s12 no-padding grey-text">
+                                                {userManagerDetailReducer.productArray.length === 0 &&
+                                                <div className="row center grey-text margin-top40 fz15">
+                                                    该订单暂无商品记录
+                                                </div>}
+                                                {userManagerDetailReducer.productArray.map(function (item) {
+                                                    return (
+                                                        <li>
+                                                            <div className="col s12 custom-padding border-bottom-line">
+                                                                <div className="col s-percent-10 no-padding">
+                                                                    <img className="img-size-100" src={item.imag == null ? '/assets/images/default_traffic_pol.png' : item.imag}/>
+                                                                </div>
+                                                                <div className="col s-percent-90 no-padding">
+                                                                    <div className="col s6">{item.product_name}</div>
+                                                                    <div className="col s6 right-align">x <span className="fz16">{item.prod_count}</span></div>
+                                                                    <div className="col s12 margin-top10">{item.remark}</div>
+                                                                    <div className="col s6 margin-top10">
+                                                                        单价：¥ <span className="fz16">{formatUtil.formatNumber(item.unit_price, 2)}</span>
+                                                                    </div>
+                                                                    <div className="col s6 margin-top10 right-align">
+                                                                        总价：¥ <span className="fz16">{formatUtil.formatNumber(item.total_price, 2)}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    )
+                                                },this)}
+
+                                                <div className="col s12 no-padding margin-top10 padding-top20 fz14">
+                                                    <div className="col s10 no-padding">
+                                                        收货地址：{item.recv_address} {item.recv_name} {item.recv_phone}
+                                                    </div>
+                                                    <div className="col s2 right-align">
+                                                        运费：¥ <span className="fz16">{formatUtil.formatNumber(item.total_freight, 2)}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                )
+                            },this)}
+                        </ul>
+                    </div>
+
+                    {/* TAB 5 : 收货地址TAB */}
+                    <div id="tab-address" className="col s12">
                         {userManagerDetailReducer.addressArray.length === 0 &&
                         <div className="row center grey-text margin-top40 fz18">
                             该用户暂未添加收货地址
@@ -358,9 +446,10 @@ class UserManagerDetail extends React.Component {
                                     </div>
                                 </div>
                             )
-                        }, this)}
-                    </Tab>
-                </Tabs>
+                        })}
+                    </div>
+                </div>
+
                 <CarQRCodeModal/>
                 <MessageInfoModal/>
             </div>
@@ -375,11 +464,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    // 设定显示TAB
-    setTabId: (tabId) => {
-        dispatch(UserManagerDetailActionType.setTabId(tabId))
-    },
-
     // TAB1：基本信息
     getUserInfo: () => {
         dispatch(userManagerDetailAction.getUserInfo(ownProps.match.params.id))
@@ -427,8 +511,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
 
     // TAB4：交易记录
-    getTransactionList: () => {
-        dispatch(userManagerDetailAction.getTransactionList(ownProps.match.params.id))
+    getOrderList: () => {
+        dispatch(userManagerDetailAction.getOrderList(ownProps.match.params.id))
+    },
+    getOrderDetail: (orderId) => {
+        dispatch(userManagerDetailAction.getOrderDetail(ownProps.match.params.id, orderId))
     },
 
     // TAB5：收货地址

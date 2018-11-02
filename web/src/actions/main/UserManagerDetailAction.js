@@ -12,29 +12,7 @@ export const getUserInfo = (id) => async (dispatch) => {
 
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
-            if (res.result.length > 0) {
-                // 用户详情：授权时间
-                dispatch({type: UserManagerDetailActionType.setCreatedOn, payload: res.result[0].created_on});
-                // 用户详情：微信昵称
-                dispatch({type: UserManagerDetailActionType.setWeChatName, payload: res.result[0].wechat_name});
-                // 用户详情：关注状态
-                dispatch({type: UserManagerDetailActionType.setWeChatStatus, payload: res.result[0].wechat_status});
-                // 用户详情：认证状态
-                dispatch({type: UserManagerDetailActionType.setAuthStatus, payload: res.result[0].auth_status});
-
-                // 用户详情：手机
-                dispatch({type: UserManagerDetailActionType.setPhone, payload: res.result[0].phone});
-                // 用户详情：姓名
-                dispatch({type: UserManagerDetailActionType.setUserName, payload: res.result[0].user_name});
-                // 用户详情：性别
-                dispatch({type: UserManagerDetailActionType.setGender, payload: res.result[0].gender});
-                // 用户详情：出生年月日
-                dispatch({type: UserManagerDetailActionType.setBirth, payload: res.result[0].birth});
-                // 用户详情：认证时间
-                dispatch({type: UserManagerDetailActionType.setAuthTime, payload: res.result[0].auth_time});
-            } else {
-                swal('未获取用户信息，请重新查询', res.msg, 'warning');
-            }
+            dispatch({type: UserManagerDetailActionType.getUserInfo, payload: res.result});
         } else if (res.success === false) {
             swal('获取用户信息失败', res.msg, 'warning');
         }
@@ -99,16 +77,32 @@ export const getMessageList = (userId) => async (dispatch, getState) => {
     }
 };
 
-export const getTransactionList = (userId) => async (dispatch) => {
+export const getOrderList = (userId) => async (dispatch) => {
     try {
         // 基本检索URL
         let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
             + '/order?userId=' + userId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
-            dispatch({type: UserManagerDetailActionType.getTransactionList, payload: res.result});
+            dispatch({type: UserManagerDetailActionType.getOrderList, payload: res.result});
         } else if (res.success === false) {
             swal('获取交易记录列表信息失败', res.msg, 'warning');
+        }
+    } catch (err) {
+        swal('操作失败', err.message, 'error');
+    }
+};
+
+export const getOrderDetail = (userId, orderId) => async (dispatch) => {
+    try {
+        // 基本检索URL
+        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+            + '/orderItem?userId=' + userId + '&orderId=' + orderId;
+        const res = await httpUtil.httpGet(url);
+        if (res.success === true) {
+            dispatch({type: UserManagerDetailActionType.getProductList, payload: res.result});
+        } else if (res.success === false) {
+            swal('获取交易记录信息失败', res.msg, 'warning');
         }
     } catch (err) {
         swal('操作失败', err.message, 'error');

@@ -2,27 +2,9 @@ import {handleActions} from 'redux-actions';
 import {UserManagerDetailActionType} from '../../actionTypes';
 
 const initialState = {
-    // 画面 TAB 标记
-    tabId: 'base',
 
-    // 基本信息TAB：授权时间
-    createdOn: '',
-    // 基本信息TAB：微信昵称
-    weChatName: '',
-    // 基本信息TAB：关注状态
-    weChatStatus: 0,
-    // 基本信息TAB：认证状态
-    authStatus: 0,
-    // 基本信息TAB：手机
-    phone: '',
-    // 基本信息TAB：姓名
-    userName: '',
-    // 基本信息TAB：性别
-    gender: 0,
-    // 基本信息TAB：出生年月日
-    birth: '',
-    // 基本信息TAB：认证时间
-    authTime: '',
+    // 基本信息TAB：用户信息
+    userInfo: [],
 
     // 绑定车辆TAB：列表
     userCarArray: [],
@@ -42,72 +24,20 @@ const initialState = {
     // 消息记录TAB：列表
     messageArray: [],
 
-    // 交易记录TAB：列表
-    transactionArray: [],
+    // 交易记录TAB：订单列表
+    orderArray: [],
+    // 交易记录TAB：订单内，商品列表
+    productArray: [],
 
     // 收货地址TAB：列表
     addressArray: []
 };
 
 export default handleActions({
-    [UserManagerDetailActionType.setTabId]: (state, action) => {
+    [UserManagerDetailActionType.getUserInfo]: (state, action) => {
         return {
             ...state,
-            tabId: action.payload
-        }
-    },
-    [UserManagerDetailActionType.setCreatedOn]: (state, action) => {
-        return {
-            ...state,
-            createdOn: action.payload
-        }
-    },
-    [UserManagerDetailActionType.setWeChatName]: (state, action) => {
-        return {
-            ...state,
-            weChatName: action.payload
-        }
-    },
-    [UserManagerDetailActionType.setWeChatStatus]: (state, action) => {
-        return {
-            ...state,
-            weChatStatus: action.payload
-        }
-    },
-    [UserManagerDetailActionType.setAuthStatus]: (state, action) => {
-        return {
-            ...state,
-            authStatus: action.payload
-        }
-    },
-    [UserManagerDetailActionType.setPhone]: (state, action) => {
-        return {
-            ...state,
-            phone: action.payload
-        }
-    },
-    [UserManagerDetailActionType.setUserName]: (state, action) => {
-        return {
-            ...state,
-            userName: action.payload
-        }
-    },
-    [UserManagerDetailActionType.setGender]: (state, action) => {
-        return {
-            ...state,
-            gender: action.payload
-        }
-    },
-    [UserManagerDetailActionType.setBirth]: (state, action) => {
-        return {
-            ...state,
-            birth: action.payload
-        }
-    },
-    [UserManagerDetailActionType.setAuthTime]: (state, action) => {
-        return {
-            ...state,
-            authTime: action.payload
+            userInfo: action.payload
         }
     },
 
@@ -155,10 +85,16 @@ export default handleActions({
         }
     },
 
-    [UserManagerDetailActionType.getTransactionList]: (state, action) => {
+    [UserManagerDetailActionType.getOrderList]: (state, action) => {
         return {
             ...state,
-            transactionArray: action.payload
+            orderArray: action.payload
+        }
+    },
+    [UserManagerDetailActionType.getProductList]: (state, action) => {
+        return {
+            ...state,
+            productArray: action.payload
         }
     },
 
