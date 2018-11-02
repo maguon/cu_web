@@ -2,9 +2,6 @@ import {handleActions} from 'redux-actions';
 import {UserCarDetailActionType} from '../../actionTypes';
 
 const initialState = {
-    // 画面 TAB
-    tabId: 'base',
-
     // 车辆信息：绑定时间
     createdOn: '',
     // 车辆信息：绑定状态
@@ -31,12 +28,6 @@ const initialState = {
 };
 
 export default handleActions({
-    [UserCarDetailActionType.setTabId]: (state, action) => {
-        return {
-            ...state,
-            tabId: action.payload
-        }
-    },
     [UserCarDetailActionType.setCreatedOn]: (state, action) => {
         return {
             ...state,

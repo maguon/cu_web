@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
-import {Tabs,Tab} from 'react-materialize';
 import {UserCarDetailActionType} from '../../actionTypes';
 
 const userCarDetailAction = require('../../actions/main/UserCarDetailAction');
@@ -23,22 +22,16 @@ class UserCarDetail extends React.Component {
     componentDidMount() {
         // 取得车辆信息
         this.props.getUserCarInfo();
-        // 显示基本信息
-        this.props.setTabId('base');
+        $('ul.tabs').tabs();
     }
 
     /**
-     * 切换TAB
+     * 扫描记录TAB：点击事件
      */
-    changeTab = (tabIndex, event) => {
-        if (event.target.text === '基本信息') {
-            this.props.setTabId('base');
-        } else if (event.target.text === '扫描记录') {
-            this.props.setTabId('scan');
-            // 默认第一页
-            this.props.setStartNumber(0);
-            this.props.getCheckCarList();
-        }
+    onClickScanTab = () => {
+        // 默认第一页
+        this.props.setStartNumber(0);
+        this.props.getCheckCarList();
     };
 
     /**
@@ -59,7 +52,6 @@ class UserCarDetail extends React.Component {
 
     render() {
         const {userCarDetailReducer} = this.props;
-
         return (
             <div>
                 {/* 标题部分 */}
@@ -75,9 +67,18 @@ class UserCarDetail extends React.Component {
                     </div>
                 </div>
 
-                {/* 主体部分：基本信息 + 扫描记录 */}
-                <Tabs onChange={this.changeTab}>
-                    <Tab title="基本信息" tabWidth={6} active={userCarDetailReducer.tabId === "base"}>
+                <div className="row">
+
+                    {/* TAB 头部 */}
+                    <div className="col s12">
+                        <ul className="tabs">
+                            <li className="tab col s6"><a className="active" href="#tab-base">基本信息</a></li>
+                            <li className="tab col s6"><a href="#tab-scan" onClick={this.onClickScanTab}>Test 2</a></li>
+                        </ul>
+                    </div>
+
+                    {/* TAB 1 : 基本信息TAB */}
+                    <div id="tab-base" className="col s12">
                         {/* 车辆信息：明细 */}
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                             <div className="row detail-box-header vc-center">
@@ -119,9 +120,10 @@ class UserCarDetail extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </Tab>
+                    </div>
 
-                    <Tab title="扫描记录" tabWidth={6} active={userCarDetailReducer.tabId === "scan"}>
+                    {/* TAB 2 : 扫描记录TAB */}
+                    <div id="tab-scan" className="col s12">
                         {/* 扫描记录：车辆信息 */}
                         <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
                             <div className="row margin-left10 margin-right10 margin-top20">
@@ -190,8 +192,8 @@ class UserCarDetail extends React.Component {
                                 </a>}
                             </div>
                         </div>
-                    </Tab>
-                </Tabs>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -204,9 +206,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    setTabId: (tabId) => {
-        dispatch(UserCarDetailActionType.setTabId(tabId))
-    },
     getUserCarInfo: () => {
         dispatch(userCarDetailAction.getUserCarInfo(ownProps.match.params.id))
     },

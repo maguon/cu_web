@@ -1,6 +1,5 @@
 import {createAction} from 'redux-actions';
 
-export const setTabId = createAction('SET_TAB_ID');
 export const setCreatedOn = createAction('SET_CREATED_ON');
 export const setStatus = createAction('SET_STATUS');
 export const setPlateNum = createAction('SET_PLATE_NUM');
