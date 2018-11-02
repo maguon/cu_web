@@ -67,8 +67,8 @@ class UserCarDetail extends React.Component {
                     </div>
                 </div>
 
-                <div className="row">
 
+                <div className="row">
                     {/* TAB 头部 */}
                     <div className="col s12">
                         <ul className="tabs">
@@ -80,6 +80,7 @@ class UserCarDetail extends React.Component {
                     {/* TAB 1 : 基本信息TAB */}
                     <div id="tab-base" className="col s12">
                         {/* 车辆信息：明细 */}
+                        {userCarDetailReducer.userCarInfo.length > 0 &&
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                             <div className="row detail-box-header vc-center">
                                 {/* 车辆信息：车辆编号 */}
@@ -87,8 +88,8 @@ class UserCarDetail extends React.Component {
 
                                 {/* 车辆信息：绑定时间 绑定状态 */}
                                 <div className="col s6 right-align">
-                                    <span className="grey-text">绑定时间：{formatUtil.getDateTime(userCarDetailReducer.createdOn)}</span>
-                                    <span className="margin-left50">{sysConst.BIND_STATUS[userCarDetailReducer.status].label}</span>
+                                    <span className="grey-text">绑定时间：{formatUtil.getDateTime(userCarDetailReducer.userCarInfo[0].created_on)}</span>
+                                    <span className="margin-left50">{sysConst.BIND_STATUS[userCarDetailReducer.userCarInfo[0].status].label}</span>
                                 </div>
                             </div>
 
@@ -96,15 +97,15 @@ class UserCarDetail extends React.Component {
                                 <div className="row margin-left10 margin-right10">
                                     {/* 车辆信息：车牌号码 */}
                                     <div className="input-field col s4 blue-font fz20">
-                                        <i className="mdi mdi-car fz20 margin-right20"/>{userCarDetailReducer.plateNum}
+                                        <i className="mdi mdi-car fz20 margin-right20"/>{userCarDetailReducer.userCarInfo[0].license_plate}
                                     </div>
                                     {/* 车辆信息：联系电话 */}
                                     <div className="input-field col s4">
-                                        <i className="mdi mdi-cellphone fz20 margin-right10"/>{userCarDetailReducer.phone}
+                                        <i className="mdi mdi-cellphone fz20 margin-right10"/>{userCarDetailReducer.userCarInfo[0].phone}
                                     </div>
                                     {/* 车辆信息：绑定用户 */}
                                     <div className="input-field col s4 right-align">
-                                        <i className="mdi mdi-account-outline fz20 margin-right10"/>{userCarDetailReducer.bindUser}
+                                        <i className="mdi mdi-account-outline fz20 margin-right10"/>{userCarDetailReducer.userCarInfo[0].user_name}
                                     </div>
                                 </div>
 
@@ -112,38 +113,39 @@ class UserCarDetail extends React.Component {
 
                                 <div className="row margin-left10 margin-right10">
                                     <div className="input-field col s6">
-                                        车辆识别码：{userCarDetailReducer.vin}
+                                        车辆识别码：{userCarDetailReducer.userCarInfo[0].vin}
                                     </div>
                                     <div className="input-field col s6 right-align">
-                                        发动机号码：{userCarDetailReducer.engineNum}
+                                        发动机号码：{userCarDetailReducer.userCarInfo[0].engine_num}
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>}
                     </div>
 
                     {/* TAB 2 : 扫描记录TAB */}
                     <div id="tab-scan" className="col s12">
                         {/* 扫描记录：车辆信息 */}
+                        {userCarDetailReducer.userCarInfo.length > 0 &&
                         <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
                             <div className="row margin-left10 margin-right10 margin-top20">
                                 {/* 车辆信息：车辆编号 */}
                                 <div className="col s6">车辆编号：{this.props.match.params.id}</div>
                                 {/* 车辆信息：绑定状态 */}
                                 <div className="col s6 right-align">
-                                    <span>{sysConst.BIND_STATUS[userCarDetailReducer.status].label}</span>
+                                    <span>{sysConst.BIND_STATUS[userCarDetailReducer.userCarInfo[0].status].label}</span>
                                 </div>
 
                                 {/* 车辆信息：车牌号码 */}
                                 <div className="input-field col s6 fz20">
-                                    <i className="mdi mdi-car fz20 margin-right10"/>{userCarDetailReducer.plateNum}
+                                    <i className="mdi mdi-car fz20 margin-right10"/>{userCarDetailReducer.userCarInfo[0].license_plate}
                                 </div>
                                 {/* 车辆信息：扫描记录 */}
                                 <div className="input-field col s6 right-align grey-text">
                                     {/*扫描记录： <span className="blue-font fz20">{formatUtil.formatNumber(userCarDetailReducer.checkCarArray.length)}</span> 条*/}
                                 </div>
                             </div>
-                        </div>
+                        </div>}
 
                         {/* 扫描记录：记录列表 */}
                         <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">

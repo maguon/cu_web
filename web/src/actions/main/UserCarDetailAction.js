@@ -8,28 +8,12 @@ const sysConst = require('../../util/SysConst');
 export const getUserCarInfo = (id) => async (dispatch) => {
     try {
         // 基本检索URL
-        const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/userCar?userCarId=' + id;
+        const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+            + '/userCar?userCarId=' + id;
 
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
-            if (res.result.length > 0) {
-                // 绑定时间
-                dispatch({type: UserCarDetailActionType.setCreatedOn, payload: res.result[0].created_on});
-                // 绑定状态
-                dispatch({type: UserCarDetailActionType.setStatus, payload: res.result[0].status});
-                // 车辆信息：车牌号码
-                dispatch({type: UserCarDetailActionType.setPlateNum, payload: res.result[0].license_plate});
-                // 车辆信息：联系电话
-                dispatch({type: UserCarDetailActionType.setPhone, payload: res.result[0].phone});
-                // 车辆信息：绑定用户
-                dispatch({type: UserCarDetailActionType.setBindUser, payload: res.result[0].user_name});
-                // 车辆信息：车辆识别码
-                dispatch({type: UserCarDetailActionType.setVin, payload: res.result[0].vin});
-                // 车辆信息：发动机号码
-                dispatch({type: UserCarDetailActionType.setEngineNum, payload: res.result[0].engine_num});
-            } else {
-                swal('未获取车辆信息，请重新查询', res.msg, 'warning');
-            }
+            dispatch({type: UserCarDetailActionType.getUserCarInfo, payload: res.result});
         } else if (res.success === false) {
             swal('获取车辆信息失败', res.msg, 'warning');
         }
@@ -49,7 +33,6 @@ export const getCheckCarList = (id) => async (dispatch, getState) => {
         let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
             + '/checkCar?start=' + start + '&size=' + size + '&userCarId=' + id;
         const res = await httpUtil.httpGet(url);
-
         if (res.success === true) {
             dispatch({type: UserCarDetailActionType.setDataSize, payload: res.result.length});
             dispatch({type: UserCarDetailActionType.getCheckCarList, payload: res.result.slice(0, size - 1)});
