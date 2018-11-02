@@ -18,13 +18,19 @@ Page({
     bntFlag:true,
 
   },
-
+  /**
+   * 生命周期函数--监听页面加载
+   */
 onLoad:function(e){
 },
 
 
-onShow:function(){
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow:function(){
   var userId = app.globalData.userId;
+  //发送请求
   reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userId, (err, res) => {
   if(res.data.result[0].phone!=''){
     this.setData({
@@ -81,6 +87,7 @@ countDown:function(num){
      gainFlag:true,
      key:num
     });
+    //time 为0 返回原始状态
   if(num<0){
      this.setData({
     key:'获取验证码',
@@ -121,11 +128,13 @@ code:function(e){
    var userid = app.globalData.userId;
    var userPhone=this.data.userPhone;
    var userCode=this.data.userCode;
+   //设置参数
    var params={
      phone: userPhone,
      signCode: userCode,
      suthStatus:0
    }
+   //发送请求
     reqUtil.httpPut(config.host.apiHost + "/api/user/" + userid + '/userPhone', params,(err,res)=>{
       if(res.data.success!=true){
       wx.showModal({
@@ -134,7 +143,7 @@ code:function(e){
       })
       return;
       }else{
-        //一致后跳转界面
+        //校对一致后跳转界面
         wx.reLaunch({
           url: "/pages/user/user"
         })

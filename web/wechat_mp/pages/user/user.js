@@ -67,6 +67,7 @@ Page({
       if (res.data.result == '') {
         return;
       }
+      //判断是否绑定
       if (res.data.result[0].phone != '') {
         this.setData({
           nullPhone: res.data.result[0].phone,
@@ -77,6 +78,7 @@ Page({
         myCar: "相关车辆" + res.data.result.length + "台",
       })
     })
+    //保存
     this.setData({
       userInfo: app.globalData.userInfo,
       wechatName: app.globalData.userInfo.result[0].wechat_name,
@@ -120,6 +122,9 @@ Page({
   onShareAppMessage: function () {
   
   },
+  /**
+   * 跳转页面
+   */
   changeMenu:function(e){
     wx.navigateTo({
       url: e.target.dataset.url

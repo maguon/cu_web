@@ -1,5 +1,4 @@
 var app = getApp();
-// var carId = '';
 const config = require('../../../../config.js');
 const reqUtil = require('../../../../utils/ReqUtil.js')
 Page({
@@ -39,22 +38,22 @@ Page({
     } else {
       flag = false;
       that.setData({
+        //赋值到数组
      carMsg: [{
           license_plate: header,
           engine_num: carNumber,
           vin: vin,
         }]
       });  
+      //设置参数
      var params={
         vin: vin,
         engineNum: carNumber,
         licensePlate: header
       }
+      //发送请求
       reqUtil.httpPost(
-        config.host.apiHost + '/api/user/' + userId + '/userCar', params,
-         (err, res) => {
-          //  carId = res.data.id;
-        })
+        config.host.apiHost + '/api/user/' + userId + '/userCar', params,(err, res) => {})
        }
     
     //弹出提示框
@@ -65,6 +64,7 @@ Page({
       })
       return;
     } 
+    //跳转并传递参数
     var name="headers";
      var queryBean = JSON.stringify(that.data.carMsg[0]);
       wx.navigateTo({

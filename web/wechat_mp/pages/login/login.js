@@ -9,8 +9,12 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     loadingHidden: false,
   },
-  
+
+   /**
+   * 生命周期函数--监听页面加载
+   */
   onLoad: function () {
+    //app.onLaunch res成功后执行{}内代码
     app.userInfoReadyCallback = res => {
       if (res != '') {
     var that = this;
@@ -18,20 +22,22 @@ Page({
     // 查看是否授权
     wx.getSetting({
       success: function (res) {
+        //判断是否授权
         if (res.authSetting['scope.userInfo']) {
           that.setData({
             loadingHidden: true,
           })
+          //获取用户信息
           wx.getUserInfo({
             success: res=> {
-
+              //设置参数
               var params = {
                 wechatId: app.globalData.openid,
                 wechatName:res.userInfo.nickName,
                 gender: res.userInfo.gender,
                 avatarImage: res.userInfo.avatarUrl,
               }
-
+              //发送请求
               reqUtil.httpPost(config.host.apiHost + "/api" + "/userLogin", params, (err, res) => {
                 //userid保存到全局
                 app.globalData.userId=res.data.result.userId;
@@ -52,6 +58,10 @@ Page({
    }
   }
   },
+
+  /**
+   * 点击授权
+   */
   bindGetUserInfo: function (e) {
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
@@ -93,7 +103,9 @@ Page({
   },
 
 
-  //获取用户信息接口
+  /**
+   * 获取用户信息接口
+  */
   queryUsreInfo: function () {
     var userId=app.globalData.userId;
     reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userId, (err, res) => {
