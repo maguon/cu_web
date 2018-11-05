@@ -7,7 +7,7 @@ const orderDetailAction = require('../../actions/main/OrderDetailAction');
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
-class UserCarDetail extends React.Component {
+class OrderDetail extends React.Component {
 
     /**
      * 组件准备要挂载的最一开始，调用执行
@@ -20,38 +20,23 @@ class UserCarDetail extends React.Component {
      * 组件完全挂载到页面上，调用执行
      */
     componentDidMount() {
-        // 取得车辆信息
+        // 取得订单信息
         this.props.getOrderInfo();
+        // 取得订单购买信息
+        this.props.getOrderDetail();
+        // 初始化TAB
         $('ul.tabs').tabs();
     }
 
     /**
-     * 扫描记录TAB：点击事件
+     * 售后信息TAB：点击事件
      */
-    onClickScanTab = () => {
-        // 默认第一页
-        this.props.setStartNumber(0);
-        this.props.getCheckCarList();
-    };
-
-    /**
-     * 上一页
-     */
-    preBtn = () => {
-        this.props.setStartNumber(this.props.userCarDetailReducer.start - (this.props.userCarDetailReducer.size - 1));
-        this.props.getCheckCarList();
-    };
-
-    /**
-     * 下一页
-     */
-    nextBtn = () => {
-        this.props.setStartNumber(this.props.userCarDetailReducer.start + (this.props.userCarDetailReducer.size - 1));
+    onClickAfterSaleTab = () => {
         this.props.getCheckCarList();
     };
 
     render() {
-        const {userCarDetailReducer} = this.props;
+        const {orderDetailReducer} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -67,134 +52,97 @@ class UserCarDetail extends React.Component {
                     </div>
                 </div>
 
-
                 <div className="row">
                     {/* TAB 头部 */}
                     <div className="col s12">
+                        {/* 订单详情：基本信息 */}
+                        {orderDetailReducer.orderInfo.length > 0 &&
+                        <div className="order-detail-header">
+                            {/* 基本信息：订单编号 */}
+                            <div className="col s6">订单编号：{this.props.match.params.id}</div>
+                            {/* 基本信息：下单时间 支付/发货状态 */}
+                            <div className="col s6 right-align">
+                                <span className="grey-text fz14">下单时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].created_on)}</span>
+                                <span className="margin-left50">{sysConst.PAYMENT_STATUS[orderDetailReducer.orderInfo[0].payment_status].label}/{sysConst.LOG_STATUS[orderDetailReducer.orderInfo[0].log_status].label}</span>
+                            </div>
+
+                            {/* 基本信息：订单描述 */}
+                            <div className="col s6 grey-text fz14 margin-top10 context-ellipsis">{orderDetailReducer.orderInfo[0].remark}</div>
+                            {/* 基本信息：用户 电话 微信昵称 */}
+                            <div className="col s6 margin-top10 right-align">
+                                <span><i className="mdi mdi-account margin-right10 fz20"/>{orderDetailReducer.orderInfo[0].user_name}</span>
+                                <span className="margin-left50"><i className="mdi mdi-cellphone margin-right10 fz20"/>{orderDetailReducer.orderInfo[0].phone}</span>
+                                <span className="margin-left50"><i className="mdi mdi-wechat margin-right10 fz20"/>{orderDetailReducer.orderInfo[0].wechat_name}</span>
+                            </div>
+                        </div>}
+
+                        {/* 订单详情：订单信息/售后信息 TAB菜单 */}
                         <ul className="tabs">
-                            <li className="tab col s6"><a className="active" href="#tab-base">基本信息</a></li>
-                            <li className="tab col s6"><a href="#tab-scan" onClick={this.onClickScanTab}>扫描记录</a></li>
+                            <li className="tab col s6"><a className="active" href="#tab-base">订单信息</a></li>
+                            <li className="tab col s6"><a href="#tab-after-sale" onClick={this.onClickAfterSaleTab}>售后信息</a></li>
                         </ul>
                     </div>
 
                     {/* TAB 1 : 基本信息TAB */}
                     <div id="tab-base" className="col s12">
                         {/* 车辆信息：明细 */}
-                        {userCarDetailReducer.userCarInfo.length > 0 &&
+                        {orderDetailReducer.orderInfo.length > 0 &&
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
-                            <div className="row detail-box-header vc-center">
+                            <div className="row detail-box-header vc-center margin-bottom0">
                                 {/* 车辆信息：车辆编号 */}
-                                <div className="col s6">车辆编号：{this.props.match.params.id}</div>
-
-                                {/* 车辆信息：绑定时间 绑定状态 */}
-                                <div className="col s6 right-align">
-                                    <span className="grey-text">绑定时间：{formatUtil.getDateTime(userCarDetailReducer.userCarInfo[0].created_on)}</span>
-                                    <span className="margin-left50">{sysConst.BIND_STATUS[userCarDetailReducer.userCarInfo[0].status].label}</span>
-                                </div>
+                                <div className="col s12">购买信息</div>
                             </div>
 
                             <div className="col s12 grey-text">
-                                <div className="row margin-left10 margin-right10">
-                                    {/* 车辆信息：车牌号码 */}
-                                    <div className="input-field col s4 blue-font fz20">
-                                        <i className="mdi mdi-car fz20 margin-right20"/>{userCarDetailReducer.userCarInfo[0].license_plate}
-                                    </div>
-                                    {/* 车辆信息：联系电话 */}
-                                    <div className="input-field col s4">
-                                        <i className="mdi mdi-cellphone fz20 margin-right10"/>{userCarDetailReducer.userCarInfo[0].phone}
-                                    </div>
-                                    {/* 车辆信息：绑定用户 */}
-                                    <div className="input-field col s4 right-align">
-                                        <i className="mdi mdi-account-outline fz20 margin-right10"/>{userCarDetailReducer.userCarInfo[0].user_name}
-                                    </div>
-                                </div>
+                                {orderDetailReducer.productArray.length === 0 &&
+                                <div className="row center grey-text margin-top20 fz15">
+                                    该订单暂无商品记录
+                                </div>}
+                                {orderDetailReducer.productArray.map(function (item) {
+                                    return (
+                                        <div className="col s12 border-bottom-line padding-top20 padding-bottom20">
+                                            <div className="col s-percent-10">
+                                                {item.imag == null || item.imag === '' ? <div className="no-img-box"/> : <img className="img-size-100" src={item.imag}/>}
+                                            </div>
+                                            <div className="col s-percent-90 margin-top10 padding-right0">
+                                                <div className="col s6">{item.product_name}</div>
+                                                <div className="col s6 right-align">x <span className="fz16">{item.prod_count}</span></div>
+                                                <div className="col s12 margin-top10">{item.remark}</div>
+                                                <div className="col s6 margin-top10">
+                                                    单价：¥ <span className="fz16">{formatUtil.formatNumber(item.unit_price, 2)}</span>
+                                                </div>
+                                                <div className="col s6 margin-top10 right-align">
+                                                    总价：¥ <span className="fz16">{formatUtil.formatNumber(item.total_price, 2)}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                },this)}
 
-                                <div className="row divider custom-divider margin-top20 margin-left10 margin-right10"/>
-
-                                <div className="row margin-left10 margin-right10">
-                                    <div className="input-field col s6">
-                                        车辆识别码：{userCarDetailReducer.userCarInfo[0].vin}
+                                <div className="col s12 padding-top20 padding-bottom20">
+                                    <div className="col s8 context-ellipsis">
+                                        收货地址：{orderDetailReducer.orderInfo[0].recv_address} {orderDetailReducer.orderInfo[0].recv_name} {orderDetailReducer.orderInfo[0].recv_phone}
                                     </div>
-                                    <div className="input-field col s6 right-align">
-                                        发动机号码：{userCarDetailReducer.userCarInfo[0].engine_num}
+                                    <div className="col s4 right-align">
+                                        ( 运费：¥ {formatUtil.formatNumber(orderDetailReducer.orderInfo[0].total_freight, 2)} )
+                                        <span className="margin-left30">合计：¥ </span>
+                                        <span className="fz16 red-font bold-font">
+                                        {formatUtil.formatNumber(orderDetailReducer.orderInfo[0].total_price + orderDetailReducer.orderInfo[0].total_freight, 2)}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>}
                     </div>
 
-                    {/* TAB 2 : 扫描记录TAB */}
-                    <div id="tab-scan" className="col s12">
-                        {/* 扫描记录：车辆信息 */}
-                        {userCarDetailReducer.userCarInfo.length > 0 &&
-                        <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
-                            <div className="row margin-left10 margin-right10 margin-top20">
-                                {/* 车辆信息：车辆编号 */}
-                                <div className="col s6">车辆编号：{this.props.match.params.id}</div>
-                                {/* 车辆信息：绑定状态 */}
-                                <div className="col s6 right-align">
-                                    <span>{sysConst.BIND_STATUS[userCarDetailReducer.userCarInfo[0].status].label}</span>
-                                </div>
-
-                                {/* 车辆信息：车牌号码 */}
-                                <div className="input-field col s6 fz20">
-                                    <i className="mdi mdi-car fz20 margin-right10"/>{userCarDetailReducer.userCarInfo[0].license_plate}
-                                </div>
-                                {/* 车辆信息：扫描记录 */}
-                                <div className="input-field col s6 right-align grey-text">
-                                    {/*扫描记录： <span className="blue-font fz20">{formatUtil.formatNumber(userCarDetailReducer.checkCarArray.length)}</span> 条*/}
-                                </div>
-                            </div>
-                        </div>}
-
-                        {/* 扫描记录：记录列表 */}
-                        <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
-                            <table className="bordered">
-                                <thead className="blue-grey lighten-5">
-                                <tr className="grey-text text-darken-2">
-                                    <th className="padding-left20">编号</th>
-                                    <th>地址</th>
-                                    <th>扫码交警</th>
-                                    <th className="center">扫码时间</th>
-                                    <th>状态</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {
-                                    userCarDetailReducer.checkCarArray.map(function (item) {
-                                        return (
-                                            <tr className="grey-text text-darken-1">
-                                                <td className="padding-left20">{item.id}</td>
-                                                <td>{item.address}</td>
-                                                <td>{item.supervise_name}</td>
-                                                <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
-                                                <td>{sysConst.CHECK_CAR_STATUS[item.status].label}</td>
-                                            </tr>
-                                        )
-                                    },this)
-                                }
-                                { userCarDetailReducer.checkCarArray.length === 0 &&
-                                <tr className="grey-text text-darken-1">
-                                    <td className="no-data-tr" colSpan="5">暂无数据</td>
-                                </tr>}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        {/* 上下页按钮 */}
-                        <div className="row margin-top10 margin-left50 margin-right50">
-                            <div className="right">
-                                {userCarDetailReducer.start > 0 &&
-                                <a className="waves-light waves-effect custom-blue btn margin-right10" id="pre" onClick={this.preBtn}>
-                                    上一页
-                                </a>}
-                                {userCarDetailReducer.dataSize >= userCarDetailReducer.size &&
-                                <a className="waves-light waves-effect custom-blue btn" id="next" onClick={this.nextBtn}>
-                                    下一页
-                                </a>}
-                            </div>
-                        </div>
+                    {/* TAB 2 : 售后信息TAB */}
+                    <div id="tab-after-sale" className="col s12">
+                        {/* 售后信息：xxxxxxx */}
                     </div>
+
+
+
+
                 </div>
             </div>
         )
@@ -203,7 +151,7 @@ class UserCarDetail extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        userCarDetailReducer: state.UserCarDetailReducer
+        orderDetailReducer: state.OrderDetailReducer
     }
 };
 
@@ -211,12 +159,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     getOrderInfo: () => {
         dispatch(orderDetailAction.getOrderInfo(ownProps.match.params.id))
     },
+    getOrderDetail: () => {
+        dispatch(orderDetailAction.getOrderDetail(ownProps.match.params.id))
+    },
     getCheckCarList: () => {
         dispatch(orderDetailAction.getCheckCarList(ownProps.match.params.id))
     },
-    setStartNumber: (start) => {
-        dispatch(OrderDetailActionType.setStartNumber(start))
-    }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserCarDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(OrderDetail)

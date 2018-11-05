@@ -92,14 +92,15 @@ body {
 }
 /** 画面加载样式 End */
 
-/** Material样式 变更部分 Start */
-.input-field {
-    margin-bottom: 0;
-}
-
+/** 画面检索部分样式 */
 .search-condition-box {
     padding-left: 5px !important;
     padding-right: 5px !important;
+}
+
+/** Material样式 变更部分 Start */
+.input-field {
+    margin-bottom: 0;
 }
 
 .btn {
@@ -177,7 +178,6 @@ body {
     height: 0;
     will-change: left, right;
 }
-
 /** Material样式 变更部分 End */
 
 /** Material补充样式 左侧导航栏 自定义 顶层按钮 */
@@ -304,8 +304,16 @@ body {
     padding-left: 30px !important;
 }
 
+.padding-right0 {
+    padding-right: 0 !important;
+}
+
 .padding-top20 {
     padding-top: 20px !important;
+}
+
+.padding-bottom20 {
+    padding-bottom: 20px !important;
 }
 
 .border-top0 {
@@ -344,6 +352,12 @@ body {
 }
 .s-percent-96 {
     width:96%;
+}
+
+.no-img-box {
+    height:100px;
+    width:100px;
+    border:1px solid #D4D4D4;
 }
 
 .img-size-100 {
@@ -524,8 +538,16 @@ body {
 
 .detail-box-header {
     height: 52px;
-    background-color: #EDEFF6;
     padding-top: 15px;
+}
+
+.order-detail-header {
+    height: 88px;
+    padding-top: 18px;
+}
+
+.detail-box-header, .order-detail-header {
+    background-color: #EDEFF6;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     border-bottom:1px solid #D4D4D4;

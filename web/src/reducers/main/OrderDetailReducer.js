@@ -2,42 +2,27 @@ import {handleActions} from 'redux-actions';
 import {OrderDetailActionType} from '../../actionTypes';
 
 const initialState = {
-    // 绑定车辆管理 - 车辆信息
-    userCarInfo: [],
+    // 订单管理 - 订单详情
+    orderInfo: [],
 
-    // 扫描记录列表
-    checkCarArray: [],
-    // 开始位置
-    start: 0,
-    // 每页数量
-    size: 7,
-    // 检索结果数量
-    dataSize: 0
+    // 订单信息TAB：订单内，商品列表
+    productArray: [],
 };
 
 export default handleActions({
-    [OrderDetailActionType.getUserCarInfo]: (state, action) => {
+    [OrderDetailActionType.getOrderInfo]: (state, action) => {
         return {
             ...state,
-            userCarInfo: action.payload
+            orderInfo: action.payload
         }
     },
-    [OrderDetailActionType.getCheckCarList]: (state, action) => {
+    [OrderDetailActionType.getProductList]: (state, action) => {
         return {
             ...state,
-            checkCarArray: action.payload
+            productArray: action.payload
         }
     },
-    [OrderDetailActionType.setStartNumber]: (state, action) => {
-        return {
-            ...state,
-            start: action.payload
-        }
-    },
-    [OrderDetailActionType.setDataSize]: (state, action) => {
-        return {
-            ...state,
-            dataSize: action.payload
-        }
-    }
+
+
+
 }, initialState)
