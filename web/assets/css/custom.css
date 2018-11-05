@@ -260,6 +260,10 @@ body {
     margin-bottom: 20px;
 }
 
+.margin-left5 {
+    margin-left: 5px;
+}
+
 .margin-left10 {
     margin-left: 10px;
 }
@@ -442,7 +446,6 @@ body {
 
 .red-font {
     color: #F44336;
-    margin: 0 5px 0 5px;
 }
 
 .custom-blue {

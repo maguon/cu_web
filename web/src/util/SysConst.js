@@ -114,7 +114,7 @@ export const WE_CHAT_STATUS = [
 export const PAYMENT_STATUS = [
     {
         value: 0,
-        label: "未支付"
+        label: "待支付"
     },
     {
         value: 1,
@@ -123,14 +123,26 @@ export const PAYMENT_STATUS = [
 ];
 
 // 货物发送状态
-export const SEND_STATUS = [
+export const LOG_STATUS = [
     {
         value: 0,
-        label: "未发货"
+        label: "待发货"
     },
     {
         value: 1,
         label: "已发货"
+    }
+];
+
+// 取消状态
+export const CANCEL_STATUS = [
+    {
+        value: 0,
+        label: "未取消"
+    },
+    {
+        value: 1,
+        label: "已取消"
     }
 ];
 

@@ -2,6 +2,8 @@ export CheckCar from "./CheckCar";
 export CheckCarDetail from "./CheckCarDetail";
 export Message from "./Message";
 export MessageDetail from "./MessageDetail";
+export Order from "./Order";
+export OrderDetail from "./OrderDetail";
 export TrafficPolice from "./TrafficPolice";
 export TrafficPoliceDetail from "./TrafficPoliceDetail";
 export UserAddress from "./UserAddress";

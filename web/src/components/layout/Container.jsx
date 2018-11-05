@@ -7,6 +7,8 @@ import {
     CheckCarDetail,
     Message,
     MessageDetail,
+    Order,
+    OrderDetail,
     TrafficPolice,
     TrafficPoliceDetail,
     UserAddressDetail,
@@ -25,19 +27,6 @@ const routes = [
         component: UserAddress
     },
 
-
-    // 消息记录
-    {
-        path: "/message",
-        exact: true,
-        component: Message
-    },
-    // 消息记录 - 详情
-    {
-        path: '/message/:id',
-        exact: true,
-        component: MessageDetail
-    },
     // 交警管理
     {
         path: "/traffic_police",
@@ -75,18 +64,6 @@ const routes = [
         exact: true,
         component: UserManagerDetail
     },
-    // 用户收货地址
-    {
-        path: "/user_address",
-        exact: true,
-        component: UserAddress
-    },
-    // 用户收货地址 - 详情
-    {
-        path: '/user_address/:id',
-        exact: true,
-        component: UserAddressDetail
-    },
     // 用户车辆
     {
         path: "/user_car",
@@ -98,6 +75,42 @@ const routes = [
         path: '/user_car/:id',
         exact: true,
         component: UserCarDetail
+    },
+    // 消息记录
+    {
+        path: "/message",
+        exact: true,
+        component: Message
+    },
+    // 消息记录 - 详情
+    {
+        path: '/message/:id',
+        exact: true,
+        component: MessageDetail
+    },
+    // 订单管理
+    {
+        path: "/order",
+        exact: true,
+        component: Order
+    },
+    // 订单管理 - 详情
+    {
+        path: '/order/:id',
+        exact: true,
+        component: OrderDetail
+    },
+    // 用户收货地址
+    {
+        path: "/user_address",
+        exact: true,
+        component: UserAddress
+    },
+    // 用户收货地址 - 详情
+    {
+        path: '/user_address/:id',
+        exact: true,
+        component: UserAddressDetail
     },
 ];
 
@@ -176,9 +189,13 @@ class Container extends React.Component {
                                         <ul>
                                             <li><Link to="/user"><i className="mdi mdi-chevron-right"/>用户管理</Link></li>
                                             <li><div className="divider"/></li>
-                                            <li><Link to="/user_address"><i className="mdi mdi-chevron-right"/>收货地址</Link></li>
-                                            <li><div className="divider"/></li>
                                             <li><Link to="/user_car"><i className="mdi mdi-chevron-right"/>用户车辆管理</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/message"><i className="mdi mdi-chevron-right"/>消息记录</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/order"><i className="mdi mdi-chevron-right"/>订单管理</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/user_address"><i className="mdi mdi-chevron-right"/>收货地址</Link></li>
                                         </ul>
                                     </div>
                                 </li>

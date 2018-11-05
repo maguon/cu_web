@@ -5,6 +5,8 @@ import * as CheckCarActionType from './main/CheckCarActionType';
 import * as CheckCarDetailActionType from './main/CheckCarDetailActionType';
 import * as MessageActionType from './main/MessageActionType';
 import * as MessageDetailActionType from './main/MessageDetailActionType';
+import * as OrderActionType from './main/OrderActionType';
+import * as OrderDetailActionType from './main/OrderDetailActionType';
 import * as TrafficPoliceActionType from './main/TrafficPoliceActionType';
 import * as TrafficPoliceDetailActionType from './main/TrafficPoliceDetailActionType';
 import * as UserAddressActionType from './main/UserAddressActionType';
@@ -22,6 +24,8 @@ export {
     CheckCarDetailActionType,
     MessageActionType,
     MessageDetailActionType,
+    OrderActionType,
+    OrderDetailActionType,
     TrafficPoliceActionType,
     TrafficPoliceDetailActionType,
     UserAddressActionType,
