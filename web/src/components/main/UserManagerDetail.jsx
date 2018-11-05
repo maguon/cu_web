@@ -375,8 +375,7 @@ class UserManagerDetail extends React.Component {
                                                 <div className="margin-top10">支付金额：¥ <span className="red-font fz16">{formatUtil.formatNumber(item.total_price + item.total_freight, 2)}</span></div>
                                             </div>
                                             <div className="col s1 no-padding right-align blue-font">
-
-                                                <div className="margin-right10">{sysConst.PAYMENT_STATUS[item.payment_status].label}/{sysConst.LOG_STATUS[item.log_status].label}</div>
+                                                <div>{sysConst.PAYMENT_STATUS[item.payment_status].label}/{sysConst.LOG_STATUS[item.log_status].label}</div>
                                                 <div className="margin-top10">
                                                     <span className="custom-detail-btn">
                                                         <span className="fz12">详情</span>
