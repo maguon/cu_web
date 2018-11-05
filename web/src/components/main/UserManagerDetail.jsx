@@ -396,7 +396,7 @@ class UserManagerDetail extends React.Component {
                                                         <li>
                                                             <div className="col s12 custom-padding border-bottom-line">
                                                                 <div className="col s-percent-10 no-padding">
-                                                                    <img className="img-size-100" src={item.imag == null ? '' : item.imag}/>
+                                                                    {item.imag == null || item.imag === '' ? <div className="no-img-box"/> : <img className="img-size-100" src={item.imag}/>}
                                                                 </div>
                                                                 <div className="col s-percent-90 no-padding">
                                                                     <div className="col s6">{item.product_name}</div>
