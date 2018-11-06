@@ -1,7 +1,9 @@
+
 <view class="container"> 
+
  <view class="code">
-  <image class='codeinfo' src='../../../../assets/images/code-active.png'></image>
- </view>
+  <image class='codeinfo' bindtap="previewImg" mode="scaleToFill" src="{{imagePath}}"></image>
+</view>
 
 <view class='but-list'>
   <button class='downlode'>
@@ -46,6 +48,8 @@
   <loading hidden="{{loadingHidden}}">加载中</loading>
 <button bindtap='sure' class="weui-btn" hover-class='weui-cell_active'>确定</button>
 <button bindtap='unbind' class="unbind" type="default" style='color:red; border:1rpx solid red'>解绑车辆</button>
+</view>
 
-
+<view class="canvas-box">
+  <canvas  hidden="{{canvasHidden}}" style="width: 100px;height: 100px;background:#f1f1f1;" canvas-id="mycanvas"/>   
 </view>

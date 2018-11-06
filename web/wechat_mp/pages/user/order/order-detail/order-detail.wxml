@@ -1,0 +1,119 @@
+<view class="page__bd" >
+        <view class="weui-cells_after-title">
+            
+              <view class='title'>
+               <view class="order-num">订单编号：32452354553453</view>
+               <view class="right-title">待支付</view>
+              </view>
+              <image class='res-image' src='../../../../assets/images/icon.png'></image>
+
+                <view class="weui-cell__bd">挪车二维码贴 </view>
+                <view class='div-line'></view> 
+
+            <view class='price'>
+            <view class='test'>单价</view>
+            <view class='right'>
+            <image class='money'src='../../../../../assets/images/money.png'></image>
+            <view class='num'>5.00</view>
+            </view>
+            </view>
+            <view class='ima-line'></view>  
+          
+            <view class='price'>
+            <view class='test'>数量</view>
+            <view class='right'>
+            <view class='num'>2</view>
+            </view>
+            </view>
+            <view class='ima-line'></view>  
+
+             <view class='price'>
+            <view class='test'>运费</view>
+            <view class='right'>
+            <image class='money'src='../../../../../assets/images/money.png'></image>
+            <view class='num'>0.00</view>
+            </view>
+            </view>
+            <view class='ima-line'></view> 
+
+             <view class='price'>
+            <view class='test'>合计运费</view>
+            <view class='right'>
+            <image class='money'src='../../../../../assets/images/money.png'></image>
+            <view class='total'>10.00</view>
+            </view>
+            </view>
+            <view class='div-line'></view> 
+
+            <view class='price'>
+            <view class='test'>商品信息</view>
+            <view class='right'>
+            <view class='num'>辽B12345的二维码</view>
+            </view>
+            </view>
+            <view class='div-line'></view>  
+
+            <view class='ress'>
+            <view class='test'>收货地址</view>
+            <view class='num'>辽宁省大连市甘井子区金马路凯伦国际A座2608室 王雪 15840668526</view>
+            </view>
+            <view class='div-line'></view>  
+
+            <view class='order-date'>下单时间：2018-06-24 11:24:32</view>
+            <view class='order-date'>支付时间：2018-06-24 11:24:32</view>
+            </view>
+            
+             <view class='after-sale'>
+            <view class='head'>  
+            <view class='apply'>发货信息</view>
+            </view>
+            
+            <view class='express'>
+            <view class='express-head'>
+               <view>快递公司:</view>
+               <view class='right num'>圆通快递</view>
+               </view>
+                <view class='div-line'></view>  
+
+                <view class='express-head'>
+                <view>快递单号:</view>
+               <view class='right num'>232322233542145</view>
+               </view>
+                <view class='div-line'></view> 
+
+            <view class='order-date'>发货时间：2018-06-24 11:24:32</view>
+            </view>
+            </view>  
+
+              <view class='after-sale'>
+            <view class='head'>  
+            <view class='apply'>申请售后</view>
+            <view class='state'>未处理</view>
+            </view>
+            
+            <view class='why'>
+            <view class='apply-why'>申请原因:</view>
+               <view class='order-date'>我不想要的，我想退款</view>
+                <view class='div-line'></view>  
+                 <view class='apply-time'>
+            <view class='order-date'>申请时间：2018-06-24 11:24:32</view>
+            </view>
+            </view>
+            </view>  
+
+              <view class='after-sale-bnt'>
+                 <button class="sale-bnt">申请售后</button>
+                </view>  
+
+            <view class='bnt-list'>
+                 <button class="btn">取消订单</button>
+                <button class="btn-left" hover-class="active">付款</button>
+                </view>  
+         
+
+          <button class='service' disabled='true'>
+          <image class='service-image' src='../../../../../assets/images/service.png'></image>
+          <text class='number'>400-800-3562</text>
+          </button>
+
+     </view>

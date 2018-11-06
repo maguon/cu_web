@@ -77,3 +77,9 @@ page{
   width: 90%;
   color:red;
   }
+  
+  .canvas-box{
+  position: fixed;
+  top:999999rpx;
+  left: 0
+  }

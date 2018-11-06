@@ -1,4 +1,4 @@
-// pages/index/submit/submit.js
+// pages/user/order/order-detail/apply/apply.js
 Page({
 
   /**
@@ -62,11 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  returnHome:function(){
-  //跳转至指定页面并关闭其他打开的所有页面（这个最好用在返回至首页的的时候）
-    wx.reLaunch({  
-      url: '/pages/index/index'
-    })
   }
 })

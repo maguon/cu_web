@@ -109,8 +109,9 @@ Page({
  * 跳转
  */
   bindButtonTap:function(){
+    var price=this.data.price;
     wx.navigateTo({
-      url: '/pages/index/submit/submit'
+      url: '/pages/index/pay/pay?price='+price,
     })
   },
   product:function(){

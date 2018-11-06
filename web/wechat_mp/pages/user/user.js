@@ -32,7 +32,7 @@ Page({
         url: "/pages/user/carList/carList"
       },{
         text: '我的订单',
-        url: ""
+        url: " pages/user/order / order"
       },{
         text: '收货地址',
         url: "/pages/index/addressList/addressList"

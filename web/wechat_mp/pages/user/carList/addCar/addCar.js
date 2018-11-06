@@ -1,6 +1,7 @@
 var app = getApp();
 const config = require('../../../../config.js');
 const reqUtil = require('../../../../utils/ReqUtil.js')
+var QR = require("../../../../utils/qrcode.js");
 Page({
 
   /**
@@ -12,6 +13,8 @@ Page({
      engine_num:'',
      vin:''
    }],
+    imagePath: '',
+    placeholder: 'http://wxapp-union.com'//默认二维码生成文本
   },
  
  /**
