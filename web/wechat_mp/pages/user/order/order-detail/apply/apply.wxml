@@ -1,0 +1,19 @@
+ <view class=" weui-cells_after-title">
+            <view class="">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入申请原因"  />
+                </view>
+            </view>
+          </view>
+
+          <view class="weui-footer">
+            <view class="weui-footer__links">
+                <view class="weui-footer__link">联系客服</view>
+            </view>
+            <view class="weui-footer-number">400-800-3562</view>
+            <view class="weui-footer__text">您也可以直接拨打400电话向客服描述问题情况</view>
+        </view>
+
+         <view class='btn'>
+    <button bindtap="bindButtonTap" class="btn-area" hover-class="weui-cell_active">提交申请</button>
+    </view>

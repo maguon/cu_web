@@ -1,6 +1,7 @@
 var app = getApp();
 const config = require('../../../../config.js');
 const reqUtil = require('../../../../utils/ReqUtil.js')
+var QR = require("../../../../utils/qrcode.js");
 Page({
 
   /**
@@ -12,19 +13,24 @@ Page({
     vin: '',
     engineNumber: '',
     loadingHidden:false,
+    canvasHidden: false,
     name:'',
+    qrcode:'',
+    imagePath:'',
+    placeholder: "https://developers.weixin.qq.com/"//默认二维码生成文本
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
+    
     //加载动画
     setTimeout(() => {
       this.setData({
         loadingHidden: true,
       })
-    }, 500);
+    }, 1000);
     var that = this
     //解析json
     var queryBean = JSON.parse(e.queryBean);
@@ -32,9 +38,65 @@ Page({
       queryBean: queryBean,
       name:e.name
     })
-
+  
+    var userId=app.globalData.userId;
+    var params='';
+    //获取code
+    reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + '/userCar/' + e.queryBean.id + '/qrCode', params,(err,res)=>{
+      //发送get请求
+      reqUtil.httpGet(config.host.apiHost + '/api/qrCode/' + res.data.result.code, (err, res) => {
+        console.log(res.data.result.success)
+        if (res.data.result.success) {
+          var initUrl = this.data.placeholder;
+          this.createQrCode(initUrl, "mycanvas", 100, 100);
+        }
+      })
+    })
   },
 
+/**
+ * 生命周期函数--监听页面初次渲染完成
+ */
+  onShow:function(){
+   
+  },
+/**
+ * 请求生成二维码
+ */
+  createQrCode: function (url, canvasId, cavW, cavH) {
+    //调用插件中的draw方法，绘制二维码图片
+    QR.api.draw(url, canvasId, cavW, cavH);
+    setTimeout(() => { this.canvasToTempImage(); }, 300);
+
+  },
+  //获取临时缓存照片路径，存入data中
+  canvasToTempImage: function () {
+    var that = this;
+    wx.canvasToTempFilePath({
+      canvasId: 'mycanvas',
+      success: function (res) {
+        var tempFilePath = res.tempFilePath;
+        that.setData({
+          imagePath: tempFilePath,
+        });
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    });
+  },
+  //点击图片进行预览，长按保存分享图片
+  previewImg: function (e) {
+    var img = this.data.imagePath;
+    console.log(img);
+    wx.previewImage({
+      current: img, // 当前显示图片的http链接
+      urls: [img] // 需要预览的图片http链接列表
+    })
+  },
+/**
+ * 跳转页面
+ */
   print: function () {
     wx.navigateTo({
       url: '/pages/index/print/print'

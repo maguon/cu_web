@@ -1,0 +1,46 @@
+page{
+  background: #efeff4;
+}
+  .weui-cells_after-title{
+    margin-top: 10px;
+    background: white;
+    height: 250px;
+    font-size: 15px;
+  }
+
+  .weui-textarea{
+    width: 92%;
+     height: 240px;
+    padding-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  .weui-footer{
+    position: fixed;
+    bottom: 80px;
+    left: 8%;
+    right: 8%;
+  }
+
+  .btn{
+  width: 100%;
+}
+  .btn-area{
+    position: fixed;
+    bottom: 20px;
+    left: 5%;
+    height: 40px;
+    width: 90%;
+    background: #0096e3;
+    color: white;
+}
+  .weui-cell_active{
+  background-color: #017ac0;
+  }
+  .weui-footer__link{
+    color: #0096e3;
+  }
+  .weui-footer-number{
+    color: rgb(107, 105, 105);
+    font-size: 15px;
+  }
