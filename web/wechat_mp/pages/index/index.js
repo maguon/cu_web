@@ -13,7 +13,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
 
-    loadingHidden:false,
+    loadingHidden:false, 
     userPhone:'',
     wechatName:'',
     avatarUrl:'',
