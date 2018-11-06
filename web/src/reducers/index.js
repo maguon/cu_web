@@ -18,6 +18,7 @@ import UserCarDetailReducer from './main/UserCarDetailReducer';
 import UserManagerReducer from './main/UserManagerReducer';
 import UserManagerDetailReducer from './main/UserManagerDetailReducer';
 import CarQRCodeModalReducer from './modules/CarQRCodeModalReducer';
+import RefundModalReducer from './modules/RefundModalReducer';
 
 export default combineReducers({
     form: reduxFormReducer,
@@ -37,5 +38,6 @@ export default combineReducers({
     UserCarDetailReducer,
     UserManagerReducer,
     UserManagerDetailReducer,
-    CarQRCodeModalReducer
+    CarQRCodeModalReducer,
+    RefundModalReducer
 })

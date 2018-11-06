@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
 import {OrderDetailActionType} from '../../actionTypes';
+import {RefundModal} from '../modules/index';
 
 const orderDetailAction = require('../../actions/main/OrderDetailAction');
 const sysConst = require('../../util/SysConst');
@@ -53,12 +54,12 @@ class OrderDetail extends React.Component {
     /**
      * 售后信息TAB：确认按钮 点击事件
      */
-    updateFeedBack = () => {
-        console.log('updateFeedBack')
+    showRefundModal = () => {
+        $('#refundModal').modal('open');
     };
 
     render() {
-        const {orderDetailReducer} = this.props;
+        const {orderDetailReducer, updateFeedBack} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -273,6 +274,7 @@ class OrderDetail extends React.Component {
                             </div>}
 
                         </div>}
+
                     </div>
 
                     {/* TAB 2 : 售后信息TAB */}
@@ -316,7 +318,7 @@ class OrderDetail extends React.Component {
                                 <div className="col s12 blue-font bold-font">售后处理</div>
                             </div>
 
-                            <div className="col s12 padding-left20 padding-right20"><div className="col s12 blue-divider"/></div>
+                            <div className="col s12 padding-left20 padding-right20 padding-bottom10"><div className="col s12 blue-divider"/></div>
 
                             <div className="col s12">
                                 <Input s={12} label="处理描述" className="right-align" value={orderDetailReducer.description} onChange={this.changeDescription}/>
@@ -324,16 +326,18 @@ class OrderDetail extends React.Component {
                             </div>
 
                             <div className="col s12 right-align padding-bottom20 padding-right20">
-                                <button type="button" className="btn confirm-btn" onClick={this.updateFeedBack}>确定</button>
+                                <button type="button" className="btn confirm-btn" onClick={updateFeedBack}>确定</button>
                             </div>
-
-
                         </div>}
 
+                        {/* 退款 补发 按钮 */}
                         <div className="col s12 right-align padding-right70">
-                            <button type="button" className="btn confirm-btn" onClick={this.updateFeedBack}>退款</button>
-                            <button type="button" className="btn confirm-btn margin-left20" onClick={this.updateFeedBack}>补发</button>
+                            <button type="button" className="btn confirm-btn" onClick={this.showRefundModal}>退款</button>
+                            <button type="button" className="btn confirm-btn margin-left20" onClick={this.showRefundModal}>补发</button>
                         </div>
+
+                        <RefundModal/>
+
 
                     </div>
 
@@ -362,7 +366,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     getAfterSaleInfo: () => {
         dispatch(orderDetailAction.getOrderInfo(ownProps.match.params.id))
     },
-
+    updateFeedBack: () => {
+        dispatch(orderDetailAction.updateFeedBack(ownProps.match.params.id))
+    },
     setDescription: (value) => {
         dispatch(OrderDetailActionType.setDescription(value))
     },

@@ -37,3 +37,19 @@ export const getOrderDetail = (orderId) => async (dispatch) => {
         swal('操作失败', err.message, 'error');
     }
 };
+
+export const updateFeedBack = (orderId) => async (dispatch) => {
+    try {
+        // 基本检索URL TODO
+        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+            + '/orderItem?orderId=' + orderId;
+        const res = await httpUtil.httpGet(url);
+        if (res.success === true) {
+            dispatch({type: OrderDetailActionType.getProductList, payload: res.result});
+        } else if (res.success === false) {
+            swal('获取订单购买信息失败', res.msg, 'warning');
+        }
+    } catch (err) {
+        swal('操作失败', err.message, 'error');
+    }
+};
