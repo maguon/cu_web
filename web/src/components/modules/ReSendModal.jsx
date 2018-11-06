@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Input} from 'react-materialize';
-import {RefundModalActionType} from "../../actionTypes";
+import {ReSendModalActionType} from "../../actionTypes";
 
-const refundModalAction = require('../../actions/modules/RefundModalAction');
+const reSendModalAction = require('../../actions/modules/ReSendModalAction');
 const formatUtil = require('../../util/FormatUtil');
+const sysConst = require('../../util/SysConst');
 
-class RefundModal extends React.Component {
+class ReSendModal extends React.Component {
 
     /**
      * 组件准备要挂载的最一开始，调用执行
@@ -30,14 +31,14 @@ class RefundModal extends React.Component {
     };
 
     render() {
-        const {refundModalReducer, refund, closeModal} = this.props;
+        const {reSendModalReducer, refund, closeModal} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
-                <div id="refundModal" className="modal modal-fixed-footer row">
+                <div id="reSendModal" className="modal modal-fixed-footer row">
 
                     {/** Modal头部：Title */}
-                    <div className="modal-title center-align white-text">退款</div>
+                    <div className="modal-title center-align white-text">补发</div>
 
                     {/** Modal主体 */}
                     <div className="modal-content white grey-text text-darken-2">
@@ -45,21 +46,21 @@ class RefundModal extends React.Component {
                         <div className="col s12 padding-left20 padding-right20 margin-top10">
                             <div className="col s12 detail-box custom-grey padding-top20 padding-bottom20">
                                 <div className="col s-percent-10 no-padding blue-font">申请原因：</div>
-                                <div className="col s-percent-90 no-padding padding-left0 grey-text">{refundModalReducer.applyReason}</div>
+                                <div className="col s-percent-90 no-padding padding-left0 grey-text">{reSendModalReducer.applyReason}</div>
                             </div>
                         </div>
 
-                        {/* 已退款金额 */}
+                        {/* 已退款金额 TODO */}
                         <div className="col s12 padding-top20 padding-bottom10">
-                            <div className="col s6">已退款金额</div>
-                            <div className="col s6 right-align">¥ {formatUtil.formatNumber(refundModalReducer.refundMoney, 2)}</div>
+                            <div className="col s6">已补发商品</div>
+                            <div className="col s6 right-align">¥ {formatUtil.formatNumber(reSendModalReducer.refundMoney, 2)}</div>
                         </div>
 
                         <div className="col s12 padding-left20 padding-right20"><div className="col s12 divider"/></div>
 
                         {/** 退款金额(元) */}
                         <div className="col s12 margin-top10">
-                            <Input s={12} label="退款金额(元)" type="number" className="right-align red-font fz16" value={refundModalReducer.newRefund} onChange={this.changeRefund}/>
+                            <Input s={12} label="退款金额(元)" type="number" className="right-align red-font fz16" value={reSendModalReducer.newRefund} onChange={this.changeRefund}/>
                         </div>
                     </div>
 
@@ -76,20 +77,20 @@ class RefundModal extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        refundModalReducer: state.RefundModalReducer
+        reSendModalReducer: state.ReSendModalReducer
     }
 };
 
 const mapDispatchToProps = (dispatch) => ({
     setNewRefund: (value) => {
-        dispatch(RefundModalActionType.setNewRefund(value))
+        dispatch(ReSendModalActionType.setNewRefund(value))
     },
     refund: () => {
-        dispatch(refundModalAction.refund())
+        dispatch(reSendModalAction.reSend())
     },
     closeModal: () => {
-        $('#refundModal').modal('close');
+        $('#reSendModal').modal('close');
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RefundModal)
+export default connect(mapStateToProps, mapDispatchToProps)(ReSendModal)

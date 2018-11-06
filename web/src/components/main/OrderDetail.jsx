@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
 import {OrderDetailActionType} from '../../actionTypes';
-import {RefundModal} from '../modules/index';
+import {RefundModal,ReSendModal} from '../modules/index';
 
 const orderDetailAction = require('../../actions/main/OrderDetailAction');
 const sysConst = require('../../util/SysConst');
@@ -52,10 +52,17 @@ class OrderDetail extends React.Component {
     };
 
     /**
-     * 售后信息TAB：确认按钮 点击事件
+     * 售后信息TAB：退款按钮 点击事件
      */
     showRefundModal = () => {
         $('#refundModal').modal('open');
+    };
+
+    /**
+     * 售后信息TAB：补发按钮 点击事件
+     */
+    showReSendModal = () => {
+        $('#reSendModal').modal('open');
     };
 
     render() {
@@ -333,17 +340,11 @@ class OrderDetail extends React.Component {
                         {/* 退款 补发 按钮 */}
                         <div className="col s12 right-align padding-right70">
                             <button type="button" className="btn confirm-btn" onClick={this.showRefundModal}>退款</button>
-                            <button type="button" className="btn confirm-btn margin-left20" onClick={this.showRefundModal}>补发</button>
+                            <button type="button" className="btn confirm-btn margin-left20" onClick={this.showReSendModal}>补发</button>
                         </div>
-
                         <RefundModal/>
-
-
+                        <ReSendModal/>
                     </div>
-
-
-
-
                 </div>
             </div>
         )

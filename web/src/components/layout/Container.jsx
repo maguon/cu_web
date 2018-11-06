@@ -165,7 +165,7 @@ class Container extends React.Component {
                         <li>
                             <ul className="collapsible collapsible-accordion">
                                 <li>
-                                    <a className="collapsible-header"><i className="mdi mdi-settings"/>交警设置</a>
+                                    <a className="collapsible-header"><i className="mdi mdi-settings"/>交警管理</a>
                                     <div className="collapsible-body">
                                         <ul>
                                             <li><Link to="/traffic_police"><i className="mdi mdi-chevron-right"/>交警管理</Link></li>
@@ -202,6 +202,24 @@ class Container extends React.Component {
                             </ul>
                         </li>
 
+                        <li>
+                            <ul className="collapsible collapsible-accordion">
+                                <li>
+                                    <a className="collapsible-header"><i className="mdi mdi-cart-outline"/>商品管理</a>
+                                    <div className="collapsible-body">
+                                        <ul>
+                                            <li><Link to="/order"><i className="mdi mdi-chevron-right"/>订单管理</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/feed_back"><i className="mdi mdi-chevron-right"/>售后管理</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/log"><i className="mdi mdi-chevron-right"/>发货管理</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/payment"><i className="mdi mdi-chevron-right"/>支付管理</Link></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                     {routes.map((route, index) => (
                         // Render more <Route>s with the same paths as

@@ -17,6 +17,7 @@ import * as UserManagerActionType from './main/UserManagerActionType';
 import * as UserManagerDetailActionType from './main/UserManagerDetailActionType';
 import * as CarQRCodeModalActionType from './modules/CarQRCodeModalActionType';
 import * as RefundModalActionType from './modules/RefundModalActionType';
+import * as ReSendModalActionType from './modules/ReSendModalActionType';
 
 export {
     LoginActionType,
@@ -36,5 +37,6 @@ export {
     UserManagerActionType,
     UserManagerDetailActionType,
     CarQRCodeModalActionType,
-    RefundModalActionType
+    RefundModalActionType,
+    ReSendModalActionType
 }

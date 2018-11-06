@@ -466,12 +466,16 @@ body {
     max-height: 450px;
 }
 
-#messageModal .modal-content, #refundModal .modal-content {
-    max-height: calc(100% - 106px);
-}
-
 #carQRCodeModal {
     max-height: 500px;
+}
+
+#reSendModal {
+    max-height: 550px;
+}
+
+#messageModal .modal-content, #refundModal .modal-content, #reSendModal .modal-content {
+    max-height: calc(100% - 106px);
 }
 
 /** modal 样式定义部分 end */
