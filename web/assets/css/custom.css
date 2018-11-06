@@ -59,6 +59,11 @@ body {
     font-size: 15px;
 }
 
+/** 自定义粗分割线(画面标题部分用) */
+.custom-divider {
+    background: #CBCBCB;
+    height: 2px;
+}
 /** 虚分割线 */
 .dotted-line {
     height: 1px;
@@ -66,6 +71,12 @@ body {
     width: calc(100% - 20px);
     margin-left:10px;
 }
+/** 蓝色分割线 */
+.blue-divider {
+    background: #88A8CA;
+    height: 1px;
+}
+
 /** 画面加载样式 Start */
 .c-loader-wrapper {
     display: none;
@@ -269,7 +280,7 @@ body {
 }
 
 .margin-left20 {
-    margin-left: 20px;
+    margin-left: 20px !important;
 }
 
 .margin-left30 {
@@ -296,6 +307,10 @@ body {
     margin-right: 50px !important;
 }
 
+.padding-left0 {
+    padding-left: 0 !important;
+}
+
 .padding-left20 {
     padding-left: 20px !important;
 }
@@ -308,8 +323,20 @@ body {
     padding-right: 0 !important;
 }
 
+.padding-right20 {
+    padding-right: 20px !important;
+}
+
+.padding-right70 {
+    padding-right: 70px !important;
+}
+
 .padding-top20 {
     padding-top: 20px !important;
+}
+
+.padding-bottom10 {
+    padding-bottom: 10px !important;
 }
 
 .padding-bottom20 {
@@ -332,26 +359,45 @@ body {
 .s-percent-4 {
     width:4%;
 }
+
+.s-percent-8 {
+    width: 8%;
+}
+
 .s-percent-10 {
-    width:10%;
+    width: 10%;
 }
+
 .s-percent-13 {
-    width:13%;
+    width: 13%;
 }
+
 .s-percent-20 {
-    width:20%;
+    width: 20%;
 }
+
+.s-percent-40 {
+    width: 40%;
+}
+
 .s-percent-46 {
-    width:46%;
+    width: 46%;
 }
-.s-percent-87{
-    width:87%;
+
+.s-percent-87 {
+    width: 87%;
 }
-.s-percent-90{
-    width:90%;
+
+.s-percent-90 {
+    width: 90%;
 }
+
+.s-percent-92 {
+    width: 92%;
+}
+
 .s-percent-96 {
-    width:96%;
+    width: 96%;
 }
 
 .no-img-box {
@@ -472,11 +518,6 @@ body {
 
 .custom-indigo {
     color: #9DB8D2;
-}
-
-.custom-divider {
-    background: #CBCBCB;
-    height: 2px;
 }
 
 /** 数据过长时，隐藏部分内容 */

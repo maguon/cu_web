@@ -146,6 +146,18 @@ export const CANCEL_STATUS = [
     }
 ];
 
+// 处理状态
+export const FEED_BACK_STATUS = [
+    {
+        value: 0,
+        label: "未处理"
+    },
+    {
+        value: 1,
+        label: "已处理"
+    }
+];
+
 export const DATE_PICKER_OPTION = {
     // selectMonths: true,
     // selectYears: 15,
