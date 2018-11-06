@@ -1,0 +1,82 @@
+ <view class='content'>
+
+   <view class='title'>
+     <view>售后编号：32452354553453</view>
+     <view class="state">已处理</view>
+   </view>
+
+   <view class='user-apply'>
+   <view class='head'>
+   <view class='head-title'>用户申请</view>
+   <view class='head-time'>申请时间：2018-06-24 11:24:32</view>
+   </view>
+   <view class='div-line'></view>
+   <view class='apply'>
+   <view class='apply-title'>申请原因：</view>
+   <view class='apply-content'>不想要了，我想退款</view>
+   </view>
+   </view>
+
+   <view class='result'>
+   <view class='head'>
+   <view class='head-title'>处理结果</view>
+   <view class='head-time'>处理时间：2018-06-24 11:24:32</view>
+   </view>
+   <view class='div-line'></view>
+       <view class='price'>
+       <view class='test'>退款金额</view>
+       <view class='right'>
+       <image class='money'src='../../../../../assets/images/money.png'></image>
+       <view class='total'>5.00</view>
+       </view>
+       </view>
+       <view class='div-line'></view>    
+
+      <view class='price'>
+      <view class='test'>补发商品</view>
+      <view class='num'>挪车二维码贴</view>
+      </view>
+      <view class='div-line'></view>  
+
+      <view class='price'>
+      <view class='test'>补发件数</view>
+      <view class='num'>1</view>
+      </view>
+      <view class='div-line'></view>  
+
+      <view class='result-text'>
+      <view class='apply-title'>处理描述：</view>
+      <view class='apply-content'>我方只能返还一件商品</view>
+      </view>
+      <view class='div-line'></view>  
+
+      <view class='price'>
+      <view class='test'>快递公司</view>
+      <view class='num'>中通快递</view>
+      </view>
+      <view class='div-line'></view>  
+
+      <view class='price'>
+      <view class='test'>快递单号</view>
+      <view class='num'>4352938472975983</view>
+      </view>
+      <view class='div-line'></view>  
+     
+      <view class='price'>
+      <view class='num'>补发时间：2018-06-24 11:24:32</view>
+      </view>
+   </view>
+
+
+   <view class="weui-footer">
+   <view class="weui-footer__links">
+    <view class="weui-footer__link">联系客服</view>
+   </view>
+   <view class="weui-footer-number">400-800-3562</view>
+   <view class="weui-footer__text">您也可以直接拨打400电话向客服描述问题情况</view>
+   </view>
+   
+
+ </view>
+
+    

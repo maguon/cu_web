@@ -1,0 +1,24 @@
+<view class='content'>
+<view class='head'> 
+   <view class='head-pay'>
+   <view class='head-text'>付款给个人</view>
+   <view class='head-name'>昵称：{{wechatName}}</view>
+   </view>
+   
+   <image class='head-image' src='{{avatarUrl}}'></image>
+</view>
+<view class='div-line'></view>
+
+<view class='center'> 
+  <view class='center-text'>转账金额</view>
+   <view class='center-pay'>
+    <image class='center-image' src='../../../../assets/images/money.png'></image>
+    <view class='center-input'>{{totalPrice}}.00</view>
+   </view>
+</view>
+<view class='div-line'></view>
+
+<button class="weui-btn" bindtap='payment' type="primary">付款</button>
+<view class='add-msg'>添加备注</view>
+
+</view>

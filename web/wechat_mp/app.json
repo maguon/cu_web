@@ -1,16 +1,16 @@
 {
   "pages": [
-
-   
+    "pages/user/order/order-detail/after-sale/after-sale",
     "pages/login/login",
     "pages/index/index",
+    "pages/index/car-detail/car-detail",
     "pages/index/addressList/addressList",
     "pages/index/print/print",
-    "pages/index/address/address",
-
-    "pages/index/car-detail/car-detail",
     "pages/index/product-dt/product-dt",
+    "pages/index/address/address",
     "pages/index/pay/pay",
+    "pages/index/pay/wxpay/wxpay",
+
     "pages/msg/msg",
     "pages/msg/read-msg/read-msg",
    
@@ -20,7 +20,7 @@
     "pages/user/order/order",
     "pages/user/order/order-detail/order-detail",
     "pages/user/order/order-detail/apply/apply",
-        
+    
     "pages/user/carList/carList",
     "pages/user/carList/addCar/addCar",
     "pages/user/carList/editCar/editCar",

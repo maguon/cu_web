@@ -1,0 +1,124 @@
+page{
+  background: #efeff4;
+}
+.title{
+height: 40px;
+width: 100%;
+color: #8a8a8a;
+font-size: 12px;
+margin-left: 15px;
+display: flex;
+align-items: center;
+}
+.state{
+  position: absolute;
+  right: 15px;
+}
+.user-apply{
+  height: 110px;
+  width: 100%;
+  background: white;
+  margin-bottom: 10px;
+}
+.head{
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 15px;
+  font-size: 15px;
+}
+.head-title{
+   color: #019deb;
+}
+.head-time{
+ color: #8a8a8a;
+ position: absolute;
+ right: 15px;
+ font-size: 12px;
+}
+.apply{
+  height: 70px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.apply-content{
+  margin-left: 15px;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #8a8a8a;
+}
+.apply-title{
+  margin-left: 15px;
+}
+.result{
+  height: 40px;
+  width: 100%;
+  background: white;
+}
+.result-text{
+height: 60px;
+width: 100%;
+font-size: 13px;
+background: white;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.price{
+  height: 40px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: white;
+}
+.test{
+   margin-left: 15px;
+}
+.money{
+  height: 12px;
+  width: 12px;
+  padding-top: 7px;
+}
+.total{
+  font-size: 15px;
+  color: red;
+}
+.num{
+  position: absolute;
+  right: 15px;
+  font-size: 13px;
+  color: #a8a8a8;
+}
+.right{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+  right: 15px;
+}
+
+
+.div-line{
+  border: 1px solid #efeff4;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+  .weui-footer{
+    position: fixed;
+    bottom: 10px;
+    left: 8%;
+    right: 8%;
+  }
+
+  .weui-footer__link{
+    color: #0096e3;
+  }
+  .weui-footer-number{
+    color: rgb(107, 105, 105);
+    font-size: 15px;
+  }

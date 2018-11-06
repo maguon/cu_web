@@ -11,7 +11,7 @@ Page({
     ],
     price:'',
     clock:'',
-    time:60000,
+    time:21000000,
 
     bntFlag: false,
   },
@@ -50,6 +50,7 @@ Page({
     })
   },
 
+
   
 /**
  * 支付选择
@@ -66,12 +67,16 @@ Page({
       payList: payList
     });
   },
-  returnHome:function(){
-  //跳转至指定页面并关闭其他打开的所有页面（这个最好用在返回至首页的的时候）
-    wx.reLaunch({  
-      url: '/pages/index/index'
+  
+  bindTap:function(){
+    var price=this.data.price;
+    var payList=this.data.payList;
+ 
+    wx.navigateTo({  
+      url: '/pages/index/pay/wxpay/wxpay?price='+price+"&payList="+payList,
     })
   }
+  
 })
 
 function checkTime(i) { //将0-9的数字前面加上0，例1变为01 
