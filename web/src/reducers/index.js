@@ -5,6 +5,8 @@ import HeaderReducer from './layout/HeaderReducer';
 import LoginReducer from './layout/LoginReducer';
 import CheckCarReducer from './main/CheckCarReducer';
 import CheckCarDetailReducer from './main/CheckCarDetailReducer'
+import FeedBackReducer from './main/FeedBackReducer';
+import FeedBackDetailReducer from './main/FeedBackDetailReducer'
 import MessageReducer from './main/MessageReducer';
 import MessageDetailReducer from './main/MessageDetailReducer';
 import OrderReducer from './main/OrderReducer';
@@ -27,6 +29,8 @@ export default combineReducers({
     HeaderReducer,
     CheckCarReducer,
     CheckCarDetailReducer,
+    FeedBackReducer,
+    FeedBackDetailReducer,
     OrderReducer,
     OrderDetailReducer,
     MessageReducer,
