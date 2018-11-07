@@ -66,7 +66,7 @@ class FeedBackDetail extends React.Component {
     };
 
     render() {
-        const {orderDetailReducer, updateFeedBack} = this.props;
+        const {feedBackDetailReducer, updateFeedBack} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -77,7 +77,7 @@ class FeedBackDetail extends React.Component {
                                 <i className="mdi mdi-arrow-left-bold"/>
                             </a>
                         </Link>
-                        <span className="page-title margin-left30">订单管理 - 订单详情</span>
+                        <span className="page-title margin-left30">售后管理 - 售后详情</span>
                         <div className="divider custom-divider margin-top10"/>
                     </div>
                 </div>
@@ -86,32 +86,32 @@ class FeedBackDetail extends React.Component {
                     {/* TAB 头部 */}
                     <div className="col s12">
                         {/* 订单详情：基本信息 */}
-                        {orderDetailReducer.orderInfo.length > 0 &&
+                        {feedBackDetailReducer.orderInfo.length > 0 &&
                         <div className="order-detail-header">
                             {/* 基本信息：订单编号 */}
                             <div className="col s6">订单编号：{this.props.match.params.id}</div>
                             {/* 基本信息：下单时间 */}
                             <div className="col s-percent-40 right-align">
-                                <span className="grey-text fz14">下单时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].created_on)}</span>
+                                <span className="grey-text fz14">下单时间：{formatUtil.getDateTime(feedBackDetailReducer.orderInfo[0].created_on)}</span>
                             </div>
 
                             {/* 基本信息：支付/发货/取消 状态 */}
                             <div className="col s-percent-10 right-align">
-                                {orderDetailReducer.orderInfo[0].status === 1
+                                {feedBackDetailReducer.orderInfo[0].status === 1
                                     ?
-                                    <span>{sysConst.CANCEL_STATUS[orderDetailReducer.orderInfo[0].status].label}</span>
+                                    <span>{sysConst.CANCEL_STATUS[feedBackDetailReducer.orderInfo[0].status].label}</span>
                                     :
-                                    <span>{sysConst.PAYMENT_STATUS[orderDetailReducer.orderInfo[0].payment_status].label}/{sysConst.LOG_STATUS[orderDetailReducer.orderInfo[0].log_status].label}</span>
+                                    <span>{sysConst.PAYMENT_STATUS[feedBackDetailReducer.orderInfo[0].payment_status].label}/{sysConst.LOG_STATUS[feedBackDetailReducer.orderInfo[0].log_status].label}</span>
                                 }
                             </div>
 
                             {/* 基本信息：订单描述 */}
-                            <div className="col s6 grey-text fz14 margin-top10 context-ellipsis">{orderDetailReducer.orderInfo[0].remark}</div>
+                            <div className="col s6 grey-text fz14 margin-top10 context-ellipsis">{feedBackDetailReducer.orderInfo[0].remark}</div>
                             {/* 基本信息：用户 电话 微信昵称 */}
                             <div className="col s6 margin-top10 right-align">
-                                <span><i className="mdi mdi-account margin-right10 fz20"/>{orderDetailReducer.orderInfo[0].user_name}</span>
-                                <span className="margin-left50"><i className="mdi mdi-cellphone margin-right10 fz20"/>{orderDetailReducer.orderInfo[0].phone}</span>
-                                <span className="margin-left50"><i className="mdi mdi-wechat margin-right10 fz20"/>{orderDetailReducer.orderInfo[0].wechat_name}</span>
+                                <span><i className="mdi mdi-account margin-right10 fz20"/>{feedBackDetailReducer.orderInfo[0].user_name}</span>
+                                <span className="margin-left50"><i className="mdi mdi-cellphone margin-right10 fz20"/>{feedBackDetailReducer.orderInfo[0].phone}</span>
+                                <span className="margin-left50"><i className="mdi mdi-wechat margin-right10 fz20"/>{feedBackDetailReducer.orderInfo[0].wechat_name}</span>
                             </div>
                         </div>}
 
@@ -125,7 +125,7 @@ class FeedBackDetail extends React.Component {
                     {/* TAB 1 : 基本信息TAB */}
                     <div id="tab-base" className="col s12">
                         {/* 车辆信息：明细 */}
-                        {orderDetailReducer.orderInfo.length > 0 &&
+                        {feedBackDetailReducer.orderInfo.length > 0 &&
                         <div>
                             {/* 购买信息 */}
                             <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
@@ -134,11 +134,11 @@ class FeedBackDetail extends React.Component {
                                 </div>
 
                                 <div className="col s12 grey-text">
-                                    {orderDetailReducer.productArray.length === 0 &&
+                                    {feedBackDetailReducer.productArray.length === 0 &&
                                     <div className="row center grey-text margin-top20 fz15">
                                         该订单暂无商品记录
                                     </div>}
-                                    {orderDetailReducer.productArray.map(function (item) {
+                                    {feedBackDetailReducer.productArray.map(function (item) {
                                         return (
                                             <div className="col s12 border-bottom-line padding-top20 padding-bottom20">
                                                 <div className="col no-padding s-percent-10">
@@ -161,29 +161,29 @@ class FeedBackDetail extends React.Component {
 
                                     <div className="col s12 padding-top20 padding-bottom20">
                                         <div className="col s8 no-padding context-ellipsis">
-                                            收货地址：{orderDetailReducer.orderInfo[0].recv_address} {orderDetailReducer.orderInfo[0].recv_name} {orderDetailReducer.orderInfo[0].recv_phone}
+                                            收货地址：{feedBackDetailReducer.orderInfo[0].recv_address} {feedBackDetailReducer.orderInfo[0].recv_name} {feedBackDetailReducer.orderInfo[0].recv_phone}
                                         </div>
                                         <div className="col s4 right-align">
-                                            ( 运费：¥ {formatUtil.formatNumber(orderDetailReducer.orderInfo[0].total_freight, 2)} )
+                                            ( 运费：¥ {formatUtil.formatNumber(feedBackDetailReducer.orderInfo[0].total_freight, 2)} )
                                             <span className="margin-left30">合计：¥ </span>
                                             <span className="fz16 red-font bold-font">
-                                            {formatUtil.formatNumber(orderDetailReducer.orderInfo[0].total_price + orderDetailReducer.orderInfo[0].total_freight, 2)}
+                                            {formatUtil.formatNumber(feedBackDetailReducer.orderInfo[0].total_price + feedBackDetailReducer.orderInfo[0].total_freight, 2)}
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 {/* 已取消的订单 显示：取消时间 */}
-                                {orderDetailReducer.orderInfo[0].status === 1 &&
+                                {feedBackDetailReducer.orderInfo[0].status === 1 &&
                                 <div className="col s12 padding-top20 padding-bottom20 box-top-line">
                                     <div className="col s12 grey-text right-align padding-right20">
-                                        取消时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
+                                        取消时间：{formatUtil.getDateTime(feedBackDetailReducer.orderInfo[0].updated_on)}
                                     </div>
                                 </div>
                                 }
                             </div>
 
                             {/* 支付信息 */}
-                            {orderDetailReducer.orderInfo[0].status === 0 && orderDetailReducer.orderInfo[0].payment_status === 1 &&
+                            {feedBackDetailReducer.orderInfo[0].status === 0 && feedBackDetailReducer.orderInfo[0].payment_status === 1 &&
                             <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                                 <div className="row detail-box-header vc-center margin-bottom0">
                                     支付信息
@@ -194,13 +194,13 @@ class FeedBackDetail extends React.Component {
                                     <div className="col s2 blue-font bold-font">支付</div>
                                     <div className="col s6">金额：¥ <span className="red-font bold-font fz16">{formatUtil.formatNumber(9999, 2)}</span></div>
                                     <div className="col s4 fz14 right-align padding-right20">
-                                        支付时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
+                                        支付时间：{formatUtil.getDateTime(feedBackDetailReducer.orderInfo[0].updated_on)}
                                     </div>
                                 </div>
                             </div>}
 
                             {/* 发货信息 */}
-                            {orderDetailReducer.orderInfo[0].status === 0 && orderDetailReducer.orderInfo[0].payment_status === 1 &&
+                            {feedBackDetailReducer.orderInfo[0].status === 0 && feedBackDetailReducer.orderInfo[0].payment_status === 1 &&
                             <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                                 <div className="row detail-box-header vc-center margin-bottom0">
                                     发货信息
@@ -210,7 +210,7 @@ class FeedBackDetail extends React.Component {
                                 <div className="col s12 padding-top20 padding-bottom20 grey-text text-darken-2">
                                     <div className="col s6 fz14 grey-text">发货编号：XXXX</div>
                                     <div className="col s6 fz14 grey-text right-align padding-right20">
-                                        发货时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
+                                        发货时间：{formatUtil.getDateTime(feedBackDetailReducer.orderInfo[0].updated_on)}
                                     </div>
 
                                     <div className="col s4 margin-top10">快递公司：XXXXX</div>
@@ -228,14 +228,14 @@ class FeedBackDetail extends React.Component {
 
                                             <div className="col s6 margin-top10 grey-text fz14">收货地址：XXXX</div>
                                             <div className="col s6 margin-top10 grey-text fz14 right-align">
-                                                操作时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
+                                                操作时间：{formatUtil.getDateTime(feedBackDetailReducer.orderInfo[0].updated_on)}
                                             </div>
 
                                             <div className="col s12 margin-top20 dotted-line"/>
 
                                             <div className="col s6 margin-top10 fz14 grey-text">发货编号：XXXX</div>
                                             <div className="col s6 margin-top10 fz14 grey-text right-align">
-                                                发货时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
+                                                发货时间：{formatUtil.getDateTime(feedBackDetailReducer.orderInfo[0].updated_on)}
                                             </div>
 
                                             <div className="col s4 margin-top10 margin-bottom10">快递公司：XXXXX</div>
@@ -257,14 +257,14 @@ class FeedBackDetail extends React.Component {
 
                                             <div className="col s6 margin-top10 grey-text fz14">收货地址：XXXX</div>
                                             <div className="col s6 margin-top10 grey-text fz14 right-align">
-                                                操作时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
+                                                操作时间：{formatUtil.getDateTime(feedBackDetailReducer.orderInfo[0].updated_on)}
                                             </div>
 
                                             <div className="col s12 margin-top20 dotted-line"/>
 
                                             <div className="col s6 margin-top10 fz14 grey-text">发货编号：XXXX</div>
                                             <div className="col s6 margin-top10 fz14 grey-text right-align">
-                                                发货时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
+                                                发货时间：{formatUtil.getDateTime(feedBackDetailReducer.orderInfo[0].updated_on)}
                                             </div>
 
                                             <div className="col s4 margin-top10 margin-bottom10">快递公司：XXXXX</div>
@@ -287,19 +287,19 @@ class FeedBackDetail extends React.Component {
                     {/* TAB 2 : 售后信息TAB */}
                     <div id="tab-after-sale" className="col s12">
                         {/* 售后信息 */}
-                        {orderDetailReducer.orderInfo.length > 0 &&
+                        {feedBackDetailReducer.orderInfo.length > 0 &&
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                             {/* 售后编号 处理状态 */}
                             <div className="row detail-box-header vc-center margin-bottom0">
                                 <div className="col s6 no-padding">售后编号：XXXXXXX</div>
-                                <div className="col s6 no-padding right-align">{sysConst.FEED_BACK_STATUS[orderDetailReducer.orderInfo[0].status].label}</div>
+                                <div className="col s6 no-padding right-align">{sysConst.FEED_BACK_STATUS[feedBackDetailReducer.orderInfo[0].status].label}</div>
                             </div>
 
                             {/* 用户申请 TODO */}
                             <div className="col s12 padding-top20 padding-bottom10 grey-text">
                                 <div className="col s6 blue-font bold-font">用户申请</div>
                                 <div className="col s6 fz14 right-align">
-                                    申请时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
+                                    申请时间：{formatUtil.getDateTime(feedBackDetailReducer.orderInfo[0].updated_on)}
                                 </div>
                             </div>
 
@@ -328,8 +328,8 @@ class FeedBackDetail extends React.Component {
                             <div className="col s12 padding-left20 padding-right20 padding-bottom10"><div className="col s12 blue-divider"/></div>
 
                             <div className="col s12">
-                                <Input s={12} label="处理描述" className="right-align" value={orderDetailReducer.description} onChange={this.changeDescription}/>
-                                <Input s={12} label="处理方法" className="right-align" value={orderDetailReducer.processing} onChange={this.changeProcessing}/>
+                                <Input s={12} label="处理描述" className="right-align" value={feedBackDetailReducer.description} onChange={this.changeDescription}/>
+                                <Input s={12} label="处理方法" className="right-align" value={feedBackDetailReducer.processing} onChange={this.changeProcessing}/>
                             </div>
 
                             <div className="col s12 right-align padding-bottom20 padding-right20">
@@ -353,7 +353,7 @@ class FeedBackDetail extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        orderDetailReducer: state.FeedBackDetailReducer
+        feedBackDetailReducer: state.FeedBackDetailReducer
     }
 };
 
