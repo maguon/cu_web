@@ -21,6 +21,8 @@ import {
     OrderDetail,
     FeedBack,
     FeedBackDetail,
+    Log,
+    LogDetail,
 } from '../main/index';
 
 const routes = [
@@ -129,6 +131,18 @@ const routes = [
         path: '/feed_back/:id',
         exact: true,
         component: FeedBackDetail
+    },
+    // 发货管理
+    {
+        path: "/log",
+        exact: true,
+        component: Log
+    },
+    // 发货管理 - 详情
+    {
+        path: '/log/:id',
+        exact: true,
+        component: LogDetail
     },
 ];
 

@@ -7,6 +7,8 @@ import CheckCarReducer from './main/CheckCarReducer';
 import CheckCarDetailReducer from './main/CheckCarDetailReducer'
 import FeedBackReducer from './main/FeedBackReducer';
 import FeedBackDetailReducer from './main/FeedBackDetailReducer'
+import LogReducer from './main/LogReducer';
+import LogDetailReducer from './main/LogDetailReducer';
 import MessageReducer from './main/MessageReducer';
 import MessageDetailReducer from './main/MessageDetailReducer';
 import OrderReducer from './main/OrderReducer';
@@ -33,6 +35,8 @@ export default combineReducers({
     FeedBackDetailReducer,
     OrderReducer,
     OrderDetailReducer,
+    LogReducer,
+    LogDetailReducer,
     MessageReducer,
     MessageDetailReducer,
     TrafficPoliceReducer,

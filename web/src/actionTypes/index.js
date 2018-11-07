@@ -5,6 +5,8 @@ import * as CheckCarActionType from './main/CheckCarActionType';
 import * as CheckCarDetailActionType from './main/CheckCarDetailActionType';
 import * as FeedBackActionType from './main/FeedBackActionType';
 import * as FeedBackDetailActionType from './main/FeedBackDetailActionType';
+import * as LogActionType from './main/LogActionType';
+import * as LogDetailActionType from './main/LogDetailActionType';
 import * as MessageActionType from './main/MessageActionType';
 import * as MessageDetailActionType from './main/MessageDetailActionType';
 import * as OrderActionType from './main/OrderActionType';
@@ -28,6 +30,8 @@ export {
     CheckCarDetailActionType,
     FeedBackActionType,
     FeedBackDetailActionType,
+    LogActionType,
+    LogDetailActionType,
     MessageActionType,
     MessageDetailActionType,
     OrderActionType,
