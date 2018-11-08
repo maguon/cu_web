@@ -189,6 +189,17 @@ body {
     height: 0;
     will-change: left, right;
 }
+
+/*.autocomplete-content {*/
+    /*margin-top: -20px !important;*/
+    /*margin-bottom: 20px !important;*/
+    /*display: block !important;*/
+    /*opacity: 1 !important;*/
+    /*!*width: 97%;*!*/
+    /*width: calc(100% - 1.5rem);*/
+    /*position: absolute !important;*/
+/*}*/
+
 /** Material样式 变更部分 End */
 
 /** Material补充样式 左侧导航栏 自定义 顶层按钮 */
@@ -470,11 +481,11 @@ body {
     max-height: 500px;
 }
 
-#reSendModal {
+#reSendModal, #newLogModal {
     max-height: 550px;
 }
 
-#messageModal .modal-content, #refundModal .modal-content, #reSendModal .modal-content {
+#messageModal .modal-content, #refundModal .modal-content, #reSendModal .modal-content, #newLogModal .modal-content {
     max-height: calc(100% - 106px);
 }
 
@@ -541,6 +552,16 @@ body {
     margin-left: 20px;
     margin-right: 10px;
     background-color: #0F4F94;
+}
+
+.small-btn {
+    width: 32px;
+    height: 32px;
+}
+
+.small-icon {
+    font-size: 24px !important;
+    line-height: 24px !important;
 }
 
 .add-btn {

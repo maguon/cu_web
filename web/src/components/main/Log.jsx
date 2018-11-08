@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
 import {LogActionType} from '../../actionTypes';
+import {NewLogModal} from '../modules/index';
 
 const logAction = require('../../actions/main/LogAction');
 const sysConst = require('../../util/SysConst');
@@ -127,6 +128,13 @@ class Log extends React.Component {
         this.props.getLogList();
     };
 
+    /**
+     * 显示 新增发货信息
+     */
+    showAddLog = () => {
+        $('#newLogModal').modal('open');
+    };
+
     render() {
         const {logReducer, changeConditionLogCo} = this.props;
         return (
@@ -141,7 +149,7 @@ class Log extends React.Component {
 
                 {/* 上部分：检索条件输入区域 */}
                 <div className="row grey-text text-darken-1">
-                    <div className="col s11 search-condition-box">
+                    <div className="col s10 search-condition-box">
 
                         {/* 查询条件：第一行 */}
                         <div>
@@ -220,6 +228,13 @@ class Log extends React.Component {
                             <i className="mdi mdi-magnify"/>
                         </a>
                     </div>
+
+                    {/* 追加按钮 */}
+                    <div className="col s1">
+                        <a className="btn-floating btn-large waves-light waves-effect btn margin-top40 add-btn" onClick={this.showAddLog}>
+                            <i className="mdi mdi-plus"/>
+                        </a>
+                    </div>
                 </div>
 
                 {/* 下部分：检索结果显示区域 */}
@@ -290,6 +305,7 @@ class Log extends React.Component {
                         </div>
                     </div>
                 </div>
+                <NewLogModal/>
             </div>
         )
     }

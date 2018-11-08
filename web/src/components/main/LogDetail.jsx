@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 
-const messageDetailAction = require('../../actions/main/MessageDetailAction');
+const logDetailAction = require('../../actions/main/LogDetailAction');
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
@@ -101,7 +101,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getMessageInfo: () => {
-        dispatch(messageDetailAction.getMessageInfo(ownProps.match.params.id))
+        dispatch(logDetailAction.getMessageInfo(ownProps.match.params.id))
     }
 });
 
