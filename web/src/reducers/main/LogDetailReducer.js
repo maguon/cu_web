@@ -1,16 +1,24 @@
 import {handleActions} from 'redux-actions';
-import {MessageDetailActionType} from '../../actionTypes';
+import {LogDetailActionType} from '../../actionTypes';
 
 const initialState = {
-    // 消息详情
-    messageInfo: []
+    // 发货详情
+    logInfo: [],
+    // 订单详情
+    orderInfo: [],
 };
 
 export default handleActions({
-    [MessageDetailActionType.getMessageInfo]: (state, action) => {
+    [LogDetailActionType.getLogInfo]: (state, action) => {
         return {
             ...state,
-            messageInfo: action.payload
+            logInfo: action.payload
+        }
+    },
+    [LogDetailActionType.getOrderInfo]: (state, action) => {
+        return {
+            ...state,
+            orderInfo: action.payload
         }
     }
 }, initialState)

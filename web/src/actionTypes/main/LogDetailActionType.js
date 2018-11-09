@@ -1,3 +1,4 @@
 import {createAction} from 'redux-actions';
 
-export const getMessageInfo = createAction('GET_MESSAGE_INFO');
+export const getLogInfo = createAction('GET_LOG_INFO');
+export const getOrderInfo = createAction('GET_ORDER_INFO');
