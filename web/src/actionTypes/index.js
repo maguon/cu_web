@@ -23,6 +23,7 @@ import * as CarQRCodeModalActionType from './modules/CarQRCodeModalActionType';
 import * as NewLogModalActionType from './modules/NewLogModalActionType';
 import * as RefundModalActionType from './modules/RefundModalActionType';
 import * as ReSendModalActionType from './modules/ReSendModalActionType';
+import * as SendOutModalActionType from './modules/SendOutModalActionType';
 
 export {
     LoginActionType,
@@ -48,5 +49,6 @@ export {
     CarQRCodeModalActionType,
     NewLogModalActionType,
     RefundModalActionType,
-    ReSendModalActionType
+    ReSendModalActionType,
+    SendOutModalActionType
 }

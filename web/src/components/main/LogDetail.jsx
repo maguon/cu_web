@@ -1,8 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
+import {SendOutModal} from '../modules/index';
+import {LogActionType, SendOutModalActionType} from "../../actionTypes";
 
 const logDetailAction = require('../../actions/main/LogDetailAction');
+const sendOutModalAction = require('../../actions/modules/SendOutModalAction');
+
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
@@ -24,10 +28,12 @@ class LogDetail extends React.Component {
     }
 
     /**
-     * 售后信息TAB：补发按钮 点击事件
+     * 显示 发货信息 模态画面
      */
     showSendModal = () => {
-        $('#reSendModal').modal('open');
+        $('#sendOutModal').modal('open');
+        this.props.setLogInfo(this.props.logDetailReducer.logInfo);
+        this.props.getLogCoList();
     };
 
     render() {
@@ -139,8 +145,11 @@ class LogDetail extends React.Component {
                     </div>
                     {/* 发货 按钮 (未发货状态显示) */}
                     {logDetailReducer.logInfo[0].status === sysConst.LOG_STATUS[0].value &&
-                    <div className="col s12 right-align padding-right70">
-                        <button type="button" className="btn confirm-btn" onClick={this.showSendModal}>发货</button>
+                    <div>
+                        <div className="col s12 right-align padding-right70">
+                            <button type="button" className="btn confirm-btn" onClick={this.showSendModal}>发货</button>
+                        </div>
+                        <SendOutModal/>
                     </div>}
                 </div>}
             </div>
@@ -157,7 +166,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getLogInfo: () => {
         dispatch(logDetailAction.getLogInfo(ownProps.match.params.id))
-    }
+    },
+    setLogInfo: (value) => {
+        dispatch(SendOutModalActionType.setLogInfo(value))
+    },
+    getLogCoList: () => {
+        dispatch(sendOutModalAction.getLogCoList())
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogDetail)

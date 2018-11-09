@@ -25,6 +25,7 @@ import CarQRCodeModalReducer from './modules/CarQRCodeModalReducer';
 import NewLogModalReducer from './modules/NewLogModalReducer';
 import RefundModalReducer from './modules/RefundModalReducer';
 import ReSendModalReducer from './modules/ReSendModalReducer';
+import SendOutModalReducer from './modules/SendOutModalReducer';
 
 export default combineReducers({
     form: reduxFormReducer,
@@ -51,5 +52,6 @@ export default combineReducers({
     CarQRCodeModalReducer,
     NewLogModalReducer,
     RefundModalReducer,
-    ReSendModalReducer
+    ReSendModalReducer,
+    SendOutModalReducer
 })
