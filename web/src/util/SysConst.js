@@ -134,6 +134,18 @@ export const LOG_STATUS = [
     }
 ];
 
+// 货物补发状态
+export const LOG_RESEND_STATUS = [
+    {
+        value: 0,
+        label: "首次发送"
+    },
+    {
+        value: 1,
+        label: "补发"
+    }
+];
+
 // 取消状态
 export const CANCEL_STATUS = [
     {

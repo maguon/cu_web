@@ -8,12 +8,15 @@ const initialState = {
     orderInfo: [],
     // 订单内商品列表
     orderItemArray: [],
-    // 订单内商品数量列表
-    orderItemCntMap: {},
-    // 商品名称
+    // 商品名称select
     orderItem: null,
+    // 商品描述
+    orderItemDes: '',
     // 商品数量
     orderItemCnt: '',
+    // 新增发货商品列表Map
+    logList: [],
+
     // 收货人
     recvName: '',
     // 收货电话
@@ -38,21 +41,11 @@ export default handleActions({
     [NewLogModalActionType.getOrderItemList]: (state, action) => {
         let orderItemList = [];
         action.payload.forEach((value) => {
-            orderItemList.push({value: value.id, label: value.product_name})
+            orderItemList.push({value: value.id, label: value.product_name, 'remark': value.remark, 'cnt': value.prod_count})
         });
         return {
             ...state,
             orderItemArray: orderItemList
-        }
-    },
-    [NewLogModalActionType.getOrderItemCntList]: (state, action) => {
-        let orderItemCntMap = new Map();
-        action.payload.forEach((value) => {
-            orderItemCntMap.set(value.id, value.prod_count)
-        });
-        return {
-            ...state,
-            orderItemCntMap: orderItemCntMap
         }
     },
     [NewLogModalActionType.setOrderItem]: (state, action) => {
@@ -61,10 +54,22 @@ export default handleActions({
             orderItem: action.payload
         }
     },
+    [NewLogModalActionType.setOrderItemDes]: (state, action) => {
+        return {
+            ...state,
+            orderItemDes: action.payload
+        }
+    },
     [NewLogModalActionType.setOrderItemCnt]: (state, action) => {
         return {
             ...state,
             orderItemCnt: action.payload
+        }
+    },
+    [NewLogModalActionType.setLogList]: (state, action) => {
+        return {
+            ...state,
+            logList: action.payload
         }
     },
     [NewLogModalActionType.setRecvName]: (state, action) => {

@@ -20,7 +20,7 @@ class MessageDetail extends React.Component {
      */
     componentDidMount() {
         // 取得消息信息
-        this.props.getMessageInfo();
+        this.props.getLogInfo();
     }
 
     render() {
@@ -100,8 +100,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    getMessageInfo: () => {
-        dispatch(logDetailAction.getMessageInfo(ownProps.match.params.id))
+    getLogInfo: () => {
+        dispatch(logDetailAction.getLogInfo(ownProps.match.params.id))
     }
 });
 

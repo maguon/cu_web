@@ -6,6 +6,7 @@ import {Input} from 'react-materialize';
 import {LogActionType} from '../../actionTypes';
 import {NewLogModal} from '../modules/index';
 
+const newLogModalAction = require('../../actions/modules/NewLogModalAction');
 const logAction = require('../../actions/main/LogAction');
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
@@ -132,6 +133,7 @@ class Log extends React.Component {
      * 显示 新增发货信息
      */
     showAddLog = () => {
+        this.props.initModalData();
         $('#newLogModal').modal('open');
     };
 
@@ -361,6 +363,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setConditionUpdatedOnEnd: (value) => {
         dispatch(LogActionType.setConditionUpdatedOnEnd(value))
+    },
+    initModalData: () => {
+        dispatch(newLogModalAction.initData())
     }
 });
 
