@@ -37,7 +37,7 @@ class LogDetail extends React.Component {
     };
 
     render() {
-        const {logDetailReducer} = this.props;
+        const {logDetailReducer, commonReducer} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -70,24 +70,24 @@ class LogDetail extends React.Component {
                         <div className="col s12 grey-text text-darken-2">
 
                             {/** 订单信息 */}
-                            {logDetailReducer.orderInfo.length > 0 &&
+                            {commonReducer.orderInfo.length > 0 &&
                             <div className="row detail-box custom-grey">
                                 {/* 订单信息：订单编号 */}
-                                <div className="col s6 margin-top10">订单编号：{logDetailReducer.orderInfo[0].id}</div>
+                                <div className="col s6 margin-top10">订单编号：{commonReducer.orderInfo[0].id}</div>
 
                                 {/* 订单信息：支付/发货/取消 状态 */}
                                 <div className="col s6 margin-top10 right-align blue-font">
-                                    {sysConst.PAYMENT_STATUS[logDetailReducer.orderInfo[0].payment_status].label}/{sysConst.LOG_STATUS[logDetailReducer.orderInfo[0].log_status].label}
+                                    {sysConst.PAYMENT_STATUS[commonReducer.orderInfo[0].payment_status].label}/{sysConst.LOG_STATUS[commonReducer.orderInfo[0].log_status].label}
                                 </div>
 
                                 {/* 订单信息：订单描述/ */}
                                 <div className="col s8 margin-top10 margin-bottom10 context-ellipsis">
-                                    {logDetailReducer.orderInfo[0].remark}
+                                    {commonReducer.orderInfo[0].remark}
                                 </div>
 
                                 {/* 订单信息：下单时间 */}
                                 <div className="col s4 margin-top10 margin-bottom10 right-align">
-                                    <span className="grey-text fz14">下单时间：{formatUtil.getDateTime(logDetailReducer.orderInfo[0].created_on)}</span>
+                                    <span className="grey-text fz14">下单时间：{formatUtil.getDateTime(commonReducer.orderInfo[0].created_on)}</span>
                                 </div>
                             </div>}
 
@@ -159,7 +159,8 @@ class LogDetail extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        logDetailReducer: state.LogDetailReducer
+        logDetailReducer: state.LogDetailReducer,
+        commonReducer: state.CommonReducer
     }
 };
 

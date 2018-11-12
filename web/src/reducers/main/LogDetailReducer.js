@@ -3,9 +3,7 @@ import {LogDetailActionType} from '../../actionTypes';
 
 const initialState = {
     // 发货详情
-    logInfo: [],
-    // 订单详情
-    orderInfo: [],
+    logInfo: []
 };
 
 export default handleActions({
@@ -13,12 +11,6 @@ export default handleActions({
         return {
             ...state,
             logInfo: action.payload
-        }
-    },
-    [LogDetailActionType.getOrderInfo]: (state, action) => {
-        return {
-            ...state,
-            orderInfo: action.payload
         }
     }
 }, initialState)
