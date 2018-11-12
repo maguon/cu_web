@@ -1,6 +1,7 @@
 import * as HeaderActionType from './layout/HeaderActionType';
 import * as LoginActionType from './layout/LoginActionType';
 
+import * as CommonActionType from './main/CommonActionType';
 import * as CheckCarActionType from './main/CheckCarActionType';
 import * as CheckCarDetailActionType from './main/CheckCarDetailActionType';
 import * as FeedBackActionType from './main/FeedBackActionType';
@@ -28,6 +29,7 @@ import * as SendOutModalActionType from './modules/SendOutModalActionType';
 export {
     LoginActionType,
     HeaderActionType,
+    CommonActionType,
     CheckCarActionType,
     CheckCarDetailActionType,
     FeedBackActionType,

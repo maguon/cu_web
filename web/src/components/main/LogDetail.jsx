@@ -2,11 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {SendOutModal} from '../modules/index';
-import {LogActionType, SendOutModalActionType} from "../../actionTypes";
+import {SendOutModalActionType} from "../../actionTypes";
 
+const commonAction = require('../../actions/main/CommonAction');
 const logDetailAction = require('../../actions/main/LogDetailAction');
-const sendOutModalAction = require('../../actions/modules/SendOutModalAction');
-
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
@@ -34,6 +33,7 @@ class LogDetail extends React.Component {
         $('#sendOutModal').modal('open');
         this.props.setLogInfo(this.props.logDetailReducer.logInfo);
         this.props.getLogCoList();
+        this.props.initModalData();
     };
 
     render() {
@@ -171,8 +171,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(SendOutModalActionType.setLogInfo(value))
     },
     getLogCoList: () => {
-        dispatch(sendOutModalAction.getLogCoList())
+        dispatch(commonAction.getLogCoList())
     },
+    initModalData: () => {
+        dispatch(SendOutModalActionType.setLogCompany(null));
+        dispatch(SendOutModalActionType.setLogNum(''));
+        dispatch(SendOutModalActionType.setFreight(''));
+        dispatch(SendOutModalActionType.setRemark(''));
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogDetail)

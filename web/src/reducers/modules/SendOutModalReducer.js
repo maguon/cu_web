@@ -1,18 +1,17 @@
 import {handleActions} from 'redux-actions';
-import {LogActionType, SendOutModalActionType} from '../../actionTypes';
+import {SendOutModalActionType} from '../../actionTypes';
 
 const initialState = {
     // 发货详细信息
     logInfo: [],
-    // 快递公司 列表
-    logCoArray: [],
-
-    // 申请原因
-    applyReason: '',
-    // 已退款金额
-    refundMoney: 0,
+    // 快递公司
+    logCompany: null,
+    // 快递单号
+    logNum: '',
     // 运费
-    freight: ''
+    freight: '',
+    // 备注
+    remark: ''
 };
 
 export default handleActions({
@@ -22,35 +21,28 @@ export default handleActions({
             logInfo: action.payload
         }
     },
-    [SendOutModalActionType.getLogCoList]: (state, action) => {
-        let logCoList = [];
-        action.payload.forEach((value) => {
-            logCoList.push({value: value.id, label: value.company_name})
-        });
+    [SendOutModalActionType.setLogCompany]: (state, action) => {
         return {
             ...state,
-            logCoArray: logCoList
+            logCompany: action.payload
         }
     },
-
-
-
-    [SendOutModalActionType.setApplyReason]: (state, action) => {
+    [SendOutModalActionType.setLogNum]: (state, action) => {
         return {
             ...state,
-            applyReason: action.payload
-        }
-    },
-    [SendOutModalActionType.setRefundMoney]: (state, action) => {
-        return {
-            ...state,
-            refundMoney: action.payload
+            logNum: action.payload
         }
     },
     [SendOutModalActionType.setFreight]: (state, action) => {
         return {
             ...state,
             freight: action.payload
+        }
+    },
+    [SendOutModalActionType.setRemark]: (state, action) => {
+        return {
+            ...state,
+            remark: action.payload
         }
     }
 }, initialState)

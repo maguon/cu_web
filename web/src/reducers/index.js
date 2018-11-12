@@ -3,6 +3,7 @@ import {reducer as reduxFormReducer} from 'redux-form';
 
 import HeaderReducer from './layout/HeaderReducer';
 import LoginReducer from './layout/LoginReducer';
+import CommonReducer from './main/CommonReducer';
 import CheckCarReducer from './main/CheckCarReducer';
 import CheckCarDetailReducer from './main/CheckCarDetailReducer'
 import FeedBackReducer from './main/FeedBackReducer';
@@ -31,6 +32,7 @@ export default combineReducers({
     form: reduxFormReducer,
     LoginReducer,
     HeaderReducer,
+    CommonReducer,
     CheckCarReducer,
     CheckCarDetailReducer,
     FeedBackReducer,
