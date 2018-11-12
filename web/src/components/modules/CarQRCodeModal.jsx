@@ -20,39 +20,36 @@ class CarQRCodeModal extends React.Component {
     render() {
         const {carQRCodeModalReducer, closeModal} = this.props;
         return (
-            <div>
-                {/* 标题部分 */}
-                <div id="carQRCodeModal" className="modal modal-fixed-footer row">
+            <div id="carQRCodeModal" className="modal modal-fixed-footer row">
 
-                    {/** Modal头部：Title */}
-                    <div className="modal-title center-align white-text">车辆二维码</div>
+                {/** Modal头部：Title */}
+                <div className="modal-title center-align white-text">车辆二维码</div>
 
-                    {/** Modal主体 */}
-                    <div className="modal-content white blue-font">
+                {/** Modal主体 */}
+                <div className="modal-content white blue-font">
 
-                        <div className="row margin-bottom0 margin-left10 margin-right10">
-                            {/* 基本信息：车牌号 */}
-                            <div className="input-field col s6 fz18">
-                                {carQRCodeModalReducer.plateNum}
-                            </div>
-                            {/* 基本信息：车辆编号 */}
-                            <div className="input-field col s6 right-align">
-                                车辆编号：{carQRCodeModalReducer.carNo}
-                            </div>
+                    <div className="row margin-bottom0 margin-left10 margin-right10">
+                        {/* 基本信息：车牌号 */}
+                        <div className="input-field col s6 fz18">
+                            {carQRCodeModalReducer.plateNum}
                         </div>
-
-                        <div className="row divider margin-left10 margin-right10"/>
-
-                        {/* 基本信息：二维码图案 */}
-                        <div className="row center">
-                            <canvas id="canvas"/>
+                        {/* 基本信息：车辆编号 */}
+                        <div className="input-field col s6 right-align">
+                            车辆编号：{carQRCodeModalReducer.carNo}
                         </div>
                     </div>
 
-                    {/** Modal固定底部：确定按钮 */}
-                    <div className="modal-footer">
-                        <button type="button" className="btn confirm-btn" onClick={closeModal}>确定</button>
+                    <div className="row divider margin-left10 margin-right10"/>
+
+                    {/* 基本信息：二维码图案 */}
+                    <div className="row center">
+                        <canvas id="canvas"/>
                     </div>
+                </div>
+
+                {/** Modal固定底部：确定按钮 */}
+                <div className="modal-footer">
+                    <button type="button" className="btn confirm-btn" onClick={closeModal}>确定</button>
                 </div>
             </div>
         )
