@@ -3,7 +3,11 @@ import {CommonActionType} from '../../actionTypes';
 
 const initialState = {
     // 快递公司 列表
-    logCoArray: []
+    logCoArray: [],
+    // 订单详情
+    orderInfo: [],
+    // 订单内商品明细
+    orderItem: [],
 };
 
 export default handleActions({
@@ -15,6 +19,18 @@ export default handleActions({
         return {
             ...state,
             logCoArray: logCoList
+        }
+    },
+    [CommonActionType.getOrderInfo]: (state, action) => {
+        return {
+            ...state,
+            orderInfo: action.payload
+        }
+    },
+    [CommonActionType.getOrderItem]: (state, action) => {
+        return {
+            ...state,
+            orderItem: action.payload
         }
     }
 }, initialState)

@@ -12,6 +12,8 @@ import * as MessageActionType from './main/MessageActionType';
 import * as MessageDetailActionType from './main/MessageDetailActionType';
 import * as OrderActionType from './main/OrderActionType';
 import * as OrderDetailActionType from './main/OrderDetailActionType';
+import * as PaymentActionType from './main/PaymentActionType';
+import * as PaymentDetailActionType from './main/PaymentDetailActionType';
 import * as TrafficPoliceActionType from './main/TrafficPoliceActionType';
 import * as TrafficPoliceDetailActionType from './main/TrafficPoliceDetailActionType';
 import * as UserAddressActionType from './main/UserAddressActionType';
@@ -40,6 +42,8 @@ export {
     MessageDetailActionType,
     OrderActionType,
     OrderDetailActionType,
+    PaymentActionType,
+    PaymentDetailActionType,
     TrafficPoliceActionType,
     TrafficPoliceDetailActionType,
     UserAddressActionType,

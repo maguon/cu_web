@@ -493,7 +493,7 @@ body {
     max-height: 500px;
 }
 
-#reSendModal {
+#reSendModal,#orderDetailModal {
     max-height: 550px;
 }
 
@@ -501,7 +501,7 @@ body {
     max-height: 750px;
 }
 
-#messageModal .modal-content, #refundModal .modal-content, #reSendModal .modal-content, #newLogModal .modal-content {
+#messageModal .modal-content, #refundModal .modal-content, #reSendModal .modal-content, #newLogModal .modal-content, #orderDetailModal .modal-content {
     max-height: calc(100% - 106px);
 }
 
@@ -598,6 +598,13 @@ body {
 .download-btn {
     margin-right: 10px;
     background-color: #fea353;
+}
+
+.detail-btn {
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    padding: 0 18px;
 }
 
 .custom-btn,.custom-detail-btn{

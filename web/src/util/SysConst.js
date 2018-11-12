@@ -170,6 +170,18 @@ export const FEED_BACK_STATUS = [
     }
 ];
 
+// 支付类型
+export const PAYMENT_TYPE = [
+    {
+        value: 0,
+        label: "退款"
+    },
+    {
+        value: 1,
+        label: "支付"
+    }
+];
+
 export const DATE_PICKER_OPTION = {
     // selectMonths: true,
     // selectYears: 15,

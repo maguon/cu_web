@@ -8,6 +8,8 @@ export Message from "./Message";
 export MessageDetail from "./MessageDetail";
 export Order from "./Order";
 export OrderDetail from "./OrderDetail";
+export Payment from "./Payment";
+export PaymentDetail from "./PaymentDetail";
 export TrafficPolice from "./TrafficPolice";
 export TrafficPoliceDetail from "./TrafficPoliceDetail";
 export UserAddress from "./UserAddress";
