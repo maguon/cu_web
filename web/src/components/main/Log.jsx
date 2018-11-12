@@ -6,6 +6,7 @@ import {Input} from 'react-materialize';
 import {LogActionType} from '../../actionTypes';
 import {NewLogModal} from '../modules/index';
 
+const commonAction = require('../../actions/main/CommonAction');
 const newLogModalAction = require('../../actions/modules/NewLogModalAction');
 const logAction = require('../../actions/main/LogAction');
 const sysConst = require('../../util/SysConst');
@@ -138,7 +139,7 @@ class Log extends React.Component {
     };
 
     render() {
-        const {logReducer, changeConditionLogCo} = this.props;
+        const {logReducer, commonReducer, changeConditionLogCo} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -168,7 +169,7 @@ class Log extends React.Component {
                             {/* 查询条件：快递公司 */}
                             <div className="input-field col s-percent-20">
                                 <Select
-                                    options={logReducer.logCoArray}
+                                    options={commonReducer.logCoArray}
                                     onChange={changeConditionLogCo}
                                     value={logReducer.conditionLogCo}
                                     isSearchable={false}
@@ -320,13 +321,14 @@ const mapStateToProps = (state, ownProps) => {
     }
     return {
         logReducer: state.LogReducer,
+        commonReducer: state.CommonReducer,
         fromDetail: fromDetail
     }
 };
 
 const mapDispatchToProps = (dispatch) => ({
     getLogCoList: () => {
-        dispatch(logAction.getLogCoList())
+        dispatch(commonAction.getLogCoList())
     },
     getLogList: () => {
         dispatch(logAction.getLogList())

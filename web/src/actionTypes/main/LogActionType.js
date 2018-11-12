@@ -1,6 +1,5 @@
 import {createAction} from 'redux-actions';
 
-export const getLogCoList = createAction('GET_LOG_CO_LIST');
 export const getLogList = createAction('GET_LOG_LIST');
 export const setStartNumber = createAction('SET_START_NUMBER');
 export const setDataSize = createAction('SET_DATA_SIZE');

@@ -31,22 +31,10 @@ const initialState = {
     conditionUpdatedOnEnd: '',
 
     // 发货记录 检索结果列表
-    logArray: [],
-    // 快递公司 列表
-    logCoArray: []
+    logArray: []
 };
 
 export default handleActions({
-    [LogActionType.getLogCoList]: (state, action) => {
-        let logCoList = [];
-        action.payload.forEach((value) => {
-            logCoList.push({value: value.id, label: value.company_name})
-        });
-        return {
-            ...state,
-            logCoArray: logCoList
-        }
-    },
     [LogActionType.getLogList]: (state, action) => {
         return {
             ...state,
