@@ -492,7 +492,7 @@ body {
     max-height: 450px;
 }
 
-#carQRCodeModal, #sendOutModal {
+#carQRCodeModal, #sendOutModal, #paymentRefundModal {
     max-height: 500px;
 }
 
@@ -504,7 +504,7 @@ body {
     max-height: 750px;
 }
 
-#messageModal .modal-content, #refundModal .modal-content, #reSendModal .modal-content, #newLogModal .modal-content, #orderDetailModal .modal-content {
+#messageModal .modal-content, #refundModal .modal-content, #reSendModal .modal-content, #newLogModal .modal-content, #orderDetailModal .modal-content, #paymentRefundModal .modal-content {
     max-height: calc(100% - 106px);
 }
 

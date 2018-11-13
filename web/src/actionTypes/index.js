@@ -24,6 +24,7 @@ import * as UserManagerActionType from './main/UserManagerActionType';
 import * as UserManagerDetailActionType from './main/UserManagerDetailActionType';
 import * as CarQRCodeModalActionType from './modules/CarQRCodeModalActionType';
 import * as NewLogModalActionType from './modules/NewLogModalActionType';
+import * as PaymentRefundModalActionType from './modules/PaymentRefundModalActionType';
 import * as RefundModalActionType from './modules/RefundModalActionType';
 import * as ReSendModalActionType from './modules/ReSendModalActionType';
 import * as SendOutModalActionType from './modules/SendOutModalActionType';
@@ -54,6 +55,7 @@ export {
     UserManagerDetailActionType,
     CarQRCodeModalActionType,
     NewLogModalActionType,
+    PaymentRefundModalActionType,
     RefundModalActionType,
     ReSendModalActionType,
     SendOutModalActionType

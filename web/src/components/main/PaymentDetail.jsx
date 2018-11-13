@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
-import {OrderDetailModal} from '../modules/index';
-import {SendOutModalActionType} from "../../actionTypes";
+import {OrderDetailModal,PaymentRefundModal} from '../modules/index';
+import {PaymentRefundModalActionType} from "../../actionTypes";
 
 const commonAction = require('../../actions/main/CommonAction');
 const paymentDetailAction = require('../../actions/main/PaymentDetailAction');
@@ -27,20 +27,19 @@ class PaymentDetail extends React.Component {
     }
 
     /**
-     * 显示 发货信息 模态画面
-     */
-    showSendModal = () => {
-        // $('#sendOutModal').modal('open');
-        // this.props.setLogInfo(this.props.paymentDetailReducer.paymentInfo);
-        // this.props.initModalData();
-    };
-
-    /**
-     * 显示 发货信息 模态画面
+     * 显示 订单详情 模态画面
      */
     showOrderDetailModal = (orderId) => {
         $('#orderDetailModal').modal('open');
         this.props.getOrderDetail(orderId);
+    };
+
+    /**
+     * 显示 退款 模态画面
+     */
+    showPaymentRefundModal = () => {
+        $('#paymentRefundModal').modal('open');
+        this.props.initRefundModalData(this.props.commonReducer.orderInfo);
     };
 
     render() {
@@ -63,15 +62,19 @@ class PaymentDetail extends React.Component {
                 {/* 主体部分：支付信息 */}
                 {paymentDetailReducer.paymentInfo.length > 0 &&
                 <div>
-                    <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
+                    <div className="row margin-top40 margin-left50 margin-right50">
+                        <div className="col s12 no-padding blue-font bold-font">本次支付</div>
+                        <div className="col s12 blue-divider margin-top10"/>
+                    </div>
+
+                    <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50">
                         <div className="row detail-box-header vc-center">
-                            {/* 消息信息：支付编号 */}
+                            {/* 支付信息：支付编号 */}
                             <div className="col s6 no-padding">支付编号：{this.props.match.params.id}</div>
 
-                            {/* 消息信息：生成时间 */}
+                            {/* 支付信息：支付/退款 状态 */}
                             <div className="col s6 no-padding right-align">
-                                {/*{sysConst.PAYMENT_TYPE[paymentDetailReducer.paymentInfo[0].payment_status].label}*/}
-                                {sysConst.PAYMENT_TYPE[0].label}
+                                {sysConst.PAYMENT_TYPE[paymentDetailReducer.paymentInfo[0].type].label}
                             </div>
                         </div>
 
@@ -83,7 +86,7 @@ class PaymentDetail extends React.Component {
                                 {/* 订单信息：订单编号 */}
                                 <div className="col s6 margin-top10">订单编号：{commonReducer.orderInfo[0].id}</div>
 
-                                {/* 订单信息：支付/支付/取消 状态 */}
+                                {/* 订单信息：支付/发货 状态 */}
                                 <div className="col s6 margin-top10 right-align blue-font">
                                     {sysConst.PAYMENT_STATUS[commonReducer.orderInfo[0].payment_status].label}/{sysConst.LOG_STATUS[commonReducer.orderInfo[0].log_status].label}
                                 </div>
@@ -107,65 +110,75 @@ class PaymentDetail extends React.Component {
 
                             {/** 支付描述 */}
                             <div className="row">
-                                <div className="col s6">
-                                    支付人：<span className="grey-text">{paymentDetailReducer.paymentInfo[0].recv_address}</span>
+                                <div className="col s8">
+                                    支付人：<span className="grey-text">{paymentDetailReducer.paymentInfo[0].user_name} ({paymentDetailReducer.paymentInfo[0].phone})</span>
                                 </div>
                                 <div className="col s4 right-align">
                                     支付时间：{formatUtil.getDateTime(paymentDetailReducer.paymentInfo[0].created_on)}
                                 </div>
-
                             </div>
 
-                            <div className="row dotted-line margin-left10 margin-right10"/>
-
-                            {/** 收货地址 收货人信息 */}
+                            {/** 支付金额 */}
                             <div className="row">
                                 <div className="col s12 right-align">
-                                    支付金额：¥ <span className="red-font bold-font fz16">{formatUtil.formatNumber(9999, 2)}</span>
+                                    支付金额：¥ <span className="red-font bold-font fz16">{formatUtil.formatNumber(paymentDetailReducer.paymentInfo[0].total_fee, 2)}</span>
                                 </div>
                             </div>
-
-                            {/* 快递公司相关信息 (已支付状态显示) */}
-                            {paymentDetailReducer.paymentInfo[0].status === sysConst.LOG_STATUS[1].value &&
-                            <div>
-                                <div className="row dotted-line margin-left10 margin-right10"/>
-
-                                {/** 快递公司 快递单号 快递费 */}
-                                <div className="row">
-                                    <div className="col s8">
-                                        {paymentDetailReducer.paymentInfo[0].company_name}<span className="margin-left10">{paymentDetailReducer.paymentInfo[0].log_num}</span>
-                                    </div>
-                                    <div className="col s4 right-align">
-                                        快递费：¥ <span className="red-font fz16">{formatUtil.formatNumber(paymentDetailReducer.paymentInfo[0].freight, 2)}</span>
-                                    </div>
-                                </div>
-
-                                <div className="row dotted-line margin-left10 margin-right10"/>
-
-                                {/** 备注 */}
-                                <div className="row">
-                                    <div className="col s12">
-                                        备注：<span className="grey-text">{paymentDetailReducer.paymentInfo[0].remark}</span>
-                                    </div>
-                                </div>
-
-                                <div className="row dotted-line margin-left10 margin-right10"/>
-
-                                {/** 支付时间 */}
-                                <div className="row">
-                                    <div className="col s12 right-align">
-                                        <span className="grey-text fz14">支付时间：{formatUtil.getDateTime(paymentDetailReducer.paymentInfo[0].updated_on)}</span>
-                                    </div>
-                                </div>
-                            </div>}
                         </div>
                     </div>
-                    {/* 退款 按钮 (支付状态显示) */}
-                    {paymentDetailReducer.paymentInfo[0].status === sysConst.LOG_STATUS[0].value &&
+
+                    {/* 退款 按钮 (存在支付信息，订单信息，并且是支付状态时 显示) */}
+                    {paymentDetailReducer.paymentInfo[0].type === sysConst.PAYMENT_TYPE[1].value && commonReducer.orderInfo.length > 0 &&
                     <div>
-                        <div className="col s12 right-align padding-right70">
-                            <button type="button" className="btn confirm-btn" onClick={this.showSendModal}>退款</button>
+                        <div className="col s12 right-align padding-top25 padding-right70">
+                            <button type="button" className="btn confirm-btn" onClick={this.showPaymentRefundModal}>退款</button>
                         </div>
+                        <PaymentRefundModal/>
+                    </div>}
+
+                    {/* 相关支付 */}
+                    {paymentDetailReducer.relPaymentArray.length > 0 &&
+                    <div>
+                        <div className="row margin-top25 margin-left50 margin-right50">
+                            <div className="col s12 no-padding blue-font bold-font">相关支付</div>
+                            <div className="col s12 blue-divider margin-top10"/>
+                        </div>
+
+                        {paymentDetailReducer.relPaymentArray.map(function (item) {
+                            return (
+                                <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50">
+                                    <div className="row detail-box-header vc-center">
+                                        {/* 支付信息：支付编号 */}
+                                        <div className="col s6 no-padding">支付编号：{item.id}</div>
+
+                                        {/* 支付信息：支付/退款 状态 */}
+                                        <div className="col s6 no-padding right-align">
+                                            {sysConst.PAYMENT_TYPE[item.type].label}
+                                        </div>
+                                    </div>
+
+                                    <div className="col s12 grey-text text-darken-2">
+                                        {/** 支付描述 */}
+                                        <div className="row">
+                                            <div className="col s8">
+                                                支付金额：¥ <span className="red-font bold-font fz16">{formatUtil.formatNumber(item.total_fee, 2)}</span>
+                                            </div>
+                                            <div className="col s4 right-align">
+                                                支付时间：{formatUtil.getDateTime(item.created_on)}
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col s12">
+                                                处理描述：<span className="grey-text">{item.remark}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            )
+                        }, this)
+                        }
                     </div>}
                 </div>}
             </div>
@@ -182,21 +195,16 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getPaymentInfo: () => {
-        dispatch(paymentDetailAction.getPaymentInfo(ownProps.match.params.id))
+        dispatch(paymentDetailAction.getPaymentInfo(ownProps.match.params.id));
+        dispatch(paymentDetailAction.getRelPaymentList(ownProps.match.params.id));
     },
-    setLogInfo: (value) => {
-        dispatch(SendOutModalActionType.setLogInfo(value))
-    },
-
-
     getOrderDetail: (orderId) => {
         dispatch(commonAction.getOrderDetail(orderId))
     },
-    initModalData: () => {
-        dispatch(SendOutModalActionType.setLogCompany(null));
-        dispatch(SendOutModalActionType.setLogNum(''));
-        dispatch(SendOutModalActionType.setFreight(''));
-        dispatch(SendOutModalActionType.setRemark(''));
+    initRefundModalData: (orderInfo) => {
+        dispatch(PaymentRefundModalActionType.setOrderInfo(orderInfo));
+        dispatch(PaymentRefundModalActionType.setRefundMoney(''));
+        dispatch(PaymentRefundModalActionType.setRemark(''));
     }
 });
 

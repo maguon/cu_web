@@ -26,6 +26,7 @@ import UserManagerReducer from './main/UserManagerReducer';
 import UserManagerDetailReducer from './main/UserManagerDetailReducer';
 import CarQRCodeModalReducer from './modules/CarQRCodeModalReducer';
 import NewLogModalReducer from './modules/NewLogModalReducer';
+import PaymentRefundModalReducer from './modules/PaymentRefundModalReducer';
 import RefundModalReducer from './modules/RefundModalReducer';
 import ReSendModalReducer from './modules/ReSendModalReducer';
 import SendOutModalReducer from './modules/SendOutModalReducer';
@@ -57,6 +58,7 @@ export default combineReducers({
     UserManagerDetailReducer,
     CarQRCodeModalReducer,
     NewLogModalReducer,
+    PaymentRefundModalReducer,
     RefundModalReducer,
     ReSendModalReducer,
     SendOutModalReducer
