@@ -22,7 +22,6 @@ export const getLogCoList = () => async (dispatch) => {
 };
 
 export const getOrderInfo = (orderId) => async (dispatch) => {
-    console.log('commmon  getOrderInfo');
     try {
         // 基本检索URL
         let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)

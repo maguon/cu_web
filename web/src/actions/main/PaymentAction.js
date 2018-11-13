@@ -8,53 +8,43 @@ const sysConst = require('../../util/SysConst');
 export const getPaymentList = () => async (dispatch, getState) => {
     try {
         // 检索条件：开始位置
-        const start = getState().LogReducer.start;
+        const start = getState().PaymentReducer.start;
         // 检索条件：每页数量
-        const size = getState().LogReducer.size;
+        const size = getState().PaymentReducer.size;
 
-        // 检索条件：发货编号
-        const conditionNo = getState().LogReducer.conditionNo.trim();
+        // 检索条件：支付编号
+        const conditionNo = getState().PaymentReducer.conditionNo.trim();
+        // 检索条件：支付类型
+        const conditionPaymentType = getState().PaymentReducer.conditionPaymentType;
+        // 检索条件：支付人
+        const conditionPaymentUser = getState().PaymentReducer.conditionPaymentUser.trim();
+        // 检索条件：绑定手机
+        const conditionBindPhone = getState().PaymentReducer.conditionBindPhone.trim();
         // 检索条件：关联订单
-        const conditionOrder = getState().LogReducer.conditionOrder.trim();
-        // 检索条件：快递公司
-        const conditionLogCo = getState().LogReducer.conditionLogCo;
-        // 检索条件：物流编号
-        const conditionLogNum = getState().LogReducer.conditionLogNum.trim();
-        // 检索条件：收货人
-        const conditionRecvName = getState().LogReducer.conditionRecvName.trim();
-        // 检索条件：收货电话
-        const conditionRecvPhone = getState().LogReducer.conditionRecvPhone.trim();
-        // 检索条件：创建时间
-        const conditionCreatedOnStart = getState().LogReducer.conditionCreatedOnStart;
-        const conditionCreatedOnEnd = getState().LogReducer.conditionCreatedOnEnd;
-        // 检索条件：发货时间
-        const conditionUpdatedOnStart = getState().LogReducer.conditionUpdatedOnStart;
-        const conditionUpdatedOnEnd = getState().LogReducer.conditionUpdatedOnEnd;
+        const conditionOrder = getState().PaymentReducer.conditionOrder.trim();
+        // 检索条件：支付时间
+        const conditionCreatedOnStart = getState().PaymentReducer.conditionCreatedOnStart;
+        const conditionCreatedOnEnd = getState().PaymentReducer.conditionCreatedOnEnd;
 
         // 基本检索URL
         let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
-            + '/log?start=' + start + '&size=' + size;
+            + '/payment?start=' + start + '&size=' + size;
 
         // 检索条件
         let conditionsObj = {
-            // 检索条件：发货编号
-            logId: conditionNo,
+            // 检索条件：支付编号
+            paymentId: conditionNo,
+            // 检索条件：支付类型
+            type: conditionPaymentType === null ? '' : conditionPaymentType.value,
+            // 检索条件：收货人
+            userName: conditionPaymentUser,
+            // 检索条件：收货电话
+            phone: conditionBindPhone,
             // 检索条件：关联订单
             orderId: conditionOrder,
-            // 检索条件：快递公司
-            logCompanyId: conditionLogCo === null ? '' : conditionLogCo.value,
-            // 检索条件：物流编号
-            logNum: conditionLogNum,
-            // 检索条件：收货人
-            recvName: conditionRecvName,
-            // 检索条件：收货电话
-            recvPhone: conditionRecvPhone,
-            // 检索条件：创建时间
+            // 检索条件：支付时间
             createdOnStart: conditionCreatedOnStart,
-            createdOnEnd: conditionCreatedOnEnd,
-            // 检索条件：发货时间
-            updatedOnStart: conditionUpdatedOnStart,
-            updatedOnEnd: conditionUpdatedOnEnd
+            createdOnEnd: conditionCreatedOnEnd
         };
         let conditions = httpUtil.objToUrl(conditionsObj);
         // 检索URL

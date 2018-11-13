@@ -102,6 +102,18 @@ class Payment extends React.Component {
         this.props.getPaymentList();
     };
 
+    /**
+     * 显示退款模态画面
+     */
+    showRefundModal = (event, paymentId) => {
+        console.log('showRefundModal paymentId' , paymentId);
+        // this.props.setUserId(this.props.match.params.id);
+        // this.props.setCarNo(carId);
+        // this.props.setPlateNum(plateNum);
+        // this.props.getQRCode();
+        // $('#carQRCodeModal').modal('open');
+    };
+
     render() {
         const {paymentReducer, changeConditionPaymentType} = this.props;
         return (
@@ -157,7 +169,7 @@ class Payment extends React.Component {
 
                             {/* 查询条件：支付时间(终) */}
                             <div className="custom-input-field col s3">
-                                <Input s={12} label="支付时间(终)" type='date' options={sysConst.DATE_PICKER_OPTION} value={paymentReducer.conditionUpdatedOnEnd} onChange={this.changeConditionCreatedOnEnd}/>
+                                <Input s={12} label="支付时间(终)" type='date' options={sysConst.DATE_PICKER_OPTION} value={paymentReducer.conditionCreatedOnEnd} onChange={this.changeConditionCreatedOnEnd}/>
                                 <span className="mdi data-icon mdi-table-large"/>
                             </div>
                         </div>
@@ -179,17 +191,14 @@ class Payment extends React.Component {
                         <table className="fixed-table bordered striped">
                             <thead className="blue-grey lighten-5">
                             <tr className="grey-text text-darken-2">
-                                <th>发货编号</th>
+                                <th>支付编号</th>
                                 <th>关联订单</th>
-                                <th>快递公司</th>
-                                <th>物流编号</th>
-                                <th>运费</th>
-                                <th>收货人</th>
-                                <th>收货电话</th>
-                                <th className="center">创建时间</th>
-                                <th className="center">发货时间</th>
-                                <th className="center">发货状态</th>
-                                <th className="center">操作</th>
+                                <th>支付人</th>
+                                <th>绑定手机</th>
+                                <th className="center">支付类型</th>
+                                <th className="right-align padding-right50">金额</th>
+                                <th className="center">支付时间</th>
+                                <th className="right-align padding-right50">操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -199,28 +208,28 @@ class Payment extends React.Component {
                                         <tr className="grey-text text-darken-1">
                                             <td>{item.id}</td>
                                             <td>{item.order_id}</td>
-                                            <td>{item.company_name}</td>
-                                            <td>{item.log_num}</td>
-                                            <td>{formatUtil.formatNumber(item.total_freight,2)}</td>
-                                            <td>{item.recv_name}</td>
-                                            <td>{item.recv_phone}</td>
+                                            <td>{item.user_name}</td>
+                                            <td>{item.phone}</td>
+                                            <td className="center">{sysConst.PAYMENT_TYPE[item.type].label}</td>
+                                            <td className={`right-align padding-right50 ${item.total_fee < 0 ?"red-font":"blue-text"}`}>{formatUtil.formatNumber(item.total_fee,2)}</td>
                                             <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
-                                            <td className="center">{formatUtil.getDateTime(item.updated_on)}</td>
-                                            <td className={`center ${item.status === 0 ?"red-font":""}`}>{sysConst.LOG_STATUS[item.status].label}</td>
-                                            <td className="operation center">
+                                            <td className="operation right-align padding-right30">
+                                                {item.type === 1 &&
+                                                <span className="refund-btn margin-right20" onClick={() => {this.showRefundModal(event,item.id)}}>
+                                                    <span className="fz12">退款</span>
+                                                </span>}
                                                 <Link to={{pathname: '/payment/' + item.id}}>
-                                                    <i className="mdi mdi-table-search cyan-text lighten-1"/>
+                                                    <i className="mdi mdi-table-search light-blue-text"/>
                                                 </Link>
                                             </td>
                                         </tr>
                                     )
-                                })
+                                },this)
                             }
                             {paymentReducer.paymentArray.length === 0 &&
                             <tr className="grey-text text-darken-1">
-                                <td className="no-data-tr" colSpan="11">暂无数据</td>
-                            </tr>
-                            }
+                                <td className="no-data-tr" colSpan="8">暂无数据</td>
+                            </tr>}
                             </tbody>
                         </table>
                     </div>

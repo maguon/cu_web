@@ -341,6 +341,9 @@ body {
 .padding-right30 {
     padding-right: 30px !important;
 }
+.padding-right50 {
+    padding-right: 50px !important;
+}
 
 .padding-right70 {
     padding-right: 70px !important;
@@ -605,6 +608,15 @@ body {
     line-height: 32px;
     font-size: 12px;
     padding: 0 18px;
+}
+
+.refund-btn {
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    background: white;
+    border: 1px solid #fe6a43;
+    color: #fea353;
+    cursor: pointer;
 }
 
 .custom-btn,.custom-detail-btn{

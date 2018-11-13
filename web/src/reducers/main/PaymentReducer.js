@@ -17,14 +17,12 @@ const initialState = {
     conditionPaymentUser: '',
     // 检索条件：绑定手机
     conditionBindPhone: '',
-
     // 检索条件：关联订单
     conditionOrder: '',
     // 检索条件：支付时间(始)
     conditionCreatedOnStart: '',
     // 检索条件：支付时间(终)
     conditionCreatedOnEnd: '',
-
     // 发货记录 检索结果列表
     paymentArray: []
 };
@@ -48,8 +46,6 @@ export default handleActions({
             dataSize: action.payload
         }
     },
-
-
     [PaymentActionType.setConditionNo]: (state, action) => {
         return {
             ...state,
@@ -74,10 +70,6 @@ export default handleActions({
             conditionBindPhone: action.payload
         }
     },
-
-
-
-
     [PaymentActionType.setConditionOrder]: (state, action) => {
         return {
             ...state,
