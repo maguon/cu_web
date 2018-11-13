@@ -221,7 +221,7 @@ class FeedBack extends React.Component {
                                                 <td className="center">{sysConst.LOG_STATUS[item.log_status].label}</td>
                                                 <td className="operation center">
                                                     <Link to={{pathname: '/feed_back/'+ item.id}} >
-                                                        <i className="mdi mdi-table-search cyan-text lighten-1"/>
+                                                        <i className="mdi mdi-table-search light-blue-text"/>
                                                     </Link>
                                                 </td>
                                             </tr>

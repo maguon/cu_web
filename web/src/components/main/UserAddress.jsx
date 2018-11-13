@@ -155,7 +155,7 @@ class UserAddress extends React.Component {
                                                 <td className="center">{formatUtil.getDateTime(item.updated_on)}</td>
                                                 <td className="operation center">
                                                     <Link to={{pathname: '/user_address/'+ item.id}} >
-                                                        <i className="mdi mdi-table-search cyan-text lighten-1"/>
+                                                        <i className="mdi mdi-table-search light-blue-text"/>
                                                     </Link>
                                                 </td>
                                             </tr>

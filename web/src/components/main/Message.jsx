@@ -210,7 +210,7 @@ class Message extends React.Component {
                                                 <td className="center">{sysConst.SUCCESS_STATUS[item.status].label}</td>
                                                 <td className="operation center">
                                                     <Link to={{pathname: '/message/'+ item.id}} >
-                                                        <i className="mdi mdi-table-search cyan-text lighten-1"/>
+                                                        <i className="mdi mdi-table-search light-blue-text"/>
                                                     </Link>
                                                 </td>
                                             </tr>

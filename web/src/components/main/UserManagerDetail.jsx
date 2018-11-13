@@ -323,7 +323,7 @@ class UserManagerDetail extends React.Component {
                                                 <td className="message-td context-ellipsis">{item.content}</td>
                                                 <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
                                                 <td className="operation center">
-                                                    <i className="mdi mdi-table-search cyan-text lighten-1 pointer" onClick={() => {this.showMessageModal(item.id)}}/>
+                                                    <i className="mdi mdi-table-search light-blue-text pointer" onClick={() => {this.showMessageModal(item.id)}}/>
                                                 </td>
                                             </tr>
                                         )

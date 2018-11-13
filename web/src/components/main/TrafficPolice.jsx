@@ -241,7 +241,7 @@ class TrafficPolice extends React.Component {
                                                 {/* 显示【交警资料】画面按钮 */}
                                                 <td className="operation center">
                                                     <Link to={{pathname: '/traffic_police/'+ item.id}} >
-                                                        <i className="mdi mdi-table-search cyan-text lighten-1"/>
+                                                        <i className="mdi mdi-table-search light-blue-text"/>
                                                     </Link>
                                                 </td>
                                             </tr>
