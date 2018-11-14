@@ -20,13 +20,23 @@ Page({
         })
         return;
       }
+      
+      var count = 0;
       //UTC 时间格式转译
       var len = res.data.result.length;
       for (var i=0;i <len; i++) {
+        if(res.data.result[i].status==0){
+          count++;
+        }
         var date = new Date(res.data.result[i].created_on);
         var localeString = date.toLocaleString();
         res.data.result[i].created_on = localeString;
       }
+      //获得消息数量
+      wx.setTabBarBadge({
+        index: 1,
+        text: String(count),
+      })
       //保存
       this.setData({
         msgList: res.data.result,

@@ -30,20 +30,20 @@ Page({
    * 加载界面处理
    */
   onLoad: function () { 
-  },
 
-/**
- * 生命周期函数--监听页面初次渲染完成
- */
-  onShow: function () {
     //加载动画
     setTimeout(() => {
       this.setData({
         loadingHidden: true,
       })
     }, 500);
-
-    var userId = app.globalData.userId;
+    //判断是否绑定手机
+    if (app.globalData.userInfo.result[0].phone != '') {
+      this.setData({
+        userPhone: app.globalData.userInfo.result[0].phone,
+        hidden: true
+      })
+    }
     //获取信息
     console.log(app.globalData.userInfo)
     if (app.globalData.userInfo) {
@@ -75,27 +75,43 @@ Page({
           })
         }
       })
-
     }
+  },
+
+/**
+ * 生命周期函数--监听页面初次渲染完成
+ */
+  onShow: function () {
+    //加载动画
+    setTimeout(() => {
+      this.setData({
+        loadingHidden: true,
+      })
+    }, 500);
+    
+    if(app.globalData.phone!=''){
+      this.setData({
+        userPhone:app.globalData.phone,
+      })
+    }
+
+    //发送请求
+    var userId = app.globalData.userId;
     //发送get请求
-    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/msgStat?userType=' + 1, (err, res) => {
-      var count = String(res.data.result[0].count);
+    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/getMessage', (err, res) => {
+      var count = 0;
+      for(var i=0;i<res.data.result.length;i++){
+        if (res.data.result[i].status == 0) {
+          count++;
+        }
+      }
       //获得消息数量
       wx.setTabBarBadge({
         index: 1,
-        text: count,
+        text:String(count),
       })
     })
 
-    //判断是否绑定手机
-    if (app.globalData.userInfo.result[0].phone != '') {
-      this.setData({
-        userPhone: app.globalData.userInfo.result[0].phone,
-        hidden: true
-      })
-    }
-    //发送请求
-    var userId = app.globalData.userId;
     reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + "/userCar", (err, res) => {
       if (res.data.result == '') {
         return;

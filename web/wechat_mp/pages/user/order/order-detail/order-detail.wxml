@@ -55,7 +55,9 @@
 
             <view class='ress'>
             <view class='test'>收货地址</view>
+             <view class='right'>
             <view class='num'>{{product.recv_address}} {{product.recv_name}} {{product.recv_phone}}</view>
+             </view>
             </view>
             <view class='div-line'></view>  
 
