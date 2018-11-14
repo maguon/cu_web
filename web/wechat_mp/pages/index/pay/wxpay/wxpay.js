@@ -7,9 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    wechatName:'',
-    avatarUrl:'',
-
     payList:[],
     totalPrice:1,
     orderId:20101118,
@@ -22,12 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */ 
   onLoad: function (e) {
-    if (app.globalData.userInfo) {
-      this.setData({
-        wechatName: app.globalData.userInfo.result[0].wechat_name,
-        avatarUrl: app.globalData.userInfo.result[0].avatar_image,
-        })
-    }
+  
   },
 
   /**
@@ -101,7 +93,7 @@ Page({
     }
     console.log(app.globalData.openid)
     //发送Post请求
-    reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + "/order/" + 2018142 +"/wechatPayment", params, (err, res) => {
+    reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + "/order/" + 2018143 +"/wechatPayment", params, (err, res) => {
       console.log(res.data.result)
 
         //out_trade_no=res.data['out_trade_no'];

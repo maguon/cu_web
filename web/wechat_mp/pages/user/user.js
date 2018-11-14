@@ -39,7 +39,7 @@ Page({
       },
       {
         text: '当前版本',
-        version:'0.0.2',
+        version:'0.0.3',
         url: ""
       }
       ]
