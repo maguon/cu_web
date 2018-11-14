@@ -12,12 +12,32 @@ Page({
     num: 1,
     minusStatus: 'disabled',  
     hidden:false,
+
+    imagePath:'',
+    queryBean:[],
+    product:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (e) {
+    console.log(e)
+    wx.getStorage({
+      key: 'qrcode',
+      success: (res)=> {
+        var queryBean = JSON.parse(e.queryBean);
+        var product = JSON.parse(e.product);
+
+        this.setData({
+          imagePath: res.data,
+          product: product,
+          queryBean: e.queryBean,
+        })
+      },
+    })
+    
+   
   },
   /**
    * 生命周期函数--监听页面显示
@@ -110,8 +130,28 @@ Page({
  */
   bindButtonTap:function(){
     var price=this.data.price;
+    var userId=app.globalData.userId;
+    //设置参数
+    var params = {
+      productId:[this.data.product.id],
+      prodCount: [this.data.num],
+      remark: [this.data.product.product_remark],
+      carId:[this.data.queryBean.id],
+
+      freight:this.data.product.freight,
+      imag: this.data.imagePath,
+      recvName: this.data.addressList.ship_name,
+      recvPhone: this.data.addressList.ship_phone,
+      recvAddress: this.data.addressList.address,
+      orderName: this.data.product.product_name,
+    }
+     //发送请求
+    reqUtil.httpPost(
+      config.host.apiHost + '/api/user/' + userId + '/order', params, (err, res) => { })
+ 
+
     wx.navigateTo({
-      url: '/pages/index/pay/pay?price='+price,
+      url: '/pages/user/order/order-detail/order-detail?price=' +this.data.product.original_price,
     })
   },
   product:function(){

@@ -32,14 +32,14 @@ Page({
         url: "/pages/user/carList/carList"
       },{
         text: '我的订单',
-        url: " pages/user/order / order"
+        url: "/pages/user/order/order"
       },{
         text: '收货地址',
         url: "/pages/index/addressList/addressList"
       },
       {
         text: '当前版本',
-        version:'0.0.2',
+        version:'0.0.3',
         url: ""
       }
       ]

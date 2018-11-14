@@ -107,7 +107,15 @@ Page({
   queryUsreInfo: function () {
     var userId=app.globalData.userId;
     reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userId, (err, res) => {
-      app.globalData.userInfo = res.data;
+      if (res.data!=''){
+        app.globalData.userInfo = res.data;
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '暂时不能访问，请稍后再试',
+        })
+        return;
+      }
       //用户已经授权过
       wx.switchTab({
         url: '/pages/index/index',

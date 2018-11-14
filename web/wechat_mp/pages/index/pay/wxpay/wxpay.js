@@ -7,11 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    wechatName:'',
-    avatarUrl:'',
-
     payList:[],
-    totalPrice:0.01,
+    totalPrice:1,
+    orderId:20101118,
     goodsList:[
       { goods_name:"商品二维码"}
     ]
@@ -21,18 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */ 
   onLoad: function (e) {
-    console.log(e)
-    this.setData({
-      totalPrice:e.price,
-      payList:e.payList,
-    })
-    console.log(app.globalData.userInfo)
-    if (app.globalData.userInfo) {
-      this.setData({
-        wechatName: app.globalData.userInfo.result[0].wechat_name,
-        avatarUrl: app.globalData.userInfo.result[0].avatar_image,
-        })
-    }
+  
   },
 
   /**
@@ -85,7 +72,7 @@ Page({
   },
   payment:function(){
 
-    
+    this.pay();
   },
 /**
  * 支付方法
@@ -94,25 +81,30 @@ Page({
   var that = this
   var openid=app.globalData.openid;
   var userInfo=app.globalData.userInfo;
+  var userId=app.globalData.userId;
+
   console.log(userInfo);
 
     var params = {
       //用户的openid
       openid: app.globalData.openid,
-      fee: that.data.totalPrice, //支付金额
-      details: that.data.goodsList[0].goods_name,//支付商品的名称
+      totalFee:1, //支付金额
+      status: 1,//支付商品的名称
     }
+    console.log(app.globalData.openid)
     //发送Post请求
-    reqUtil.httpPost(config.host.apiHost + "", params, (err, res) => {
-      if (res.data) {
+    reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + "/order/" + 2018143 +"/wechatPayment", params, (err, res) => {
+      console.log(res.data.result)
+
         //out_trade_no=res.data['out_trade_no'];
         wx.requestPayment({
-          timeStamp: res.data['timeStamp'],
-          nonceStr: res.data['nonceStr'],
-          package: res.data['package'],
-          signType: 'MD5',
-          paySign: res.data['paySign'],
-          'success': function (successret) {
+          timeStamp: res.data.result[0].timeStamp+"",
+          nonceStr: res.data.result[0].nonce_str,
+          package:'prepay_id='+res.data.result[0].prepay_id,
+          signType: "MD5",
+          paySign: res.data.result[0].paySign,
+          success: (res)=> {
+            console.log(res)
             console.log('支付成功');
             var params = {
               //用户的openid
@@ -121,12 +113,25 @@ Page({
               goods: that.data.goodsList[0].goods_name,
               price: that.data.totalPrice,
             }
-            reqUtil.httpPost(config.host.apiHost + "", params, (err, res) => {
-              console.log("存取成功");
+            // reqUtil.httpPost(config.host.apiHost + "", params, (err, res) => {
+            //   console.log("存取成功");
+            // })
+            wx.showToast({
+             title: '支付成功',
+             icon: 'success',
+             duration: 2000
             })
+      },
+      fail:function(err){
+        console.log('支付失败')
+        console.log(err)
+        wx.showToast({
+             title: '支付失败！请稍后再试',
+             icon: 'success',
+             duration: 2000
+        })
       }
-      })
-      }
+      })  
     })
   },
 

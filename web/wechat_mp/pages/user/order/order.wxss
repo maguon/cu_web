@@ -24,7 +24,7 @@ display: flex;
 }
 .order-time{
   margin-right: 0px;
-  position: fixed;
+  position: absolute;
   right: 10px;
 }
 

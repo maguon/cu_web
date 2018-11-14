@@ -3,7 +3,7 @@ page{
    background: #efeff4;
 }
 .content{
-height: 250px;
+height: 200px;
 width: 90%;
 background: white;
 margin-top: 10px;
