@@ -2,30 +2,43 @@
         <view class="page__desc">暂无订单</view>
 </view>
 
-<view class="page__bd" >
+<view class="page__bd" wx:for="{{orderList}}" wx:key="u">
         <view class="weui-cells weui-cells_after-title">
-              <navigator url="" class="weui-cell_access" hover-class="weui-cell_active">
+              <navigator url="/pages/user/order/order-detail/order-detail" class="weui-cell_access" hover-class="weui-cell_active">
               <view class='title'>
-               <view class="order-num">订单编号：32452354553453</view>
-               <view class="order-time">下单时间：2018-06-24 11:24:32</view>
+               <view class="order-num">订单编号：{{item.id}}</view>
+               <view class="order-time">下单时间：{{item.created_on}}</view>
               </view>
-                <view class="weui-cell__bd">挪车二维码贴
+                <view class="weui-cell__bd">{{item.order_name}}
                 <view class='state'>待支付</view>
                 </view>
-                <view class='money'>
+                <view class='money'> 
                 <view class="weui-cell__hd">
                     <image class='image' src="../../../../assets/images/money.png" ></image>
                 </view>
-                <view class="num">50.00</view>
+                <view class="num">{{item.total_price}}.00</view>
                 </view>
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
             </navigator>
 
-            <view class="weui-cell bnt-list">
+            <view class="weui-cell bnt-list" hidden='{{isPay}}'>
             <view class='bnt-list'>
-                 <button class="btn">取消订单</button>
-                <button class="btn-left" hover-class="active">付款</button>
+                 <button class="btn"  bindtap='cancelOrder'>取消订单</button>
+                <button class="btn-left" bindtap='payment' hover-class="active">付款</button>
                 </view>
             </view>
+
+            <view class="weui-cell bnt-list" hidden='{{!isPay}}'>
+            <view class='bnt-list'>
+                 <button class="btn"  bindtap='apply'>申请售后</button>
+                </view>
+            </view>
+
+            <view class="weui-cell bnt-list" hidden='{{!isApply}}'>
+            <view class='bnt-list'>
+                 <button class="btn"  bindtap='chick'>查看售后</button>
+                </view>
+            </view>
+            
         </view>
      </view>

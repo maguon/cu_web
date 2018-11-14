@@ -15,7 +15,7 @@ Page({
     loadingHidden:false,
     canvasHidden: false,
     name:'',
-    qrcode:'',
+
     imagePath:'',
     placeholder: "https://developers.weixin.qq.com/"//默认二维码生成文本
   },
@@ -34,6 +34,7 @@ Page({
     var that = this
     //解析json
     var queryBean = JSON.parse(e.queryBean);
+    console.log(e)
     that.setData({
       queryBean: queryBean,
       name:e.name
@@ -45,7 +46,6 @@ Page({
     reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + '/userCar/' + e.queryBean.id + '/qrCode', params,(err,res)=>{
       //发送get请求
       reqUtil.httpGet(config.host.apiHost + '/api/qrCode/' + res.data.result.code, (err, res) => {
-        console.log(res.data.result.success)
         if (res.data.result.success) {
           var initUrl = this.data.placeholder;
           this.createQrCode(initUrl, "mycanvas", 100, 100);
@@ -79,6 +79,10 @@ Page({
         that.setData({
           imagePath: tempFilePath,
         });
+        wx.setStorage({
+          key: 'qrcode',
+          data: tempFilePath,
+        })
       },
       fail: function (res) {
         console.log(res);
@@ -98,9 +102,17 @@ Page({
  * 跳转页面
  */
   print: function () {
-    wx.navigateTo({
-      url: '/pages/index/print/print'
+    var userId=app.globalData.userId;
+    var queryBean = JSON.stringify(this.data.queryBean);
+    reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId +'/product',(err,res)=>{
+      var product = JSON.stringify(res.data.result[res.data.result.length-1]);
+      wx.navigateTo({
+        url: '/pages/index/print/print?queryBean=' + queryBean + '&product=' + product
+      })
     })
+
+    
+   
   },
   /**
    * 确定按钮

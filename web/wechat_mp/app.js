@@ -24,6 +24,7 @@ App({
       success: res => {
         //获取code
         var code=res.code;
+        console.log(res.code)
         //发送code 请求openid
         reqUtil.httpGet(config.host.apiHost + "/api/wechat/" + code + "/openid", (err, res) => {
           //保存openid 到全局
