@@ -1,5 +1,6 @@
 export CarQRCodeModal from "./CarQRCodeModal";
 export MessageInfoModal from "./MessageInfoModal";
+export NewLogCompanyModal from "./NewLogCompanyModal";
 export NewLogModal from "./NewLogModal";
 export OrderDetailModal from "./OrderDetailModal";
 export PaymentRefundModal from "./PaymentRefundModal";

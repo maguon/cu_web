@@ -8,6 +8,7 @@ import CheckCarReducer from './main/CheckCarReducer';
 import CheckCarDetailReducer from './main/CheckCarDetailReducer'
 import FeedBackReducer from './main/FeedBackReducer';
 import FeedBackDetailReducer from './main/FeedBackDetailReducer'
+import LogCompanyReducer from './main/LogCompanyReducer';
 import LogReducer from './main/LogReducer';
 import LogDetailReducer from './main/LogDetailReducer';
 import MessageReducer from './main/MessageReducer';
@@ -25,6 +26,7 @@ import UserCarDetailReducer from './main/UserCarDetailReducer';
 import UserManagerReducer from './main/UserManagerReducer';
 import UserManagerDetailReducer from './main/UserManagerDetailReducer';
 import CarQRCodeModalReducer from './modules/CarQRCodeModalReducer';
+import NewLogCompanyModalReducer from './modules/NewLogCompanyModalReducer';
 import NewLogModalReducer from './modules/NewLogModalReducer';
 import PaymentRefundModalReducer from './modules/PaymentRefundModalReducer';
 import RefundModalReducer from './modules/RefundModalReducer';
@@ -44,6 +46,7 @@ export default combineReducers({
     OrderDetailReducer,
     PaymentReducer,
     PaymentDetailReducer,
+    LogCompanyReducer,
     LogReducer,
     LogDetailReducer,
     MessageReducer,
@@ -57,6 +60,7 @@ export default combineReducers({
     UserManagerReducer,
     UserManagerDetailReducer,
     CarQRCodeModalReducer,
+    NewLogCompanyModalReducer,
     NewLogModalReducer,
     PaymentRefundModalReducer,
     RefundModalReducer,

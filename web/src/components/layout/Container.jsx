@@ -25,6 +25,7 @@ import {
     FeedBackDetail,
     Log,
     LogDetail,
+    LogCompany,
 } from '../main/index';
 
 const routes = [
@@ -158,6 +159,12 @@ const routes = [
         exact: true,
         component: PaymentDetail
     },
+    // 快递公司管理
+    {
+        path: "/log_company",
+        exact: true,
+        component: LogCompany
+    },
 ];
 
 class Container extends React.Component {
@@ -255,6 +262,8 @@ class Container extends React.Component {
                                             <li><Link to="/log"><i className="mdi mdi-chevron-right"/>发货管理</Link></li>
                                             <li><div className="divider"/></li>
                                             <li><Link to="/payment"><i className="mdi mdi-chevron-right"/>支付管理</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/log_company"><i className="mdi mdi-chevron-right"/>快递公司</Link></li>
                                         </ul>
                                     </div>
                                 </li>

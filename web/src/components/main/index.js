@@ -2,6 +2,7 @@ export CheckCar from "./CheckCar";
 export CheckCarDetail from "./CheckCarDetail";
 export FeedBack from "./FeedBack";
 export FeedBackDetail from "./FeedBackDetail";
+export LogCompany from "./LogCompany";
 export Log from "./Log";
 export LogDetail from "./LogDetail";
 export Message from "./Message";

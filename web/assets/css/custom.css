@@ -266,6 +266,10 @@ body {
     margin-top: 25px;
 }
 
+.margin-top30 {
+    margin-top: 30px;
+}
+
 .margin-top40 {
     margin-top: 40px;
 }
@@ -280,6 +284,10 @@ body {
 
 .margin-bottom20 {
     margin-bottom: 20px;
+}
+
+.margin-bottom40 {
+    margin-bottom: 40px !important;
 }
 
 .margin-left5 {
@@ -328,6 +336,10 @@ body {
 
 .padding-left30 {
     padding-left: 30px !important;
+}
+
+.padding-left55 {
+    padding-left: 55px !important;
 }
 
 .padding-right0 {
@@ -410,6 +422,10 @@ body {
     width: 46%;
 }
 
+.s-percent-82 {
+    width: 82%;
+}
+
 .s-percent-87 {
     width: 87%;
 }
@@ -488,7 +504,7 @@ body {
     background-color: #0F4F94;
 }
 
-#policeModal, #messageModal, #refundModal {
+#policeModal, #messageModal, #refundModal,#newLogCompanyModal {
     max-height: 450px;
 }
 
@@ -662,17 +678,22 @@ body {
     font-weight: bold;
 }
 
-.box-right-line {
-    border-right: 1px solid #D4D4D4;
-}
-
 .box-top-line {
     border-top: 1px solid #D4D4D4;
+}
+
+.box-right-line {
+    border-right: 1px solid #D4D4D4;
 }
 
 .border-bottom-line {
     border-bottom: 1px solid #D4D4D4;
 }
+
+.box-left-line {
+    border-left: 1px solid #D4D4D4;
+}
+
 
 /** 日期控件 图片 样式 */
 .data-icon{
