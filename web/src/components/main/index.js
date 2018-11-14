@@ -11,6 +11,8 @@ export Order from "./Order";
 export OrderDetail from "./OrderDetail";
 export Payment from "./Payment";
 export PaymentDetail from "./PaymentDetail";
+export Product from "./Product";
+export ProductDetail from "./ProductDetail";
 export TrafficPolice from "./TrafficPolice";
 export TrafficPoliceDetail from "./TrafficPoliceDetail";
 export UserAddress from "./UserAddress";

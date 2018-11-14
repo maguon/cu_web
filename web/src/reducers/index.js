@@ -17,6 +17,8 @@ import OrderReducer from './main/OrderReducer';
 import OrderDetailReducer from './main/OrderDetailReducer';
 import PaymentReducer from './main/PaymentReducer';
 import PaymentDetailReducer from './main/PaymentDetailReducer';
+import ProductReducer from './main/ProductReducer';
+import ProductDetailReducer from './main/ProductDetailReducer';
 import TrafficPoliceReducer from './main/TrafficPoliceReducer';
 import TrafficPoliceDetailReducer from './main/TrafficPoliceDetailReducer';
 import UserAddressReducer from './main/UserAddressReducer';
@@ -51,6 +53,8 @@ export default combineReducers({
     LogDetailReducer,
     MessageReducer,
     MessageDetailReducer,
+    ProductReducer,
+    ProductDetailReducer,
     TrafficPoliceReducer,
     TrafficPoliceDetailReducer,
     UserAddressReducer,

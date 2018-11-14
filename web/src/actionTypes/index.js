@@ -17,6 +17,8 @@ import * as PaymentActionType from './main/PaymentActionType';
 import * as PaymentDetailActionType from './main/PaymentDetailActionType';
 import * as TrafficPoliceActionType from './main/TrafficPoliceActionType';
 import * as TrafficPoliceDetailActionType from './main/TrafficPoliceDetailActionType';
+import * as ProductActionType from './main/ProductActionType';
+import * as ProductDetailActionType from './main/ProductDetailActionType';
 import * as UserAddressActionType from './main/UserAddressActionType';
 import * as UserAddressDetailActionType from './main/UserAddressDetailActionType';
 import * as UserCarActionType from './main/UserCarActionType';
@@ -48,6 +50,8 @@ export {
     OrderDetailActionType,
     PaymentActionType,
     PaymentDetailActionType,
+    ProductActionType,
+    ProductDetailActionType,
     TrafficPoliceActionType,
     TrafficPoliceDetailActionType,
     UserAddressActionType,
