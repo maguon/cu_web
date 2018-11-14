@@ -3,7 +3,8 @@ import Select from 'react-select';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
-import {PaymentActionType} from '../../actionTypes';
+import {PaymentRefundModal} from '../modules/index';
+import {PaymentActionType, PaymentRefundModalActionType} from '../../actionTypes';
 
 const paymentAction = require('../../actions/main/PaymentAction');
 const sysConst = require('../../util/SysConst');
@@ -103,15 +104,12 @@ class Payment extends React.Component {
     };
 
     /**
-     * 显示退款模态画面
+     * 显示 退款 模态画面 TODO 关于退款接口暂无，所以支付信息部分，是只显示还是需要传参有疑问，所以暂时不写
      */
-    showRefundModal = (event, paymentId) => {
-        console.log('showRefundModal paymentId' , paymentId);
-        // this.props.setUserId(this.props.match.params.id);
-        // this.props.setCarNo(carId);
-        // this.props.setPlateNum(plateNum);
-        // this.props.getQRCode();
-        // $('#carQRCodeModal').modal('open');
+    showPaymentRefundModal = (event, paymentId) => {
+        console.log('showPaymentRefundModal paymentId' , paymentId);
+        this.props.initRefundModalData(this.props.commonReducer.orderInfo);
+        $('#paymentRefundModal').modal('open');
     };
 
     render() {
@@ -215,7 +213,7 @@ class Payment extends React.Component {
                                             <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
                                             <td className="operation right-align padding-right30">
                                                 {item.type === 1 &&
-                                                <span className="refund-btn margin-right20" onClick={() => {this.showRefundModal(event,item.id)}}>
+                                                <span className="refund-btn margin-right20" onClick={() => {this.showPaymentRefundModal(event,item.id)}}>
                                                     <span className="fz12">退款</span>
                                                 </span>}
                                                 <Link to={{pathname: '/payment/' + item.id}}>
@@ -248,6 +246,7 @@ class Payment extends React.Component {
                         </div>
                     </div>
                 </div>
+                <PaymentRefundModal/>
             </div>
         )
     }
@@ -291,6 +290,11 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setConditionCreatedOnEnd: (value) => {
         dispatch(PaymentActionType.setConditionCreatedOnEnd(value))
+    },
+    initRefundModalData: (orderInfo) => {
+        dispatch(PaymentRefundModalActionType.setOrderInfo(orderInfo));
+        dispatch(PaymentRefundModalActionType.setRefundMoney(''));
+        dispatch(PaymentRefundModalActionType.setRemark(''));
     }
 });
 
