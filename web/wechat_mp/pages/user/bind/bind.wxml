@@ -1,7 +1,8 @@
 
 <view class='logo-text'>
  <view class='logo'>连</view>
-<view class="weui-cells__tips">{{bindPhone}}</view>
+<view hidden='{{!hidden}}' class="weui-cells__tips">当前绑定号码为:{{bindPhone}}</view>
+<view hidden='{{hidden}}' class="weui-cells__tips">请先绑定您的手机</view>
 </view>
  
 <view class='weui-cells'>

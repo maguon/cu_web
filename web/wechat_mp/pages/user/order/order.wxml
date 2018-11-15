@@ -1,9 +1,10 @@
  <view hidden='{{!hidden}}' >
         <view class="page__desc">暂无订单</view>
 </view>
+<loading hidden="{{loadingHidden}}">加载中</loading>
 
 <view class="page__bd" wx:for="{{orderList}}" wx:key="u">
-        <view class="weui-cells weui-cells_after-title">
+        <view hidden='{{item.status}}' class="weui-cells weui-cells_after-title">
               <navigator url="/pages/user/order/order-detail/order-detail" class="weui-cell_access" hover-class="weui-cell_active">
               <view class='title'>
                <view class="order-num">订单编号：{{item.id}}</view>

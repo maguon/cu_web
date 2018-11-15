@@ -69,6 +69,8 @@ Page({
       }
       //判断是否绑定
       if (res.data.result[0].phone != '') {
+        app.globalData.phone = res.data.result[0].phone;
+
         this.setData({
           nullPhone: res.data.result[0].phone,
           hidden: true

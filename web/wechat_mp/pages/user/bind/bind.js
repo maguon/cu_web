@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    bindPhone:"请先绑定您的手机",
+    bindPhone:"",
     userPhone:'',
     userCode:'',
 
@@ -16,6 +16,7 @@ Page({
     gainFlag:false,
 
     bntFlag:true,
+    hidden:false,
 
   },
   /**
@@ -34,7 +35,7 @@ onLoad:function(e){
   reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userId, (err, res) => {
   if(res.data.result[0].phone!=''){
     this.setData({
-      bindPhone: "当前绑定号码为" + res.data.result[0].phone,
+      bindPhone:res.data.result[0].phone,
       hidden: true
     })
    }
@@ -149,7 +150,5 @@ code:function(e){
         })
       }
  })
- 
-  
   },
 })

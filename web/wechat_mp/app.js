@@ -8,6 +8,7 @@ App({
     openid:'',
     userId: 0,
     accessToken: '',
+    phone:'',
   },
 
   /**
@@ -29,6 +30,7 @@ App({
         reqUtil.httpGet(config.host.apiHost + "/api/wechat/" + code + "/openid", (err, res) => {
           //保存openid 到全局
           that.globalData.openid=res.data.result.openid;
+          console.log(res.data.result.openid)
           //判断加载数据完成后执行login-onload
           if (this.userInfoReadyCallback) {
             this.userInfoReadyCallback(res)

@@ -7,7 +7,7 @@
 </block>
 <block wx:else>
 <block wx:for='{{msgList}}' wx:key='u'>
-<view class="weui-panel weui-panel_access" >
+<view hidden='{{!item.type}}' class="weui-panel weui-panel_access" >
   <view class="weui-panel__bd">
     <view bindtap='bindMsg' data-id="{{index}}" class="weui-media-box weui-media-box_text">
       

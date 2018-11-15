@@ -9,7 +9,7 @@ Page({
   data: {
     payList:[],
     totalPrice:1,
-    orderId:20101118,
+    orderId:'',
     goodsList:[
       { goods_name:"商品二维码"}
     ]
@@ -19,6 +19,9 @@ Page({
    * 生命周期函数--监听页面加载
    */ 
   onLoad: function (e) {
+    this.setData({
+      orderId: e.orderId,
+    })
   
   },
 
@@ -70,21 +73,17 @@ Page({
   onShareAppMessage: function () {
 
   },
-  payment:function(){
 
-    this.pay();
-  },
 /**
  * 支付方法
  */
-  pay: function () {                                                                         
+  payment: function () {                                                                         
   var that = this
   var openid=app.globalData.openid;
   var userInfo=app.globalData.userInfo;
   var userId=app.globalData.userId;
-
-  console.log(userInfo);
-
+  var orderId = that.data.orderId;
+  
     var params = {
       //用户的openid
       openid: app.globalData.openid,
@@ -93,7 +92,7 @@ Page({
     }
     console.log(app.globalData.openid)
     //发送Post请求
-    reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + "/order/" + 2018143 +"/wechatPayment", params, (err, res) => {
+    reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + "/order/" + orderId+"/wechatPayment", params, (err, res) => {
       console.log(res.data.result)
 
         //out_trade_no=res.data['out_trade_no'];
@@ -104,15 +103,14 @@ Page({
           signType: "MD5",
           paySign: res.data.result[0].paySign,
           success: (res)=> {
-            console.log(res)
             console.log('支付成功');
-            var params = {
-              //用户的openid
-              openid: app.globalData.openid,
-              uname: userInfo.result[0].wechat_name,
-              goods: that.data.goodsList[0].goods_name,
-              price: that.data.totalPrice,
-            }
+            // var params = {
+            //   //用户的openid
+            //   openid: app.globalData.openid,
+            //   uname: userInfo.result[0].wechat_name,
+            //   goods: that.data.goodsList[0].goods_name,
+            //   price: that.data.totalPrice,
+            // }
             // reqUtil.httpPost(config.host.apiHost + "", params, (err, res) => {
             //   console.log("存取成功");
             // })
@@ -120,6 +118,9 @@ Page({
              title: '支付成功',
              icon: 'success',
              duration: 2000
+            })
+            wx.reLaunch({
+              url: "/pages/index/index",
             })
       },
       fail:function(err){

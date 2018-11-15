@@ -12,6 +12,7 @@ Page({
 
   isPay: false,
   isApply: false,
+  loadingHidden:false,
 
   created_on:'',
   },
@@ -27,10 +28,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    //加载动画
+    setTimeout(() => {
+      this.setData({
+        loadingHidden: true,
+      })
     var userId = app.globalData.userId;
-    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/orderItem", (err, res) => {
+      reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/order", (err, res) => {
       console.log(res)
-      for (var i = 0; i < res.data.result.length; i++) {
+      for (var i = 0; i < res.data.result.length; i++) {      
         var len = res.data.result[i];
         var date = new Date(len.created_on);
         var localeString = date.toLocaleString();
@@ -40,6 +46,7 @@ Page({
         orderList: res.data.result,
       })
     })
+    }, 500)
   },
   /**
    * 取消订单
@@ -48,13 +55,16 @@ Page({
     var that=this;
     console.log(e)
     var index = e.currentTarget.dataset.index;
+    var orderId = that.data.orderList[index].id;
     wx.showModal({
       content: "你确定要取消订单？",
       success(res) {
+        var params='';
         if (res.confirm) {
-          
-          reqUtil.httpDel(config.host.apiHost + '/api/user/' + app.globalData.userId + '/orderItem/' + that.data.orderList[index].id)
-
+          reqUtil.httpPut(config.host.apiHost +'/api/user/'+ app.globalData.userId+'/order/'+orderId+"/status/"+1,params, (err, res) => {})
+          that.setData({
+            loadingHidden: false,
+          })
           that.onShow();
           console.log('用户点击确定')
         } else if (res.cancel) {

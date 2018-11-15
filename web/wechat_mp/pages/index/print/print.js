@@ -131,6 +131,7 @@ Page({
   bindButtonTap:function(){
     var price=this.data.price;
     var userId=app.globalData.userId;
+
     //设置参数
     var params = {
       productId:[this.data.product.id],
@@ -145,14 +146,23 @@ Page({
       recvAddress: this.data.addressList.address,
       orderName: this.data.product.product_name,
     }
+    //地址为空时提示
+    if (this.data.addressList == '') {
+      wx.showModal({
+        title: '提示',
+        content: '请添加您的收货地址',
+      })
+      return;
+    }
      //发送请求
     reqUtil.httpPost(
-      config.host.apiHost + '/api/user/' + userId + '/order', params, (err, res) => { })
- 
-
-    wx.navigateTo({
-      url: '/pages/user/order/order-detail/order-detail?price=' +this.data.product.original_price,
-    })
+      config.host.apiHost + '/api/user/' + userId + '/order', params, (err, res) => {
+      console.log(res)
+       var orderId=res.data.result[0].orderId
+        wx.navigateTo({
+          url: '/pages/user/order/order-detail/order-detail?price=' + this.data.product.original_price + "&orderId=" + orderId,
+        })
+      })   
   },
   product:function(){
     wx.navigateTo({
