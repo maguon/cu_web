@@ -182,6 +182,30 @@ export const PAYMENT_TYPE = [
     }
 ];
 
+// 商品类型
+export const PRODUCT_TYPE = [
+    {
+        value: 0,
+        label: "服务"
+    },
+    {
+        value: 1,
+        label: "实物"
+    }
+];
+
+// 销售状态
+export const SALE_STATUS = [
+    {
+        value: 0,
+        label: "下架"
+    },
+    {
+        value: 1,
+        label: "销售中"
+    }
+];
+
 export const DATE_PICKER_OPTION = {
     // selectMonths: true,
     // selectYears: 15,

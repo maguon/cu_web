@@ -1,45 +1,199 @@
 import {apiHost} from '../../config/HostConfig';
-import {UserCarDetailActionType} from '../../actionTypes';
+import {ProductDetailActionType} from '../../actionTypes';
 
+const productAction = require('../../actions/main/ProductAction');
 const httpUtil = require('../../util/HttpUtil');
 const localUtil = require('../../util/LocalUtil');
 const sysConst = require('../../util/SysConst');
 
-export const getUserCarInfo = (id) => async (dispatch) => {
+export const getProductInfo = (id) => async (dispatch) => {
     try {
         // 基本检索URL
         const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
-            + '/userCar?userCarId=' + id;
-
+            + '/product?productId=' + id;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
-            dispatch({type: UserCarDetailActionType.getUserCarInfo, payload: res.result});
+            dispatch({type: ProductDetailActionType.getProductInfo, payload: res.result});
+            if (res.result.length > 0) {
+                let selectedPos = {
+                    value: res.result[0].type,
+                    label: sysConst.PRODUCT_TYPE[res.result[0].type].label
+                };
+                // 初期化数据
+                dispatch({type: ProductDetailActionType.setProductName, payload: res.result[0].product_name});
+                dispatch({type: ProductDetailActionType.setProductType, payload: selectedPos});
+                dispatch({type: ProductDetailActionType.setOriginalPrice, payload: res.result[0].original_price});
+                dispatch({type: ProductDetailActionType.setUnitPrice, payload: res.result[0].unit_price});
+                dispatch({type: ProductDetailActionType.setFreight, payload: res.result[0].freight});
+                dispatch({type: ProductDetailActionType.setRemark, payload: res.result[0].remark});
+                dispatch({type: ProductDetailActionType.setProductImg, payload: res.result[0].img});
+                dispatch({type: ProductDetailActionType.setProductDes, payload: res.result[0].product_remark});
+                $('.no-border-bottom').trigger('autoresize');
+            } else {
+                swal('未获取商品信息，请重新查询', res.msg, 'warning');
+            }
         } else if (res.success === false) {
-            swal('获取车辆信息失败', res.msg, 'warning');
+            swal('获取商品信息失败', res.msg, 'warning');
         }
     } catch (err) {
         swal('操作失败', err.message, 'error');
     }
 };
 
-export const getCheckCarList = (id) => async (dispatch, getState) => {
-    try {
-        // 检索条件：开始位置
-        const start = getState().UserCarDetailReducer.start;
-        // 检索条件：每页数量
-        const size = getState().UserCarDetailReducer.size;
+export const saveProductInfo = () => async (dispatch, getState) => {
+    // 商品管理详细：画面类型(新建/编辑)
+    const pageType = getState().ProductDetailReducer.pageType;
 
-        // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
-            + '/checkCar?start=' + start + '&size=' + size + '&userCarId=' + id;
-        const res = await httpUtil.httpGet(url);
-        if (res.success === true) {
-            dispatch({type: UserCarDetailActionType.setDataSize, payload: res.result.length});
-            dispatch({type: UserCarDetailActionType.getCheckCarList, payload: res.result.slice(0, size - 1)});
-        } else if (res.success === false) {
-            swal('获取扫描记录列表失败', res.msg, 'warning');
+    // 商品管理详细：商品信息
+    const productInfo = getState().ProductDetailReducer.productInfo;
+
+    // 商品管理详细：商品名称
+    const productName = getState().ProductDetailReducer.productName.trim();
+    // 商品管理详细：商品类型
+    const productType = getState().ProductDetailReducer.productType;
+    // 商品管理详细：原价
+    const originalPrice = getState().ProductDetailReducer.originalPrice;
+    // 商品管理详细：单价
+    const unitPrice = getState().ProductDetailReducer.unitPrice;
+    // 商品管理详细：运费
+    const freight = getState().ProductDetailReducer.freight;
+    // 商品管理详细：备注
+    const remark = getState().ProductDetailReducer.remark;
+    try {
+        if (productName === '' || productType == null || originalPrice === '' || unitPrice === '' || freight === '') {
+            swal('保存失败', '请输入完整的商品信息！', 'warning');
+        } else {
+            const params = {
+                productName: productName,
+                originalPrice: originalPrice,
+                unitPrice: unitPrice,
+                freight: freight,
+                type: productType.value,
+                remark: remark
+            };
+
+            console.log('params',params);
+
+            // 基本url
+            let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/product';
+            let res = null;
+            // 编辑时
+            if (pageType === 'edit') {
+                url = url + '/' + productInfo[0].id + '/productInfo';
+                res = await httpUtil.httpPut(url, params);
+            } else {
+                // 新建时
+                res = await httpUtil.httpPost(url, params);
+            }
+            if (res.success === true) {
+                swal("保存成功", "", "success");
+                // 新建成功时，要自动跳转到下一个TAB
+                if (pageType === 'new') {
+                    dispatch({type: ProductDetailActionType.setNewProductId, payload: res.id});
+                    $("ul.tabs li").removeClass("disabled");
+                    $('ul.tabs').tabs('select_tab', 'tab-img');
+                    $("ul.tabs li").addClass("disabled");
+                }
+            } else if (res.success === false) {
+                swal('保存失败', res.msg, 'warning');
+            }
         }
     } catch (err) {
         swal('操作失败', err.message, 'error');
+    }
+};
+
+
+export const changeProductStatus = () => async (dispatch, getState) => {
+    // 商品管理详细：商品信息
+    const productInfo = getState().ProductDetailReducer.productInfo;
+
+    try {
+        if (productInfo.length === 0) {
+            swal('修改失败', '未找到对应的商品信息，请重新检索！', 'warning');
+        } else {
+            swal({
+                title: "",
+                text: productInfo[0].status === 1 ? "确认将当前商品下架？" : "确认将当前商品重新上架？",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: '确定',
+                cancelButtonText: '取消'
+            }).then(async function (isConfirm) {
+                if (isConfirm && isConfirm.value === true) {
+                    // 状态
+                    let status = 0;
+                    if (productInfo[0].status === 0) {
+                        // 启用
+                        status = 1
+                    } else {
+                        // 停用
+                        status = 0
+                    }
+                    const params = {
+                        status: status
+                    };
+                    // 基本url
+                    let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+                        + '/product/' + productInfo[0].id  + '/status';
+                    let res = await httpUtil.httpPut(url, params);
+
+                    if (res.success === true) {
+                        swal("修改成功", "", "success");
+                        // dispatch(getPoliceInfo(id));
+                        // 更新成功后，刷新页面
+                        dispatch(getProductInfo(productInfo[0].id));
+                    } else if (res.success === false) {
+                        swal('修改失败', res.msg, 'warning');
+                    }
+                }
+            });
+        }
+    } catch (err) {
+        swal('操作失败', err.message, 'error');
+    }
+};
+
+export const saveProductDesc = () => async (dispatch, getState) => {
+    // 商品管理详细：画面类型(新建/编辑)
+    const pageType = getState().ProductDetailReducer.pageType;
+
+    // 商品管理详细：商品信息
+    const productInfo = getState().ProductDetailReducer.productInfo;
+    // 商品管理详细：新建商品id
+    let productId = getState().ProductDetailReducer.newProductId;
+
+    // 商品介绍：详细介绍
+    const productDes = getState().ProductDetailReducer.productDes;
+
+    if (productInfo.length === 0) {
+        swal('修改失败', '未找到对应的商品信息，请重新检索！', 'warning');
+    } else {
+        try {
+            // 如果是编辑画面，则使用检索商品信息中的 商品ID
+            if (pageType=== 'edit') {
+                productId = productInfo[0].id;
+            }
+            const params = {
+                productRemark: productDes
+            };
+
+            // 基本url
+            let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/product/' + productId + '/productRemark';
+            let res = await httpUtil.httpPut(url, params);
+            if (res.success === true) {
+                swal("保存成功", "", "success");
+                // 新建成功时，要自动跳转到下一个TAB
+                if (pageType === 'new') {
+                    // 回到主画面，显示详细列表
+                    dispatch(productAction.getProductList());
+                }
+            } else if (res.success === false) {
+                swal('保存失败', res.msg, 'warning');
+            }
+        } catch (err) {
+            swal('操作失败', err.message, 'error');
+        }
     }
 };

@@ -8,21 +8,18 @@ const initialState = {
     size: 11,
     // 检索结果数量
     dataSize: 0,
-
     // 检索条件：编号
     conditionNo: '',
     // 检索条件：商品名称
     conditionProductName: '',
     // 检索条件：商品类型
     conditionProductType: null,
-
     // 检索条件：上架时间(始)
     conditionCreatedOnStart: '',
     // 检索条件：上架时间(终)
     conditionCreatedOnEnd: '',
     // 检索条件：销售状态
     conditionSaleStatus: null,
-
     // 绑定车辆检索结果列表
     productArray: []
 };

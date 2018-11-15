@@ -1,13 +1,15 @@
 import React from 'react';
+import Select from 'react-select';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
-import {UserCarDetailActionType} from '../../actionTypes';
+import {Input} from 'react-materialize';
+import {ProductDetailActionType} from '../../actionTypes';
 
-const userCarDetailAction = require('../../actions/main/UserCarDetailAction');
+const productDetailAction = require('../../actions/main/ProductDetailAction');
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
-class UserCarDetail extends React.Component {
+class ProductDetail extends React.Component {
 
     /**
      * 组件准备要挂载的最一开始，调用执行
@@ -20,179 +22,234 @@ class UserCarDetail extends React.Component {
      * 组件完全挂载到页面上，调用执行
      */
     componentDidMount() {
-        // 取得车辆信息
-        this.props.getUserCarInfo();
+        // 取得商品信息
+        this.props.getProductInfo();
         $('ul.tabs').tabs();
     }
 
     /**
-     * 扫描记录TAB：点击事件
+     * 更新 商品信息：商品名称
      */
-    onClickScanTab = () => {
-        // 默认第一页
-        this.props.setStartNumber(0);
-        this.props.getCheckCarList();
+    changeProductName = (event, value) => {
+        this.props.setProductName(value);
     };
 
     /**
-     * 上一页
+     * 更新 商品信息：原价
      */
-    preBtn = () => {
-        this.props.setStartNumber(this.props.userCarDetailReducer.start - (this.props.userCarDetailReducer.size - 1));
-        this.props.getCheckCarList();
+    changeOriginalPrice = (event, value) => {
+        this.props.setOriginalPrice(value);
     };
 
     /**
-     * 下一页
+     * 更新 商品信息：单价
      */
-    nextBtn = () => {
-        this.props.setStartNumber(this.props.userCarDetailReducer.start + (this.props.userCarDetailReducer.size - 1));
-        this.props.getCheckCarList();
+    changeUnitPrice = (event, value) => {
+        this.props.setUnitPrice(value);
+    };
+
+    /**
+     * 更新 商品信息：运费
+     */
+    changeFreight = (event, value) => {
+        this.props.setFreight(value);
+    };
+
+    /**
+     * 更新 商品信息：备注
+     */
+    changeRemark = (event, value) => {
+        this.props.setRemark(value);
+    };
+
+    /**
+     * 更新 商品信息：商品图片
+     */
+    changeProductImg = (event, value) => {
+        this.props.setProductImg(value);
+    };
+
+    /**
+     * 更新 商品信息：商品介绍
+     */
+    changeProductDes = (event, value) => {
+        this.props.setProductDes(value);
+    };
+
+    /**
+     * 新建商品时，TAB跳转
+     */
+    goNextTab = (tabId) => {
+        if (tabId === 'tab-img') {
+            this.props.saveProductInfo();
+
+        } else {
+
+        }
+
     };
 
     render() {
-        const {userCarDetailReducer} = this.props;
+        const {productDetailReducer, changeProductType, saveProductInfo, changeProductStatus, saveProductDesc} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
                 <div className="row margin-bottom0">
                     <div className="input-field col s12">
-                        <Link to={{pathname: '/user_car', state: {fromDetail: true}}}>
+                        <Link to={{pathname: '/product', state: {fromDetail: true}}}>
                             <a className="btn-floating btn waves-effect custom-blue waves-light fz15">
                                 <i className="mdi mdi-arrow-left-bold"/>
                             </a>
                         </Link>
-                        <span className="page-title margin-left30">绑定车辆管理 - 车辆信息</span>
+                        <span className="page-title margin-left30">{}商品管理 - 商品发布</span>
                         <div className="divider custom-divider margin-top10"/>
                     </div>
                 </div>
 
 
+
                 <div className="row">
+
                     {/* TAB 头部 */}
                     <div className="col s12">
                         <ul className="tabs">
-                            <li className="tab col s6"><a className="active" href="#tab-base">基本信息</a></li>
-                            <li className="tab col s6"><a href="#tab-scan" onClick={this.onClickScanTab}>扫描记录</a></li>
+                            <li className="tab col s4">
+                            {/*<li className={`tab col s4 ${productDetailReducer.activeTab !== 'base' ? "disabled" : ""}`}>*/}
+                                {/*<a href="#tab-base" className={`${productDetailReducer.activeTab === 'base' ? "active" : ""}`}>商品信息</a>*/}
+                                <a href="#tab-base">商品信息</a>
+                            </li>
+                            <li className="tab col s4">
+                            {/*<li className={`tab col s4 ${productDetailReducer.activeTab !== 'img' ? "disabled" : ""}`}>*/}
+                                {/*<a href="#tab-img" className={`${productDetailReducer.activeTab === 'img' ? "active" : ""}`}>商品图片</a>*/}
+                                <a href="#tab-img" >商品图片</a>
+                            </li>
+                                <li className="tab col s4">
+                            {/*<li className={`tab col s4 ${productDetailReducer.activeTab !== 'desc' ? "disabled" : ""}`}>*/}
+                                {/*<a href="#tab-desc" className={`${productDetailReducer.activeTab === 'desc' ? "active" : ""}`}>商品介绍</a>*/}
+                                <a href="#tab-desc" className="active" >商品介绍</a>
+                            </li>
                         </ul>
                     </div>
 
-                    {/* TAB 1 : 基本信息TAB */}
+                    {/* TAB 1 : 商品信息TAB */}
                     <div id="tab-base" className="col s12">
-                        {/* 车辆信息：明细 */}
-                        {userCarDetailReducer.userCarInfo.length > 0 &&
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
+                            {/* 商品信息：商品编号 上架时间 (编辑画面显示) */}
+                            {productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 &&
                             <div className="row detail-box-header vc-center">
-                                {/* 车辆信息：车辆编号 */}
-                                <div className="col s6">车辆编号：{this.props.match.params.id}</div>
+                                {/* 商品信息：商品编号 */}
+                                <div className="col s6">商品编号：{productDetailReducer.productInfo[0].id}</div>
+                                <div className="col s6 fz14 right-align grey-text">上架时间：{formatUtil.getDateTime(productDetailReducer.productInfo[0].created_on)}</div>
+                            </div>}
 
-                                {/* 车辆信息：绑定时间 绑定状态 */}
-                                <div className="col s6 right-align">
-                                    <span className="grey-text">绑定时间：{formatUtil.getDateTime(userCarDetailReducer.userCarInfo[0].created_on)}</span>
-                                    <span className="margin-left50">{sysConst.BIND_STATUS[userCarDetailReducer.userCarInfo[0].status].label}</span>
-                                </div>
-                            </div>
-
-                            <div className="col s12 grey-text">
-                                <div className="row margin-left10 margin-right10">
-                                    {/* 车辆信息：车牌号码 */}
-                                    <div className="input-field col s4 blue-font fz20">
-                                        <i className="mdi mdi-car fz20 margin-right20"/>{userCarDetailReducer.userCarInfo[0].license_plate}
-                                    </div>
-                                    {/* 车辆信息：联系电话 */}
-                                    <div className="input-field col s4">
-                                        <i className="mdi mdi-cellphone fz20 margin-right10"/>{userCarDetailReducer.userCarInfo[0].phone}
-                                    </div>
-                                    {/* 车辆信息：绑定用户 */}
-                                    <div className="input-field col s4 right-align">
-                                        <i className="mdi mdi-account-outline fz20 margin-right10"/>{userCarDetailReducer.userCarInfo[0].user_name}
-                                    </div>
-                                </div>
-
-                                <div className="row divider custom-divider margin-top20 margin-left10 margin-right10"/>
-
-                                <div className="row margin-left10 margin-right10">
+                            {/* 商品信息：商品编辑部分 (新建/销售中商品 状态时 时 编辑) */}
+                            {productDetailReducer.pageType === 'new' || (productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 && productDetailReducer.productInfo[0].status === 1) &&
+                            <div>
+                                <div className="row margin-left20 margin-right20 margin-top40">
+                                    <Input s={6} label="商品名称" maxLength="50" value={productDetailReducer.productName} onChange={this.changeProductName}/>
+                                    {/* 查询条件：商品类型 */}
                                     <div className="input-field col s6">
-                                        车辆识别码：{userCarDetailReducer.userCarInfo[0].vin}
+                                        <Select
+                                            options={sysConst.PRODUCT_TYPE}
+                                            onChange={changeProductType}
+                                            value={productDetailReducer.productType}
+                                            isSearchable={false}
+                                            placeholder={"请选择"}
+                                            styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
+                                            isClearable={false}
+                                        />
+                                        <label className="active">商品类型</label>
                                     </div>
-                                    <div className="input-field col s6 right-align">
-                                        发动机号码：{userCarDetailReducer.userCarInfo[0].engine_num}
+                                </div>
+
+                                <div className="row margin-left20 margin-right20 margin-top20">
+                                    <Input s={4} label="原价(元)" maxLength="10" type="number" className="right-align fz16 red-font" value={productDetailReducer.originalPrice} onChange={this.changeOriginalPrice}/>
+                                    <Input s={4} label="单价(元)" maxLength="10" type="number" className="right-align fz16 red-font" value={productDetailReducer.unitPrice} onChange={this.changeUnitPrice}/>
+                                    <Input s={4} label="运费(元)" maxLength="10" type="number" className="right-align fz16 red-font" value={productDetailReducer.freight} onChange={this.changeFreight}/>
+                                </div>
+
+                                <div className="row margin-left20 margin-right20 margin-top20 margin-bottom40">
+                                    <Input s={12} label="备注" maxLength="100" value={productDetailReducer.remark} onChange={this.changeRemark}/>
+                                </div>
+                            </div>}
+
+                            {/* 商品信息：商品编辑部分 (下架商品 状态时 显示) */}
+                            {productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 && productDetailReducer.productInfo[0].status === 0 &&
+                            <div>
+
+                                <div className="row margin-left20 margin-right20 margin-top40">
+                                    <Input s={6} label="商品名称" disabled maxLength="50" value={productDetailReducer.productName} onChange={this.changeProductName}/>
+                                    {/* 查询条件：商品类型 */}
+                                    <div className="input-field col s6">
+                                        <Select
+                                            options={sysConst.PRODUCT_TYPE}
+                                            onChange={changeProductType}
+                                            isDisabled={true}
+                                            value={productDetailReducer.productType}
+                                            isSearchable={false}
+                                            placeholder={"请选择"}
+                                            styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
+                                            isClearable={false}
+                                        />
+                                        <label className="active">商品类型</label>
                                     </div>
                                 </div>
-                            </div>
-                        </div>}
-                    </div>
 
-                    {/* TAB 2 : 扫描记录TAB */}
-                    <div id="tab-scan" className="col s12">
-                        {/* 扫描记录：车辆信息 */}
-                        {userCarDetailReducer.userCarInfo.length > 0 &&
-                        <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
-                            <div className="row margin-left10 margin-right10 margin-top20">
-                                {/* 车辆信息：车辆编号 */}
-                                <div className="col s6">车辆编号：{this.props.match.params.id}</div>
-                                {/* 车辆信息：绑定状态 */}
-                                <div className="col s6 right-align">
-                                    <span>{sysConst.BIND_STATUS[userCarDetailReducer.userCarInfo[0].status].label}</span>
+                                <div className="row margin-left20 margin-right20 margin-top20">
+                                    <Input s={4} label="原价(元)" disabled maxLength="10" type="number" className="right-align fz16 red-font" value={productDetailReducer.originalPrice} onChange={this.changeOriginalPrice}/>
+                                    <Input s={4} label="单价(元)" disabled maxLength="10" type="number" className="right-align fz16 red-font" value={productDetailReducer.unitPrice} onChange={this.changeUnitPrice}/>
+                                    <Input s={4} label="运费(元)" disabled maxLength="10" type="number" className="right-align fz16 red-font" value={productDetailReducer.freight} onChange={this.changeFreight}/>
                                 </div>
 
-                                {/* 车辆信息：车牌号码 */}
-                                <div className="input-field col s6 fz20">
-                                    <i className="mdi mdi-car fz20 margin-right10"/>{userCarDetailReducer.userCarInfo[0].license_plate}
+                                <div className="row margin-left20 margin-right20 margin-top20 margin-bottom10">
+                                    <Input s={12} label="备注" disabled maxLength="100" value={productDetailReducer.remark} onChange={this.changeRemark}/>
                                 </div>
-                                {/* 车辆信息：扫描记录 */}
-                                <div className="input-field col s6 right-align grey-text">
-                                    {/*扫描记录： <span className="blue-font fz20">{formatUtil.formatNumber(userCarDetailReducer.checkCarArray.length)}</span> 条*/}
-                                </div>
-                            </div>
-                        </div>}
 
-                        {/* 扫描记录：记录列表 */}
-                        <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50 blue-font">
-                            <table className="bordered">
-                                <thead className="blue-grey lighten-5">
-                                <tr className="grey-text text-darken-2">
-                                    <th className="padding-left20">编号</th>
-                                    <th>地址</th>
-                                    <th>扫码交警</th>
-                                    <th className="center">扫码时间</th>
-                                    <th>状态</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {
-                                    userCarDetailReducer.checkCarArray.map(function (item) {
-                                        return (
-                                            <tr className="grey-text text-darken-1">
-                                                <td className="padding-left20">{item.id}</td>
-                                                <td>{item.address}</td>
-                                                <td>{item.supervise_name}</td>
-                                                <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
-                                                <td>{sysConst.CHECK_CAR_STATUS[item.status].label}</td>
-                                            </tr>
-                                        )
-                                    },this)
-                                }
-                                { userCarDetailReducer.checkCarArray.length === 0 &&
-                                <tr className="grey-text text-darken-1">
-                                    <td className="no-data-tr" colSpan="5">暂无数据</td>
-                                </tr>}
-                                </tbody>
-                            </table>
+                                <div className="row margin-left20 margin-right20 margin-top10 margin-bottom40">
+                                    <div className="col s12 fz14 right-align grey-text">下架时间：{formatUtil.getDateTime(productDetailReducer.productInfo[0].updated_on)}</div>
+                                </div>
+                            </div>}
                         </div>
 
-                        {/* 上下页按钮 */}
-                        <div className="row margin-top10 margin-left50 margin-right50">
-                            <div className="right">
-                                {userCarDetailReducer.start > 0 &&
-                                <a className="waves-light waves-effect custom-blue btn margin-right10" id="pre" onClick={this.preBtn}>
-                                    上一页
-                                </a>}
-                                {userCarDetailReducer.dataSize >= userCarDetailReducer.size &&
-                                <a className="waves-light waves-effect custom-blue btn" id="next" onClick={this.nextBtn}>
-                                    下一页
-                                </a>}
+                        {/* 下一步 按钮 */}
+                        <div className="col s12 right-align padding-right70">
+                            {productDetailReducer.pageType === 'new' && <button type="button" className="btn confirm-btn" onClick={saveProductInfo}>下一步</button>}
+                            {productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 &&
+                                 <div>
+                                    <button type="button" className="btn orange-btn" onClick={changeProductStatus}>{productDetailReducer.productInfo[0].status === 0 ? '重新上架' : '下架'}</button>
+                                    <button type="button" className="btn confirm-btn margin-left20" onClick={saveProductInfo}>确定</button>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+
+                    {/* TAB 2 : 商品图片TAB */}
+                    <div id="tab-img" className="col s12">
+                        商品图片 2
+                        <button type="button" className="btn confirm-btn" onClick={()=>{this.goNextTab('tab-desc')}}>下一步</button>
+                    </div>
+
+                    {/* TAB 3 : 商品介绍TAB */}
+                    <div id="tab-desc" className="col s12">
+                        <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50 min-height500">
+                            <div className="row detail-box-header vc-center margin-bottom0">
+                                {/* 商品介绍：商品名称 */}
+                                <div className="col s12 no-padding">{productDetailReducer.productName}</div>
                             </div>
+                            <div className="row col s12">
+                                <Input s={12} type='textarea' placeholder="请输入文字介绍" className="no-border-bottom" value={productDetailReducer.productDes} onChange={this.changeProductDes}/>
+                            </div>
+                        </div>
+                        {/* 完成 按钮 */}
+                        <div className="col s12 right-align padding-right70">
+                            {productDetailReducer.pageType === 'new' && <button type="button" className="btn confirm-btn" onClick={saveProductInfo}>完成</button>}
+                            {productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 &&
+                            <div>
+                                <button type="button" className="btn orange-btn" onClick={()=>{this.changeProductDes(event,'')}}>清空</button>
+                                <button type="button" className="btn confirm-btn margin-left20" onClick={saveProductDesc}>确定</button>
+                            </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -203,20 +260,75 @@ class UserCarDetail extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        userCarDetailReducer: state.UserCarDetailReducer
+        productDetailReducer: state.ProductDetailReducer
     }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    getUserCarInfo: () => {
-        dispatch(userCarDetailAction.getUserCarInfo(ownProps.match.params.id))
+    getProductInfo: () => {
+        let productId = ownProps.match.params.id;
+        console.log('productId', productId);
+
+        if (productId === 'new') {
+            // 新建画面 TAB 不可操作
+            $("ul.tabs li").addClass("disabled");
+            // 画面区分：新建
+            dispatch(ProductDetailActionType.setPageType('new'));
+            // 初期化数据
+            dispatch(ProductDetailActionType.setProductName(''));
+            dispatch(ProductDetailActionType.setProductType(''));
+            dispatch(ProductDetailActionType.setOriginalPrice(''));
+            dispatch(ProductDetailActionType.setUnitPrice(''));
+            dispatch(ProductDetailActionType.setFreight(''));
+            dispatch(ProductDetailActionType.setRemark(''));
+            dispatch(ProductDetailActionType.setProductImg(''));
+            dispatch(ProductDetailActionType.setProductDes(''));
+
+        } else {
+            // 画面区分：编辑
+            dispatch(ProductDetailActionType.setPageType('edit'));
+            dispatch(productDetailAction.getProductInfo(productId));
+        }
     },
-    getCheckCarList: () => {
-        dispatch(userCarDetailAction.getCheckCarList(ownProps.match.params.id))
+
+    saveProductInfo: () => {
+        dispatch(productDetailAction.saveProductInfo());
     },
-    setStartNumber: (start) => {
-        dispatch(UserCarDetailActionType.setStartNumber(start))
+
+    changeProductStatus: () => {
+        dispatch(productDetailAction.changeProductStatus());
+    },
+
+
+
+    setProductName: (value) => {
+        dispatch(ProductDetailActionType.setProductName(value))
+    },
+    changeProductType: (value) => {
+        dispatch(ProductDetailActionType.setProductType(value))
+    },
+    setUnitPrice: (value) => {
+        dispatch(ProductDetailActionType.setUnitPrice(value))
+    },
+    setOriginalPrice: (value) => {
+        dispatch(ProductDetailActionType.setOriginalPrice(value))
+    },
+    setFreight: (value) => {
+        dispatch(ProductDetailActionType.setFreight(value))
+    },
+    setRemark: (value) => {
+        dispatch(ProductDetailActionType.setRemark(value))
+    },
+    setProductImg: (value) => {
+        dispatch(ProductDetailActionType.setProductImg(value))
+    },
+    setProductDes: (value) => {
+        dispatch(ProductDetailActionType.setProductDes(value))
+    },
+
+    saveProductDesc: () => {
+        dispatch(productDetailAction.saveProductDesc());
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserCarDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail)

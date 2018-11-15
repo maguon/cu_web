@@ -1,43 +1,99 @@
 import {handleActions} from 'redux-actions';
-import {UserCarDetailActionType} from '../../actionTypes';
+import {ProductDetailActionType} from '../../actionTypes';
 
 const initialState = {
-    // 绑定车辆管理 - 车辆信息
-    userCarInfo: [],
+    // 画面区分
+    pageType: '',
 
-    // 扫描记录列表
-    checkCarArray: [],
-    // 开始位置
-    start: 0,
-    // 每页数量
-    size: 7,
-    // 检索结果数量
-    dataSize: 0
+    // 商品信息 - 商品基本信息(编辑画面用)
+    productInfo: [],
+    // 商品信息 - 新建商品id
+    newProductId: '',
+    // 商品信息 - 商品名称
+    productName: '',
+    // 商品信息 - 商品类型
+    productType: null,
+    // 商品信息 - 原价
+    originalPrice: '',
+    // 商品信息 - 单价
+    unitPrice: '',
+    // 商品信息 - 运费
+    freight: '',
+    // 商品信息 - 备注
+    remark: '',
+
+    // 商品图片
+    productImg: '',
+
+    // 商品介绍
+    productDes: ''
 };
 
 export default handleActions({
-    [UserCarDetailActionType.getUserCarInfo]: (state, action) => {
+    [ProductDetailActionType.setPageType]: (state, action) => {
         return {
             ...state,
-            userCarInfo: action.payload
+            pageType: action.payload
         }
     },
-    [UserCarDetailActionType.getCheckCarList]: (state, action) => {
+    [ProductDetailActionType.getProductInfo]: (state, action) => {
         return {
             ...state,
-            checkCarArray: action.payload
+            productInfo: action.payload
         }
     },
-    [UserCarDetailActionType.setStartNumber]: (state, action) => {
+    [ProductDetailActionType.setNewProductId]: (state, action) => {
         return {
             ...state,
-            start: action.payload
+            newProductId: action.payload
         }
     },
-    [UserCarDetailActionType.setDataSize]: (state, action) => {
+    [ProductDetailActionType.setProductName]: (state, action) => {
         return {
             ...state,
-            dataSize: action.payload
+            productName: action.payload
+        }
+    },
+    [ProductDetailActionType.setProductType]: (state, action) => {
+        return {
+            ...state,
+            productType: action.payload
+        }
+    },
+    [ProductDetailActionType.setOriginalPrice]: (state, action) => {
+        return {
+            ...state,
+            originalPrice: action.payload
+        }
+    },
+    [ProductDetailActionType.setUnitPrice]: (state, action) => {
+        return {
+            ...state,
+            unitPrice: action.payload
+        }
+    },
+    [ProductDetailActionType.setFreight]: (state, action) => {
+        return {
+            ...state,
+            freight: action.payload
+        }
+    },
+    [ProductDetailActionType.setRemark]: (state, action) => {
+        return {
+            ...state,
+            remark: action.payload
+        }
+    },
+    [ProductDetailActionType.setProductImg]: (state, action) => {
+        return {
+            ...state,
+            productImg: action.payload
+        }
+    },
+    [ProductDetailActionType.setProductDes]: (state, action) => {
+        return {
+            ...state,
+            productDes: action.payload
         }
     }
 }, initialState)

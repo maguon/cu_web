@@ -18,7 +18,6 @@ export const getProductList = () => async (dispatch, getState) => {
         const conditionProductName = getState().ProductReducer.conditionProductName.trim();
         // 检索条件：商品类型
         const conditionProductType = getState().ProductReducer.conditionProductType;
-
         // 检索条件：上架时间
         const conditionCreatedOnStart = getState().ProductReducer.conditionCreatedOnStart;
         const conditionCreatedOnEnd = getState().ProductReducer.conditionCreatedOnEnd;
