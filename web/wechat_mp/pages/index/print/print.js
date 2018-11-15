@@ -131,6 +131,8 @@ Page({
   bindButtonTap:function(){
     var price=this.data.price;
     var userId=app.globalData.userId;
+
+    if (this.data.addressList!=''){
     //设置参数
     var params = {
       productId:[this.data.product.id],
@@ -153,6 +155,13 @@ Page({
     wx.navigateTo({
       url: '/pages/user/order/order-detail/order-detail?price=' +this.data.product.original_price,
     })
+  }else{
+      wx.showModal({
+        title: '提示',
+        content: '请添加您的收货地址',
+      })
+      return;
+  }
   },
   product:function(){
     wx.navigateTo({
