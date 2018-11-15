@@ -55,9 +55,7 @@
 
             <view class='ress'>
             <view class='test'>收货地址</view>
-             <view class='right'>
-            <view class='num'>{{product.recv_address}} {{product.recv_name}} {{product.recv_phone}}</view>
-             </view>
+            <view class='ress-msg'>{{product.recv_address}} {{product.recv_name}} {{product.recv_phone}}</view>
             </view>
             <view class='div-line'></view>  
 
@@ -108,7 +106,7 @@
                 </view>  
 
             <view class='bnt-list' hidden='{{isPay}}'>
-                 <button class="btn" bindtap='cancelOrder'>取消订单</button>
+                 <button class="btn" bindtap='cancelOrder' data-index='{{index}}'>取消订单</button>
                 <button class="btn-left"  bindtap='payment' hover-class="active">付款</button>
                 </view>  
          
