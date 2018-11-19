@@ -1,4 +1,4 @@
-import {apiHost} from '../../config/HostConfig';
+import {apiHost, fileHost} from '../../config/HostConfig';
 import {ProductDetailActionType} from '../../actionTypes';
 
 const productAction = require('../../actions/main/ProductAction');
@@ -15,6 +15,7 @@ export const getProductInfo = (id) => async (dispatch) => {
         if (res.success === true) {
             dispatch({type: ProductDetailActionType.getProductInfo, payload: res.result});
             if (res.result.length > 0) {
+                // 组装react-select 需要的类型
                 let selectedPos = {
                     value: res.result[0].type,
                     label: sysConst.PRODUCT_TYPE[res.result[0].type].label
@@ -28,6 +29,7 @@ export const getProductInfo = (id) => async (dispatch) => {
                 dispatch({type: ProductDetailActionType.setRemark, payload: res.result[0].remark});
                 dispatch({type: ProductDetailActionType.setProductImg, payload: res.result[0].img});
                 dispatch({type: ProductDetailActionType.setProductDes, payload: res.result[0].product_remark});
+                // material textarea 自动适配 高度，否则显示不全
                 $('.no-border-bottom').trigger('autoresize');
             } else {
                 swal('未获取商品信息，请重新查询', res.msg, 'warning');
@@ -43,7 +45,6 @@ export const getProductInfo = (id) => async (dispatch) => {
 export const saveProductInfo = () => async (dispatch, getState) => {
     // 商品管理详细：画面类型(新建/编辑)
     const pageType = getState().ProductDetailReducer.pageType;
-
     // 商品管理详细：商品信息
     const productInfo = getState().ProductDetailReducer.productInfo;
 
@@ -71,13 +72,10 @@ export const saveProductInfo = () => async (dispatch, getState) => {
                 type: productType.value,
                 remark: remark
             };
-
-            console.log('params',params);
-
             // 基本url
             let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/product';
             let res = null;
-            // 编辑时
+            // 编辑时,需要拼接 商品信息 中的商品id
             if (pageType === 'edit') {
                 url = url + '/' + productInfo[0].id + '/productInfo';
                 res = await httpUtil.httpPut(url, params);
@@ -86,13 +84,14 @@ export const saveProductInfo = () => async (dispatch, getState) => {
                 res = await httpUtil.httpPost(url, params);
             }
             if (res.success === true) {
-                swal("保存成功", "", "success");
                 // 新建成功时，要自动跳转到下一个TAB
                 if (pageType === 'new') {
                     dispatch({type: ProductDetailActionType.setNewProductId, payload: res.id});
                     $("ul.tabs li").removeClass("disabled");
                     $('ul.tabs').tabs('select_tab', 'tab-img');
                     $("ul.tabs li").addClass("disabled");
+                } else {
+                    swal("保存成功", "", "success");
                 }
             } else if (res.success === false) {
                 swal('保存失败', res.msg, 'warning');
@@ -103,12 +102,10 @@ export const saveProductInfo = () => async (dispatch, getState) => {
     }
 };
 
-
 export const changeProductStatus = () => async (dispatch, getState) => {
-    // 商品管理详细：商品信息
-    const productInfo = getState().ProductDetailReducer.productInfo;
-
     try {
+        // 商品管理详细：商品信息
+        const productInfo = getState().ProductDetailReducer.productInfo;
         if (productInfo.length === 0) {
             swal('修改失败', '未找到对应的商品信息，请重新检索！', 'warning');
         } else {
@@ -141,8 +138,7 @@ export const changeProductStatus = () => async (dispatch, getState) => {
 
                     if (res.success === true) {
                         swal("修改成功", "", "success");
-                        // dispatch(getPoliceInfo(id));
-                        // 更新成功后，刷新页面
+                        // 修改成功后，刷新页面
                         dispatch(getProductInfo(productInfo[0].id));
                     } else if (res.success === false) {
                         swal('修改失败', res.msg, 'warning');
@@ -155,45 +151,106 @@ export const changeProductStatus = () => async (dispatch, getState) => {
     }
 };
 
-export const saveProductDesc = () => async (dispatch, getState) => {
-    // 商品管理详细：画面类型(新建/编辑)
-    const pageType = getState().ProductDetailReducer.pageType;
+export const uploadProductImg = (formData) => (dispatch) => {
+    try {
+        // 基本url
+        let url = fileHost + '/api/user/' + localUtil.getLocalItem(sysConst.USER_ID) + '/image?imageType=1';
+        httpUtil.httpAsyncFormPost(url, formData, function (result) {
+            if (result.success === true) {
+                // 上传图片成功后，刷新画面显示图片
+                dispatch({type: ProductDetailActionType.setProductImg, payload: result.imageId});
+            } else {
+                swal('上传图片失败', result.msg, 'warning');
+            }
+        }, function (err) {
+            swal('保存失败', err.msg, 'warning');
+        });
+    } catch (err) {
+        swal('操作失败', err.message, 'error');
+    }
+};
 
-    // 商品管理详细：商品信息
-    const productInfo = getState().ProductDetailReducer.productInfo;
-    // 商品管理详细：新建商品id
-    let productId = getState().ProductDetailReducer.newProductId;
+export const saveProductImg = () => async (dispatch, getState) => {
+    try {
+        // 商品管理详细：画面类型(新建/编辑)
+        const pageType = getState().ProductDetailReducer.pageType;
 
-    // 商品介绍：详细介绍
-    const productDes = getState().ProductDetailReducer.productDes;
+        // 商品管理详细：商品信息
+        const productInfo = getState().ProductDetailReducer.productInfo;
+        // 商品管理详细：新建商品id
+        let productId = getState().ProductDetailReducer.newProductId;
 
-    if (productInfo.length === 0) {
-        swal('修改失败', '未找到对应的商品信息，请重新检索！', 'warning');
-    } else {
-        try {
+        // 商品管理详细：商品照片id
+        let productImgId = getState().ProductDetailReducer.productImg;
+
+        if (pageType === 'edit' && productInfo.length === 0) {
+            swal('修改失败', '未找到对应的商品信息，请重新检索！', 'warning');
+        } else {
             // 如果是编辑画面，则使用检索商品信息中的 商品ID
-            if (pageType=== 'edit') {
+            if (pageType === 'edit') {
+                productId = productInfo[0].id;
+            }
+            const params = {
+                img: productImgId
+            };
+            // 基本url
+            let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+                + '/product/' + productId + '/productImg';
+            let res = await httpUtil.httpPut(url, params);
+            if (res.success === true) {
+                if (pageType === 'new') {
+                    $("ul.tabs li").removeClass("disabled");
+                    $('ul.tabs').tabs('select_tab', 'tab-desc');
+                    $("ul.tabs li").addClass("disabled");
+                } else {
+                    swal("保存成功", "", "success");
+                }
+            } else if (res.success === false) {
+                swal('保存失败', res.msg, 'warning');
+            }
+        }
+    } catch (err) {
+        swal('操作失败', err.message, 'error');
+    }
+};
+
+export const saveProductDesc = () => async (dispatch, getState) => {
+    try {
+        // 商品管理详细：画面类型(新建/编辑)
+        const pageType = getState().ProductDetailReducer.pageType;
+
+        // 商品管理详细：商品信息
+        const productInfo = getState().ProductDetailReducer.productInfo;
+        // 商品管理详细：新建商品id
+        let productId = getState().ProductDetailReducer.newProductId;
+
+        // 商品介绍：详细介绍
+        const productDes = getState().ProductDetailReducer.productDes;
+
+        if (pageType === 'edit' && productInfo.length === 0) {
+            swal('修改失败', '未找到对应的商品信息，请重新检索！', 'warning');
+        } else {
+            // 如果是编辑画面，则使用检索商品信息中的 商品ID
+            if (pageType === 'edit') {
                 productId = productInfo[0].id;
             }
             const params = {
                 productRemark: productDes
             };
-
             // 基本url
             let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/product/' + productId + '/productRemark';
             let res = await httpUtil.httpPut(url, params);
             if (res.success === true) {
                 swal("保存成功", "", "success");
-                // 新建成功时，要自动跳转到下一个TAB
+                // 新建成功时，回到主画面，显示详细列表
                 if (pageType === 'new') {
-                    // 回到主画面，显示详细列表
                     dispatch(productAction.getProductList());
                 }
             } else if (res.success === false) {
                 swal('保存失败', res.msg, 'warning');
             }
-        } catch (err) {
-            swal('操作失败', err.message, 'error');
         }
+    } catch (err) {
+        swal('操作失败', err.message, 'error');
     }
 };

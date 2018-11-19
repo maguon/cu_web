@@ -26,9 +26,9 @@ body {
 
 /** 左侧导航 按钮样式 */
 #sideNav {
-     display: block;
-     padding-left: 10px;
- }
+    display: block;
+    padding-left: 10px;
+}
 
 /** 标题：画面主体部分，标题部分样式 */
 .header-icon {
@@ -64,13 +64,15 @@ body {
     background: #CBCBCB;
     height: 2px;
 }
+
 /** 虚分割线 */
 .dotted-line {
     height: 1px;
     border-bottom: 1px dotted #ccc;
     width: calc(100% - 20px);
-    margin-left:10px;
+    margin-left: 10px;
 }
+
 /** 蓝色分割线 */
 .blue-divider {
     background: #88A8CA;
@@ -101,6 +103,7 @@ body {
     width: 9em;
     height: 9em;
 }
+
 /** 画面加载样式 End */
 
 /** 画面检索部分样式 */
@@ -110,6 +113,19 @@ body {
 }
 
 /** Material样式 变更部分 Start */
+
+/*垂直水平居中*/
+.vc-center {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
 .input-field {
     margin-bottom: 0;
 }
@@ -132,11 +148,12 @@ body {
     margin: 0;
 }
 
-.switch label input[type=checkbox]:checked + .lever{
-    background-color:#0E4E92
+.switch label input[type=checkbox]:checked + .lever {
+    background-color: #0E4E92
 }
-.switch label input[type=checkbox]:checked + .lever:after{
-    background-color:#ffffff
+
+.switch label input[type=checkbox]:checked + .lever:after {
+    background-color: #ffffff
 }
 
 .tabs {
@@ -197,13 +214,13 @@ body {
 }
 
 /*.autocomplete-content {*/
-    /*margin-top: -20px !important;*/
-    /*margin-bottom: 20px !important;*/
-    /*display: block !important;*/
-    /*opacity: 1 !important;*/
-    /*!*width: 97%;*!*/
-    /*width: calc(100% - 1.5rem);*/
-    /*position: absolute !important;*/
+/*margin-top: -20px !important;*/
+/*margin-bottom: 20px !important;*/
+/*display: block !important;*/
+/*opacity: 1 !important;*/
+/*!*width: 97%;*!*/
+/*width: calc(100% - 1.5rem);*/
+/*position: absolute !important;*/
 /*}*/
 
 /** Material样式 变更部分 End */
@@ -221,27 +238,35 @@ body {
 .bold-font {
     font-weight: bold;
 }
+
 .fz12 {
     font-size: 12px;
 }
+
 .fz14 {
     font-size: 14px;
 }
+
 .fz15 {
     font-size: 15px !important;
 }
+
 .fz16 {
     font-size: 16px;
 }
+
 .fz18 {
     font-size: 18px;
 }
+
 .fz20 {
     font-size: 20px;
 }
+
 .fz24 {
     font-size: 24px;
 }
+
 .fz50 {
     font-size: 50px;
 }
@@ -253,7 +278,7 @@ body {
 }
 
 .margin-top0 {
-    margin-top: 0;
+    margin-top: 0 !important;
 }
 
 .margin-top3 {
@@ -316,6 +341,10 @@ body {
     margin-left: 50px !important;
 }
 
+.margin-left150 {
+    margin-left: 150px !important;
+}
+
 .margin-right0 {
     margin-right: 0 !important;
 }
@@ -330,6 +359,10 @@ body {
 
 .margin-right50 {
     margin-right: 50px !important;
+}
+
+.margin-right150 {
+    margin-right: 150px !important;
 }
 
 .padding-left0 {
@@ -348,6 +381,10 @@ body {
     padding-left: 55px !important;
 }
 
+.padding-left150 {
+    padding-left: 150px !important;
+}
+
 .padding-right0 {
     padding-right: 0 !important;
 }
@@ -359,12 +396,17 @@ body {
 .padding-right30 {
     padding-right: 30px !important;
 }
+
 .padding-right50 {
     padding-right: 50px !important;
 }
 
 .padding-right70 {
     padding-right: 70px !important;
+}
+
+.padding-right150 {
+    padding-right: 100px !important;
 }
 
 .padding-top10 {
@@ -405,7 +447,7 @@ body {
 
 /** col 后 自定义宽度 */
 .s-percent-4 {
-    width:4%;
+    width: 4%;
 }
 
 .s-percent-8 {
@@ -453,23 +495,24 @@ body {
 }
 
 .no-img-box {
-    height:100px;
-    width:100px;
-    border:1px solid #D4D4D4;
+    height: 100px;
+    width: 100px;
+    border: 1px solid #D4D4D4;
 }
 
 .img-size-100 {
-    height:100px;
+    height: 100px;
 }
 
 .img-size-120 {
-    height:120px;
+    height: 120px;
 }
 
 /** 一览画面 操作按钮部 样式 */
 .operation {
     padding: 8px 5px 8px 5px;
 }
+
 .operation i {
     font-size: 22px;
 }
@@ -519,16 +562,17 @@ body {
     padding: 0 10px !important;
     background-color: #fea353 !important;
 }
+
 .orange-btn:hover {
     background: #febc60 !important;
 }
+
 .orange-btn:focus {
     background-color: #febc60 !important;
     color: white;
 }
 
-
-#policeModal, #messageModal, #refundModal,#newLogCompanyModal {
+#policeModal, #messageModal, #refundModal, #newLogCompanyModal {
     max-height: 450px;
 }
 
@@ -536,7 +580,7 @@ body {
     max-height: 500px;
 }
 
-#reSendModal,#orderDetailModal {
+#reSendModal, #orderDetailModal {
     max-height: 550px;
 }
 
@@ -596,6 +640,7 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
 /** 鼠标悬停在TD上，显示隐藏内容 */
 /*td:hover {*/
 /*text-overflow: inherit;*/
@@ -654,10 +699,10 @@ body {
     cursor: pointer;
 }
 
-.custom-btn,.custom-detail-btn{
-    padding:3px 10px 3px 20px;
+.custom-btn, .custom-detail-btn {
+    padding: 3px 10px 3px 20px;
     background: #E3E8ED;
-    border:1px solid #dadfe4;
+    border: 1px solid #dadfe4;
     height: 70%;
     cursor: pointer;
 }
@@ -669,13 +714,14 @@ body {
 .custom-btn {
     border-radius: 40px;
 }
-.custom-btn i{
+
+.custom-btn i {
     margin-left: 5px;
 }
 
 /** 详细信息 画面 用 */
 .detail-box {
-    border:1px solid #D4D4D4;
+    border: 1px solid #D4D4D4;
 }
 
 .detail-box-header {
@@ -692,7 +738,7 @@ body {
     background-color: #EDEFF6;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    border-bottom:1px solid #D4D4D4;
+    border-bottom: 1px solid #D4D4D4;
     color: #0F4F94;
     font-weight: bold;
 }
@@ -718,9 +764,59 @@ body {
     border-left: 1px solid #D4D4D4;
 }
 
+/* 照片 */
+.upload-img-box {
+    height: 222px;
+    width: 322px;
+}
+
+.upload-img {
+    height: 80px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    margin: 50px 120px 20px 120px;
+    font-size: 35px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.upload-img input {
+    font-size: 200px;
+    position: absolute;
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.picture-list {
+    height: 222px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    font-size: 100px;
+    min-width: 200px;
+}
+
+img.responsive-img {
+    max-width: 100%;
+    height: auto;
+}
+
+/*删除照片*/
+.delete-img{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
 
 /** 日期控件 图片 样式 */
-.data-icon{
+.data-icon {
     position: absolute;
     right: 12px;
     bottom: 30px;
@@ -734,11 +830,11 @@ body {
 }
 
 .message-td {
-    width:600px;
+    width: 600px;
 }
 
 .ellipsis-td {
-    width:300px;
+    width: 300px;
 }
 
 .pointer {

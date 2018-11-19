@@ -3,7 +3,9 @@ import Select from 'react-select';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
+import {reduxForm} from "redux-form";
 import {ProductDetailActionType} from '../../actionTypes';
+import {fileHost} from "../../config/HostConfig";
 
 const productDetailAction = require('../../actions/main/ProductDetailAction');
 const sysConst = require('../../util/SysConst');
@@ -25,6 +27,9 @@ class ProductDetail extends React.Component {
         // 取得商品信息
         this.props.getProductInfo();
         $('ul.tabs').tabs();
+        let viewer = new Viewer(document.getElementById('viewer'), {
+            url: 'data-original'
+        });
     }
 
     /**
@@ -63,34 +68,23 @@ class ProductDetail extends React.Component {
     };
 
     /**
-     * 更新 商品信息：商品图片
-     */
-    changeProductImg = (event, value) => {
-        this.props.setProductImg(value);
-    };
-
-    /**
      * 更新 商品信息：商品介绍
      */
     changeProductDes = (event, value) => {
         this.props.setProductDes(value);
     };
 
-    /**
-     * 新建商品时，TAB跳转
-     */
-    goNextTab = (tabId) => {
-        if (tabId === 'tab-img') {
-            this.props.saveProductInfo();
+    render() {
+        const {productDetailReducer, changeProductType, saveProductInfo, changeProductStatus, saveProductImg, saveProductDesc, handleSubmit} = this.props;
 
+        // 商品图片地址
+        let avatarUrl = "";
+        if (productDetailReducer.productImg !== null && productDetailReducer.productImg !== '') {
+            avatarUrl = "http://" + fileHost + "/api/image/" + productDetailReducer.productImg;
         } else {
-
+            avatarUrl = "";
         }
 
-    };
-
-    render() {
-        const {productDetailReducer, changeProductType, saveProductInfo, changeProductStatus, saveProductDesc} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -101,33 +95,18 @@ class ProductDetail extends React.Component {
                                 <i className="mdi mdi-arrow-left-bold"/>
                             </a>
                         </Link>
-                        <span className="page-title margin-left30">{}商品管理 - 商品发布</span>
+                        <span className="page-title margin-left30">{productDetailReducer.pageType === 'new' ? '商品管理 - 商品发布' : '商品管理 - 商品详情'}</span>
                         <div className="divider custom-divider margin-top10"/>
                     </div>
                 </div>
 
-
-
                 <div className="row">
-
                     {/* TAB 头部 */}
                     <div className="col s12">
                         <ul className="tabs">
-                            <li className="tab col s4">
-                            {/*<li className={`tab col s4 ${productDetailReducer.activeTab !== 'base' ? "disabled" : ""}`}>*/}
-                                {/*<a href="#tab-base" className={`${productDetailReducer.activeTab === 'base' ? "active" : ""}`}>商品信息</a>*/}
-                                <a href="#tab-base">商品信息</a>
-                            </li>
-                            <li className="tab col s4">
-                            {/*<li className={`tab col s4 ${productDetailReducer.activeTab !== 'img' ? "disabled" : ""}`}>*/}
-                                {/*<a href="#tab-img" className={`${productDetailReducer.activeTab === 'img' ? "active" : ""}`}>商品图片</a>*/}
-                                <a href="#tab-img" >商品图片</a>
-                            </li>
-                                <li className="tab col s4">
-                            {/*<li className={`tab col s4 ${productDetailReducer.activeTab !== 'desc' ? "disabled" : ""}`}>*/}
-                                {/*<a href="#tab-desc" className={`${productDetailReducer.activeTab === 'desc' ? "active" : ""}`}>商品介绍</a>*/}
-                                <a href="#tab-desc" className="active" >商品介绍</a>
-                            </li>
+                            <li className="tab col s4"><a href="#tab-base" className="active">商品信息</a></li>
+                            <li className="tab col s4"><a href="#tab-img">商品图片</a></li>
+                            <li className="tab col s4"><a href="#tab-desc">商品介绍</a></li>
                         </ul>
                     </div>
 
@@ -143,7 +122,7 @@ class ProductDetail extends React.Component {
                             </div>}
 
                             {/* 商品信息：商品编辑部分 (新建/销售中商品 状态时 时 编辑) */}
-                            {productDetailReducer.pageType === 'new' || (productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 && productDetailReducer.productInfo[0].status === 1) &&
+                            {(productDetailReducer.pageType === 'new' || (productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 && productDetailReducer.productInfo[0].status === 1)) &&
                             <div>
                                 <div className="row margin-left20 margin-right20 margin-top40">
                                     <Input s={6} label="商品名称" maxLength="50" value={productDetailReducer.productName} onChange={this.changeProductName}/>
@@ -220,14 +199,38 @@ class ProductDetail extends React.Component {
                                     <button type="button" className="btn confirm-btn margin-left20" onClick={saveProductInfo}>确定</button>
                                 </div>
                             }
-
                         </div>
                     </div>
 
                     {/* TAB 2 : 商品图片TAB */}
                     <div id="tab-img" className="col s12">
-                        商品图片 2
-                        <button type="button" className="btn confirm-btn" onClick={()=>{this.goNextTab('tab-desc')}}>下一步</button>
+                        <div className="row margin-top40 margin-left150 margin-right150">
+                            <div className="col s6 padding-left150 padding-right150">
+                                <div className="upload-img-box z-depth-1 detail-box right-align">
+                                    <form ref="addForm" className="addForm" id="addForm" encType="multipart/form-data" method="post">
+                                        <div className="upload-img  vc-center white-text custom-blue">
+                                            <input id="product_image" name="product_image" type="file" onChange={handleSubmit}/>
+                                            <i className="mdi mdi-camera"/>
+                                        </div>
+                                    </form>
+                                    <div className="center grey-text">上传商品照片</div>
+                                </div>
+                            </div>
+                            <div className="col s6 padding-left55">
+                                <div className="upload-img-box z-depth-1 detail-box">
+                                    <ul id="viewer" className="margin-top0">
+                                        <li className="picture-list vc-center"><img src={avatarUrl} className="responsive-img"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 按钮 */}
+                        <div className="col s12 right-align margin-top40 padding-right70">
+                            {productDetailReducer.pageType === 'new' && <button type="button" className="btn confirm-btn" onClick={saveProductImg}>下一步</button>}
+                            {productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 &&
+                                <button type="button" className="btn confirm-btn margin-left20" onClick={saveProductImg}>确定</button>}
+                        </div>
                     </div>
 
                     {/* TAB 3 : 商品介绍TAB */}
@@ -243,7 +246,7 @@ class ProductDetail extends React.Component {
                         </div>
                         {/* 完成 按钮 */}
                         <div className="col s12 right-align padding-right70">
-                            {productDetailReducer.pageType === 'new' && <button type="button" className="btn confirm-btn" onClick={saveProductInfo}>完成</button>}
+                            {productDetailReducer.pageType === 'new' && <button type="button" className="btn confirm-btn" onClick={saveProductDesc}>完成</button>}
                             {productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 &&
                             <div>
                                 <button type="button" className="btn orange-btn" onClick={()=>{this.changeProductDes(event,'')}}>清空</button>
@@ -266,9 +269,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getProductInfo: () => {
+        // 迁移地址id
         let productId = ownProps.match.params.id;
-        console.log('productId', productId);
-
+        // 画面区分：新建
         if (productId === 'new') {
             // 新建画面 TAB 不可操作
             $("ul.tabs li").addClass("disabled");
@@ -283,24 +286,18 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             dispatch(ProductDetailActionType.setRemark(''));
             dispatch(ProductDetailActionType.setProductImg(''));
             dispatch(ProductDetailActionType.setProductDes(''));
-
         } else {
             // 画面区分：编辑
             dispatch(ProductDetailActionType.setPageType('edit'));
             dispatch(productDetailAction.getProductInfo(productId));
         }
     },
-
     saveProductInfo: () => {
         dispatch(productDetailAction.saveProductInfo());
     },
-
     changeProductStatus: () => {
         dispatch(productDetailAction.changeProductStatus());
     },
-
-
-
     setProductName: (value) => {
         dispatch(ProductDetailActionType.setProductName(value))
     },
@@ -319,16 +316,27 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setRemark: (value) => {
         dispatch(ProductDetailActionType.setRemark(value))
     },
-    setProductImg: (value) => {
-        dispatch(ProductDetailActionType.setProductImg(value))
-    },
     setProductDes: (value) => {
         dispatch(ProductDetailActionType.setProductDes(value))
     },
-
+    saveProductImg: (formData) => {
+        dispatch(productDetailAction.saveProductImg(formData));
+    },
     saveProductDesc: () => {
         dispatch(productDetailAction.saveProductDesc());
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(
+    reduxForm({
+            // 必要参数，表单命名
+            form: 'productDetailForm',
+            // 可选参数 onSubmit : Function [optional[ : 表单提交配置，可以配置需要提交哪些参数，还有提交时触发的 dispatch等
+            onSubmit: (values, dispatch, props) => {
+                let formData = new FormData();
+                formData.append('image', document.getElementById('product_image').files[0]);
+                dispatch(productDetailAction.uploadProductImg(formData));
+            }
+        }
+    )(ProductDetail)
+);
