@@ -9,7 +9,7 @@
       <view class='left'>{{product.product_name}}</view>
       <view class='right'>
       <image class='right-img' src='../../../assets/images/money.png'></image>
-      <view class='right-text'>{{product.original_price}}.00</view>
+      <view class='right-text'>{{product.unit_price}}.00</view>
     </view>
    </view>
   </view>
@@ -59,7 +59,7 @@
    </block>
 
    <view class='btn'>
-    <button bindtap="bindButtonTap" class="btn-area" hover-class="weui-cell_active">确定</button>
+    <button bindtap="bindButtonTap" data-name="print" class="btn-area" hover-class="weui-cell_active">确定</button>
     </view>
   <!-- <button class='but'>确定</button> -->
  </view>

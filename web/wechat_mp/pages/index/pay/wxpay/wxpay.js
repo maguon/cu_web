@@ -10,6 +10,7 @@ Page({
     payList:[],
     totalPrice:1,
     orderId:'',
+    name:'',
     goodsList:[
       { goods_name:"商品二维码"}
     ]
@@ -21,6 +22,7 @@ Page({
   onLoad: function (e) {
     this.setData({
       orderId: e.orderId,
+      name:e.name,
     })
   
   },
@@ -83,7 +85,7 @@ Page({
   var userInfo=app.globalData.userInfo;
   var userId=app.globalData.userId;
   var orderId = that.data.orderId;
-  
+
     var params = {
       //用户的openid
       openid: app.globalData.openid,
@@ -104,31 +106,29 @@ Page({
           paySign: res.data.result[0].paySign,
           success: (res)=> {
             console.log('支付成功');
-            // var params = {
-            //   //用户的openid
-            //   openid: app.globalData.openid,
-            //   uname: userInfo.result[0].wechat_name,
-            //   goods: that.data.goodsList[0].goods_name,
-            //   price: that.data.totalPrice,
-            // }
-            // reqUtil.httpPost(config.host.apiHost + "", params, (err, res) => {
-            //   console.log("存取成功");
-            // })
+             reqUtil.httpPut(config.host.apiHost + "/api/user/"+userId+"/order/"+orderId+"/paymentStatus/"+0, params, (err, res) => {
+               console.log("存取成功");
+             })
             wx.showToast({
              title: '支付成功',
              icon: 'success',
              duration: 2000
             })
-            wx.reLaunch({
-              url: "/pages/index/index",
+           if(this.data.name=="payment"){
+             wx.navigateBack({
+             })
+           }else{
+            wx.navigateBack({
+              delta:3
             })
+            }
       },
       fail:function(err){
         console.log('支付失败')
         console.log(err)
         wx.showToast({
-             title: '支付失败！请稍后再试',
-             icon: 'success',
+             title: '支付失败',
+          icon: 'none',
              duration: 2000
         })
       }

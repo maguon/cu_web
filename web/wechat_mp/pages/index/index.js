@@ -58,7 +58,9 @@ Page({
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
         this.setData({
-          userInfo: res.userInfo,
+          userInfo: app.globalData.userInfo,
+          wechatName: app.globalData.userInfo.result[0].wechat_name,
+          avatarUrl: app.globalData.userInfo.result[0].avatar_image,
           hasUserInfo: true
         })
       }
@@ -67,10 +69,11 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          app.globalData.userInfo = res.userInfo
           //保存信息
           this.setData({
-            userInfo: res.userInfo,
+            userInfo: app.globalData.userInfo,
+            wechatName: app.globalData.userInfo.result[0].wechat_name,
+            avatarUrl: app.globalData.userInfo.result[0].avatar_image,
             hasUserInfo: true
           })
         }
@@ -105,11 +108,13 @@ Page({
           count++;
         }
       }
+      if (count != 0){
       //获得消息数量
       wx.setTabBarBadge({
         index: 1,
         text:String(count),
       })
+    }
     })
 
     reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + "/userCar", (err, res) => {

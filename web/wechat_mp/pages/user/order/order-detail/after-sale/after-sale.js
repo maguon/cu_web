@@ -1,17 +1,23 @@
-// pages/user/order/order-detail/after-sale/after-sale.js
+const app = getApp();
+const config = require('../../../../../config.js');
+const reqUtil = require('../../../../../utils/ReqUtil.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+   orderId:'',
+   afterSale:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (e) {
+   this.setData({
+     orderId:e.orderId,
+   })
 
   },
 
@@ -26,6 +32,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var orderId=this.data.orderId;
+    var userId = app.globalData.userId;
+    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/orderFeedback?orderId=" + orderId, (err, res) => {
+      console.log(res)
+      wx.getStorage({
+        key: 'orderFeedbackid',
+        success: function(e) {
+          for (var i = 0; i < res.data.result.length; i++) {
+            if (res.data.result[i].id = e.data) {
+              this.setData({
+                afterSale: res.data.result[i],
+              })
+            }
+          }
+        },
+      })
+    })
 
   },
 

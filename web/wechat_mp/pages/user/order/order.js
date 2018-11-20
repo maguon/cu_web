@@ -9,6 +9,7 @@ Page({
   data: {
   hidden:false,
   orderList:[],
+  state: ['待发货', '待支付', '已发货', '处理中', '已处理', '已退款'],
 
   isPay: false,
   isApply: false,
@@ -38,6 +39,10 @@ Page({
       console.log(res)
       for (var i = 0; i < res.data.result.length; i++) {      
         var len = res.data.result[i];
+        if (len.payment_status!=1){
+          res.data.result[i].flag=true;
+          res.data.result[i].isPay=true;
+        }
         var date = new Date(len.created_on);
         var localeString = date.toLocaleString();
         res.data.result[i].created_on = localeString;
@@ -76,13 +81,77 @@ Page({
   /**
    * 付款
    */
-  payment: function () {
+  payment: function (e) {
+    var that = this;
+    console.log(e)
+    var index = e.currentTarget.dataset.index;
+    var name = e.currentTarget.dataset.name;
+    var orderId = that.data.orderList[index].id;
     wx.navigateTo({
-      url: '/pages/index/pay/wxpay/wxpay',
+      url: '/pages/index/pay/wxpay/wxpay?orderId='+orderId+"&name="+name,
     })
   },
+  /**
+   * 跳转详情页
+   */
+  orderDetail:function(e){
+    var that = this;
+    console.log(e)
+    var index = e.currentTarget.dataset.index;
+    var name = e.currentTarget.dataset.name;
+    var orderId = that.data.orderList[index].id;
+    var  userId = app.globalData.userId;
 
+    reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + '/product', (err, res) => {
+      for (var i = 0; i < res.data.result.length; i++) {
+        if (res.data.result[i].id == 1000) {
+           var price= res.data.result[i].unit_price;
+        }
+      }
+      wx.navigateTo({
+        url: '/pages/user/order/order-detail/order-detail?orderId=' + orderId + "&price=" + price + "&name=" + name,
+      })
+    })
+  },
+/**
+ * 申请售后
+ */
+  apply:function(e){
+    console.log(e)
+    var index = e.currentTarget.dataset.index;
+    var orderId=this.data.orderList[index].id;
+    var userId=app.globalData.userId;
+    var apply='';
 
+    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/orderFeedback?orderId=" + orderId, (err, res) => {
+      console.log(res)
+      if (res.data.result==''){
+        wx.navigateTo({
+          url: '/pages/user/order/order-detail/apply/apply?orderId=' + orderId + "&apply=" + "",
+        })
+      }else{
+      apply = res.data.result[res.data.result.length - 1].apply_reason;
+      wx.navigateTo({
+        url: '/pages/user/order/order-detail/apply/apply?orderId=' + orderId + "&apply=" + apply,
+      })
+      }
+    })
+  },
+  /**
+   * 查看售后
+   */
+  check:function(e){
+    console.log(e)
+   var index = e.currentTarget.dataset.index;
+    var orderId = this.data.orderList[index].id;
+   var userId = app.globalData.userId;
+    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/orderFeedback?orderId=" + orderId, (err, res) => {
+
+    })
+    wx.navigateTo({
+      url: 'pages/user/order/order-detail/after-sale/after-sale?orderId='+orderId,
+    })
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

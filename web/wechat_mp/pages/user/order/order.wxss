@@ -43,7 +43,13 @@ top:37px;
 font-size: 11px;
 color: red;
 }
-
+.state-two{
+position: absolute;
+right: 30px;
+top:37px;
+font-size: 11px;
+color: #8a8a8a;
+}
 .image{
   width: 15px;
   height: 15px;
@@ -86,7 +92,10 @@ justify-content: flex-end;
   margin-left: 20px;
   background: #0096e3;
 }
-
+.bnt-mest{
+position: relative;
+bottom: 25px;
+}
 .weui-cell__ft_in-access{
   position: relative;
   top: -30px;

@@ -6,7 +6,7 @@
 </view>
 
 <view class='but-list'>
-  <button class='downlode'>
+  <button bindtap='downLoadImg' class='downlode'>
     <image class='downlode-img' src='../../../../assets/images/download.png'></image>
     <text class='download-text'>下载二维码</text>
   </button>

@@ -1,7 +1,8 @@
+<form bindsubmit='saveAfterSale'>
  <view class=" weui-cells_after-title">
             <view class="">
                 <view class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="请输入申请原因"  />
+                    <textarea class="weui-textarea" placeholder="请输入申请原因" value="{{value}}" name="apply" />
                 </view>
             </view>
           </view>
@@ -15,5 +16,6 @@
         </view>
 
          <view class='btn'>
-    <button bindtap="bindButtonTap" class="btn-area" hover-class="weui-cell_active">提交申请</button>
+    <button form-type='submit' class="btn-area" hover-class="weui-cell_active">{{botton[index]}}</button>
     </view>
+    </form>

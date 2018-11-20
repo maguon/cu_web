@@ -4,12 +4,18 @@
   flex-direction: row;
    font-size: 18px;
 }
-
+.title{
+  margin-left: 15px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
 .time{
   color: #a3a2a2;
   width: 100%;
   text-align: right;
-  font-size: 15px;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 .box{
   display: flex;

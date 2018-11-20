@@ -1,7 +1,10 @@
-
+page{
+  background: #efeff4;
+}
 .weui-media-box__title{
   display: flex;
   flex-direction: row;
+
 }
 
 .point{
@@ -46,6 +49,7 @@ font-size: 20px;
 .motto{
 font-size: 15px;
 margin-top: 10px;
+
 }
 .weui-media-box__desc{
   margin-left: 15px;
@@ -62,6 +66,7 @@ margin-top: 10px;
   word-wrap: break-word;
   word-break: break-all;
   margin-left: 15px;
+
 }
 .bottom{
 margin-bottom: 8px;

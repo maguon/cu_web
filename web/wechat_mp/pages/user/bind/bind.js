@@ -55,7 +55,7 @@ checkPhone:function(e){
 *  获取验证码
 */
 gain:function(){
-  var userPhone=this.data.userPhone;
+  var userPhone=this.data.userPhone
   //检查手机号码输入
   if (userPhone==''){ 
     wx.showModal({
