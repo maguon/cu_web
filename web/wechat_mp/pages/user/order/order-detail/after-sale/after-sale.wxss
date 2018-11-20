@@ -108,17 +108,16 @@ justify-content: center;
   margin-left: 10px;
   margin-right: 10px;
 }
-  .weui-footer{
-    position: fixed;
-    bottom: 10px;
-    left: 8%;
-    right: 8%;
-  }
 
-  .weui-footer__link{
-    color: #0096e3;
+.weui-footer{
+  margin-top: 20px;
+ margin-bottom: 10px;
+}
+
+.weui-footer__link{
+  color: #0096e3;
   }
-  .weui-footer-number{
-    color: rgb(107, 105, 105);
-    font-size: 15px;
+.weui-footer-number{
+  color: rgb(107, 105, 105);
+  font-size: 15px;
   }

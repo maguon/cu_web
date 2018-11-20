@@ -19,6 +19,6 @@
 <view class='div-line'></view>
 
 <button class="weui-btn" bindtap='payment' type="primary">付款</button>
-<view class='add-msg'>添加备注</view>
+<!-- <view class='add-msg'>添加备注</view> -->
 
 </view>

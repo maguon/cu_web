@@ -28,15 +28,20 @@ Page({
         if(res.data.result[i].status==0){
           count++;
         }
+        if (res.data.result[i].type== 1) {
+          res.data.result[i].type=false;
+        }
         var date = new Date(res.data.result[i].created_on);
         var localeString = date.toLocaleString();
         res.data.result[i].created_on = localeString;
       }
+      if(count!=0){
       //获得消息数量
       wx.setTabBarBadge({
         index: 1,
         text: String(count),
       })
+    }
       //保存
       this.setData({
         msgList: res.data.result,

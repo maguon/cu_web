@@ -3,7 +3,8 @@
             
               <view class='title'>
                <view class="order-num">订单编号：{{product.id}}</view>
-               <view class="right-title">待支付</view>
+               <view hidden='{{isPay}}' class="right-title">{{state[payment_status]}}</view>
+               <view hidden='{{!isPay}}' class="right-title-two">{{state[payment_status]}}</view>
               </view>
               <image class='res-image' src='../../../../assets/images/icon.png'></image>
 
@@ -37,7 +38,7 @@
             <view class='ima-line'></view> 
 
              <view class='price'>
-            <view class='test'>合计运费</view>
+            <view class='test'>合计费用</view>
             <view class='right'>
             <image class='money'src='../../../../../assets/images/money.png'></image>
             <view class='total'>{{product.total_price}}.00</view>
@@ -60,7 +61,7 @@
             <view class='div-line'></view>  
 
             <view class='order-date'>下单时间：{{staterTime}}</view>
-            <view class='order-date'hidden='{{!isPay}}'>支付时间：2018-06-24 11:24:32</view>
+            <view class='order-date'hidden='{{!isPay}}'>支付时间：{{payTime}}</view>
             </view>
             
      <view class='after-sale' hidden='{{!isDelivery}}'>
@@ -88,21 +89,22 @@
         <view class='after-sale' hidden='{{!isApply}}'>
             <view class='head'>  
             <view class='apply'>申请售后</view>
-            <view class='state'>未处理</view>
+            <view hidden='{{applyState}}' class='state'>未处理</view>
+             <view hidden='{{!applyState}}' class='state'>已处理</view>
             </view>
             
             <view class='why'>
             <view class='apply-why'>申请原因:</view>
-               <view class='order-date'>我不想要的，我想退款</view>
+               <view class='order-date'>{{apply.apply_reason}}</view>
                 <view class='div-line'></view>  
                  <view class='apply-time'>
-            <view class='order-date'>申请时间：2018-06-24 11:24:32</view>
+            <view class='order-date'>申请时间：{{applyTime}}</view>
             </view>
             </view>
             </view>  
 
               <view class='after-sale-bnt' hidden='{{!isPay}}'>
-                 <button class="sale-bnt">申请售后</button>
+                 <button bindtap='afterSale' class="sale-bnt">{{ applytext[rank]}}</button>
                 </view>  
 
             <view class='bnt-list' hidden='{{isPay}}'>

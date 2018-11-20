@@ -2,20 +2,23 @@
 <view class="weui-panel weui-panel_access">
 
   <view class="weui-panel__bd">
-    <view class="weui-media-box weui-media-box_text">
-      <view class="weui-media-box__title weui-media-box__title_in-text">违停消息</view>
-      <view class='time'>2018-09-23 11:30:24</view>
-      <view class="box__desc">您的牌照为辽B12345的车辆在2018年9月23日11时30分，在大连市开发区安盛购物广场附近违章停车超过规定30秒停车时限，按照交通条例您将处以100元罚款。</view>
+    <view class="">
+      <view class="title">违停消息</view>
     </view> 
+
+      <view class="weui-media-box">
+      <view class='time'>{{queryBean.created_on}}</view>
+      <view class="box__desc">{{queryBean.content}}</view>
+      </view>
   
-  <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+  <view bindtap='listenerBtnGetLocation' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
       <image class="thumb" src="../../../assets/images/pos.png" />
     </view>
     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
     <view class="box__desc">辽宁省大连市开发区金马路 凯伦国际大厦A座2608室</view>
     </view>
-  </navigator>
+  </view>
 
   <navigator url="" class="weui-media-box weui-media-box_appmsg box" hover-class="weui-cell_active">
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg image">

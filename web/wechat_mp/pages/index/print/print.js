@@ -36,8 +36,6 @@ Page({
         })
       },
     })
-    
-   
   },
   /**
    * 生命周期函数--监听页面显示
@@ -128,10 +126,10 @@ Page({
 /**
  * 跳转
  */
-  bindButtonTap:function(){
+  bindButtonTap:function(e){
     var price=this.data.price;
     var userId=app.globalData.userId;
-
+    var name = e.currentTarget.dataset.name;
     //设置参数
     var params = {
       productId:[this.data.product.id],
@@ -160,7 +158,7 @@ Page({
       console.log(res)
        var orderId=res.data.result[0].orderId
         wx.navigateTo({
-          url: '/pages/user/order/order-detail/order-detail?price=' + this.data.product.original_price + "&orderId=" + orderId,
+          url: '/pages/user/order/order-detail/order-detail?price=' + this.data.product.original_price + "&orderId=" + orderId+"&name="+name,
         })
       })   
   },

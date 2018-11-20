@@ -11,7 +11,7 @@
    <view class="weui-label">手机号码</view>
 </view>
 <view class="weui-cell__bd">
-  <input class="weui-input" type='number' placeholder="请输入新手机号"bindblur="checkPhone" name='phoneNumber' />
+  <input class="weui-input" type='number' placeholder="请输入新手机号" bindinput="checkPhone" name='phoneNumber' />
   </view>
 <view class="weui-cell__ft">
   <view disabled="{{gainFlag}}" bindtap='gain' class="weui-vcode-btn">{{key}}</view>
