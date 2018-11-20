@@ -185,7 +185,7 @@ const routes = [
     },
     // 商品销售 - 详情
     {
-        path: '/product/:id',
+        path: '/sale/:id',
         exact: true,
         component: SaleDetail
     },
@@ -195,7 +195,6 @@ const routes = [
         exact: true,
         component: LogCompany
     },
-
 ];
 
 class Container extends React.Component {
