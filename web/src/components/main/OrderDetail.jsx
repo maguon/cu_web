@@ -129,7 +129,7 @@ class OrderDetail extends React.Component {
                         <div>
                             {/* 购买信息 */}
                             <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
-                                <div className="row detail-box-header vc-center margin-bottom0">
+                                <div className="row detail-box-header margin-bottom0">
                                     购买信息
                                 </div>
 
@@ -185,7 +185,7 @@ class OrderDetail extends React.Component {
                             {/* 支付信息 */}
                             {orderDetailReducer.orderInfo[0].status === 0 && orderDetailReducer.orderInfo[0].payment_status === 1 &&
                             <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
-                                <div className="row detail-box-header vc-center margin-bottom0">
+                                <div className="row detail-box-header margin-bottom0">
                                     支付信息
                                 </div>
 
@@ -202,7 +202,7 @@ class OrderDetail extends React.Component {
                             {/* 发货信息 */}
                             {orderDetailReducer.orderInfo[0].status === 0 && orderDetailReducer.orderInfo[0].payment_status === 1 &&
                             <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
-                                <div className="row detail-box-header vc-center margin-bottom0">
+                                <div className="row detail-box-header margin-bottom0">
                                     发货信息
                                 </div>
 
@@ -290,7 +290,7 @@ class OrderDetail extends React.Component {
                         {orderDetailReducer.orderInfo.length > 0 &&
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                             {/* 售后编号 处理状态 */}
-                            <div className="row detail-box-header vc-center margin-bottom0">
+                            <div className="row detail-box-header margin-bottom0">
                                 <div className="col s6 no-padding">售后编号：XXXXXXX</div>
                                 <div className="col s6 no-padding right-align">{sysConst.FEED_BACK_STATUS[orderDetailReducer.orderInfo[0].status].label}</div>
                             </div>

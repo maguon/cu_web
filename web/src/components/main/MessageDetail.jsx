@@ -44,7 +44,7 @@ class MessageDetail extends React.Component {
                 {/* 主体部分：消息信息 */}
                 {messageDetailReducer.messageInfo.length > 0 &&
                 <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
-                    <div className="row detail-box-header vc-center">
+                    <div className="row detail-box-header">
                         {/* 消息信息：消息编号 */}
                         <div className="col s6 no-padding">消息编号：{this.props.match.params.id}</div>
 

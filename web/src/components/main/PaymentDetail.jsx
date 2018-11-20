@@ -68,7 +68,7 @@ class PaymentDetail extends React.Component {
                     </div>
 
                     <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50">
-                        <div className="row detail-box-header vc-center">
+                        <div className="row detail-box-header">
                             {/* 支付信息：支付编号 */}
                             <div className="col s6 no-padding">支付编号：{this.props.match.params.id}</div>
 
@@ -147,7 +147,7 @@ class PaymentDetail extends React.Component {
                         {paymentDetailReducer.relPaymentArray.map(function (item) {
                             return (
                                 <div className="row z-depth-1 detail-box margin-top10 margin-left50 margin-right50">
-                                    <div className="row detail-box-header vc-center">
+                                    <div className="row detail-box-header">
                                         {/* 支付信息：支付编号 */}
                                         <div className="col s6 no-padding">支付编号：{item.id}</div>
 

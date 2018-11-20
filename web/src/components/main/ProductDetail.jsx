@@ -115,7 +115,7 @@ class ProductDetail extends React.Component {
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                             {/* 商品信息：商品编号 上架时间 (编辑画面显示) */}
                             {productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 &&
-                            <div className="row detail-box-header vc-center">
+                            <div className="row detail-box-header">
                                 {/* 商品信息：商品编号 */}
                                 <div className="col s6">商品编号：{productDetailReducer.productInfo[0].id}</div>
                                 <div className="col s6 fz14 right-align grey-text">上架时间：{formatUtil.getDateTime(productDetailReducer.productInfo[0].created_on)}</div>
@@ -208,7 +208,7 @@ class ProductDetail extends React.Component {
                             <div className="col s6 padding-left150 padding-right150">
                                 <div className="upload-img-box z-depth-1 detail-box right-align">
                                     <form ref="addForm" className="addForm" id="addForm" encType="multipart/form-data" method="post">
-                                        <div className="upload-img  vc-center white-text custom-blue">
+                                        <div className="upload-img vc-center white-text custom-blue">
                                             <input id="product_image" name="product_image" type="file" onChange={handleSubmit}/>
                                             <i className="mdi mdi-camera"/>
                                         </div>
@@ -236,7 +236,7 @@ class ProductDetail extends React.Component {
                     {/* TAB 3 : 商品介绍TAB */}
                     <div id="tab-desc" className="col s12">
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50 min-height500">
-                            <div className="row detail-box-header vc-center margin-bottom0">
+                            <div className="row detail-box-header margin-bottom0">
                                 {/* 商品介绍：商品名称 */}
                                 <div className="col s12 no-padding">{productDetailReducer.productName}</div>
                             </div>

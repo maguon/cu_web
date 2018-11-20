@@ -82,7 +82,7 @@ class UserCarDetail extends React.Component {
                         {/* 车辆信息：明细 */}
                         {userCarDetailReducer.userCarInfo.length > 0 &&
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
-                            <div className="row detail-box-header vc-center">
+                            <div className="row detail-box-header">
                                 {/* 车辆信息：车辆编号 */}
                                 <div className="col s6">车辆编号：{this.props.match.params.id}</div>
 

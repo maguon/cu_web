@@ -57,7 +57,7 @@ class LogDetail extends React.Component {
                 {logDetailReducer.logInfo.length > 0 &&
                 <div>
                     <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
-                        <div className="row detail-box-header vc-center">
+                        <div className="row detail-box-header">
                             {/* 消息信息：发货编号 */}
                             <div className="col s6 no-padding">发货编号：{this.props.match.params.id}</div>
 
