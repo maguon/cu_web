@@ -267,6 +267,14 @@ body {
     font-size: 24px;
 }
 
+.fz30 {
+    font-size: 30px;
+}
+
+.fz45 {
+    font-size: 45px;
+}
+
 .fz50 {
     font-size: 50px;
 }
@@ -305,6 +313,10 @@ body {
     margin-top: 40px;
 }
 
+.margin-top50 {
+    margin-top: 50px;
+}
+
 .margin-bottom0 {
     margin-bottom: 0;
 }
@@ -315,6 +327,10 @@ body {
 
 .margin-bottom20 {
     margin-bottom: 20px;
+}
+
+.margin-bottom30 {
+    margin-bottom: 30px !important;
 }
 
 .margin-bottom40 {
@@ -334,7 +350,7 @@ body {
 }
 
 .margin-left30 {
-    margin-left: 30px;
+    margin-left: 30px !important;
 }
 
 .margin-left50 {
@@ -369,6 +385,10 @@ body {
     padding-left: 0 !important;
 }
 
+.padding-left10 {
+    padding-left: 10px !important;
+}
+
 .padding-left20 {
     padding-left: 20px !important;
 }
@@ -387,6 +407,10 @@ body {
 
 .padding-right0 {
     padding-right: 0 !important;
+}
+
+.padding-right10 {
+    padding-right: 10px !important;
 }
 
 .padding-right20 {
@@ -427,6 +451,10 @@ body {
 
 .padding-bottom20 {
     padding-bottom: 20px !important;
+}
+
+.padding-bottom30 {
+    padding-bottom: 30px !important;
 }
 
 .border-top0 {
@@ -676,6 +704,13 @@ body {
 .tiny-icon {
     font-size: 18px !important;
     line-height: 18px !important;
+}
+
+.main-panel-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    font-size: 40px;
 }
 
 .add-btn {

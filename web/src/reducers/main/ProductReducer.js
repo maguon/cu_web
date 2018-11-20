@@ -20,7 +20,7 @@ const initialState = {
     conditionCreatedOnEnd: '',
     // 检索条件：销售状态
     conditionSaleStatus: null,
-    // 绑定车辆检索结果列表
+    // 商品检索结果列表
     productArray: []
 };
 
