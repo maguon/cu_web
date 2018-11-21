@@ -8,6 +8,7 @@ export Log from "./Log";
 export LogDetail from "./LogDetail";
 export Message from "./Message";
 export MessageDetail from "./MessageDetail";
+export MessageStatistic from "./MessageStatistic";
 export Order from "./Order";
 export OrderDetail from "./OrderDetail";
 export Payment from "./Payment";

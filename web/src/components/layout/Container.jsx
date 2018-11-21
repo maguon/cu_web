@@ -16,6 +16,7 @@ import {
     UserCarDetail,
     Message,
     MessageDetail,
+    MessageStatistic,
     UserAddressDetail,
     UserAddress,
 
@@ -40,6 +41,13 @@ const routes = [
         path: "/",
         exact: true,
         component: MainPanel
+    },
+
+    // 消息发送 统计
+    {
+        path: "/message_statistic",
+        exact: true,
+        component: MessageStatistic
     },
 
     // 交警管理
@@ -238,6 +246,22 @@ class Container extends React.Component {
                             <Link to="/message" className="side-navigation">
                                 <i className="mdi mdi-comment-text-multiple"/>消息记录
                             </Link>
+                        </li>
+                        <li><div className="divider"/></li>
+
+                        <li>
+                            <ul className="collapsible collapsible-accordion">
+                                <li>
+                                    <a className="collapsible-header"><i className="mdi mdi-chart-line"/>统计图</a>
+                                    <div className="collapsible-body">
+                                        <ul>
+                                            <li><Link to="/message_statistic"><i className="mdi mdi-chevron-right"/>消息发送</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/new_user_statistic"><i className="mdi mdi-chevron-right"/>新增用户</Link></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
                         </li>
                         <li><div className="divider"/></li>
 
