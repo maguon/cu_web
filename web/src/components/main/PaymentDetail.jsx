@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {OrderDetailModal,PaymentRefundModal} from '../modules/index';
 import {PaymentRefundModalActionType} from "../../actionTypes";
 
+const paymentRefundModalAction = require('../../actions/modules/PaymentRefundModalAction');
 const commonAction = require('../../actions/main/CommonAction');
 const paymentDetailAction = require('../../actions/main/PaymentDetailAction');
 const sysConst = require('../../util/SysConst');
@@ -202,7 +203,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(commonAction.getOrderDetail(orderId))
     },
     initRefundModalData: (orderInfo) => {
-        dispatch(PaymentRefundModalActionType.setOrderInfo(orderInfo));
+        dispatch(paymentRefundModalAction.getOrderInfo(orderInfo[0].id));
+        dispatch(PaymentRefundModalActionType.setPaymentId(ownProps.match.params.id));
         dispatch(PaymentRefundModalActionType.setRefundMoney(''));
         dispatch(PaymentRefundModalActionType.setRemark(''));
     }

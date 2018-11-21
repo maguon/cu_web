@@ -4,6 +4,8 @@ import {PaymentRefundModalActionType} from '../../actionTypes';
 const initialState = {
     // 订单详细信息
     orderInfo: [],
+    // 支付编号
+    paymentId: '',
     // 本次退款
     refundMoney: '',
     // 处理描述
@@ -11,10 +13,16 @@ const initialState = {
 };
 
 export default handleActions({
-    [PaymentRefundModalActionType.setOrderInfo]: (state, action) => {
+    [PaymentRefundModalActionType.getOrderInfo]: (state, action) => {
         return {
             ...state,
             orderInfo: action.payload
+        }
+    },
+    [PaymentRefundModalActionType.setPaymentId]: (state, action) => {
+        return {
+            ...state,
+            paymentId: action.payload
         }
     },
     [PaymentRefundModalActionType.setRefundMoney]: (state, action) => {

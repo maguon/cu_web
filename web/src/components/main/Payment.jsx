@@ -6,6 +6,7 @@ import {Input} from 'react-materialize';
 import {PaymentRefundModal} from '../modules/index';
 import {PaymentActionType, PaymentRefundModalActionType} from '../../actionTypes';
 
+const paymentRefundModalAction = require('../../actions/modules/PaymentRefundModalAction');
 const paymentAction = require('../../actions/main/PaymentAction');
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
@@ -106,9 +107,8 @@ class Payment extends React.Component {
     /**
      * 显示 退款 模态画面 TODO 关于退款接口暂无，所以支付信息部分，是只显示还是需要传参有疑问，所以暂时不写
      */
-    showPaymentRefundModal = (event, paymentId) => {
-        console.log('showPaymentRefundModal paymentId' , paymentId);
-        this.props.initRefundModalData(this.props.commonReducer.orderInfo);
+    showPaymentRefundModal = (event, paymentId, orderId) => {
+        this.props.initRefundModalData(paymentId, orderId);
         $('#paymentRefundModal').modal('open');
     };
 
@@ -213,7 +213,7 @@ class Payment extends React.Component {
                                             <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
                                             <td className="operation right-align padding-right30">
                                                 {item.type === 1 &&
-                                                <span className="refund-btn margin-right20" onClick={() => {this.showPaymentRefundModal(event,item.id)}}>
+                                                <span className="refund-btn margin-right20" onClick={() => {this.showPaymentRefundModal(event,item.id,item.order_id)}}>
                                                     <span className="fz12">退款</span>
                                                 </span>}
                                                 <Link to={{pathname: '/payment/' + item.id}}>
@@ -291,8 +291,9 @@ const mapDispatchToProps = (dispatch) => ({
     setConditionCreatedOnEnd: (value) => {
         dispatch(PaymentActionType.setConditionCreatedOnEnd(value))
     },
-    initRefundModalData: (orderInfo) => {
-        dispatch(PaymentRefundModalActionType.setOrderInfo(orderInfo));
+    initRefundModalData: (paymentId, orderId) => {
+        dispatch(paymentRefundModalAction.getOrderInfo(orderId));
+        dispatch(PaymentRefundModalActionType.setPaymentId(paymentId));
         dispatch(PaymentRefundModalActionType.setRefundMoney(''));
         dispatch(PaymentRefundModalActionType.setRemark(''));
     }
