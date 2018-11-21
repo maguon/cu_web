@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
-import {OrderDetailModal,PaymentRefundModal} from '../modules/index';
-import {PaymentRefundModalActionType} from "../../actionTypes";
+import {OrderDetailModal,RefundModal} from '../modules/index';
+import {RefundModalActionType} from "../../actionTypes";
 
-const paymentRefundModalAction = require('../../actions/modules/PaymentRefundModalAction');
+const refundModalAction = require('../../actions/modules/RefundModalAction');
 const commonAction = require('../../actions/main/CommonAction');
 const paymentDetailAction = require('../../actions/main/PaymentDetailAction');
 const sysConst = require('../../util/SysConst');
@@ -38,8 +38,8 @@ class PaymentDetail extends React.Component {
     /**
      * 显示 退款 模态画面
      */
-    showPaymentRefundModal = () => {
-        $('#paymentRefundModal').modal('open');
+    showRefundModal = () => {
+        $('#refundModal').modal('open');
         this.props.initRefundModalData(this.props.commonReducer.orderInfo);
     };
 
@@ -132,9 +132,9 @@ class PaymentDetail extends React.Component {
                     {paymentDetailReducer.paymentInfo[0].type === sysConst.PAYMENT_TYPE[1].value && commonReducer.orderInfo.length > 0 &&
                     <div>
                         <div className="col s12 right-align padding-top25 padding-right70">
-                            <button type="button" className="btn confirm-btn" onClick={this.showPaymentRefundModal}>退款</button>
+                            <button type="button" className="btn confirm-btn" onClick={this.showRefundModal}>退款</button>
                         </div>
-                        <PaymentRefundModal/>
+                        <RefundModal/>
                     </div>}
 
                     {/* 相关支付 */}
@@ -203,10 +203,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(commonAction.getOrderDetail(orderId))
     },
     initRefundModalData: (orderInfo) => {
-        dispatch(paymentRefundModalAction.getOrderInfo(orderInfo[0].id));
-        dispatch(PaymentRefundModalActionType.setPaymentId(ownProps.match.params.id));
-        dispatch(PaymentRefundModalActionType.setRefundMoney(''));
-        dispatch(PaymentRefundModalActionType.setRemark(''));
+        dispatch(refundModalAction.getOrderInfo(orderInfo[0].id));
+        dispatch(RefundModalActionType.setPaymentId(ownProps.match.params.id));
+        dispatch(RefundModalActionType.setRefundMoney(''));
+        dispatch(RefundModalActionType.setRemark(''));
     }
 });
 
