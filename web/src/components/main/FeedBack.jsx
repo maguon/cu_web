@@ -25,14 +25,16 @@ class FeedBack extends React.Component {
         if (!this.props.fromDetail) {
             this.props.setStartNumber(0);
             this.props.setConditionNo('');
+            this.props.setConditionOrderId('');
             this.props.setConditionUser('');
             this.props.setConditionPhone('');
             this.props.setConditionCreatedOnStart('');
             this.props.setConditionCreatedOnEnd('');
-            this.props.changeConditionPaymentStatus(null);
-            this.props.changeConditionLogStatus(null);
+            this.props.setConditionUpdatedOnStart('');
+            this.props.setConditionUpdatedOnEnd('');
+            this.props.changeConditionStatus(null);
         }
-        this.props.getOrderList();
+        this.props.getFeedBackList();
     }
 
     /**
@@ -43,7 +45,15 @@ class FeedBack extends React.Component {
     };
 
     /**
-     * 更新 检索条件：购买人
+     * 更新 检索条件：关联订单
+     */
+    changeConditionOrderId = (event) => {
+        this.props.setConditionOrderId(event.target.value);
+    };
+
+
+    /**
+     * 更新 检索条件：申请人
      */
     changeConditionUser = (event) => {
         this.props.setConditionUser(event.target.value);
@@ -57,26 +67,40 @@ class FeedBack extends React.Component {
     };
 
     /**
-     * 更新 检索条件：绑定时间(始)
+     * 更新 检索条件：申请时间(始)
      */
     changeConditionStartDate = (event, value) => {
         this.props.setConditionCreatedOnStart(value);
     };
 
     /**
-     * 更新 检索条件：绑定时间(始)
+     * 更新 检索条件：申请时间(始)
      */
     changeConditionEndDate = (event, value) => {
         this.props.setConditionCreatedOnEnd(value);
     };
 
     /**
+     * 更新 检索条件：处理时间(始)
+     */
+    changeConditionUpdatedOnStart = (event, value) => {
+        this.props.setConditionUpdatedOnStart(value);
+    };
+
+    /**
+     * 更新 检索条件：处理时间(始)
+     */
+    changeConditionUpdatedOnEnd = (event, value) => {
+        this.props.setConditionUpdatedOnEnd(value);
+    };
+
+    /**
      * 查询绑定车辆列表
      */
-    queryOrderList = () => {
+    queryFeedBackList = () => {
         // 默认第一页
         this.props.setStartNumber(0);
-        this.props.getOrderList();
+        this.props.getFeedBackList();
     };
 
     /**
@@ -84,7 +108,7 @@ class FeedBack extends React.Component {
      */
     preBtn = () => {
         this.props.setStartNumber(this.props.feedBackReducer.start - (this.props.feedBackReducer.size - 1));
-        this.props.getOrderList();
+        this.props.getFeedBackList();
     };
 
     /**
@@ -92,11 +116,11 @@ class FeedBack extends React.Component {
      */
     nextBtn = () => {
         this.props.setStartNumber(this.props.feedBackReducer.start + (this.props.feedBackReducer.size - 1));
-        this.props.getOrderList();
+        this.props.getFeedBackList();
     };
 
     render() {
-        const {feedBackReducer, changeConditionPaymentStatus, changeConditionLogStatus} = this.props;
+        const {feedBackReducer, changeConditionStatus} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -120,7 +144,7 @@ class FeedBack extends React.Component {
 
                             {/* 查询条件：关联订单 */}
                             <div className="custom-input-field col s-percent-40">
-                                <Input s={12} label="关联订单" value={feedBackReducer.conditionNo} onChange={this.changeConditionNo}/>
+                                <Input s={12} label="关联订单" value={feedBackReducer.conditionOrderId} onChange={this.changeConditionOrderId}/>
                             </div>
 
                             {/* 查询条件：申请人 */}
@@ -136,54 +160,53 @@ class FeedBack extends React.Component {
 
                         {/* 查询条件：第二行 */}
                         <div>
-                            {/* 查询条件：下单时间(始) */}
+                            {/* 查询条件：申请时间(始) */}
                             <div className="custom-input-field col s-percent-20">
-                                <Input s={12} label="下单时间(始)" type='date' options={sysConst.DATE_PICKER_OPTION}
+                                <Input s={12} label="申请时间(始)" type='date' options={sysConst.DATE_PICKER_OPTION}
                                        value={feedBackReducer.conditionCreatedOnStart} onChange={this.changeConditionStartDate} />
                                 <span className="mdi data-icon mdi-table-large"/>
                             </div>
 
-                            {/* 查询条件：下单时间(终) */}
+                            {/* 查询条件：申请时间(终) */}
                             <div className="custom-input-field col s-percent-20">
-                                <Input s={12} label="下单时间(终)" type='date' options={sysConst.DATE_PICKER_OPTION}
+                                <Input s={12} label="申请时间(终)" type='date' options={sysConst.DATE_PICKER_OPTION}
                                        value={feedBackReducer.conditionCreatedOnEnd} onChange={this.changeConditionEndDate} />
                                 <span className="mdi data-icon mdi-table-large"/>
                             </div>
 
-                            {/* 查询条件：下单时间(始) */}
+                            {/* 查询条件：处理时间(始) */}
                             <div className="custom-input-field col s-percent-20">
-                                <Input s={12} label="下单时间(始)" type='date' options={sysConst.DATE_PICKER_OPTION}
-                                       value={feedBackReducer.conditionCreatedOnStart} onChange={this.changeConditionStartDate} />
+                                <Input s={12} label="处理时间(始)" type='date' options={sysConst.DATE_PICKER_OPTION}
+                                       value={feedBackReducer.conditionUpdatedOnStart} onChange={this.changeConditionUpdatedOnStart} />
                                 <span className="mdi data-icon mdi-table-large"/>
                             </div>
 
-                            {/* 查询条件：下单时间(终) */}
+                            {/* 查询条件：处理时间(终) */}
                             <div className="custom-input-field col s-percent-20">
-                                <Input s={12} label="下单时间(终)" type='date' options={sysConst.DATE_PICKER_OPTION}
-                                       value={feedBackReducer.conditionCreatedOnEnd} onChange={this.changeConditionEndDate} />
+                                <Input s={12} label="处理时间(终)" type='date' options={sysConst.DATE_PICKER_OPTION}
+                                       value={feedBackReducer.conditionUpdatedOnEnd} onChange={this.changeConditionUpdatedOnEnd} />
                                 <span className="mdi data-icon mdi-table-large"/>
                             </div>
 
-                            {/* 查询条件：发货状态 */}
+                            {/* 查询条件：处理状态 */}
                             <div className="input-field col s-percent-20">
                                 <Select
-                                    options={sysConst.LOG_STATUS}
-                                    onChange={changeConditionLogStatus}
-                                    value={feedBackReducer.conditionLogStatus}
+                                    options={sysConst.FEED_BACK_STATUS}
+                                    onChange={changeConditionStatus}
+                                    value={feedBackReducer.conditionStatus}
                                     isSearchable={false}
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
                                 />
-                                <label className="active">发货状态</label>
+                                <label className="active">处理状态</label>
                             </div>
-
                         </div>
                     </div>
 
                     {/* 查询按钮 */}
                     <div className="col s1">
-                        <a className="btn-floating btn-large waves-light waves-effect btn margin-top40 query-btn" onClick={this.queryOrderList}>
+                        <a className="btn-floating btn-large waves-light waves-effect btn margin-top40 query-btn" onClick={this.queryFeedBackList}>
                             <i className="mdi mdi-magnify"/>
                         </a>
                     </div>
@@ -197,40 +220,41 @@ class FeedBack extends React.Component {
                         <table className="bordered striped">
                             <thead className="blue-grey lighten-5">
                             <tr className="grey-text text-darken-2">
-                                <th>订单编号</th>
-                                <th>购买人</th>
-                                <th className="center">绑定手机</th>
-                                <th className="center">下单时间</th>
-                                <th>应付金额(元)</th>
-                                <th className="center">付款状态</th>
-                                <th className="center">发货状态</th>
+                                <th>售后编号</th>
+                                <th>关联订单</th>
+                                <th>支付金额</th>
+                                <th>申请人</th>
+                                <th className="center">手机</th>
+                                <th className="center">申请时间</th>
+                                <th className="center">处理状态</th>
+                                <th className="center">处理时间</th>
                                 <th className="center">操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {
-                                feedBackReducer.orderArray.map(function (item) {
-                                    return (
-                                            <tr className="grey-text text-darken-1">
-                                                <td>{item.id}</td>
-                                                <td>{item.user_name}</td>
-                                                <td className="center">{item.phone}</td>
-                                                <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
-                                                <td>{formatUtil.formatNumber(item.total_price + item.total_freight,2)}</td>
-                                                <td className={`center ${item.payment_status === 0 ?"red-font":""}`}>{sysConst.PAYMENT_STATUS[item.payment_status].label}</td>
-                                                <td className="center">{sysConst.LOG_STATUS[item.log_status].label}</td>
-                                                <td className="operation center">
-                                                    <Link to={{pathname: '/feed_back/'+ item.id}} >
-                                                        <i className="mdi mdi-table-search light-blue-text"/>
-                                                    </Link>
-                                                </td>
-                                            </tr>
-                                    )
-                                })
+                            {feedBackReducer.feedBackArray.map(function (item) {
+                                return (
+                                    <tr className="grey-text text-darken-1">
+                                        <td>{item.id}</td>
+                                        <td>{item.order_id}</td>
+                                        <td>{formatUtil.formatNumber(item.total_price, 2)}</td>
+                                        <td>{item.user_name}</td>
+                                        <td className="center">{item.phone}</td>
+                                        <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
+                                        <td className={`center ${item.status === 0 ? "red-font" : ""}`}>{sysConst.FEED_BACK_STATUS[item.status].label}</td>
+                                        <td className="center">{formatUtil.getDateTime(item.updated_on)}</td>
+                                        <td className="operation center">
+                                            <Link to={{pathname: '/feed_back/' + item.id}}>
+                                                <i className="mdi mdi-table-search light-blue-text"/>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                )
+                            })
                             }
-                            { feedBackReducer.orderArray.length === 0 &&
+                            { feedBackReducer.feedBackArray.length === 0 &&
                                 <tr className="grey-text text-darken-1">
-                                    <td className="no-data-tr" colSpan="8">暂无数据</td>
+                                    <td className="no-data-tr" colSpan="9">暂无数据</td>
                                 </tr>
                             }
                             </tbody>
@@ -268,14 +292,17 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    getOrderList: () => {
-        dispatch(feedBackAction.getOrderList())
+    getFeedBackList: () => {
+        dispatch(feedBackAction.getFeedBackList())
     },
     setStartNumber: (start) => {
         dispatch(FeedBackActionType.setStartNumber(start))
     },
-    setConditionNo: (no) => {
-        dispatch(FeedBackActionType.setConditionNo(no))
+    setConditionNo: (value) => {
+        dispatch(FeedBackActionType.setConditionNo(value))
+    },
+    setConditionOrderId: (value) => {
+        dispatch(FeedBackActionType.setConditionOrderId(value))
     },
     setConditionUser: (user) => {
         dispatch(FeedBackActionType.setConditionUser(user))
@@ -289,11 +316,14 @@ const mapDispatchToProps = (dispatch) => ({
     setConditionCreatedOnEnd: (time) => {
         dispatch(FeedBackActionType.setConditionCreatedOnEnd(time))
     },
-    changeConditionPaymentStatus: (status) => {
-        dispatch(FeedBackActionType.setConditionPaymentStatus(status))
+    setConditionUpdatedOnStart: (time) => {
+        dispatch(FeedBackActionType.setConditionUpdatedOnStart(time))
     },
-    changeConditionLogStatus: (status) => {
-        dispatch(FeedBackActionType.setConditionLogStatus(status))
+    setConditionUpdatedOnEnd: (time) => {
+        dispatch(FeedBackActionType.setConditionUpdatedOnEnd(time))
+    },
+    changeConditionStatus: (status) => {
+        dispatch(FeedBackActionType.setConditionStatus(status))
     }
 });
 

@@ -1,44 +1,51 @@
 import {handleActions} from 'redux-actions';
-import {OrderDetailActionType} from '../../actionTypes';
+import {FeedBackDetailActionType} from '../../actionTypes';
 
 const initialState = {
-    // 订单管理 - 订单详情
+    // 售后管理 - 订单详情
     orderInfo: [],
 
-    // 订单信息TAB：订单内，商品列表
+    // 售后管理 - 订单内，商品列表
     productArray: [],
 
-    // 售后信息TAB：处理描述
-    description: '',
-    // 售后信息TAB：处理方法
-    processing: '',
+    // 售后管理 - 售后详情
+    feedBackInfo: [],
+
+    // 售后管理 - 售后详情：处理描述
+    processRemark: '',
+    // 售后管理 - 售后详情：处理方法
+    processMethod: '',
 };
 
 export default handleActions({
-    [OrderDetailActionType.getOrderInfo]: (state, action) => {
+    [FeedBackDetailActionType.getOrderInfo]: (state, action) => {
         return {
             ...state,
             orderInfo: action.payload
         }
     },
-    [OrderDetailActionType.getProductList]: (state, action) => {
+    [FeedBackDetailActionType.getProductList]: (state, action) => {
         return {
             ...state,
             productArray: action.payload
         }
     },
-
-    [OrderDetailActionType.setDescription]: (state, action) => {
+    [FeedBackDetailActionType.getFeedBackInfo]: (state, action) => {
         return {
             ...state,
-            description: action.payload
+            feedBackInfo: action.payload
         }
     },
-    [OrderDetailActionType.setProcessing]: (state, action) => {
+    [FeedBackDetailActionType.setProcessRemark]: (state, action) => {
         return {
             ...state,
-            processing: action.payload
+            processRemark: action.payload
         }
     },
-
+    [FeedBackDetailActionType.setProcessMethod]: (state, action) => {
+        return {
+            ...state,
+            processMethod: action.payload
+        }
+    }
 }, initialState)
