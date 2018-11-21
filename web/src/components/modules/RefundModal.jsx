@@ -26,7 +26,14 @@ class RefundModal extends React.Component {
      * 更新 退款金额
      */
     changeRefund = (event) => {
-        this.props.setNewRefund(event.target.value);
+        this.props.setRefundMoney(event.target.value);
+    };
+
+    /**
+     * 更新 处理描述
+     */
+    changeRemark = (event) => {
+        this.props.setRemark(event.target.value);
     };
 
     render() {
@@ -39,25 +46,33 @@ class RefundModal extends React.Component {
 
                 {/** Modal主体 */}
                 <div className="modal-content white grey-text text-darken-2">
-                    {/* 申请原因 */}
+
+                    {/* 订单信息描述 */}
+                    {refundModalReducer.orderInfo.length > 0 &&
                     <div className="col s12 padding-left20 padding-right20 margin-top10">
                         <div className="col s12 detail-box custom-grey padding-top20 padding-bottom20">
-                            <div className="col s-percent-10 no-padding blue-font">申请原因：</div>
-                            <div className="col s-percent-90 no-padding padding-left0 grey-text">{refundModalReducer.applyReason}</div>
+                            <div className="col s6">订单编号：{refundModalReducer.orderInfo[0].id}</div>
+                            <div className="col s6 right-align">
+                                <span className="grey-text fz14">下单时间：{formatUtil.getDateTime(refundModalReducer.orderInfo[0].created_on)}</span>
+                            </div>
+                            {/* 订单描述 */}
+                            <div className="col s12 margin-top10">{refundModalReducer.orderInfo[0].remark}</div>
+                            {/* 支付金额 */}
+                            <div className="col s12 margin-top10">支付金额：¥ <span
+                                className="red-font bold-font fz16">{formatUtil.formatNumber(refundModalReducer.orderInfo[0].total_price + refundModalReducer.orderInfo[0].total_freight, 2)}</span>
+                            </div>
                         </div>
+                    </div>}
+
+                    {/** 本次退款(元) */}
+                    <div className="col s12 margin-top25">
+                        <Input s={12} label="本次退款(元)" type="number" className="right-align red-font fz16"
+                               value={refundModalReducer.refundMoney} onChange={this.changeRefund}/>
                     </div>
-
-                    {/* 已退款金额 */}
-                    <div className="col s12 padding-top20 padding-bottom10">
-                        <div className="col s6">已退款金额</div>
-                        <div className="col s6 right-align">¥ {formatUtil.formatNumber(refundModalReducer.refundMoney, 2)}</div>
-                    </div>
-
-                    <div className="col s12 padding-left20 padding-right20"><div className="col s12 divider"/></div>
-
-                    {/** 退款金额(元) */}
+                    {/** 处理描述 */}
                     <div className="col s12 margin-top10">
-                        <Input s={12} label="退款金额(元)" type="number" className="right-align red-font fz16" value={refundModalReducer.newRefund} onChange={this.changeRefund}/>
+                        <Input s={12} label="处理描述" value={refundModalReducer.remark}
+                               onChange={this.changeRemark}/>
                     </div>
                 </div>
 
@@ -78,8 +93,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    setNewRefund: (value) => {
-        dispatch(RefundModalActionType.setNewRefund(value))
+    setRefundMoney: (value) => {
+        dispatch(RefundModalActionType.setRefundMoney(value))
+    },
+    setRemark: (value) => {
+        dispatch(RefundModalActionType.setRemark(value))
     },
     refund: () => {
         dispatch(refundModalAction.refund())

@@ -2,19 +2,27 @@ import {handleActions} from 'redux-actions';
 import {RefundModalActionType} from '../../actionTypes';
 
 const initialState = {
-    // 申请原因
-    applyReason: '',
-    // 已退款金额
-    refundMoney: 0,
-    // 退款金额
-    newRefund: ''
+    // 订单详细信息
+    orderInfo: [],
+    // 支付编号
+    paymentId: '',
+    // 本次退款
+    refundMoney: '',
+    // 处理描述
+    remark: ''
 };
 
 export default handleActions({
-    [RefundModalActionType.setApplyReason]: (state, action) => {
+    [RefundModalActionType.getOrderInfo]: (state, action) => {
         return {
             ...state,
-            applyReason: action.payload
+            orderInfo: action.payload
+        }
+    },
+    [RefundModalActionType.setPaymentId]: (state, action) => {
+        return {
+            ...state,
+            paymentId: action.payload
         }
     },
     [RefundModalActionType.setRefundMoney]: (state, action) => {
@@ -23,11 +31,10 @@ export default handleActions({
             refundMoney: action.payload
         }
     },
-    [RefundModalActionType.setNewRefund]: (state, action) => {
+    [RefundModalActionType.setRemark]: (state, action) => {
         return {
             ...state,
-            newRefund: action.payload
+            remark: action.payload
         }
     }
 }, initialState)
-
