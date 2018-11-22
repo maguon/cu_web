@@ -174,7 +174,7 @@ class UserAddress extends React.Component {
                     {/* 上下页按钮 */}
                     <div className="col s12 margin-top10">
                         <div className="right">
-                            {userAddressReducer.start > 0 &&
+                            {userAddressReducer.start > 0 && userAddressReducer.dataSize > 0 &&
                             <a className="waves-light waves-effect custom-blue btn margin-right10" id="pre" onClick={this.preBtn}>
                                 上一页
                             </a>}

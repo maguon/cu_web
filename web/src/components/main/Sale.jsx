@@ -209,7 +209,7 @@ class Sale extends React.Component {
                     {/* 上下页按钮 */}
                     <div className="col s12 margin-top10">
                         <div className="right">
-                            {saleReducer.start > 0 &&
+                            {saleReducer.start > 0 && saleReducer.dataSize > 0 &&
                             <a className="waves-light waves-effect custom-blue btn margin-right10" id="pre" onClick={this.preBtn}>
                                 上一页
                             </a>}
