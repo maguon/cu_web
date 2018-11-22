@@ -203,6 +203,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(commonAction.getOrderDetail(orderId))
     },
     initRefundModalData: (orderInfo) => {
+        dispatch(RefundModalActionType.setPrePage('paymentDetail'));
         dispatch(refundModalAction.getOrderInfo(orderInfo[0].id));
         dispatch(RefundModalActionType.setPaymentId(ownProps.match.params.id));
         dispatch(RefundModalActionType.setRefundMoney(''));

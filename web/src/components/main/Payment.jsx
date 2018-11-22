@@ -292,6 +292,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(PaymentActionType.setConditionCreatedOnEnd(value))
     },
     initRefundModalData: (paymentId, orderId) => {
+        dispatch(RefundModalActionType.setPrePage('payment'));
         dispatch(refundModalAction.getOrderInfo(orderId));
         dispatch(RefundModalActionType.setPaymentId(paymentId));
         dispatch(RefundModalActionType.setRefundMoney(''));

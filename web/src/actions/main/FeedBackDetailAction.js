@@ -10,11 +10,8 @@ export const getFeedBackInfo = (id) => async (dispatch) => {
         // 基本检索URL
         const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
             + '/orderFeedback?orderFeedbackId=' + id;
-        console.log('url',url);
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
-            console.log(res.result);
-
             dispatch({type: FeedBackDetailActionType.getFeedBackInfo, payload: res.result});
             if (res.result.length > 0) {
                 dispatch(getOrderInfo(res.result[0].order_id));
@@ -36,8 +33,6 @@ export const getOrderInfo = (id) => async (dispatch) => {
         // 基本检索URL
         const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
             + '/order?orderId=' + id;
-
-        console.log('url',url);
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
             dispatch({type: FeedBackDetailActionType.getOrderInfo, payload: res.result});
@@ -54,8 +49,6 @@ export const getOrderDetail = (orderId) => async (dispatch) => {
         // 基本检索URL
         let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
             + '/orderItem?orderId=' + orderId;
-        console.log('url',url);
-
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
             dispatch({type: FeedBackDetailActionType.getProductList, payload: res.result});
