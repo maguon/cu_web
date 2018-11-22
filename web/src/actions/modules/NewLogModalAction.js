@@ -20,7 +20,6 @@ export const getOrderInfo = () => async (dispatch, getState) => {
             if (res.result.length > 0) {
                 dispatch(getOrderItemList(orderId));
                 dispatch({type: NewLogModalActionType.setOrderItem, payload: null});
-                dispatch({type: NewLogModalActionType.setOrderItemDes, payload: ''});
                 dispatch({type: NewLogModalActionType.setOrderItemCnt, payload: ''});
                 dispatch({type: NewLogModalActionType.setRecvName, payload: res.result[0].recv_name});
                 dispatch({type: NewLogModalActionType.setRecvPhone, payload: res.result[0].recv_phone});
@@ -69,7 +68,7 @@ export const addLog = () => async (dispatch, getState) => {
         } else {
             let productDes = '';
             logList.map(function (item) {
-                productDes = productDes + item.name + '(' + item.remark + ')' + ' x' + item.cnt + ';'
+                productDes = productDes + item.name + ' x' + item.cnt + ';'
             });
             const params = {
                 orderId: orderInfo[0].id,
@@ -100,7 +99,6 @@ export const initData = () => async (dispatch) => {
     dispatch({type: NewLogModalActionType.setOrderId, payload: ''});
     dispatch({type: NewLogModalActionType.getOrderInfo, payload: []});
     dispatch({type: NewLogModalActionType.setOrderItem, payload: null});
-    dispatch({type: NewLogModalActionType.setOrderItemDes, payload: ''});
     dispatch({type: NewLogModalActionType.setOrderItemCnt, payload: ''});
     dispatch({type: NewLogModalActionType.setLogList, payload: []});
     dispatch({type: NewLogModalActionType.setRecvName, payload: ''});

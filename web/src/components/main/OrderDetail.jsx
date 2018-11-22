@@ -2,11 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
-import {OrderDetailActionType, RefundModalActionType} from '../../actionTypes';
+import {
+    NewLogModalActionType, OrderDetailActionType, RefundModalActionType,
+    ReSendModalActionType
+} from '../../actionTypes';
 import {RefundModal,ReSendModal} from '../modules/index';
 
-const refundModalAction = require('../../actions/modules/RefundModalAction');
 const orderDetailAction = require('../../actions/main/OrderDetailAction');
+const refundModalAction = require('../../actions/modules/RefundModalAction');
+const reSendModalAction = require('../../actions/modules/ReSendModalAction');
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
@@ -28,6 +32,14 @@ class OrderDetail extends React.Component {
         // 初始化TAB
         $('ul.tabs').tabs();
     }
+
+    /**
+     * 订单信息TAB：点击事件
+     */
+    showOrderInfoTab = () => {
+        // 取得售后详情信息
+        this.props.getOrderInfo();
+    };
 
     /**
      * 售后信息TAB：点击事件
@@ -64,6 +76,7 @@ class OrderDetail extends React.Component {
      */
     showReSendModal = () => {
         $('#reSendModal').modal('open');
+        this.props.initReSendModalData();
     };
 
     render() {
@@ -118,7 +131,7 @@ class OrderDetail extends React.Component {
 
                         {/* 订单详情：订单信息/售后信息 TAB菜单 */}
                         <ul className="tabs">
-                            <li className="tab col s6"><a className="active" href="#tab-base">订单信息</a></li>
+                            <li className="tab col s6"><a href="#tab-base" className="active" onClick={this.showOrderInfoTab}>订单信息</a></li>
                             <li className="tab col s6"><a href="#tab-after-sale" onClick={this.showFeedBackTab}>售后信息</a></li>
                         </ul>
                     </div>
@@ -220,24 +233,26 @@ class OrderDetail extends React.Component {
                                         return (
                                             <div className="col s12 margin-top10 detail-box custom-grey">
 
-                                                <div className="col s6 margin-top20">发货编号：{item.id}</div>
+                                                <div className="col s6 margin-top20 fz14 grey-text">发货编号：{item.id}</div>
                                                 <div className="col s6 margin-top20 fz14 grey-text right-align">
-                                                    发货时间：{formatUtil.getDateTime(item.created_on)}
+                                                    操作时间：{formatUtil.getDateTime(item.updated_on)}
                                                 </div>
-
-                                                <div className="col s4 margin-top10">快递公司：{item.company_name}</div>
-                                                <div className="col s4 margin-top10">快递编号：{item.log_num}</div>
-                                                <div className="col s4 margin-top10 right-align">
-                                                    快递费用：¥ {formatUtil.formatNumber(item.freight, 2)}
-                                                </div>
-
-                                                {/* 分割线 */}
-                                                <div className="col s12 margin-top10 dotted-line"/>
 
                                                 <div className="col s8 margin-top10 margin-bottom10 grey-text fz14">收货地址：{item.recv_address}</div>
                                                 <div className="col s4 margin-top10 margin-bottom10 right-align">
                                                     收货人：{item.recv_name} ({item.recv_phone})
                                                 </div>
+
+                                                {item.status === 1 && <div>
+                                                    {/* 分割线 */}
+                                                    <div className="col s12 dotted-line"/>
+
+                                                    <div className="col s4 margin-top10 margin-bottom10">快递公司：{item.company_name}</div>
+                                                    <div className="col s4 margin-top10 margin-bottom10">快递编号：{item.log_num}</div>
+                                                    <div className="col s4 margin-top10 margin-bottom10 right-align">
+                                                        快递费用：¥ {formatUtil.formatNumber(item.freight, 2)}
+                                                    </div>
+                                                </div>}
                                             </div>
                                         )
                                     },this)}
@@ -274,7 +289,10 @@ class OrderDetail extends React.Component {
 
                             {/* 售后处理 */}
                             <div className="col s12 padding-top20 padding-bottom10">
-                                <div className="col s12 blue-font bold-font">售后处理</div>
+                                <div className="col s6 blue-font bold-font">售后处理</div>
+                                <div className="col s6 fz14 right-align">
+                                    {orderDetailReducer.feedBackInfo[0].status === 1 && <span>处理时间：{formatUtil.getDateTime(orderDetailReducer.feedBackInfo[0].updated_on)}</span>}
+                                </div>
                             </div>
 
                             <div className="col s12 padding-left20 padding-right20 padding-bottom10"><div className="col s12 blue-divider"/></div>
@@ -285,7 +303,7 @@ class OrderDetail extends React.Component {
                             </div>
 
                             <div className="col s12 right-align padding-bottom20 padding-right20">
-                                <button type="button" className="btn confirm-btn" onClick={() => {updateFeedBack(orderDetailReducer.feedBackInfo[0].id)}}>确定</button>
+                                <button type="button" className="btn confirm-btn" onClick={() => {updateFeedBack(orderDetailReducer.feedBackInfo[0].id)}}>修改</button>
                             </div>
                         </div>}
 
@@ -330,6 +348,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(RefundModalActionType.setPaymentId(feedBackInfo[0].id));
         dispatch(RefundModalActionType.setRefundMoney(''));
         dispatch(RefundModalActionType.setRemark(''));
+    },
+    initReSendModalData: () => {
+        dispatch(ReSendModalActionType.setOrderId(ownProps.match.params.id));
+        dispatch(reSendModalAction.getOrderInfo(ownProps.match.params.id));
     },
     updateFeedBack: (feedBackId) => {
         dispatch(orderDetailAction.updateFeedBack(feedBackId, ownProps.match.params.id))

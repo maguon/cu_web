@@ -50,10 +50,14 @@ class NewLogModal extends React.Component {
      */
     addLogItem = () => {
         let selectItem = this.props.newLogModalReducer.orderItem;
-        let cnt = this.props.newLogModalReducer.orderItemCnt;
-        let logArray = this.props.newLogModalReducer.logList;
-        logArray.push({'id': selectItem.value, 'name': selectItem.label, 'remark': selectItem.remark, 'cnt': cnt});
-        this.props.setLogList(logArray);
+        if (selectItem === null) {
+            swal('请选择商品', '', 'warning');
+        } else {
+            let cnt = this.props.newLogModalReducer.orderItemCnt;
+            let logArray = this.props.newLogModalReducer.logList;
+            logArray.push({'id': selectItem.value, 'name': selectItem.label, 'cnt': cnt});
+            this.props.setLogList(logArray);
+        }
     };
 
     /**
@@ -126,11 +130,11 @@ class NewLogModal extends React.Component {
                                 <div className="col s12 margin-top10 margin-bottom10 context-ellipsis">{newLogModalReducer.orderInfo[0].remark}</div>
                             </div>
 
-                            {/* 用户申请 TODO */}
+                            {/* 用户申请 */}
                             <div className="col s12 padding-top20">
                                 <div className="col s11">
 
-                                    <div className="input-field col s4">
+                                    <div className="input-field col s9">
                                         <Select
                                             options={newLogModalReducer.orderItemArray}
                                             onChange={changeOrderItem}
@@ -140,13 +144,13 @@ class NewLogModal extends React.Component {
                                             styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                             isClearable={false}
                                         />
-                                        <label className="active">补发商品</label>
+                                        <label className="active">发货商品</label>
                                     </div>
-                                    <div className="col s6 context-ellipsis">
-                                        <Input s={12} label="商品描述" value={newLogModalReducer.orderItemDes} disabled />
-                                    </div>
-                                    <div className="col s2">
-                                        <Input s={12} label="补发件数" type="number" className="right-align"
+                                    {/*<div className="col s6 context-ellipsis">*/}
+                                        {/*<Input s={12} label="商品描述" value={newLogModalReducer.orderItemDes} disabled />*/}
+                                    {/*</div>*/}
+                                    <div className="col s3">
+                                        <Input s={12} label="发货件数" type="number" className="right-align"
                                                value={newLogModalReducer.orderItemCnt}
                                                onChange={this.changeOrderItemCnt}/>
                                     </div>
@@ -163,19 +167,19 @@ class NewLogModal extends React.Component {
 
                             {newLogModalReducer.logList.length > 0 &&
                             <div className="col s12 padding-left30 padding-right30 padding-top10 padding-bottom10">
-                                {
-                                    newLogModalReducer.logList.map(function (item) {
-                                        return (
-                                            <div className="col s12 no-padding padding-top10 padding-bottom5 border-bottom-line">
+                                {newLogModalReducer.logList.map(function (item) {
+                                    return (
+                                        <div
+                                            className="col s12 no-padding padding-top10 padding-bottom5 border-bottom-line">
 
-                                                <div className="col s8 context-ellipsis">{item.name} ({item.remark})</div>
-                                                <div className="col s3 right-align">x {item.cnt}</div>
-                                                <div className="col s1 right-align">
-                                                    <a onClick={() => (this.deleteLogItem(item))}><i className="mdi mdi-close pointer tiny-icon red-font"/></a>
-                                                </div>
+                                            <div className="col s8 context-ellipsis">{item.name}</div>
+                                            <div className="col s3 right-align">x {item.cnt}</div>
+                                            <div className="col s1 right-align">
+                                                <a onClick={() => (this.deleteLogItem(item))}><i className="mdi mdi-close pointer tiny-icon red-font"/></a>
                                             </div>
-                                        )
-                                    }, this)
+                                        </div>
+                                    )
+                                }, this)
                                 }
                             </div>}
 
@@ -217,7 +221,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     changeOrderItem: (selectedItem) => {
         dispatch(NewLogModalActionType.setOrderItem(selectedItem));
-        dispatch(NewLogModalActionType.setOrderItemDes(selectedItem.remark));
         dispatch(NewLogModalActionType.setOrderItemCnt(selectedItem.cnt));
     },
     setOrderItemCnt: (value) => {

@@ -1,5 +1,5 @@
 import {handleActions} from 'redux-actions';
-import {LogActionType, NewLogModalActionType} from '../../actionTypes';
+import {NewLogModalActionType} from '../../actionTypes';
 
 const initialState = {
     // 订单编号
@@ -10,13 +10,10 @@ const initialState = {
     orderItemArray: [],
     // 商品名称select
     orderItem: null,
-    // 商品描述
-    orderItemDes: '',
     // 商品数量
     orderItemCnt: '',
     // 新增发货商品列表Map
     logList: [],
-
     // 收货人
     recvName: '',
     // 收货电话
@@ -41,7 +38,7 @@ export default handleActions({
     [NewLogModalActionType.getOrderItemList]: (state, action) => {
         let orderItemList = [];
         action.payload.forEach((value) => {
-            orderItemList.push({value: value.id, label: value.product_name, 'remark': value.remark, 'cnt': value.prod_count})
+            orderItemList.push({value: value.id, label: value.product_name + ' (' + value.remark + ')', 'cnt': value.prod_count})
         });
         return {
             ...state,
@@ -52,12 +49,6 @@ export default handleActions({
         return {
             ...state,
             orderItem: action.payload
-        }
-    },
-    [NewLogModalActionType.setOrderItemDes]: (state, action) => {
-        return {
-            ...state,
-            orderItemDes: action.payload
         }
     },
     [NewLogModalActionType.setOrderItemCnt]: (state, action) => {
