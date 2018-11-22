@@ -2,19 +2,21 @@ import {handleActions} from 'redux-actions';
 import {FeedBackDetailActionType} from '../../actionTypes';
 
 const initialState = {
-    // 售后管理 - 订单详情
+    // 订单信息TAB - 订单详情
     orderInfo: [],
-
-    // 售后管理 - 订单内，商品列表
+    // 订单信息TAB：订单内，商品列表
     productArray: [],
+    // 订单信息TAB - 支付信息
+    paymentInfo: [],
+    // 订单信息TAB - 发货信息
+    logInfo: [],
 
-    // 售后管理 - 售后详情
+    // 售后信息TAB：售后信息
     feedBackInfo: [],
-
-    // 售后管理 - 售后详情：处理描述
+    // 售后信息TAB：处理描述
     processRemark: '',
-    // 售后管理 - 售后详情：处理方法
-    processMethod: '',
+    // 售后信息TAB：处理方法
+    processMethod: ''
 };
 
 export default handleActions({
@@ -30,6 +32,19 @@ export default handleActions({
             productArray: action.payload
         }
     },
+    [FeedBackDetailActionType.getPaymentInfo]: (state, action) => {
+        return {
+            ...state,
+            paymentInfo: action.payload
+        }
+    },
+    [FeedBackDetailActionType.getLogInfo]: (state, action) => {
+        return {
+            ...state,
+            logInfo: action.payload
+        }
+    },
+
     [FeedBackDetailActionType.getFeedBackInfo]: (state, action) => {
         return {
             ...state,

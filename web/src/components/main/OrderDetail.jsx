@@ -2,10 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
-import {
-    NewLogModalActionType, OrderDetailActionType, RefundModalActionType,
-    ReSendModalActionType
-} from '../../actionTypes';
+import {OrderDetailActionType, RefundModalActionType, ReSendModalActionType} from '../../actionTypes';
 import {RefundModal,ReSendModal} from '../modules/index';
 
 const orderDetailAction = require('../../actions/main/OrderDetailAction');
@@ -103,7 +100,7 @@ class OrderDetail extends React.Component {
                         {orderDetailReducer.orderInfo.length > 0 &&
                         <div className="order-detail-header">
                             {/* 基本信息：订单编号 */}
-                            <div className="col s6">订单编号：{this.props.match.params.id}</div>
+                            <div className="col s6">订单编号：{orderDetailReducer.orderInfo[0].id}</div>
                             {/* 基本信息：下单时间 */}
                             <div className="col s-percent-40 right-align">
                                 <span className="grey-text fz14">下单时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].created_on)}</span>
@@ -264,6 +261,11 @@ class OrderDetail extends React.Component {
                     {/* TAB 2 : 售后信息TAB */}
                     <div id="tab-after-sale" className="col s12">
                         {/* 售后信息 */}
+                        {orderDetailReducer.feedBackInfo.length === 0 &&
+                        <div className="row center grey-text margin-top40 fz18">
+                            暂无售后信息
+                        </div>}
+
                         {orderDetailReducer.feedBackInfo.length > 0 &&
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                             {/* 售后编号 处理状态 */}
@@ -308,12 +310,15 @@ class OrderDetail extends React.Component {
                         </div>}
 
                         {/* 退款 补发 按钮 */}
-                        <div className="col s12 right-align padding-right70">
-                            <button type="button" className="btn confirm-btn" onClick={this.showRefundModal}>退款</button>
-                            <button type="button" className="btn confirm-btn margin-left20" onClick={this.showReSendModal}>补发</button>
-                        </div>
-                        <RefundModal/>
-                        <ReSendModal/>
+                        {orderDetailReducer.feedBackInfo.length > 0 &&
+                        <div>
+                            <div className="col s12 right-align padding-right70">
+                                <button type="button" className="btn confirm-btn" onClick={this.showRefundModal}>退款</button>
+                                <button type="button" className="btn confirm-btn margin-left20" onClick={this.showReSendModal}>补发</button>
+                            </div>
+                            <RefundModal/>
+                            <ReSendModal/>
+                        </div>}
                     </div>
                 </div>
             </div>
