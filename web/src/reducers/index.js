@@ -13,6 +13,7 @@ import LogReducer from './main/LogReducer';
 import LogDetailReducer from './main/LogDetailReducer';
 import MessageReducer from './main/MessageReducer';
 import MessageDetailReducer from './main/MessageDetailReducer';
+import MessageStatisticReducer from './main/MessageStatisticReducer';
 import OrderReducer from './main/OrderReducer';
 import OrderDetailReducer from './main/OrderDetailReducer';
 import PaymentReducer from './main/PaymentReducer';
@@ -54,6 +55,7 @@ export default combineReducers({
     LogDetailReducer,
     MessageReducer,
     MessageDetailReducer,
+    MessageStatisticReducer,
     ProductReducer,
     ProductDetailReducer,
     SaleReducer,

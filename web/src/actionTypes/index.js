@@ -11,6 +11,7 @@ import * as LogCompanyActionType from './main/LogCompanyActionType';
 import * as LogDetailActionType from './main/LogDetailActionType';
 import * as MessageActionType from './main/MessageActionType';
 import * as MessageDetailActionType from './main/MessageDetailActionType';
+import * as MessageStatisticActionType from './main/MessageStatisticActionType'
 import * as OrderActionType from './main/OrderActionType';
 import * as OrderDetailActionType from './main/OrderDetailActionType';
 import * as PaymentActionType from './main/PaymentActionType';
@@ -47,6 +48,7 @@ export {
     LogDetailActionType,
     MessageActionType,
     MessageDetailActionType,
+    MessageStatisticActionType,
     OrderActionType,
     OrderDetailActionType,
     PaymentActionType,

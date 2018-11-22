@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Input} from 'react-materialize';
 
 // import Highcharts from 'highcharts';
 // Alternatively, this is how to load Highstock. Highmaps is similar.
@@ -7,10 +8,11 @@ import Highcharts from 'highcharts/highstock';
 
 // Load the exporting module.
 import Exporting from 'highcharts/modules/exporting';
+import {MessageStatisticActionType} from "../../actionTypes";
 // Initialize exporting module.
 Exporting(Highcharts);
 
-const logCompanyAction = require('../../actions/main/LogCompanyAction');
+const messageStatisticAction = require('../../actions/main/MessageStatisticAction');
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
 
@@ -28,14 +30,14 @@ class MessageStatistic extends React.Component {
      * 组件完全挂载到页面上，调用执行
      */
     componentDidMount() {
-        this.props.getLogCompanyList();
+        this.props.tempMethod();
 
-        $('#monthStart,#monthEnd').monthpicker();
+        // $('#monthStart,#monthEnd').monthpicker();
 
-        // $('#monthStart,#monthEnd').MonthPicker({
-        //     Button: false,
-        //     MonthFormat: 'yymm'
-        // });
+        $('#monthStart,#monthEnd').MonthPicker({
+            Button: false,
+            MonthFormat: 'yymm'
+        });
 
         // // 初始化图表
         let options = {
@@ -112,13 +114,13 @@ class MessageStatistic extends React.Component {
     }
 
     render() {
-        const {logCompanyReducer, getLogCompanyList} = this.props;
+        const {messageStatisticReducer, tempMethod} = this.props;
         return (
             <div>
 
                 {/* 下部分：本月订单数 本月商城收益 本月发布指令 本月申请售后数 */}
                 <div className="row margin-top40 margin-left50 margin-right50 z-depth-1 white">
-                    <div className="col s12 cyan lighten-1 lighten-4 bold white-text text-darken-1 no-mp">
+                    <div className="col s12 custom-blue bold white-text text-darken-1 no-padding">
                         <div className="col s6 left">
                             <p>消息发送-按月统计</p>
                         </div>
@@ -126,24 +128,24 @@ class MessageStatistic extends React.Component {
                         <div className="col s6 right">
                             <div className="col s3 left"/>
 
-                            <div className="col s3 input-field">
-                                {/*<input type="text" id="yearpicker">*/}
-                                <input type="text" id="monthStart" value="startInitial" />
-                                <i className="mdi mdi-table-large dataIcon"/>
+                            <div className="col s3 position-relative">
+                                <input type="text" id="monthStart" className="margin-bottom0" value={messageStatisticReducer.monthStart} readonly/>
+                                <i className="mdi mdi-table-large table-icon"/>
                             </div>
-                            <div className="col s1 center">
-                                <p>至</p>
+
+                            <div className="col s1 center"><p>至</p></div>
+
+                            <div className="col s3 position-relative">
+                                <input type="text" id="monthEnd" className="margin-bottom0" value={messageStatisticReducer.monthEnd} readonly/>
+                                <i className="mdi mdi-table-large table-icon"/>
                             </div>
-                            <div className="col s3 input-field">
-                                <input type="text" id="monthEnd" value="endInitial" readonly/>
-                                <i className="mdi mdi-table-large dataIcon"/>
+                            <div className="col s2 center padding-top10">
+                                <i className="mdi mdi-magnify fz24 pointer" onClick={tempMethod}/>
                             </div>
-                            <div className="col s2 center">
-                                <i className="mdi mdi-magnify"/>
-                            </div>
+
                         </div>
                     </div>
-                    <div id="container"/>
+                    <div id="container" style={{minWidth:'400px',height:'350px',paddingTop: '80px'}}/>
                 </div>
 
 
@@ -154,14 +156,16 @@ class MessageStatistic extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        logCompanyReducer: state.LogCompanyReducer
+        messageStatisticReducer: state.MessageStatisticReducer
     }
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    getLogCompanyList: () => {
-        dispatch(logCompanyAction.getLogCompanyList())
+    tempMethod: () => {
+        dispatch(messageStatisticAction.tempMethod())
     },
+
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageStatistic)

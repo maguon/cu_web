@@ -318,7 +318,7 @@ body {
 }
 
 .margin-bottom0 {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 
 .margin-bottom10 {
@@ -859,6 +859,16 @@ img.responsive-img {
     position: absolute;
     right: 12px;
     bottom: 30px;
+}
+
+.table-icon {
+    position: absolute;
+    left: 128px;
+    bottom: 10px;
+}
+
+.position-relative {
+    position: relative;
 }
 
 /** 固定表格样式 */
