@@ -2,6 +2,8 @@ import {handleActions} from 'redux-actions';
 import {RefundModalActionType} from '../../actionTypes';
 
 const initialState = {
+    // 前画面
+    prePage: '',
     // 订单详细信息
     orderInfo: [],
     // 支付编号
@@ -13,6 +15,12 @@ const initialState = {
 };
 
 export default handleActions({
+    [RefundModalActionType.setPrePage]: (state, action) => {
+        return {
+            ...state,
+            prePage: action.payload
+        }
+    },
     [RefundModalActionType.getOrderInfo]: (state, action) => {
         return {
             ...state,

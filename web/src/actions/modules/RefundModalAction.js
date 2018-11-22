@@ -1,6 +1,7 @@
 import {apiHost} from '../../config/HostConfig';
 import {RefundModalActionType} from "../../actionTypes";
 
+const paymentAction = require('../../actions/main/PaymentAction');
 const paymentDetailAction = require('../../actions/main/PaymentDetailAction');
 const httpUtil = require('../../util/HttpUtil');
 const localUtil = require('../../util/LocalUtil');
@@ -23,6 +24,8 @@ export const getOrderInfo = (orderId) => async (dispatch) => {
 };
 
 export const refund = () => async (dispatch, getState) => {
+    // 前画面
+    const prePage = getState().RefundModalReducer.prePage;
     // 退款信息：订单信息
     const orderInfo = getState().RefundModalReducer.orderInfo;
     // 退款信息：支付编号
@@ -46,8 +49,13 @@ export const refund = () => async (dispatch, getState) => {
                 swal("退款成功", "", "success");
                 $('#refundModal').modal('close');
                 // 退款成功后，重新检索画面数据
-                dispatch(paymentDetailAction.getPaymentInfo(paymentId));
-                dispatch(paymentDetailAction.getRelPaymentList(paymentId));
+                if (prePage === 'paymentDetail') {
+                    dispatch(paymentDetailAction.getPaymentInfo(paymentId));
+                    dispatch(paymentDetailAction.getRelPaymentList(paymentId));
+                } else if (prePage === 'payment') {
+                    dispatch(paymentAction.getPaymentList())
+                }
+
             } else if (res.success === false) {
                 swal('退款失败', res.msg, 'warning');
             }
