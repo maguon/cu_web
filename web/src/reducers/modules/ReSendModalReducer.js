@@ -1,33 +1,85 @@
 import {handleActions} from 'redux-actions';
-import {RefundModalActionType} from '../../actionTypes';
+import {ReSendModalActionType} from '../../actionTypes';
 
 const initialState = {
-    // 申请原因
-    applyReason: '',
-    // 已退款金额
-    refundMoney: 0,
-    // 退款金额
-    newRefund: ''
+    // 订单编号
+    orderId: '',
+    // 订单详细信息
+    orderInfo: [],
+    // 订单内商品列表
+    orderItemArray: [],
+    // 商品名称select
+    orderItem: null,
+    // 商品数量
+    orderItemCnt: '',
+    // 新增发货商品列表Map
+    logList: [],
+
+    // 收货人
+    recvName: '',
+    // 收货电话
+    recvPhone: '',
+    // 收货地址
+    recvAddress: ''
 };
 
 export default handleActions({
-    [RefundModalActionType.setApplyReason]: (state, action) => {
+    [ReSendModalActionType.setOrderId]: (state, action) => {
         return {
             ...state,
-            applyReason: action.payload
+            orderId: action.payload
         }
     },
-    [RefundModalActionType.setRefundMoney]: (state, action) => {
+    [ReSendModalActionType.getOrderInfo]: (state, action) => {
         return {
             ...state,
-            refundMoney: action.payload
+            orderInfo: action.payload
         }
     },
-    [RefundModalActionType.setNewRefund]: (state, action) => {
+    [ReSendModalActionType.getOrderItemList]: (state, action) => {
+        let orderItemList = [];
+        action.payload.forEach((value) => {
+            orderItemList.push({value: value.id, label: value.product_name + ' (' + value.remark + ')', 'cnt': value.prod_count})
+        });
         return {
             ...state,
-            newRefund: action.payload
+            orderItemArray: orderItemList
+        }
+    },
+    [ReSendModalActionType.setOrderItem]: (state, action) => {
+        return {
+            ...state,
+            orderItem: action.payload
+        }
+    },
+    [ReSendModalActionType.setOrderItemCnt]: (state, action) => {
+        return {
+            ...state,
+            orderItemCnt: action.payload
+        }
+    },
+    [ReSendModalActionType.setLogList]: (state, action) => {
+        return {
+            ...state,
+            logList: action.payload
+        }
+    },
+    [ReSendModalActionType.setRecvName]: (state, action) => {
+        return {
+            ...state,
+            recvName: action.payload
+        }
+    },
+    [ReSendModalActionType.setRecvPhone]: (state, action) => {
+        return {
+            ...state,
+            recvPhone: action.payload
+        }
+    },
+    [ReSendModalActionType.setRecvAddress]: (state, action) => {
+        return {
+            ...state,
+            recvAddress: action.payload
         }
     }
 }, initialState)
-
