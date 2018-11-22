@@ -79,8 +79,10 @@ export const getFeedBackInfo = (orderId) => async (dispatch) => {
         if (res.success === true) {
             dispatch({type: OrderDetailActionType.getFeedBackInfo, payload: res.result});
             if (res.result.length > 0) {
-                dispatch({type: OrderDetailActionType.setProcessRemark, payload: res.result[0].process_remark});
-                dispatch({type: OrderDetailActionType.setProcessMethod, payload: res.result[0].process_method});
+                let process_remark = res.result[0].process_remark == null ? '' : res.result[0].process_remark;
+                let process_method = res.result[0].process_method == null ? '' : res.result[0].process_method;
+                dispatch({type: OrderDetailActionType.setProcessRemark, payload: process_remark});
+                dispatch({type: OrderDetailActionType.setProcessMethod, payload: process_method});
             }
         } else if (res.success === false) {
             swal('获取售后详情信息失败', res.msg, 'warning');
@@ -91,13 +93,13 @@ export const getFeedBackInfo = (orderId) => async (dispatch) => {
 };
 
 export const updateFeedBack = (feedBackId, orderId) => async (dispatch, getState) => {
-    // 处理描述
-    const processRemark = getState().OrderDetailReducer.processRemark.trim();
-    // 处理方法
-    const processMethod = getState().OrderDetailReducer.processMethod.trim();
-
     try {
-        if (processRemark === '' || processMethod === '') {
+        // 处理描述
+        const processRemark = getState().OrderDetailReducer.processRemark;
+        // 处理方法
+        const processMethod = getState().OrderDetailReducer.processMethod;
+
+        if (processRemark == null || processRemark === '' || processMethod == null || processMethod === '') {
             swal('修改失败', '请输入完整的售后处理信息！', 'warning');
         } else {
             const params = {

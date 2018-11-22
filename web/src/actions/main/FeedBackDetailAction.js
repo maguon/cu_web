@@ -18,8 +18,10 @@ export const getFeedBackInfo = (id) => async (dispatch) => {
                 dispatch(getOrderDetail(res.result[0].order_id));
                 dispatch(getPaymentInfo(res.result[0].order_id));
                 dispatch(getLogInfo(res.result[0].order_id));
-                dispatch({type: FeedBackDetailActionType.setProcessRemark, payload: res.result[0].process_remark});
-                dispatch({type: FeedBackDetailActionType.setProcessMethod, payload: res.result[0].process_method});
+                let process_remark = res.result[0].process_remark == null ? '' : res.result[0].process_remark;
+                let process_method = res.result[0].process_method == null ? '' : res.result[0].process_method;
+                dispatch({type: FeedBackDetailActionType.setProcessRemark, payload: process_remark});
+                dispatch({type: FeedBackDetailActionType.setProcessMethod, payload: process_method});
             }
         } else if (res.success === false) {
             swal('获取售后详情信息失败', res.msg, 'warning');
@@ -30,14 +32,13 @@ export const getFeedBackInfo = (id) => async (dispatch) => {
 };
 
 export const updateFeedBack = (feedBackId, orderId) => async (dispatch, getState) => {
-
-    // 处理描述
-    const processRemark = getState().FeedBackDetailReducer.processRemark.trim();
-    // 处理方法
-    const processMethod = getState().FeedBackDetailReducer.processMethod.trim();
-
     try {
-        if (processRemark === '' || processMethod === '') {
+        // 处理描述
+        const processRemark = getState().FeedBackDetailReducer.processRemark;
+        // 处理方法
+        const processMethod = getState().FeedBackDetailReducer.processMethod;
+
+        if (processRemark == null || processRemark === '' || processMethod == null || processMethod === '') {
             swal('修改失败', '请输入完整的售后处理信息！', 'warning');
         } else {
             const params = {
@@ -49,6 +50,7 @@ export const updateFeedBack = (feedBackId, orderId) => async (dispatch, getState
             const res = await httpUtil.httpPut(url, params);
             if (res.success === true) {
                 swal("修改成功", "", "success");
+                dispatch(getFeedBackInfo(feedBackId));
             } else if (res.success === false) {
                 swal('修改失败', res.msg, 'warning');
             }

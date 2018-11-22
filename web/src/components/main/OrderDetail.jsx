@@ -209,7 +209,7 @@ class OrderDetail extends React.Component {
                                             </div>
                                             <div className="col s6">金额：¥ <span className="red-font bold-font fz16">{formatUtil.formatNumber(item.total_fee, 2)}</span></div>
                                             <div className="col s4 fz14 right-align padding-right20">
-                                                支付时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].created_on)}
+                                                支付时间：{formatUtil.getDateTime(item.created_on)}
                                             </div>
                                         </div>
                                     )
@@ -217,7 +217,7 @@ class OrderDetail extends React.Component {
                             </div>}
 
                             {/* 发货信息 */}
-                            {orderDetailReducer.orderInfo[0].status === 0 && orderDetailReducer.orderInfo[0].log_status === 1 && orderDetailReducer.logInfo.length > 0 &&
+                            {orderDetailReducer.orderInfo[0].status === 0 && orderDetailReducer.logInfo.length > 0 &&
                             <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                                 <div className="row detail-box-header margin-bottom0">
                                     发货信息
