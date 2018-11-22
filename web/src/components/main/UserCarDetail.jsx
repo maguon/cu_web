@@ -184,7 +184,7 @@ class UserCarDetail extends React.Component {
                         {/* 上下页按钮 */}
                         <div className="row margin-top10 margin-left50 margin-right50">
                             <div className="right">
-                                {userCarDetailReducer.start > 0 &&
+                                {userCarDetailReducer.start > 0 && userCarDetailReducer.dataSize > 0 &&
                                 <a className="waves-light waves-effect custom-blue btn margin-right10" id="pre" onClick={this.preBtn}>
                                     上一页
                                 </a>}
