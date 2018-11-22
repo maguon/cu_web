@@ -2,9 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
-import {OrderDetailActionType} from '../../actionTypes';
+import {OrderDetailActionType, RefundModalActionType} from '../../actionTypes';
 import {RefundModal,ReSendModal} from '../modules/index';
 
+const refundModalAction = require('../../actions/modules/RefundModalAction');
 const orderDetailAction = require('../../actions/main/OrderDetailAction');
 const sysConst = require('../../util/SysConst');
 const formatUtil = require('../../util/FormatUtil');
@@ -24,8 +25,6 @@ class OrderDetail extends React.Component {
     componentDidMount() {
         // 取得订单信息
         this.props.getOrderInfo();
-        // 取得订单购买信息
-        this.props.getOrderDetail();
         // 初始化TAB
         $('ul.tabs').tabs();
     }
@@ -33,29 +32,31 @@ class OrderDetail extends React.Component {
     /**
      * 售后信息TAB：点击事件
      */
-    onClickAfterSaleTab = () => {
-        this.props.getAfterSaleInfo();
+    showFeedBackTab = () => {
+        // 取得售后详情信息
+        this.props.getFeedBackInfo();
     };
 
     /**
      * 售后信息TAB：更新 处理描述
      */
-    changeDescription = (event) => {
-        this.props.setDescription(event.target.value);
+    changeProcessRemark = (event) => {
+        this.props.setProcessRemark(event.target.value);
     };
 
     /**
      * 售后信息TAB：更新 处理方法
      */
-    changeProcessing = (event) => {
-        this.props.setProcessing(event.target.value);
+    changeProcessMethod = (event) => {
+        this.props.setProcessMethod(event.target.value);
     };
 
     /**
-     * 售后信息TAB：退款按钮 点击事件
+     * 售后信息TAB：显示 退款 模态画面
      */
     showRefundModal = () => {
         $('#refundModal').modal('open');
+        this.props.initRefundModalData(this.props.orderDetailReducer.feedBackInfo);
     };
 
     /**
@@ -117,14 +118,14 @@ class OrderDetail extends React.Component {
 
                         {/* 订单详情：订单信息/售后信息 TAB菜单 */}
                         <ul className="tabs">
-                            <li className="tab col s6"><a href="#tab-base">订单信息</a></li>
-                            <li className="tab col s6"><a className="active" href="#tab-after-sale" onClick={this.onClickAfterSaleTab}>售后信息</a></li>
+                            <li className="tab col s6"><a className="active" href="#tab-base">订单信息</a></li>
+                            <li className="tab col s6"><a href="#tab-after-sale" onClick={this.showFeedBackTab}>售后信息</a></li>
                         </ul>
                     </div>
 
-                    {/* TAB 1 : 基本信息TAB */}
+                    {/* TAB 1 : 订单信息TAB */}
                     <div id="tab-base" className="col s12">
-                        {/* 车辆信息：明细 */}
+                        {/* 订单信息：明细 */}
                         {orderDetailReducer.orderInfo.length > 0 &&
                         <div>
                             {/* 购买信息 */}
@@ -183,144 +184,95 @@ class OrderDetail extends React.Component {
                             </div>
 
                             {/* 支付信息 */}
-                            {orderDetailReducer.orderInfo[0].status === 0 && orderDetailReducer.orderInfo[0].payment_status === 1 &&
+                            {orderDetailReducer.orderInfo[0].status === 0 && orderDetailReducer.orderInfo[0].payment_status === 1 && orderDetailReducer.paymentInfo.length > 0 &&
                             <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                                 <div className="row detail-box-header margin-bottom0">
                                     支付信息
                                 </div>
 
-                                {/* 支付信息 TODO */}
-                                <div className="col s12 padding-top20 padding-bottom20 grey-text">
-                                    <div className="col s2 blue-font bold-font">支付</div>
-                                    <div className="col s6">金额：¥ <span className="red-font bold-font fz16">{formatUtil.formatNumber(9999, 2)}</span></div>
-                                    <div className="col s4 fz14 right-align padding-right20">
-                                        支付时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
-                                    </div>
-                                </div>
+                                {/* 支付信息 */}
+                                {orderDetailReducer.paymentInfo.map(function (item) {
+                                    return (
+                                        <div className="col s12 padding-top20 padding-bottom20 grey-text border-bottom-line">
+                                            <div className={`col s2 bold-font ${item.type === 0 ?"red-font":"blue-font"}`}>
+                                                {sysConst.PAYMENT_TYPE[item.type].label}
+                                            </div>
+                                            <div className="col s6">金额：¥ <span className="red-font bold-font fz16">{formatUtil.formatNumber(item.total_fee, 2)}</span></div>
+                                            <div className="col s4 fz14 right-align padding-right20">
+                                                支付时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].created_on)}
+                                            </div>
+                                        </div>
+                                    )
+                                },this)}
                             </div>}
 
                             {/* 发货信息 */}
-                            {orderDetailReducer.orderInfo[0].status === 0 && orderDetailReducer.orderInfo[0].payment_status === 1 &&
+                            {orderDetailReducer.orderInfo[0].status === 0 && orderDetailReducer.orderInfo[0].log_status === 1 && orderDetailReducer.logInfo.length > 0 &&
                             <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                                 <div className="row detail-box-header margin-bottom0">
                                     发货信息
                                 </div>
 
-                                {/* 发货信息 TODO */}
-                                <div className="col s12 padding-top20 padding-bottom20 grey-text text-darken-2">
-                                    <div className="col s6 fz14 grey-text">发货编号：XXXX</div>
-                                    <div className="col s6 fz14 grey-text right-align padding-right20">
-                                        发货时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
-                                    </div>
+                                {/* 发货信息 */}
+                                <div className="col s12 padding20 grey-text text-darken-2">
+                                    {/* 支付信息 */}
+                                    {orderDetailReducer.logInfo.map(function (item) {
+                                        return (
+                                            <div className="col s12 margin-top10 detail-box custom-grey">
 
-                                    <div className="col s4 margin-top10">快递公司：XXXXX</div>
-                                    <div className="col s4 margin-top10">快递编号：XXXXX</div>
-                                    <div className="col s4 margin-top10 right-align padding-right20">
-                                        快递费用：¥ {formatUtil.formatNumber(9999, 2)}
-                                    </div>
+                                                <div className="col s6 margin-top20">发货编号：{item.id}</div>
+                                                <div className="col s6 margin-top20 fz14 grey-text right-align">
+                                                    发货时间：{formatUtil.getDateTime(item.created_on)}
+                                                </div>
 
-                                    <div className="col s12 margin-top20">
-                                        <div className="col s12 detail-box custom-grey">
-                                            <div className="col s6 margin-top10 blue-font bold-font">补发商品：XXXX</div>
-                                            <div className="col s6 margin-top10 right-align">
-                                                收货人：XXXX
+                                                <div className="col s4 margin-top10">快递公司：{item.company_name}</div>
+                                                <div className="col s4 margin-top10">快递编号：{item.log_num}</div>
+                                                <div className="col s4 margin-top10 right-align">
+                                                    快递费用：¥ {formatUtil.formatNumber(item.freight, 2)}
+                                                </div>
+
+                                                {/* 分割线 */}
+                                                <div className="col s12 margin-top10 dotted-line"/>
+
+                                                <div className="col s8 margin-top10 margin-bottom10 grey-text fz14">收货地址：{item.recv_address}</div>
+                                                <div className="col s4 margin-top10 margin-bottom10 right-align">
+                                                    收货人：{item.recv_name} ({item.recv_phone})
+                                                </div>
                                             </div>
-
-                                            <div className="col s6 margin-top10 grey-text fz14">收货地址：XXXX</div>
-                                            <div className="col s6 margin-top10 grey-text fz14 right-align">
-                                                操作时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
-                                            </div>
-
-                                            <div className="col s12 margin-top20 dotted-line"/>
-
-                                            <div className="col s6 margin-top10 fz14 grey-text">发货编号：XXXX</div>
-                                            <div className="col s6 margin-top10 fz14 grey-text right-align">
-                                                发货时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
-                                            </div>
-
-                                            <div className="col s4 margin-top10 margin-bottom10">快递公司：XXXXX</div>
-                                            <div className="col s4 margin-top10 margin-bottom10">快递编号：XXXXX</div>
-                                            <div className="col s4 margin-top10 margin-bottom10 right-align">
-                                                快递费用：¥ {formatUtil.formatNumber(9999, 2)}
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    {/* 以下内容为迭代显示，需要删除 TODO */}
-                                    <div className="col s12 margin-top20">
-                                        <div className="col s12 detail-box custom-grey">
-                                            <div className="col s6 margin-top10 blue-font bold-font">补发商品：XXXX</div>
-                                            <div className="col s6 margin-top10 right-align">
-                                                收货人：XXXX
-                                            </div>
-
-                                            <div className="col s6 margin-top10 grey-text fz14">收货地址：XXXX</div>
-                                            <div className="col s6 margin-top10 grey-text fz14 right-align">
-                                                操作时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
-                                            </div>
-
-                                            <div className="col s12 margin-top20 dotted-line"/>
-
-                                            <div className="col s6 margin-top10 fz14 grey-text">发货编号：XXXX</div>
-                                            <div className="col s6 margin-top10 fz14 grey-text right-align">
-                                                发货时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
-                                            </div>
-
-                                            <div className="col s4 margin-top10 margin-bottom10">快递公司：XXXXX</div>
-                                            <div className="col s4 margin-top10 margin-bottom10">快递编号：XXXXX</div>
-                                            <div className="col s4 margin-top10 margin-bottom10 right-align">
-                                                快递费用：¥ {formatUtil.formatNumber(9999, 2)}
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-
+                                        )
+                                    },this)}
                                 </div>
                             </div>}
-
                         </div>}
-
                     </div>
 
                     {/* TAB 2 : 售后信息TAB */}
                     <div id="tab-after-sale" className="col s12">
                         {/* 售后信息 */}
-                        {orderDetailReducer.orderInfo.length > 0 &&
+                        {orderDetailReducer.feedBackInfo.length > 0 &&
                         <div className="row z-depth-1 detail-box margin-top40 margin-left50 margin-right50">
                             {/* 售后编号 处理状态 */}
                             <div className="row detail-box-header margin-bottom0">
-                                <div className="col s6 no-padding">售后编号：XXXXXXX</div>
-                                <div className="col s6 no-padding right-align">{sysConst.FEED_BACK_STATUS[orderDetailReducer.orderInfo[0].status].label}</div>
+                                <div className="col s6 no-padding">售后编号：{orderDetailReducer.feedBackInfo[0].id}</div>
+                                <div className="col s6 no-padding right-align">{sysConst.FEED_BACK_STATUS[orderDetailReducer.feedBackInfo[0].status].label}</div>
                             </div>
 
-                            {/* 用户申请 TODO */}
+                            {/* 用户申请 */}
                             <div className="col s12 padding-top20 padding-bottom10 grey-text">
                                 <div className="col s6 blue-font bold-font">用户申请</div>
-                                <div className="col s6 fz14 right-align">
-                                    申请时间：{formatUtil.getDateTime(orderDetailReducer.orderInfo[0].updated_on)}
-                                </div>
+                                <div className="col s6 fz14 right-align">申请时间：{formatUtil.getDateTime(orderDetailReducer.feedBackInfo[0].created_on)}</div>
                             </div>
 
                             <div className="col s12 padding-left20 padding-right20"><div className="col s12 blue-divider"/></div>
 
                             <div className="col s12 padding-top20 padding-bottom20">
-                                <div className="col s-percent-8 grey-text text-darken-2">
-                                    申请原因：
-                                </div>
-
-                                <div className="col s-percent-92 padding-left0 grey-text">
-                                    不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。
-                                    不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。
-                                    不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。
-                                    不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。不想要了。
-                                </div>
+                                <div className="col s-percent-8 grey-text text-darken-2">申请原因：</div>
+                                <div className="col s-percent-92 padding-left0 grey-text">{orderDetailReducer.feedBackInfo[0].apply_reason}</div>
                             </div>
 
                             <div className="col s12 padding-left20 padding-right20"><div className="col s12 divider"/></div>
 
-                            {/* 售后处理 TODO */}
+                            {/* 售后处理 */}
                             <div className="col s12 padding-top20 padding-bottom10">
                                 <div className="col s12 blue-font bold-font">售后处理</div>
                             </div>
@@ -328,12 +280,12 @@ class OrderDetail extends React.Component {
                             <div className="col s12 padding-left20 padding-right20 padding-bottom10"><div className="col s12 blue-divider"/></div>
 
                             <div className="col s12">
-                                <Input s={12} label="处理描述" className="right-align" value={orderDetailReducer.description} onChange={this.changeDescription}/>
-                                <Input s={12} label="处理方法" className="right-align" value={orderDetailReducer.processing} onChange={this.changeProcessing}/>
+                                <Input s={12} label="处理描述" className="right-align" value={orderDetailReducer.processRemark} onChange={this.changeProcessRemark}/>
+                                <Input s={12} label="处理方法" className="right-align" value={orderDetailReducer.processMethod} onChange={this.changeProcessMethod}/>
                             </div>
 
                             <div className="col s12 right-align padding-bottom20 padding-right20">
-                                <button type="button" className="btn confirm-btn" onClick={updateFeedBack}>确定</button>
+                                <button type="button" className="btn confirm-btn" onClick={() => {updateFeedBack(orderDetailReducer.feedBackInfo[0].id)}}>确定</button>
                             </div>
                         </div>}
 
@@ -359,24 +311,29 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getOrderInfo: () => {
-        dispatch(orderDetailAction.getOrderInfo(ownProps.match.params.id))
+        dispatch(orderDetailAction.getOrderInfo(ownProps.match.params.id));
+        dispatch(orderDetailAction.getOrderDetail(ownProps.match.params.id));
+        dispatch(orderDetailAction.getPaymentInfo(ownProps.match.params.id));
+        dispatch(orderDetailAction.getLogInfo(ownProps.match.params.id));
     },
-    getOrderDetail: () => {
-        dispatch(orderDetailAction.getOrderDetail(ownProps.match.params.id))
+    getFeedBackInfo: () => {
+        dispatch(orderDetailAction.getFeedBackInfo(ownProps.match.params.id))
     },
-    getAfterSaleInfo: () => {
-        dispatch(orderDetailAction.getOrderInfo(ownProps.match.params.id))
+    setProcessRemark: (value) => {
+        dispatch(OrderDetailActionType.setProcessRemark(value))
     },
-    updateFeedBack: () => {
-        dispatch(orderDetailAction.updateFeedBack(ownProps.match.params.id))
+    setProcessMethod: (value) => {
+        dispatch(OrderDetailActionType.setProcessMethod(value))
     },
-    setDescription: (value) => {
-        dispatch(OrderDetailActionType.setDescription(value))
+    initRefundModalData: (feedBackInfo) => {
+        dispatch(refundModalAction.getOrderInfo(ownProps.match.params.id));
+        dispatch(RefundModalActionType.setPaymentId(feedBackInfo[0].id));
+        dispatch(RefundModalActionType.setRefundMoney(''));
+        dispatch(RefundModalActionType.setRemark(''));
     },
-    setProcessing: (value) => {
-        dispatch(OrderDetailActionType.setProcessing(value))
-    },
-
+    updateFeedBack: (feedBackId) => {
+        dispatch(orderDetailAction.updateFeedBack(feedBackId, ownProps.match.params.id))
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetail)

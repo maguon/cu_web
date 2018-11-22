@@ -11,10 +11,12 @@ const initialState = {
     // 订单信息TAB - 发货信息
     logInfo: [],
 
+    // 售后信息TAB：售后信息
+    feedBackInfo: [],
     // 售后信息TAB：处理描述
-    description: '',
+    processRemark: '',
     // 售后信息TAB：处理方法
-    processing: '',
+    processMethod: ''
 };
 
 export default handleActions({
@@ -43,18 +45,22 @@ export default handleActions({
         }
     },
 
-
-    [OrderDetailActionType.setDescription]: (state, action) => {
+    [OrderDetailActionType.getFeedBackInfo]: (state, action) => {
         return {
             ...state,
-            description: action.payload
+            feedBackInfo: action.payload
         }
     },
-    [OrderDetailActionType.setProcessing]: (state, action) => {
+    [OrderDetailActionType.setProcessRemark]: (state, action) => {
         return {
             ...state,
-            processing: action.payload
+            processRemark: action.payload
         }
     },
-
+    [OrderDetailActionType.setProcessMethod]: (state, action) => {
+        return {
+            ...state,
+            processMethod: action.payload
+        }
+    }
 }, initialState)
