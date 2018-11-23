@@ -30,6 +30,7 @@ import UserCarReducer from './main/UserCarReducer';
 import UserCarDetailReducer from './main/UserCarDetailReducer';
 import UserManagerReducer from './main/UserManagerReducer';
 import UserManagerDetailReducer from './main/UserManagerDetailReducer';
+import UserStatisticReducer from './main/UserStatisticReducer';
 import CarQRCodeModalReducer from './modules/CarQRCodeModalReducer';
 import NewLogCompanyModalReducer from './modules/NewLogCompanyModalReducer';
 import NewLogModalReducer from './modules/NewLogModalReducer';
@@ -68,6 +69,7 @@ export default combineReducers({
     UserCarDetailReducer,
     UserManagerReducer,
     UserManagerDetailReducer,
+    UserStatisticReducer,
     CarQRCodeModalReducer,
     NewLogCompanyModalReducer,
     NewLogModalReducer,

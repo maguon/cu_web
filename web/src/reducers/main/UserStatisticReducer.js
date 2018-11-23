@@ -2,11 +2,11 @@ import {handleActions} from 'redux-actions';
 import {MessageStatisticActionType} from '../../actionTypes';
 
 const initialState = {
-    // 消息发送-按月统计：开始月
+    // 新增用户-按月统计：开始月
     monthStart: '',
-    // 消息发送-按月统计：终了月
+    // 新增用户-按月统计：终了月
     monthEnd: '',
-    // 消息发送-按日统计：统计日数
+    // 新增用户-按日统计：统计日数
     dataSize: ''
 };
 

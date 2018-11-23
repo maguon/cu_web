@@ -25,3 +25,4 @@ export UserCar from "./UserCar";
 export UserCarDetail from "./UserCarDetail";
 export UserManager from "./UserManager";
 export UserManagerDetail from "./UserManagerDetail";
+export UserStatistic from "./UserStatistic";

@@ -19,6 +19,7 @@ import {
     MessageStatistic,
     UserAddressDetail,
     UserAddress,
+    UserStatistic,
 
     Order,
     OrderDetail,
@@ -48,6 +49,12 @@ const routes = [
         path: "/message_statistic",
         exact: true,
         component: MessageStatistic
+    },
+    // 新增用户 统计
+    {
+        path: "/user_statistic",
+        exact: true,
+        component: UserStatistic
     },
 
     // 交警管理
@@ -257,7 +264,7 @@ class Container extends React.Component {
                                         <ul>
                                             <li><Link to="/message_statistic"><i className="mdi mdi-chevron-right"/>消息发送</Link></li>
                                             <li><div className="divider"/></li>
-                                            <li><Link to="/new_user_statistic"><i className="mdi mdi-chevron-right"/>新增用户</Link></li>
+                                            <li><Link to="/user_statistic"><i className="mdi mdi-chevron-right"/>新增用户</Link></li>
                                         </ul>
                                     </div>
                                 </li>
