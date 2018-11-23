@@ -9,6 +9,7 @@ import * as FeedBackDetailActionType from './main/FeedBackDetailActionType';
 import * as LogActionType from './main/LogActionType';
 import * as LogCompanyActionType from './main/LogCompanyActionType';
 import * as LogDetailActionType from './main/LogDetailActionType';
+import * as MainPanelActionType from './main/MainPanelActionType';
 import * as MessageActionType from './main/MessageActionType';
 import * as MessageDetailActionType from './main/MessageDetailActionType';
 import * as MessageStatisticActionType from './main/MessageStatisticActionType'
@@ -28,6 +29,7 @@ import * as UserCarActionType from './main/UserCarActionType';
 import * as UserCarDetailActionType from './main/UserCarDetailActionType';
 import * as UserManagerActionType from './main/UserManagerActionType';
 import * as UserManagerDetailActionType from './main/UserManagerDetailActionType';
+import * as UserStatisticActionType from './main/UserStatisticActionType';
 import * as CarQRCodeModalActionType from './modules/CarQRCodeModalActionType';
 import * as NewLogCompanyModalActionType from './modules/NewLogCompanyModalActionType';
 import * as NewLogModalActionType from './modules/NewLogModalActionType';
@@ -46,6 +48,7 @@ export {
     LogActionType,
     LogCompanyActionType,
     LogDetailActionType,
+    MainPanelActionType,
     MessageActionType,
     MessageDetailActionType,
     MessageStatisticActionType,
@@ -65,6 +68,7 @@ export {
     UserCarDetailActionType,
     UserManagerActionType,
     UserManagerDetailActionType,
+    UserStatisticActionType,
     CarQRCodeModalActionType,
     NewLogCompanyModalActionType,
     NewLogModalActionType,

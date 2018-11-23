@@ -11,6 +11,7 @@ import FeedBackDetailReducer from './main/FeedBackDetailReducer'
 import LogCompanyReducer from './main/LogCompanyReducer';
 import LogReducer from './main/LogReducer';
 import LogDetailReducer from './main/LogDetailReducer';
+import MainPanelReducer from './main/MainPanelReducer';
 import MessageReducer from './main/MessageReducer';
 import MessageDetailReducer from './main/MessageDetailReducer';
 import MessageStatisticReducer from './main/MessageStatisticReducer';
@@ -54,6 +55,7 @@ export default combineReducers({
     LogCompanyReducer,
     LogReducer,
     LogDetailReducer,
+    MainPanelReducer,
     MessageReducer,
     MessageDetailReducer,
     MessageStatisticReducer,
