@@ -74,8 +74,17 @@ class ProductDetail extends React.Component {
         this.props.setProductDes(value);
     };
 
+    /**
+     * 新建画面 跳转到 商品介绍TAB
+     */
+    goNextPage = () => {
+        $("ul.tabs li").removeClass("disabled");
+        $('ul.tabs').tabs('select_tab', 'tab-desc');
+        $("ul.tabs li").addClass("disabled");
+    };
+
     render() {
-        const {productDetailReducer, changeProductType, saveProductInfo, changeProductStatus, saveProductImg, saveProductDesc, handleSubmit} = this.props;
+        const {productDetailReducer, changeProductType, saveProductInfo, changeProductStatus, saveProductDesc, handleSubmit} = this.props;
 
         // 商品图片地址
         let avatarUrl = "";
@@ -227,9 +236,9 @@ class ProductDetail extends React.Component {
 
                         {/* 按钮 */}
                         <div className="col s12 right-align margin-top40 padding-right70">
-                            {productDetailReducer.pageType === 'new' && <button type="button" className="btn confirm-btn" onClick={saveProductImg}>下一步</button>}
-                            {productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 &&
-                                <button type="button" className="btn confirm-btn margin-left20" onClick={saveProductImg}>确定</button>}
+                            {productDetailReducer.pageType === 'new' && <button type="button" className="btn confirm-btn" onClick={this.goNextPage}>下一步</button>}
+                            {/*{productDetailReducer.pageType === 'edit' && productDetailReducer.productInfo.length > 0 &&*/}
+                                {/*<button type="button" className="btn confirm-btn margin-left20" onClick={saveProductImg}>确定</button>}*/}
                         </div>
                     </div>
 
@@ -319,9 +328,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setProductDes: (value) => {
         dispatch(ProductDetailActionType.setProductDes(value))
     },
-    saveProductImg: (formData) => {
-        dispatch(productDetailAction.saveProductImg(formData));
-    },
+    // saveProductImg: () => {
+    //     dispatch(productDetailAction.saveProductImg(formData));
+    // },
     saveProductDesc: () => {
         dispatch(productDetailAction.saveProductDesc());
     }

@@ -159,11 +159,12 @@ export const uploadProductImg = (formData) => (dispatch) => {
             if (result.success === true) {
                 // 上传图片成功后，刷新画面显示图片
                 dispatch({type: ProductDetailActionType.setProductImg, payload: result.imageId});
+                dispatch(saveProductImg());
             } else {
                 swal('上传图片失败', result.msg, 'warning');
             }
         }, function (err) {
-            swal('保存失败', err.msg, 'warning');
+            swal('上传图片失败', err.msg, 'warning');
         });
     } catch (err) {
         swal('操作失败', err.message, 'error');
@@ -198,13 +199,14 @@ export const saveProductImg = () => async (dispatch, getState) => {
                 + '/product/' + productId + '/productImg';
             let res = await httpUtil.httpPut(url, params);
             if (res.success === true) {
-                if (pageType === 'new') {
-                    $("ul.tabs li").removeClass("disabled");
-                    $('ul.tabs').tabs('select_tab', 'tab-desc');
-                    $("ul.tabs li").addClass("disabled");
-                } else {
-                    swal("保存成功", "", "success");
-                }
+                // if (pageType === 'new') {
+                //     $("ul.tabs li").removeClass("disabled");
+                //     $('ul.tabs').tabs('select_tab', 'tab-desc');
+                //     $("ul.tabs li").addClass("disabled");
+                // } else {
+                //     swal("保存成功", "", "success");
+                // }
+                swal("保存成功", "", "success");
             } else if (res.success === false) {
                 swal('保存失败', res.msg, 'warning');
             }
