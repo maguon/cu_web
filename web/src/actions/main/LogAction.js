@@ -16,6 +16,8 @@ export const getLogList = () => async (dispatch, getState) => {
         const conditionNo = getState().LogReducer.conditionNo.trim();
         // 检索条件：关联订单
         const conditionOrder = getState().LogReducer.conditionOrder.trim();
+        // 检索条件：发货状态
+        const conditionLogStatus = getState().LogReducer.conditionLogStatus;
         // 检索条件：快递公司
         const conditionLogCo = getState().LogReducer.conditionLogCo;
         // 检索条件：物流编号
@@ -41,6 +43,8 @@ export const getLogList = () => async (dispatch, getState) => {
             logId: conditionNo,
             // 检索条件：关联订单
             orderId: conditionOrder,
+            // 检索条件：发货状态
+            status: conditionLogStatus === null ? '' : conditionLogStatus.value,
             // 检索条件：快递公司
             logCompanyId: conditionLogCo === null ? '' : conditionLogCo.value,
             // 检索条件：物流编号

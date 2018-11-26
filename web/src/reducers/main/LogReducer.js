@@ -13,6 +13,8 @@ const initialState = {
     conditionNo: '',
     // 检索条件：关联订单
     conditionOrder: '',
+    // 检索条件：快递状态
+    conditionLogStatus: null,
     // 检索条件：快递公司
     conditionLogCo: null,
     // 检索条件：物流编号
@@ -63,6 +65,12 @@ export default handleActions({
         return {
             ...state,
             conditionOrder: action.payload
+        }
+    },
+    [LogActionType.setConditionLogStatus]: (state, action) => {
+        return {
+            ...state,
+            conditionLogStatus: action.payload
         }
     },
     [LogActionType.setConditionLogCo]: (state, action) => {

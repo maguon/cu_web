@@ -30,6 +30,7 @@ class Log extends React.Component {
             this.props.setStartNumber(0);
             this.props.setConditionNo('');
             this.props.setConditionOrder('');
+            this.props.changeConditionLogStatus({value: 0, label: "待发货"});
             this.props.changeConditionLogCo(null);
             this.props.setConditionLogNum('');
             this.props.setConditionRecvName('');
@@ -139,7 +140,7 @@ class Log extends React.Component {
     };
 
     render() {
-        const {logReducer, commonReducer, changeConditionLogCo} = this.props;
+        const {logReducer, commonReducer, changeConditionLogCo, changeConditionLogStatus} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -156,14 +157,24 @@ class Log extends React.Component {
 
                         {/* 查询条件：第一行 */}
                         <div>
-                            {/* 查询条件：发货编号 */}
+                            {/* 查询条件：发货编号 关联订单 */}
                             <div className="custom-input-field col s-percent-20">
-                                <Input s={12} label="发货编号" value={logReducer.conditionNo} onChange={this.changeConditionNo}/>
+                                <Input s={6} label="发货编号" value={logReducer.conditionNo} onChange={this.changeConditionNo}/>
+                                <Input s={6} label="关联订单" value={logReducer.conditionOrder} onChange={this.changeConditionOrder}/>
                             </div>
 
-                            {/* 查询条件：关联订单 */}
-                            <div className="custom-input-field col s-percent-20">
-                                <Input s={12} label="关联订单" value={logReducer.conditionOrder} onChange={this.changeConditionOrder}/>
+                            {/* 查询条件：发货状态 */}
+                            <div className="input-field col s-percent-20">
+                                <Select
+                                    options={sysConst.LOG_STATUS}
+                                    onChange={changeConditionLogStatus}
+                                    value={logReducer.conditionLogStatus}
+                                    isSearchable={false}
+                                    placeholder={"请选择"}
+                                    styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
+                                    isClearable={true}
+                                />
+                                <label className="active">发货状态</label>
                             </div>
 
                             {/* 查询条件：快递公司 */}
@@ -344,6 +355,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     changeConditionLogCo: (value) => {
         dispatch(LogActionType.setConditionLogCo(value))
+    },
+    changeConditionLogStatus: (value) => {
+        dispatch(LogActionType.setConditionLogStatus(value))
     },
     setConditionLogNum: (value) => {
         dispatch(LogActionType.setConditionLogNum(value))

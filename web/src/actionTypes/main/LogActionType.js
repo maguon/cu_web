@@ -6,6 +6,7 @@ export const setDataSize = createAction('SET_DATA_SIZE');
 export const setConditionNo = createAction('SET_CONDITION_NO');
 export const setConditionOrder = createAction('SET_CONDITION_ORDER');
 export const setConditionLogCo = createAction('SET_CONDITION_LOG_CO');
+export const setConditionLogStatus = createAction('SET_CONDITION_LOG_STATUS');
 export const setConditionLogNum = createAction('SET_CONDITION_LOG_NUM');
 export const setConditionRecvName = createAction('SET_CONDITION_RECV_NAME');
 export const setConditionRecvPhone = createAction('SET_CONDITION_RECV_PHONE');
