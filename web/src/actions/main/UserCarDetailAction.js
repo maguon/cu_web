@@ -28,10 +28,14 @@ export const getCheckCarList = (id) => async (dispatch, getState) => {
         const start = getState().UserCarDetailReducer.start;
         // 检索条件：每页数量
         const size = getState().UserCarDetailReducer.size;
+        // 用户车辆信息
+        const userCarInfo = getState().UserCarDetailReducer.userCarInfo;
+        // 用户id
+        const userId = userCarInfo.length > 0 ? userCarInfo[0].user_id : '';
 
         // 基本检索URL
         let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
-            + '/checkCar?start=' + start + '&size=' + size + '&userCarId=' + id;
+            + '/checkCar?start=' + start + '&size=' + size + '&userCarId=' + id + '&userId=' + userId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
             dispatch({type: UserCarDetailActionType.setDataSize, payload: res.result.length});
