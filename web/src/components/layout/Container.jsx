@@ -233,7 +233,7 @@ class Container extends React.Component {
         return (
             <Router hashType={"hashbang"}>
                 <div className="main-body">
-                    <ul id="slide-out" className="side-nav">
+                    <ul id="slide-out" className="side-nav height-percent100">
                         <li>
                             <div className="user-view blue-grey">
                                 <img className="circle" src={avatarUrl}/>
@@ -298,9 +298,43 @@ class Container extends React.Component {
                                             <li><div className="divider"/></li>
                                             <li><Link to="/user_car"><i className="mdi mdi-chevron-right"/>用户车辆管理</Link></li>
                                             <li><div className="divider"/></li>
+                                            <li><Link to="/user_address"><i className="mdi mdi-chevron-right"/>收货地址</Link></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><div className="divider"/></li>
+
+                        <li>
+                            <ul className="collapsible collapsible-accordion">
+                                <li>
+                                    <a className="collapsible-header"><i className="mdi mdi-shopping"/>订单管理</a>
+                                    <div className="collapsible-body">
+                                        <ul>
                                             <li><Link to="/order"><i className="mdi mdi-chevron-right"/>订单管理</Link></li>
                                             <li><div className="divider"/></li>
-                                            <li><Link to="/user_address"><i className="mdi mdi-chevron-right"/>收货地址</Link></li>
+                                            <li><Link to="/payment"><i className="mdi mdi-chevron-right"/>支付管理</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/sale"><i className="mdi mdi-chevron-right"/>商品销售</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/feed_back"><i className="mdi mdi-chevron-right"/>售后管理</Link></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><div className="divider"/></li>
+
+                        <li>
+                            <ul className="collapsible collapsible-accordion">
+                                <li>
+                                    <a className="collapsible-header"><i className="mdi mdi-truck-fast"/>物流管理</a>
+                                    <div className="collapsible-body">
+                                        <ul>
+                                            <li><Link to="/log_company"><i className="mdi mdi-chevron-right"/>快递公司</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/log"><i className="mdi mdi-chevron-right"/>发货管理</Link></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -314,17 +348,7 @@ class Container extends React.Component {
                                     <a className="collapsible-header"><i className="mdi mdi-cart-outline"/>商品管理</a>
                                     <div className="collapsible-body">
                                         <ul>
-                                            <li><Link to="/feed_back"><i className="mdi mdi-chevron-right"/>售后管理</Link></li>
-                                            <li><div className="divider"/></li>
-                                            <li><Link to="/log"><i className="mdi mdi-chevron-right"/>发货管理</Link></li>
-                                            <li><div className="divider"/></li>
-                                            <li><Link to="/payment"><i className="mdi mdi-chevron-right"/>支付管理</Link></li>
-                                            <li><div className="divider"/></li>
-                                            <li><Link to="/log_company"><i className="mdi mdi-chevron-right"/>快递公司</Link></li>
-                                            <li><div className="divider"/></li>
                                             <li><Link to="/product"><i className="mdi mdi-chevron-right"/>商品管理</Link></li>
-                                            <li><div className="divider"/></li>
-                                            <li><Link to="/sale"><i className="mdi mdi-chevron-right"/>商品销售</Link></li>
                                         </ul>
                                     </div>
                                 </li>
