@@ -10,11 +10,12 @@ export const DEFAULT_LOCATION = [121.61476, 38.91369];
 export const GENDER = [
     {
         value: 0,
-        label: "男"
+        label: "女"
+
     },
     {
         value: 1,
-        label: "女"
+        label: "男"
     }
 ];
 

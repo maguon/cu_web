@@ -106,11 +106,21 @@ class UserAddress extends React.Component {
                 {/* 上部分：检索条件输入区域 */}
                 <div className="row grey-text text-darken-1">
                     <div className="col s11 search-condition-box">
-                        <Input s={2} label="地址编号" value={userAddressReducer.conditionNo} onChange={this.changeConditionNo}/>
-                        <Input s={3} label="收货人" value={userAddressReducer.conditionShipName} onChange={this.changeConditionShipName}/>
-                        <Input s={2} label="收货电话" value={userAddressReducer.conditionShipPhone} onChange={this.changeConditionShipPhone}/>
-                        <Input s={3} label="用户" value={userAddressReducer.conditionBindUser} onChange={this.changeConditionBindUser}/>
-                        <Input s={2} label="绑定手机" value={userAddressReducer.conditionBindPhone} onChange={this.changeConditionBindPhone}/>
+                        <div className="custom-input-field col s-percent-20">
+                            <Input s={12} label="用户" value={userAddressReducer.conditionBindUser} onChange={this.changeConditionBindUser}/>
+                        </div>
+                        <div className="custom-input-field col s-percent-20">
+                            <Input s={12} label="绑定手机" value={userAddressReducer.conditionBindPhone} onChange={this.changeConditionBindPhone}/>
+                        </div>
+                        <div className="custom-input-field col s-percent-20">
+                            <Input s={12} label="地址编号" value={userAddressReducer.conditionNo} onChange={this.changeConditionNo}/>
+                        </div>
+                        <div className="custom-input-field col s-percent-20">
+                            <Input s={12} label="收货人" value={userAddressReducer.conditionShipName} onChange={this.changeConditionShipName}/>
+                        </div>
+                        <div className="custom-input-field col s-percent-20">
+                            <Input s={12} label="收货电话" value={userAddressReducer.conditionShipPhone} onChange={this.changeConditionShipPhone}/>
+                        </div>
                     </div>
 
                     {/* 查询按钮 */}
