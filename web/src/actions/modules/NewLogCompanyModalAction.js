@@ -39,8 +39,8 @@ export const saveLogCompany = () => async (dispatch, getState) => {
                 res = await httpUtil.httpPost(url, params);
             }
             if (res.success === true) {
-                swal("保存成功", "", "success");
                 $('#newLogCompanyModal').modal('close');
+                swal("保存成功", "", "success");
                 // 保存成功后，重新检索画面数据
                 dispatch(logCompanyAction.getLogCompanyList());
             } else if (res.success === false) {

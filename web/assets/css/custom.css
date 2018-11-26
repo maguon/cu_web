@@ -15,6 +15,10 @@ body {
     font-size: 15px;
 }
 
+.height-percent100 {
+    height: 100%;
+}
+
 /** 主画面 主体部分样式 */
 .main-body {
     /** header height 64px + footer height: 50px + margin-top: 2px = 116px */
