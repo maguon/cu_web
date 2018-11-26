@@ -8,8 +8,10 @@ const initialState = {
     size: 11,
     // 检索结果数量
     dataSize: 0,
-    // 检索条件：销售编号
-    conditionNo: '',
+    // // 检索条件：销售编号
+    // conditionNo: '',
+    // 检索条件：支付状态
+    conditionPaymentStatus: null,
     // 检索条件：商品编号
     conditionProductId: '',
     // 检索条件：商品名称
@@ -43,10 +45,16 @@ export default handleActions({
             dataSize: action.payload
         }
     },
-    [SaleActionType.setConditionNo]: (state, action) => {
+    // [SaleActionType.setConditionNo]: (state, action) => {
+    //     return {
+    //         ...state,
+    //         conditionNo: action.payload
+    //     }
+    // },
+    [SaleActionType.setConditionPaymentStatus]: (state, action) => {
         return {
             ...state,
-            conditionNo: action.payload
+            conditionPaymentStatus: action.payload
         }
     },
     [SaleActionType.setConditionProductId]: (state, action) => {

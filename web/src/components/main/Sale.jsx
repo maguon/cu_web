@@ -1,4 +1,5 @@
 import React from 'react';
+import Select from 'react-select';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
@@ -23,7 +24,8 @@ class Sale extends React.Component {
     componentDidMount() {
         if (!this.props.fromDetail) {
             this.props.setStartNumber(0);
-            this.props.setConditionNo('');
+            // this.props.setConditionNo('');
+            this.props.changeConditionPaymentStatus(null);
             this.props.setConditionProductId('');
             this.props.setConditionProductName('');
             this.props.setConditionOrderId('');
@@ -101,7 +103,7 @@ class Sale extends React.Component {
     };
 
     render() {
-        const {saleReducer} = this.props;
+        const {saleReducer, changeConditionPaymentStatus} = this.props;
         return (
             <div>
                 {/* 标题部分 */}
@@ -118,8 +120,11 @@ class Sale extends React.Component {
 
                         {/* 查询条件：第一行 */}
                         <div>
-                            {/* 查询条件：销售编号 */}
-                            <Input s={4} label="销售编号" value={saleReducer.conditionNo} onChange={this.changeConditionNo}/>
+                            {/*/!* 查询条件：销售编号 *!/*/}
+                            {/*<Input s={4} label="销售编号" value={saleReducer.conditionNo} onChange={this.changeConditionNo}/>*/}
+
+                            {/* 查询条件：关联订单 */}
+                            <Input s={4} label="关联订单" value={saleReducer.conditionOrderId} onChange={this.changeConditionOrderId}/>
 
                             {/* 查询条件：商品编号 */}
                             <Input s={4} label="商品编号" value={saleReducer.conditionProductId} onChange={this.changeConditionProductId}/>
@@ -130,8 +135,19 @@ class Sale extends React.Component {
 
                         {/* 查询条件：第二行 */}
                         <div>
-                            {/* 查询条件：关联订单 */}
-                            <Input s={4} label="关联订单" value={saleReducer.conditionOrderId} onChange={this.changeConditionOrderId}/>
+                            {/* 查询条件：付款状态 */}
+                            <div className="input-field col s4">
+                                <Select
+                                    options={sysConst.PAYMENT_STATUS}
+                                    onChange={changeConditionPaymentStatus}
+                                    value={saleReducer.conditionPaymentStatus}
+                                    isSearchable={false}
+                                    placeholder={"请选择"}
+                                    styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
+                                    isClearable={true}
+                                />
+                                <label className="active">付款状态</label>
+                            </div>
 
                             {/* 查询条件：售出时间(始) */}
                             <div className="input-field col s4 custom-input-field">
@@ -172,6 +188,7 @@ class Sale extends React.Component {
                                 <th>单价</th>
                                 <th>数量</th>
                                 <th>总价</th>
+                                <th className="center">付款状态</th>
                                 <th className="center">售出时间</th>
                                 <th className="center">操作</th>
                             </tr>
@@ -187,6 +204,7 @@ class Sale extends React.Component {
                                         <td>{formatUtil.formatNumber(item.unit_price, 2)}</td>
                                         <td>{formatUtil.formatNumber(item.prod_count, 0)}</td>
                                         <td>{formatUtil.formatNumber(item.total_price, 2)}</td>
+                                        <td className={`center ${item.payment_status === 0 ?"red-font":""}`}>{sysConst.PAYMENT_STATUS[item.payment_status].label}</td>
                                         <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
                                         <td className="operation center">
                                             <Link to={{pathname: '/sale/' + item.id}}>
@@ -199,7 +217,7 @@ class Sale extends React.Component {
                             }
                             { saleReducer.saleArray.length === 0 &&
                                 <tr className="grey-text text-darken-1">
-                                    <td className="no-data-tr" colSpan="9">暂无数据</td>
+                                    <td className="no-data-tr" colSpan="10">暂无数据</td>
                                 </tr>
                             }
                             </tbody>
@@ -243,8 +261,11 @@ const mapDispatchToProps = (dispatch) => ({
     setStartNumber: (start) => {
         dispatch(SaleActionType.setStartNumber(start))
     },
-    setConditionNo: (value) => {
-        dispatch(SaleActionType.setConditionNo(value))
+    // setConditionNo: (value) => {
+    //     dispatch(SaleActionType.setConditionNo(value))
+    // },
+    changeConditionPaymentStatus: (value) => {
+        dispatch(SaleActionType.setConditionPaymentStatus(value))
     },
     setConditionProductId: (value) => {
         dispatch(SaleActionType.setConditionProductId(value))

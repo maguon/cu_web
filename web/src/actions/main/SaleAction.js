@@ -12,8 +12,10 @@ export const getSaleList = () => async (dispatch, getState) => {
         // 检索条件：每页数量
         const size = getState().SaleReducer.size;
 
-        // 检索条件：销售编号
-        const conditionNo = getState().SaleReducer.conditionNo.trim();
+        // // 检索条件：销售编号
+        // const conditionNo = getState().SaleReducer.conditionNo.trim();
+        // 检索条件：支付状态
+        const conditionPaymentStatus = getState().SaleReducer.conditionPaymentStatus;
         // 检索条件：商品编号
         const conditionProductId = getState().SaleReducer.conditionProductId.trim();
         // 检索条件：商品名称
@@ -30,8 +32,8 @@ export const getSaleList = () => async (dispatch, getState) => {
 
         // 检索条件
         let conditionsObj = {
-            // 检索条件：销售编号
-            orderItemId: conditionNo,
+            // 检索条件：支付状态
+            paymentStatus: conditionPaymentStatus === null ? '' : conditionPaymentStatus.value,
             // 检索条件：商品编号
             productId: conditionProductId,
             // 检索条件：商品名称
