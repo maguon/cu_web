@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
 import {UserManagerDetailActionType, CarQRCodeModalActionType} from '../../actionTypes';
 import {CarQRCodeModal, MessageInfoModal} from '../modules/index';
+import {fileHost} from "../../config/HostConfig";
 
 const userManagerDetailAction = require('../../actions/main/UserManagerDetailAction');
 const carQRCodeModalAction = require('../../actions/modules/CarQRCodeModalAction');
@@ -396,7 +397,10 @@ class UserManagerDetail extends React.Component {
                                                         <li>
                                                             <div className="col s12 custom-padding border-bottom-line">
                                                                 <div className="col s-percent-10 no-padding">
-                                                                    {item.imag == null || item.imag === '' ? <div className="no-img-box"/> : <img className="img-size-100" src={item.imag}/>}
+                                                                    {item.imag == null || item.imag === ''
+                                                                        ? <div className="no-img-box"/>
+                                                                        : <img className="img-size-100" src={"http://" + fileHost + "/api/image/" + item.imag}/>
+                                                                    }
                                                                 </div>
                                                                 <div className="col s-percent-90 no-padding">
                                                                     <div className="col s6">{item.product_name}</div>

@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {Input} from 'react-materialize';
 import {FeedBackDetailActionType, RefundModalActionType, ReSendModalActionType} from '../../actionTypes';
 import {RefundModal,ReSendModal} from '../modules/index';
+import {fileHost} from "../../config/HostConfig";
 
 const feedBackDetailAction = require('../../actions/main/FeedBackDetailAction');
 const refundModalAction = require('../../actions/modules/RefundModalAction');
@@ -153,7 +154,10 @@ class FeedBackDetail extends React.Component {
                                         return (
                                             <div className="col s12 border-bottom-line padding-top20 padding-bottom20">
                                                 <div className="col no-padding s-percent-10">
-                                                    {item.imag == null || item.imag === '' ? <div className="no-img-box"/> : <img className="img-size-100" src={item.imag}/>}
+                                                    {item.imag == null || item.imag === ''
+                                                        ? <div className="no-img-box"/>
+                                                        : <img className="img-size-100" src={"http://" + fileHost + "/api/image/" + item.imag}/>
+                                                    }
                                                 </div>
                                                 <div className="col s-percent-90 margin-top10 padding-right0">
                                                     <div className="col s6 grey-text text-darken-1">{item.product_name}</div>
