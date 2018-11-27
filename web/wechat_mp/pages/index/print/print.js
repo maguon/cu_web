@@ -10,10 +10,11 @@ Page({
     addressList: [],
     price:5,
     num: 1,
+    sumPrice:0,
     minusStatus: 'disabled',  
     hidden:false,
+    imgPath:'',
 
-    imagePath:'',
     queryBean:[],
     product:[],
   },
@@ -23,18 +24,14 @@ Page({
    */
   onLoad: function (e) {
     console.log(e)
-    wx.getStorage({
-      key: 'qrcode',
-      success: (res)=> {
-        var queryBean = JSON.parse(e.queryBean);
-        var product = JSON.parse(e.product);
-
-        this.setData({
-          imagePath: res.data,
-          product: product,
-          queryBean: e.queryBean,
-        })
-      },
+    var queryBean = JSON.parse(e.queryBean);
+    var product = JSON.parse(e.product);
+    this.setData({
+      product: product,
+      queryBean: queryBean ,
+      price: product.unit_price,
+      sumPrice: product.unit_price,
+      imgPath: e.imgPath,
     })
   },
   /**
@@ -66,13 +63,13 @@ Page({
     if (num > 1) {
       num--;
     }
-    var price = num * 5;
+    var price = num * this.data.price;
     // 只有大于一件的时候，才能normal状态，否则disable状态  
     var minusStatus = num <= 1 ? 'disabled' : 'normal';
     // 将数值与状态写回  
     this.setData({
       num: num,
-      price: price,
+      sumPrice: price,
       minusStatus: minusStatus
     });
   },
@@ -91,13 +88,13 @@ Page({
         content: "最多可选打印数量为10个",
       })
     }
-    var price=num*5;
+    var price = num * this.data.price;
     // 只有大于一件的时候，才能normal状态，否则disable状态  
     var minusStatus = num < 1 ? 'disabled' : 'normal';
     // 将数值与状态写回  
     this.setData({
       num: num,
-      price:price,
+      sumPrice:price,
       minusStatus: minusStatus
     });
   },
@@ -115,11 +112,11 @@ Page({
         content: "最多可打印数量为10个",
       })
     }
-    var price = num * 5;
+    var price = num * this.data.price;
     // 将数值与状态写回  
     this.setData({
       num: num,
-      price: price,
+      sumPrice: price,
     });
   },
 
@@ -130,15 +127,16 @@ Page({
     var price=this.data.price;
     var userId=app.globalData.userId;
     var name = e.currentTarget.dataset.name;
+    console.log(this.data.queryBean.id)
+    console.log(this.data.queryBean.license_plate)
     //设置参数
     var params = {
       productId:[this.data.product.id],
       prodCount: [this.data.num],
-      remark: [this.data.product.product_remark],
+      remark: [this.data.queryBean.license_plate],
       carId:[this.data.queryBean.id],
 
       freight:this.data.product.freight,
-      imag: this.data.imagePath,
       recvName: this.data.addressList.ship_name,
       recvPhone: this.data.addressList.ship_phone,
       recvAddress: this.data.addressList.address,
@@ -158,7 +156,7 @@ Page({
       console.log(res)
        var orderId=res.data.result[0].orderId
         wx.navigateTo({
-          url: '/pages/user/order/order-detail/order-detail?price=' + this.data.product.original_price + "&orderId=" + orderId+"&name="+name,
+          url: '/pages/user/order/order-detail/order-detail?price=' + this.data.product.unit_price+ "&orderId=" + orderId+"&name="+name+"&imgPath="+this.data.imgPath,
         })
       })   
   },

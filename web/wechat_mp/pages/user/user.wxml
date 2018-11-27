@@ -6,7 +6,7 @@
     <block wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 
      <image  class="userinfo-avatar" src="../../../assets/images/player.png"></image>
       <text class="userinfo-nickname">微信昵称
-       <text class="userinfo-phone">{{nullPhone}}</text>
+       <text class="userinfo-phone">{{Phone}}</text>
       </text>
     </block>
 
@@ -16,7 +16,7 @@
        <view class="phone-img">
       <image class="phone" src="../../../assets/images/phone.png"></image>
       <text hidden='{{hidden}}' class="userinfo-phone">未绑定手机</text>
-        <text hidden='{{!hidden}}' class="userinfo-phone">{{nullPhone}}</text>
+        <text hidden='{{!hidden}}' class="userinfo-phone">{{Phone}}</text>
       </view>
       </view>
     </block>
@@ -35,23 +35,35 @@
        <view class="access"></view>
       </navigator>
 
-       <navigator url="{{userSections[1].url}}" class="weui-cell_access" hover-class="weui-cell_active">
+       <view bindtap='bindphone' class="weui-cell_access" hover-class="weui-cell_active">
       <view class='content'>
           <view class="weui-cell__bd">{{userSections[1].text}}
           <image class='arrow' src='../../../assets/images/arrow.png'></image>
           </view>
           <view hidden='{{hidden}}' class='weui-cell__right'>未绑定手机</view>
-          <view hidden='{{!hidden}}' class='weui-cell__right'>{{nullPhone}}</view>
+          <view hidden='{{!hidden}}' class='weui-cell__right'>{{Phone}}</view>
       </view>
        <view class="access"></view>
-      </navigator>
+      </view>
 
-       <navigator url="{{userSections[2].url}}" class="weui-cell_access" hover-class="weui-cell_active">
+
+       <view bindtap='relevanceCar' class="weui-cell_access" hover-class="weui-cell_active">
+      <view class='content'>
+          <view class="weui-cell__bd">关联车辆
+          <image class='arrow' src='../../../assets/images/arrow.png'></image>
+          </view>
+          <view class='weui-cell__right'>{{myCar}}</view>
+      </view>
+       <view class="access"></view>
+      </view>
+
+
+      <navigator url="{{userSections[2].url}}" class="weui-cell_access" hover-class="weui-cell_active">
       <view class='content'>
           <view class="weui-cell__bd">{{userSections[2].text}}
           <image class='arrow' src='../../../assets/images/arrow.png'></image>
           </view>
-          <view class='weui-cell__right'>{{myCar}}</view>
+          <view class='weui-cell__right'></view>
       </view>
        <view class="access"></view>
       </navigator>
@@ -69,16 +81,6 @@
       <navigator url="{{userSections[4].url}}" class="weui-cell_access" hover-class="weui-cell_active">
       <view class='content'>
           <view class="weui-cell__bd">{{userSections[4].text}}
-          <image class='arrow' src='../../../assets/images/arrow.png'></image>
-          </view>
-          <view class='weui-cell__right'></view>
-      </view>
-       <view class="access"></view>
-      </navigator>
-
-      <navigator url="{{userSections[5].url}}" class="weui-cell_access" hover-class="weui-cell_active">
-      <view class='content'>
-          <view class="weui-cell__bd">{{userSections[5].text}}
           <image class='arrow' src='../../../assets/images/arrow.png'></image>
           </view>
           <view class='weui-cell__right'>{{userSections[5].version}}</view>

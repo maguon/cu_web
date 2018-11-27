@@ -10,7 +10,7 @@ Page({
    */
   data: {
    userId:'',
-   queryBean:[],
+   addressList:[],
    add:"添加",
   },
 
@@ -18,6 +18,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
+    var addressList = JSON.parse(e.addressList);
+    this.setData({
+      addressList: addressList,
+    })
   },
 
  /**
@@ -45,6 +49,15 @@ Page({
    }else{
      flag=false;
      var that=this;
+     if(that.data.addressList!=""){
+       var params = {
+         userName: consignee,
+         phone: mobile,
+         address: address
+       }
+       //发送请求
+       reqUtil.httpPut(config.host.apiHost + '/api/user/' + userId + "/shipAddress/" + that.data.addressList.id +"/info", params, (err, res) => { });
+     }else{
      //获取要传递的参数
      var params={
        userName: consignee,
@@ -52,10 +65,8 @@ Page({
        address: address
      }
      //发送Post请求
-     reqUtil.httpPost(config.host.apiHost + '/api/user/' + userId + "/userShipAddress", params, (err, res)=>{
-
-     }
-     )
+     reqUtil.httpPost(config.host.apiHost + '/api/user/' + userId + "/userShipAddress", params, (err, res)=>{})
+   }
      //跳转地址管理界面
      wx.navigateBack({
        url: "/pages/index/addressList/addressList"

@@ -16,6 +16,7 @@ Page({
     canvasHidden: false,
     name:'',
 
+    hidden: false,
     imagePath:'',
     placeholder: "https://developers.weixin.qq.com/"//默认二维码生成文本
   },
@@ -42,16 +43,16 @@ Page({
   
     var userId=app.globalData.userId;
     var params='';
+    var carId = that.data.queryBean.id;
     //获取code
-    reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + '/userCar/' + e.queryBean.id + '/qrCode', params,(err,res)=>{
+    reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + '/userCar/' + carId + '/qrCode', params,(err,res)=>{
       //发送get请求
-      reqUtil.httpGet(config.host.apiHost + '/api/qrCode/' + res.data.result.code, (err, res) => {
-         
-        if (res.data.result.success) {
-          var initUrl = config.host.apiHost + "/api/user/" + userId + '/userCar?userCarId=' + e.queryBean.id;
+      // reqUtil.httpGet(config.host.apiHost + '/api/qrCode/' + res.data.result.code, (err,date ) => {
+      //   if (res.data.result.success) {
+          var initUrl = config.host.apiHost + '/api/qrCode/' + res.data.result.code;
           this.createQrCode(initUrl, "mycanvas", 100, 100);
-        }
-      })
+      //   }
+      // })
     })
   },
 
@@ -59,6 +60,15 @@ Page({
  * 生命周期函数--监听页面初次渲染完成
  */
   onShow:function(){
+    if (this.data.name != "") {
+    this.setData({
+      hidden:true,
+    })
+    }else{
+      this.setData({
+        hidden: false,
+      })
+    }
     this.setData({
       loadingHidden: false,
     })
@@ -87,10 +97,6 @@ Page({
         that.setData({
           imagePath: tempFilePath,
         });
-        wx.setStorage({
-          key: 'qrcode',
-          data: tempFilePath,
-        })
       },
       fail: function (res) {
         console.log(res);
@@ -113,6 +119,7 @@ Page({
     var userId=app.globalData.userId;
     var queryBean = JSON.stringify(this.data.queryBean);
     var index='';
+    var imgPath='';
     reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId +'/product',(err,res)=>{
      
       for (var i = 0; i < res.data.result.length;i++){
@@ -120,9 +127,12 @@ Page({
           index=i;
         }
       }
+
+      imgPath = config.host.imageHost + "/api/image/" + res.data.result[index].img
+
       var product = JSON.stringify(res.data.result[index]);
       wx.navigateTo({
-        url: '/pages/index/print/print?queryBean=' + queryBean + '&product=' + product
+        url: '/pages/index/print/print?queryBean=' + queryBean + '&product=' + product+'&imgPath='+imgPath,
       })
     })
   },
@@ -172,12 +182,12 @@ Page({
    */
   sure:function(){
     //判断上级页面并跳转
-    if(this.data.name=="header"){
+    if(this.data.name==""){
       wx.navigateBack({
+        delta: 2
       })
     }else{
-    wx.reLaunch({
-      url: '/pages/user/user',
+      wx.navigateBack({
     })
     }
   },
@@ -188,14 +198,15 @@ Page({
   unbind:function(){
     var userid = app.globalData.userId;
     var id=this.data.queryBean.id;
-    reqUtil.httpDel(config.host.apiHost + '/api/user/' + userid + '/userCar/' + id);
+    reqUtil.httpPut(config.host.apiHost + '/api/user/' + userid + '/userCar/' + id + '/status/' + 0, "",(err,res)=>{});
+    
    //判断上级页面并跳转
-    if (this.data.name == "header") {
+    if (this.data.name == "") {
       wx.navigateBack({
+        delta:2
       })
     } else {
-      wx.reLaunch({
-        url: '/pages/user/user',
+      wx.navigateBack({
       })
     }
   }

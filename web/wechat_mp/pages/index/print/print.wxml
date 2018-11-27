@@ -2,7 +2,7 @@
  <view class='print'>
 
   <view class='code'>
-  <image class='code-img' src='../../../assets/images/icon.png'></image>
+  <image class='code-img' src='{{imgPath}}'></image>
 
   <text class='code-text'>{{product.product_remark}}</text>
   <view class='choose'>
@@ -24,7 +24,7 @@
  </view>
  <view class='right'>
       <image class='right-img' src='../../../assets/images/money.png'></image>
-      <view class='right-text'>{{price}}.00</view>
+      <view class='right-text'>{{sumPrice}}.00</view>
     </view> 
 </view>
 
@@ -35,6 +35,14 @@
   <image class='sign' src='../../../assets/images/arrow.png'></image>
   </view>
   </view>
+
+     <view class='divline'></view>
+    <view class='choose'>
+      <view class='left'>备注信息</view>
+      <view class='right'>
+      <view class='right-text01'>{{queryBean.license_plate}}</view>
+    </view>
+   </view>
 
   <view class='mail'>收货地址</view>
   <block wx:if="{{!flag}}">

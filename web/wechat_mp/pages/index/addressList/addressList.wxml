@@ -14,7 +14,7 @@
          <view class='default'>
              <view hidden='{{!item.status}}' class='default-item'>默认</view>
              <view hidden='{{item.status}}' class='default-item-two'>设为默认</view>
-             <!-- <view class='default-redact'data-id="{{index}}" bindtap="editorAddress">修改</view> -->
+             <view class='default-redact'data-id="{{index}}" bindtap="editorAddress">编辑</view>
              <view class="ui-list-item-del" data-id="{{index}}" bindtap="delAddress">删除</view>
          </view>
 

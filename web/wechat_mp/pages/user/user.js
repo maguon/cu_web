@@ -12,12 +12,11 @@ Page({
     userInfo: {},
     avatarUrl:'',
     wechatName:'',
-    phoneNumber:'',
     hasUserInfo: false,
     hidden:false,
     
     myCar:'未关联车辆',
-    nullPhone:'',
+    Phone:'',
     userSections: [{
       text: '个人资料',
       isunread: true,
@@ -27,9 +26,6 @@ Page({
       {
         text: '绑定手机',
         url: "/pages/user/bind/bind"
-      }, {
-        text: '关联车辆',
-        url: "/pages/user/carList/carList"
       },{
         text: '我的订单',
         url: "/pages/user/order/order"
@@ -39,7 +35,7 @@ Page({
       },
       {
         text: '当前版本',
-        version:'0.0.3',
+        version:'0.0.4',
         url: ""
       }
       ]
@@ -64,22 +60,27 @@ Page({
   onShow: function () {
     var userId = app.globalData.userId;
     reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + "/userCar", (err, res) => {
+      var num=0;
       if (res.data.result == '') {
         return;
       }
-      //判断是否绑定
-      if (res.data.result[0].phone != '') {
-        app.globalData.phone = res.data.result[0].phone;
-
-        this.setData({
-          nullPhone: res.data.result[0].phone,
-          hidden: true
-        })
+      for (var i = 0; i < res.data.result.length; i++) {
+        if (res.data.result[i].status == 1) {
+          num++;
+        }
       }
       this.setData({
-        myCar: "相关车辆" + res.data.result.length + "台",
+        myCar: "关联车辆" + num + "台",
       })
     })
+
+    if (app.globalData.userInfo.result[0].phone != null || app.globalData.userInfo.result[0].phone !='' ){
+      this.setData({
+        hidden: true,
+        Phone: app.globalData.userInfo.result[0].phone,
+      })
+    }
+
     //保存
     this.setData({
       userInfo: app.globalData.userInfo,
@@ -88,6 +89,42 @@ Page({
       hasUserInfo: true,
     })
  
+  },
+  /**
+   * 绑定手机
+   */
+  bindphone:function(){
+    if (this.data.Phone == null || this.data.Phone == '') {
+   
+
+    }else{
+    wx.navigateTo({
+      url: '/pages/user/bind/bind',
+    })
+    }
+  },
+  /**
+   * 点击关联车辆
+   */
+  relevanceCar:function(){
+    console.log(this.data.Phone)
+
+    if (this.data.Phone == null || this.data.Phone == ''){
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请先绑定您的手机',
+        success: function (res) { 
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } 
+        }
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/user/carList/carList',
+      })
+    }
   },
 
   /**

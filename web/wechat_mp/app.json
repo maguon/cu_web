@@ -19,6 +19,8 @@
     "pages/user/order/order-detail/order-detail",
     "pages/user/order/order-detail/apply/apply",
     "pages/user/order/order-detail/after-sale/after-sale",
+    "pages/user/order/order-detail/payMsg/payMsg",
+    "pages/user/order/order-detail/logistics/logistics",
     
     "pages/user/carList/carList",
     "pages/user/carList/addCar/addCar",

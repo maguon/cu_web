@@ -16,6 +16,6 @@
         </view>
 
          <view class='btn'>
-    <button form-type='submit' class="btn-area" hover-class="weui-cell_active">{{botton[index]}}</button>
+    <button form-type='submit' class="btn-area" hover-class="weui-cell_active">提交申请</button>
     </view>
     </form>

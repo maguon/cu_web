@@ -9,6 +9,11 @@ Page({
   data: {
    orderId:'',
    afterSale:[],
+   state: ['未处理','已处理'],
+
+   created_on:'',
+   updated_on: '',
+   hidden:false,
   },
 
   /**
@@ -32,24 +37,57 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var orderId=this.data.orderId;
+    var that=this;
+    var orderId = that.data.orderId;
     var userId = app.globalData.userId;
     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/orderFeedback?orderId=" + orderId, (err, res) => {
-      console.log(res)
-      wx.getStorage({
-        key: 'orderFeedbackid',
-        success: function(e) {
-          for (var i = 0; i < res.data.result.length; i++) {
-            if (res.data.result[i].id = e.data) {
-              this.setData({
-                afterSale: res.data.result[i],
-              })
-            }
-          }
-        },
+    
+      var afterSale=res.data.result[res.data.result.length-1];
+      var newCreated_on = this.Time(afterSale.created_on);
+      var newUpdated_on = this.Time(afterSale.updated_on);
+      if (afterSale.status==1){
+        that.setData({
+          hidden:true,
+        })
+      }
+
+      console.log(afterSale)
+      this.setData({
+        afterSale: afterSale,
+        created_on: newCreated_on,
+        updated_on: newUpdated_on,
       })
     })
 
+  },
+  /**
+ * 共通编译时间
+ */
+  Time: function (e) {
+    var date = new Date(e);
+    var localeString = date.toLocaleString();
+    return localeString;
+  },
+
+  bindFormSubmit:function(e){
+    console.log(e)
+    var userId=app.globalData.userId;
+    var orderId = this.data.orderId;
+    var applyReason = e.detail.value.apply;
+    var params = {applyReason: applyReason }
+
+    //发送Post请求
+    reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + "/order/" + orderId + "/orderFeedback", params, (err, res) => {
+      wx.showToast({
+        title: '申请已修改，客服会在24小时内为你处理，请耐心等待',
+        icon: 'none',
+        duration: 2000,
+      })
+      // setTimeout(() => {
+      //   wx.navigateBack({
+      //   })
+      // }, 2000)
+    })
   },
 
   /**

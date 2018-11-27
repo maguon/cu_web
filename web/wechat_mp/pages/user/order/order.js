@@ -9,12 +9,10 @@ Page({
   data: {
   hidden:false,
   orderList:[],
-  state: ['待发货', '待支付', '已发货', '处理中', '已处理', '已退款'],
+  state: ['未支付','待发货','已发货','已退款','已补发','已付款'],
+  page_state:1,
 
-  isPay: false,
-  isApply: false,
   loadingHidden:false,
-
   created_on:'',
   },
 
@@ -37,12 +35,23 @@ Page({
     var userId = app.globalData.userId;
       reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/order", (err, res) => {
       console.log(res)
+
       for (var i = 0; i < res.data.result.length; i++) {      
         var len = res.data.result[i];
-        if (len.payment_status!=1){
+        res.data.result[i].page_state = 1;
+        if (len.payment_status!=0){
           res.data.result[i].flag=true;
           res.data.result[i].isPay=true;
+          res.data.result[i].isApply = true;
         }
+        if (len.log_status == 1 ){
+          res.data.result[i].page_state = 2;
+        }
+        if (len.log_status == 2) {
+          res.data.result[i].page_state = 5;
+   
+        }
+        
         var date = new Date(len.created_on);
         var localeString = date.toLocaleString();
         res.data.result[i].created_on = localeString;
@@ -86,9 +95,10 @@ Page({
     console.log(e)
     var index = e.currentTarget.dataset.index;
     var name = e.currentTarget.dataset.name;
-    var orderId = that.data.orderList[index].id;
+    var orderList = JSON.stringify(that.data.orderList[index]);
+    var total_price = that.data.orderList[index].total_price;
     wx.navigateTo({
-      url: '/pages/index/pay/wxpay/wxpay?orderId='+orderId+"&name="+name,
+      url: '/pages/index/pay/wxpay/wxpay?orderList=' + orderList + "&price=" + total_price+"&name="+name,
     })
   },
   /**
@@ -101,57 +111,60 @@ Page({
     var name = e.currentTarget.dataset.name;
     var orderId = that.data.orderList[index].id;
     var  userId = app.globalData.userId;
-
+    var imgPath='';
+    var imgPathIndex='';
     reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + '/product', (err, res) => {
       for (var i = 0; i < res.data.result.length; i++) {
         if (res.data.result[i].id == 1000) {
            var price= res.data.result[i].unit_price;
+           imgPathIndex= i;
         }
       }
+      imgPath = config.host.imageHost + "/api/image/" + res.data.result[imgPathIndex].img
+
       wx.navigateTo({
-        url: '/pages/user/order/order-detail/order-detail?orderId=' + orderId + "&price=" + price + "&name=" + name,
+        url: '/pages/user/order/order-detail/order-detail?orderId=' + orderId + "&price=" + price + "&name=" + name + '&imgPath=' + imgPath,
       })
     })
   },
-/**
- * 申请售后
- */
-  apply:function(e){
-    console.log(e)
-    var index = e.currentTarget.dataset.index;
-    var orderId=this.data.orderList[index].id;
-    var userId=app.globalData.userId;
-    var apply='';
+// /**
+//  * 申请售后
+//  */
+//   apply:function(e){
+//     console.log(e)
+//     var index = e.currentTarget.dataset.index;
+//     var orderId=this.data.orderList[index].id;
+//     var userId=app.globalData.userId;
+//     var apply='';
 
-    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/orderFeedback?orderId=" + orderId, (err, res) => {
-      console.log(res)
-      if (res.data.result==''){
-        wx.navigateTo({
-          url: '/pages/user/order/order-detail/apply/apply?orderId=' + orderId + "&apply=" + "",
-        })
-      }else{
-      apply = res.data.result[res.data.result.length - 1].apply_reason;
-      wx.navigateTo({
-        url: '/pages/user/order/order-detail/apply/apply?orderId=' + orderId + "&apply=" + apply,
-      })
-      }
-    })
-  },
-  /**
-   * 查看售后
-   */
-  check:function(e){
-    console.log(e)
-   var index = e.currentTarget.dataset.index;
-    var orderId = this.data.orderList[index].id;
-   var userId = app.globalData.userId;
-    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/orderFeedback?orderId=" + orderId, (err, res) => {
-
-    })
-    wx.navigateTo({
-      url: 'pages/user/order/order-detail/after-sale/after-sale?orderId='+orderId,
-    })
-  },
+//     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/orderFeedback?orderId=" + orderId, (err, res) => {
+//       console.log(res)
+//       if (res.data.result==''){
+//         wx.navigateTo({
+//           url: '/pages/user/order/order-detail/apply/apply?orderId=' + orderId + "&apply=" + "",
+//         })
+//       }else{
+//       wx.showModal({
+//         title: '提示',
+//         content: '申请售后已提交，等待商家处理',
+//       })
+//       }
+//     })
+//   },
+//   /**
+//    * 查看售后
+//    */
+//   check:function(e){
+//     console.log(e)
+//    var index = e.currentTarget.dataset.index;
+//     var orderId = this.data.orderList[index].id;
+//    var userId = app.globalData.userId;
+//     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/orderFeedback?orderId=" + orderId, (err, res) => {
+//       wx.navigateTo({
+//         url: '/pages/user/order/order-detail/after-sale/after-sale?orderId=' + orderId,
+//       })
+//     })  
+//   },
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -25,7 +25,7 @@ Page({
       //UTC 时间格式转译
       var len = res.data.result.length;
       for (var i=0;i <len; i++) {
-        if(res.data.result[i].status==0){
+        if (res.data.result[i].read_status == 0 && res.data.result[i].type != 1){
           count++;
         }
         if (res.data.result[i].type== 1) {
@@ -64,7 +64,7 @@ Page({
     var params='';
     //循环判断用户点击
     for (var i=0; i < len; i++) {
-      msgList[i].status = i == index;
+      msgList[i].read_status = i == index;
     }
     //发送请求
     reqUtil.httpPut(config.host.apiHost + "/api/user/" + userId + '/msg/' + id + '/status/'+1, params, (err, res) => {})

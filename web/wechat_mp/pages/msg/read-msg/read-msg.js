@@ -19,6 +19,7 @@ Page({
     })
 
   },
+
   /**
     * 监听定位到当前位置
     */
@@ -61,7 +62,16 @@ Page({
       },
     })
   },
-
+  //点击图片进行预览，长按保存分享图片
+  previewImg: function (e) {
+    console.log(e)
+    var index=e.currentTarget.dataset.value;
+    var img ='http://tmp/wx694764f7676e75c3.o6zAJs0J27BdPDFb0Eo126HHzIFI.nY6oa4nYoqfS15f8686f46458edf918637eb85733a37.png';
+    wx.previewImage({
+      current: img, // 当前显示图片的http链接
+      urls: [img] // 需要预览的图片http链接列表
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -2,21 +2,22 @@
 <view class="container">
   <view class="userinfo">
     <block wx:if="{{!hasUserInfo && canIUse}}"> 
-     <image bindtap="bindViewTap" class="userinfo-avatar" src="../../assets/images/player.png" mode="cover"></image>
+     <image  class="userinfo-avatar" src="../../assets/images/player.png" mode="cover"></image>
      <button class='userinfo-nickname' size='mini' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
       <!-- <text class="userinfo-nickname">微信昵称</text> -->
      <button  class='userinfo-nickname' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button>
     </block>
 
       <block wx:else>
-       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{avatarUrl}}" mode="cover"></image>
+       <image class="userinfo-avatar" src="{{avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{wechatName}}</text>
-      <black class="phoneimg">
+
+      <view  hidden='{{hidden}}' class="phoneimg">
       <image class="phone" src="../../assets/images/phone.png"></image>
-      <!-- <text class="userinfo-phone">{{userPhone}}</text> -->
-           <button hidden='{{hidden}}' class='userinfo-nickname' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button>
-           <view hidden='{{!hidden}}' class='userinfo-phone' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">{{userPhone}}</view>
-      </black>
+      <view  class='userinfo-phone' size='mini'>{{userPhone}}</view>
+      </view>
+        <button hidden='{{!hidden}}' class='userinfo-nickname' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button>
+
     </block>
   </view>
 
@@ -33,7 +34,7 @@
   
 <block wx:else>
   <block wx:for='{{carList}}'  wx:key='u'>
-  <view  class='item'>
+  <view hidden='{{!item.status}}' class='item'>
     <view class='carbox'>
       <view class='left'>
         <image class='left-img' src='../../assets/images/car.png'></image>
@@ -56,6 +57,8 @@
   </view>
  </block>
 </block>
-   <!-- <button  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机登录</button> -->
+       <!-- <button  class='userinfo-nickname' size='mini'  open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button> -->
+<!-- 验证码组件 -->
+<verifycode id='verifycode' title="请输入验证码" content="已发送到手机:" />
 </view>
 

@@ -19,25 +19,25 @@ height: 85%;
   flex-direction: row;
 }
 .default-item{
-  width: 88%;
+  width: 64%;
   color: #feb100;
   margin-left: 30px;
 }
 .default-item-two{
-  width: 88%;
+  width: 64%;
   color: #8a8988;
   margin-left: 30px;
 }
 .default-redact{
   text-align: center;
-  width: 12%;
+  width: 18%;
   color: white;
   background:rgb(201, 201, 247); 
   opacity: 0.9;  
   transform: scale(0.9,0.9); 
 }
 .ui-list-item-del{
-  width: 12%;
+  width: 18%;
   opacity: 0.9;      /*透明度变化*/
   transform: scale(0.9,0.9); /*缩放*/
   text-align: center;

@@ -20,19 +20,19 @@
     </view>
   </view>
 
-  <navigator url="" class="weui-media-box weui-media-box_appmsg box" hover-class="weui-cell_active">
+  <view class="weui-media-box weui-media-box_appmsg box">
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg image">
-      <image class="weui-media-box__thumb" src="" />
+      <image class="weui-media-box__thumb" bindtap='previewImg' src="" data-value='1' />
     </view>
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg image">
-      <image class="weui-media-box__thumb" src="" />
+      <image class="weui-media-box__thumb" bindtap='previewImg' src="" data-value='2'/>
     </view>
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg image">
-      <image class="weui-media-box__thumb" src="" />
+      <image class="weui-media-box__thumb" bindtap='previewImg' src="" data-value='3'/>
     </view>
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg image">
-      <image class="weui-media-box__thumb" src="" />
+      <image class="weui-media-box__thumb" bindtap='previewImg' src="" data-value='4' />
     </view>
-  </navigator>
+  </view>
  </view>
 </view>

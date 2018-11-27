@@ -8,8 +8,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    botton:['提交申请','修改申请'],
-    index:0,
     orderId:'',
     value:'',
   },
@@ -22,13 +20,11 @@ Page({
     if (e.apply==''){
       this.setData({
         orderId: e.orderId,
-        index: 0,
       })
     }else{
      this.setData({
        orderId:e.orderId,
        value: e.apply,
-       index: 1,
      })
     }
   },
@@ -67,17 +63,10 @@ Page({
         icon: 'none',
         duration: 2000,
       })
-      wx.setStorage({
-        key: 'orderFeedbackid',
-        data: res.data.id,
-      })
       setTimeout(()=>{
         wx.navigateBack({
         })
       },2000)
-      // wx.navigateTo({
-      //   url: '/pages/user/order/order-detail/after-sale/after-sale',
-      // })
     })
   },
   /**

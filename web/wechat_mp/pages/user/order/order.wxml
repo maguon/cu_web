@@ -5,14 +5,14 @@
 
 <view class="page__bd" wx:for="{{orderList}}" wx:key="u">
         <view hidden='{{item.status}}' class="weui-cells weui-cells_after-title">
-              <view bindtap='orderDetail' data-index="{{index}}" data-name='order' class="weui-cell_access" hover-class="weui-cell_active">
+              <view bindtap='orderDetail' data-index="{{index}}" data-name='order' class="weui-cell_access" hover-class="weui-cell_active" name='payment'>
               <view class='title'>
                <view class="order-num">订单编号：{{item.id}}</view>
                <view class="order-time">下单时间：{{item.created_on}}</view>
               </view>
                 <view class="weui-cell__bd">{{item.order_name}}
                 <view hidden='{{item.flag}}' class='state'>{{state[item.payment_status]}}</view>
-                <view hidden='{{!item.flag}}' class='state-two'>{{state[item.payment_status]}}</view>
+                <view hidden='{{!item.flag}}' class='state-two'>{{state[item.page_state]}}</view>
                 </view>
                 <view class='money'> 
                 <view class="weui-cell__hd">
@@ -32,15 +32,11 @@
 
             <view hidden='{{!item.isPay}}' class="weui-cell bnt-list bnt-mest" >
             <view class='bnt-list'>
-                 <button hidden='{{isApply}}' class="btn"  bindtap='apply'data-index="{{index}}">申请售后</button>
+                 <button  class="btn" disabled='{{!isApply}}' bindtap='apply'data-index="{{index}}">已支付</button>
                 </view>
-            </view>
-
-            <view class="weui-cell bnt-list bnt-mest" >
-            <view class='bnt-list'>
-                 <button hidden='{{!isApply}}' class="btn"  bindtap='check' data-index="{{index}}">查看售后</button>
-                </view>
-            </view>
-            
+                   <!-- <view class='bnt-list'>
+                 <button hidden='{{!item.isApply}}' class="btn"  bindtap='check' data-index="{{index}}">查看售后</button> 
+                </view> -->
+            </view>   
         </view>
      </view>

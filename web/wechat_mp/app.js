@@ -8,9 +8,9 @@ App({
     openid:'',
     userId: 0,
     accessToken: '',
-    phone:'',
+    session_key:'',
   },
-
+ 
   /**
    * 异步执行登录信息加载
    */
@@ -30,7 +30,8 @@ App({
         reqUtil.httpGet(config.host.apiHost + "/api/wechat/" + code + "/openid", (err, res) => {
           //保存openid 到全局
           that.globalData.openid=res.data.result.openid;
-          console.log(res.data.result.openid)
+          console.log(res.data.result)
+          that.globalData.session_key = res.data.result.session_key;
           //判断加载数据完成后执行login-onload
           if (this.userInfoReadyCallback) {
             this.userInfoReadyCallback(res)
