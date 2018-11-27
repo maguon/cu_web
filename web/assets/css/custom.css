@@ -39,10 +39,17 @@ body {
     margin-left: 60px;
 }
 
+.header-icon img {
+    position: absolute;
+    margin-top: 16px;
+    margin-left: 10px;
+    height: 36px;
+}
+
 .header-font {
+    margin-left: 70px;
     font-weight: bold;
     font-size: 20px;
-    margin-left: 20px;
 }
 
 /* 主画面 底部样式 (固定) */

@@ -56,7 +56,9 @@ class Header extends React.Component {
                             <i className="mdi mdi-menu mdi-36px"/>
                         </a>
 
-                        <span className="header-icon">icon位置</span>
+                        <span className="header-icon">
+                            <img src="../../../assets/images/logo_ico-32.ico" alt=""/>
+                        </span>
                         <span className="header-font">连惠车后台管理系统</span>
 
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
