@@ -223,7 +223,6 @@ class Container extends React.Component {
 
     render() {
         const {headerReducer} = this.props;
-        console.log(headerReducer.userInfo);
         let avatarUrl = "";
         if (headerReducer.userInfo && headerReducer.userInfo.avatar_image) {
             avatarUrl = "http://" + fileHost + "/api/image/" + headerReducer.userInfo.avatar_image;
