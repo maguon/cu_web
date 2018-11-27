@@ -200,11 +200,11 @@ class Product extends React.Component {
                                     <tr className="grey-text text-darken-1">
                                         <td>{item.id}</td>
                                         <td>{item.product_name}</td>
-                                        <td className="center">{sysConst.PRODUCT_TYPE[item.type].label}</td>
+                                        <td className="center">{(item.type !== 0 && item.type !== 1) ? '未知' : sysConst.PRODUCT_TYPE[item.type].label}</td>
                                         <td>{formatUtil.formatNumber(item.unit_price, 2)}</td>
                                         <td>{formatUtil.formatNumber(item.freight, 2)}</td>
                                         <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
-                                        <td className="center">{sysConst.SALE_STATUS[item.status].label}</td>
+                                        <td className="center">{(item.status !== 0 && item.status !== 1) ? '未知' : sysConst.SALE_STATUS[item.status].label}</td>
                                         <td className="operation center">
                                             <Link to={{pathname: '/product/' + item.id}}>
                                                 <i className="mdi mdi-table-search light-blue-text"/>
