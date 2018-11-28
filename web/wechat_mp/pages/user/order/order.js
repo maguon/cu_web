@@ -54,7 +54,9 @@ Page({
         
         var date = new Date(len.created_on);
         var localeString = date.toLocaleString();
-        res.data.result[i].created_on = localeString;
+        var t = new Date(localeString);
+        var time = t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
+        res.data.result[i].created_on = time;
       }
       this.setData({
         orderList: res.data.result,

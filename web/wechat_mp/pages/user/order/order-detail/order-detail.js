@@ -115,7 +115,9 @@ Page({
   Time: function (e) {
     var date = new Date(e);
     var localeString = date.toLocaleString();
-    return localeString;
+    var t = new Date(localeString);
+    var time = t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
+    return time;
   },
  /**
   * 取消订单
