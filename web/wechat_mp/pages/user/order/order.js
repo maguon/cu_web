@@ -35,7 +35,11 @@ Page({
     var userId = app.globalData.userId;
       reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/order", (err, res) => {
       console.log(res)
-
+        if (res.data.result!=''){
+        this.setData({
+         hidden: true,
+        })
+      }
       for (var i = 0; i < res.data.result.length; i++) {      
         var len = res.data.result[i];
         res.data.result[i].page_state = 1;

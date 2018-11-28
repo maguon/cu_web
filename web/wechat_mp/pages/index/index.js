@@ -17,7 +17,7 @@ Page({
     userPhone:'',
     wechatName:'',
     avatarUrl:'',
-    hidden:true,
+    flag:false,
    
   },
   //事件处理函数
@@ -53,10 +53,13 @@ Page({
         userPhone: res.data.result[0].phone,
         hasUserInfo: true
       })
-      if (res.data.result[0].phone != null || res.data.result[0].phone != '') {
+      if (res.data.result[0].phone != null && res.data.result[0].phone!= "") {
+        console.log(res.data.result)
+        console.log(res.data.result[0].phone != "")
+        console.log(res.data.result[0].phone != null)
         console.log('11111111')
         this.setData({
-          hidden: false,
+          flag: true,
         })
       }
     })
@@ -81,7 +84,7 @@ Page({
     })
    
     reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + "/userCar", (err, res) => {
-      console.log(res.data.result)
+
       var num = 0;
       if (res.data.result == '') {
         return;

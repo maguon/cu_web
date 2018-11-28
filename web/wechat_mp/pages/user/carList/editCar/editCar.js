@@ -98,8 +98,12 @@ Page({
           imagePath: tempFilePath,
         });
       },
-      fail: function (res) {
-        console.log(res);
+      fail: function (err) {
+        var tempFilePath = res.tempFilePath;
+        that.setData({
+          imagePath: tempFilePath,
+        });
+        console.log(err);
       }
     });
   },

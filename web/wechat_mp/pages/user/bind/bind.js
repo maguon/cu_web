@@ -34,11 +34,15 @@ onLoad:function(e){
   //发送请求
   reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userId, (err, res) => {
     console.log(res.data.result[0].phone)
-  if(res.data.result[0].phone!=''){
+    if (res.data.result[0].phone != '' && res.data.result[0].phone !=null){
     this.setData({
       hidden: true,
       bindPhone:res.data.result[0].phone,
 
+    })
+   }else{
+    this.setData({
+      hidden: false,
     })
    }
   })

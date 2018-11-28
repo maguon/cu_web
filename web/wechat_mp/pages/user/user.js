@@ -74,12 +74,20 @@ Page({
       })
     })
 
-    if (app.globalData.userInfo.result[0].phone != null || app.globalData.userInfo.result[0].phone !='' ){
-      this.setData({
-        hidden: true,
-        Phone: app.globalData.userInfo.result[0].phone,
-      })
-    }
+
+    //发送请求
+    reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userId, (err, res) => {
+      if (res.data.result[0].phone != '' && res.data.result[0].phone != null) {
+        this.setData({
+          hidden: true,
+          Phone: res.data.result[0].phone,
+        })
+      } else {
+        this.setData({
+          hidden: false,
+        })
+      }
+    })
 
     //保存
     this.setData({
@@ -94,14 +102,9 @@ Page({
    * 绑定手机
    */
   bindphone:function(){
-    if (this.data.Phone == null || this.data.Phone == '') {
-   
-
-    }else{
     wx.navigateTo({
       url: '/pages/user/bind/bind',
     })
-    }
   },
   /**
    * 点击关联车辆

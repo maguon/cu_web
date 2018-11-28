@@ -30,24 +30,7 @@ Page({
      //UTC时间的转译
      var date = new Date(res.data.result[0].auth_time);
      var localeString = date.toLocaleString();
-     var localeString01 = date.toLocaleDateString();
-     var localeString02 = date.toDateString();
-     var localeString03 = date.toISOString();
-     var localeString04 = date.toJSON();
-     var localeString05 = date.valueOf();
-     var localeString06 = date.toUTCString();
-     var localeString07 = date.toTimeString();
-     var localeString08 = date.toString();
 
-     console.log(localeString);
-     console.log(localeString01);
-     console.log(localeString02);
-     console.log(localeString03);
-     console.log(localeString04);
-     console.log(localeString05);
-     console.log(localeString06);
-     console.log(localeString07);
-     console.log(localeString08);
      res.data.result[0].auth_time = localeString;
      if (res.data.result[0].user_name==null){
        that.setData({

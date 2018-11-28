@@ -12,11 +12,11 @@
        <image class="userinfo-avatar" src="{{avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{wechatName}}</text>
 
-      <view  hidden='{{hidden}}' class="phoneimg">
+      <view  hidden='{{!flag}}' class="phoneimg">
       <image class="phone" src="../../assets/images/phone.png"></image>
       <view  class='userinfo-phone' size='mini'>{{userPhone}}</view>
       </view>
-        <button hidden='{{!hidden}}' class='userinfo-nickname' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button>
+        <button hidden='{{flag}}' class='userinfo-nickname' size='mini' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button>
 
     </block>
   </view>

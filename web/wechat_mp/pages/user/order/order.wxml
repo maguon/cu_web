@@ -1,4 +1,4 @@
- <view hidden='{{!hidden}}' >
+ <view hidden='{{hidden}}' >
         <view class="page__desc">暂无订单</view>
 </view>
 <loading hidden="{{loadingHidden}}">加载中</loading>
