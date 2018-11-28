@@ -1,0 +1,18 @@
+     <view class='express'wx:for="{{payMsgList}}" wx:key='u'>
+    
+            <view class='express-head'>
+               <view class='express-text' >{{header[item.type]}}</view>
+               <view class='right num'>{{timeState[item.type]}}:{{item.created_on}}</view>
+               </view>
+                <view class='div-line'></view>  
+
+               <view class='express-head'>
+                <view >{{payState[item.type]}}</view>
+                <view class='right'>
+                <image class='money'src='../../../../../../assets/images/money.png'></image>
+            <view class='total'>{{item.total_fee}}.00</view>
+               </view>
+               </view>
+                <view class='div-line'></view> 
+       </view>
+           

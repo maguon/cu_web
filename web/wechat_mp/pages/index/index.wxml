@@ -59,6 +59,6 @@
 </block>
        <!-- <button  class='userinfo-nickname' size='mini'  open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">用户认证</button> -->
 <!-- 验证码组件 -->
-<verifycode id='verifycode' title="请输入验证码" content="已发送到手机:" />
+<!-- <verifycode id='verifycode' title="请输入验证码" content="已发送到手机:" /> -->
 </view>
 

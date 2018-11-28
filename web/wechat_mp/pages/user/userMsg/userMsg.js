@@ -29,8 +29,7 @@ Page({
      console.log(res)
      //UTC时间的转译
      var date = new Date(res.data.result[0].auth_time);
-     var localeString = date.toLocaleTimeString();
-
+     var localeString = date.toLocaleString();
      res.data.result[0].auth_time = localeString;
      if (res.data.result[0].user_name==null){
        that.setData({
