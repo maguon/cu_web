@@ -1,7 +1,7 @@
 <!--index.wxml-->
-<block wx:for='{{carList}}' wx:key='u'>
+<block  wx:for='{{carList}}' wx:key='u'>
  <view class="divLine"></view>
-    <view class='carbox'>
+    <view hidden='{{!item.status}}' class='carbox'>
       <view class='left'>
         <image class='left-img' src='../../../assets/images/car.png'></image>
           <text class='left-text'>{{item.license_plate}}

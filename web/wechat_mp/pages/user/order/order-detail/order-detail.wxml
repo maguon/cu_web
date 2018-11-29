@@ -3,10 +3,10 @@
             
               <view class='title'>
                <view class="order-num">订单编号：{{product.id}}</view>
-               <view hidden='{{isPay}}' class="right-title">{{state[payment_status]}}</view>
-               <view hidden='{{!isPay}}' class="right-title-two">{{state[payment_status]}}</view>
+               <view hidden='{{isPay}}' class="right-title">{{state[paymentStatus]}}</view>
+               <view hidden='{{!isPay}}' class="right-title">{{state[paymentStatus]}}</view>
               </view>
-              <image class='res-image' src='../../../../assets/images/icon.png'></image>
+              <image class='res-image' src='{{imgPath}}'></image>
 
                 <view class="weui-cell__bd">{{product.order_name}} </view>
                 <view class='div-line'></view> 
@@ -41,13 +41,13 @@
             <view class='test'>合计费用</view>
             <view class='right'>
             <image class='money'src='../../../../../assets/images/money.png'></image>
-            <view class='total'>{{product.total_price}}.00</view>
+            <view class='total'>{{price}}.00</view>
             </view>
             </view>
             <view class='div-line'></view> 
 
             <view class='price'>
-            <view class='test'>商品信息</view>
+            <view class='test'>备注信息</view>
             <view class='right'>
             <view class='num'>{{product.remark}}</view>
             </view>
@@ -64,7 +64,7 @@
             <view class='order-date'hidden='{{!isPay}}'>支付时间：{{payTime}}</view>
             </view>
             
-     <view class='after-sale' hidden='{{!isDelivery}}'>
+     <!-- <view class='after-sale' hidden='{{!isDelivery}}'>
             <view class='head'>  
             <view class='apply'>发货信息</view>
             </view>
@@ -72,17 +72,17 @@
             <view class='express'>
             <view class='express-head'>
                <view>快递公司:</view>
-               <view class='right num'>圆通快递</view>
+               <view class='right num'>{{logistics.company_name}}</view>
                </view>
                 <view class='div-line'></view>  
 
                 <view class='express-head'>
                 <view>快递单号:</view>
-               <view class='right num'>232322233542145</view>
+               <view class='right num'>{{logistics.log_num}}</view>
                </view>
                 <view class='div-line'></view> 
 
-            <view class='order-date'>发货时间：2018-06-24 11:24:32</view>
+            <view class='order-date'>发货时间：{{logisticsTime}}</view>
             </view>
             </view>  
 
@@ -105,13 +105,29 @@
 
               <view class='after-sale-bnt' hidden='{{!isPay}}'>
                  <button bindtap='afterSale' class="sale-bnt">{{ applytext[rank]}}</button>
-                </view>  
+                </view>   -->
 
-            <view class='bnt-list' hidden='{{isPay}}'>
+          <view hidden='{{!isPay}}'>
+           <view bindtap='paymentMsg' class='item'>
+           <view class='item_text'>支付信息</view>
+           <image class='item_img' src='../../../../../assets/images/arrow.png'></image>
+           </view>
+
+           <view bindtap='afterSale' class='item'>
+           <view class='item_text'>申请售后</view>
+           <image class='item_img' src='../../../../../assets/images/arrow.png'></image>
+           </view>
+           </view>
+
+          <view hidden='{{!isDelivery}}' bindtap='deliverMsg' class='item'>
+           <view class='item_text'>发货信息</view>
+           <image class='item_img' src='../../../../../assets/images/arrow.png'></image>
+           </view>
+
+             <view class='bnt-list' hidden='{{isPay}}'>
                  <button class="btn" bindtap='cancelOrder' data-index='{{index}}'>取消订单</button>
                 <button class="btn-left"  bindtap='payment' hover-class="active">付款</button>
                 </view>  
-         
 
           <button class='service' disabled='true' hidden='{{!isPay}}'>
           <image class='service-image' src='../../../../../assets/images/service.png'></image>

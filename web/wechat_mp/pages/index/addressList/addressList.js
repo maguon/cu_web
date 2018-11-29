@@ -30,7 +30,8 @@ onLoad: function (options) {
    * 添加地址按钮
    */
   addAddress: function () {
-    wx.navigateTo({ url: '../address/address' });
+    var addressList = JSON.stringify("");
+    wx.navigateTo({ url: '../address/address?addressList=' + addressList});
   },
 
 /**
@@ -46,6 +47,15 @@ delAddress: function (e) {
     this.onShow();
   },
 
+
+  editorAddress:function(e){
+    var index = e.currentTarget.dataset.id;
+    var userId = app.globalData.userId;
+    var addressList =JSON.stringify(this.data.addressList[index]);
+    wx.navigateTo({ 
+      url: '../address/address?addressList='+addressList, 
+      });
+  },
 /**
    *单项选择控制
    */

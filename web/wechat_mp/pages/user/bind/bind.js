@@ -33,10 +33,16 @@ onLoad:function(e){
   var userId = app.globalData.userId;
   //发送请求
   reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userId, (err, res) => {
-  if(res.data.result[0].phone!=''){
+    console.log(res.data.result[0].phone)
+    if (res.data.result[0].phone != '' && res.data.result[0].phone !=null){
     this.setData({
+      hidden: true,
       bindPhone:res.data.result[0].phone,
-      hidden: true
+
+    })
+   }else{
+    this.setData({
+      hidden: false,
     })
    }
   })

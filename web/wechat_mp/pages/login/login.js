@@ -16,7 +16,7 @@ Page({
   onLoad: function () {
     //app.onLaunch res成功后执行{}内代码
     app.userInfoReadyCallback = res => {
-      if (res != '') {
+    if (res != '') {
     var that = this;
     
     // 查看是否授权
@@ -27,8 +27,9 @@ Page({
         
           //获取用户信息
           wx.getUserInfo({
+        
             success: res=> {
-              //设置参数
+              console.log(res);
               var params = {
                 wechatId: app.globalData.openid,
                 wechatName:res.userInfo.nickName,
@@ -61,6 +62,7 @@ Page({
    * 点击授权
    */
   bindGetUserInfo: function (e) {
+    console.log(e)
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
       var that = this;

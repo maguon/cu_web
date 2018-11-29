@@ -1,0 +1,46 @@
+page{
+  background: #efeff4;
+}
+.express{
+  margin-top: 10px;
+  height: 150px;
+  width: 100%;
+  background: white;
+  font-size: 12px;
+}
+.express-text{
+ color: #0096e3;
+}
+.express-head{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+  height: 50px;
+  align-items: center;
+}
+.div-line{
+  border: 1px solid #efeff4;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.right{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+  right: 15px;
+  
+}
+.num{
+  font-size: 12px;
+  color: #a8a8a8;
+}
+.money{
+  height: 12px;
+  width: 12px;
+  padding-top: 10px;
+}
+.total{
+  font-size: 18px;
+  color: red;
+}

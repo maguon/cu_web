@@ -14,9 +14,11 @@ Page({
      vin:''
    }],
     imagePath: '',
+    content:'',
     placeholder: 'http://wxapp-union.com'//默认二维码生成文本
   },
  
+
  /**
    * 保存信息
    */
@@ -28,7 +30,7 @@ Page({
     var vin = e.detail.value.vin;
     var carNumber = e.detail.value.carNumber;
     var userId = app.globalData.userId;
-
+ 
     //判断用户输入
     if (header == "") {
       warn = "请输入您的车牌号";
@@ -56,9 +58,24 @@ Page({
       }
       //发送请求
       reqUtil.httpPost(
-        config.host.apiHost + '/api/user/' + userId + '/userCar', params,(err, res) => {})
-       }
-    
+        config.host.apiHost + '/api/user/' + userId + '/userCar', params,(err, res) => {
+          console.log(res)
+          if(res.data.success==false){
+            wx.showModal({
+              title: '提示',
+              content: res.data.msg,
+            })
+            return;
+          }
+          //跳转并传递参数
+          var queryBean = JSON.stringify(that.data.carMsg[0]);
+          wx.navigateTo({
+            url: "/pages/user/carList/editCar/editCar?queryBean=" + queryBean + '&name=' + "",
+          })
+
+        })
+    }
+
     //弹出提示框
     if (flag == true) {
       wx.showModal({
@@ -67,12 +84,7 @@ Page({
       })
       return;
     } 
-    //跳转并传递参数
-    var name="headers";
-     var queryBean = JSON.stringify(that.data.carMsg[0]);
-      wx.navigateTo({
-        url: "/pages/user/carList/editCar/editCar?queryBean=" + queryBean+'&name='+name,
-      })   
+   
   },
 
 })

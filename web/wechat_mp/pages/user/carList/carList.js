@@ -14,15 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var userId = app.globalData.userId;
-    reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + "/userCar", (err, res) => {
-      if (res.data.result == '') {
-        return;
-      }
-      this.setData({
-        carList: res.data.result,
-      })
-    })
+   
   },
 
   /**
@@ -36,6 +28,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var userId = app.globalData.userId;
+    var carList=[];
+    reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + "/userCar", (err, res) => {
+      console.log(res)
+      if (res.data.result == '') {
+        return;
+      }
+      
+      this.setData({
+        carList: res.data.result,
+      })
+    })
   },
 
   /**

@@ -17,7 +17,7 @@ Page({
     userPhone:'',
     wechatName:'',
     avatarUrl:'',
-    hidden: false,
+    flag:false,
    
   },
   //事件处理函数
@@ -30,81 +30,47 @@ Page({
    * 加载界面处理
    */
   onLoad: function () { 
-
-    //加载动画
-    setTimeout(() => {
-      this.setData({
-        loadingHidden: true,
-      })
-    }, 500);
-    //判断是否绑定手机
-    if (app.globalData.userInfo.result[0].phone != '') {
-      this.setData({
-        userPhone: app.globalData.userInfo.result[0].phone,
-        hidden: true
-      })
-    }
-    //获取信息
-    console.log(app.globalData.userInfo)
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        wechatName: app.globalData.userInfo.result[0].wechat_name,
-        avatarUrl: app.globalData.userInfo.result[0].avatar_image,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: app.globalData.userInfo,
-          wechatName: app.globalData.userInfo.result[0].wechat_name,
-          avatarUrl: app.globalData.userInfo.result[0].avatar_image,
-          hasUserInfo: true
-        })
-      }
-      console.log(app.globalData.userInfo)
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          //保存信息
-          this.setData({
-            userInfo: app.globalData.userInfo,
-            wechatName: app.globalData.userInfo.result[0].wechat_name,
-            avatarUrl: app.globalData.userInfo.result[0].avatar_image,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
   },
 
 /**
  * 生命周期函数--监听页面初次渲染完成
  */
   onShow: function () {
-    //加载动画
-    setTimeout(() => {
-      this.setData({
-        loadingHidden: true,
-      })
-    }, 500);
-    
-    if(app.globalData.phone!=''){
-      this.setData({
-        userPhone:app.globalData.phone,
-      })
-    }
-
     //发送请求
     var userId = app.globalData.userId;
+
+    reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userId, (err, res) => {
+      //加载动画
+      setTimeout(() => {
+        this.setData({
+          loadingHidden: true,
+        })
+      }, 500); 
+      this.setData({
+        userInfo: res.data,
+        wechatName: res.data.result[0].wechat_name,
+        avatarUrl: res.data.result[0].avatar_image,
+        userPhone: res.data.result[0].phone,
+        hasUserInfo: true
+      })
+      if (res.data.result[0].phone != null && res.data.result[0].phone!= "") {
+        console.log(res.data.result)
+        console.log(res.data.result[0].phone != "")
+        console.log(res.data.result[0].phone != null)
+        console.log('11111111')
+        this.setData({
+          flag: true,
+        })
+      }
+    })
+
+  
+
     //发送get请求
     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + '/getMessage', (err, res) => {
       var count = 0;
       for(var i=0;i<res.data.result.length;i++){
-        if (res.data.result[i].status == 0) {
+        if (res.data.result[i].read_status == 0 && res.data.result[i].type != 1) {
           count++;
         }
       }
@@ -116,15 +82,29 @@ Page({
       })
     }
     })
-
+   
     reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + "/userCar", (err, res) => {
+
+      var num = 0;
       if (res.data.result == '') {
         return;
       }
-      this.setData({
-        carList: res.data.result,
-        bindCar: true,
-      })
+      for(var i=0;i<res.data.result.length;i++){
+        if(res.data.result[i].status==1){
+        num++;
+        }
+      }
+      if(num>0){
+        this.setData({
+          carList: res.data.result,
+          bindCar: true,
+        })
+      }else{
+        this.setData({
+          bindCar: false,
+        })
+      }
+      
     })
   },
   //跳转详情界面
@@ -146,10 +126,45 @@ Page({
  * getPhoneNumber 信息
  */
   getPhoneNumber:function(e){
-      console.log(e.detail.errMsg)
-      console.log(e.detail.iv)
-      console.log(e.detail.encryptedData)
+    console.log(e)
+    console.log(app.globalData.session_key)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
 
+    var that = this;
+    var session_key = app.globalData.session_key;
+    var iv = e.detail.iv;
+    var encryptedData = e.detail.encryptedData;
+
+
+    if (e.detail.errMsg != 'getPhoneNumber:ok') {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请先绑定您的手机',
+        success: function (res) { }
+      })
+    } else {
+    wx.request({
+      url: config.host.apiHost + "/api/WXBizDataCrypt",
+      data: {
+        userId: app.globalData.userId,
+        sessionKey: session_key,
+        iv: iv,
+        encryptedData: encryptedData,
+      },
+      success: (res) => {
+      wx.showModal({
+          title: '提示',
+          showCancel: false,
+          content: '您已成功绑定',
+          success: function (res) {
+            that.onShow();
+           }
+        })
+      }
+    }) 
+    }
   }
 })
 

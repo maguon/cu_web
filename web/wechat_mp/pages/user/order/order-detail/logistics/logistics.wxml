@@ -1,0 +1,21 @@
+     <view class='express' wx:for="{{logisticsList}}" wx:key='u'>
+            <view class='express-head'>
+               <view class='express-text' >{{logisticsState[item.type]}}</view>
+               <view class='right num'>发货时间:{{item.created_on}}</view>
+               </view>
+                <view class='div-line'></view>  
+
+              
+                <view class='express-head'>
+                <view>快递公司:</view>
+               <view class='right num'>{{item.company_name}}</view>
+               </view>
+                <view class='div-line'></view> 
+
+                <view class='express-head'>
+                <view>快递单号:</view>
+               <view class='right num'>{{item.log_num}}</view>
+               </view>
+                <view class='div-line'></view> 
+
+            </view>

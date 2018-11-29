@@ -1,6 +1,6 @@
 /**index.wxss**/
 .userinfo {
-  margin-top: 0px;
+  margin-top: -10px;
   height: 400rpx;
   display: flex;
   flex-direction: column;

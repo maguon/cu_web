@@ -6,7 +6,7 @@ Page({
   data: {
       determineTime: "",
       name: "",
-      itemList: ['男', '女'],
+     itemList: ['女', '男'],
       index:0,
       date:'1990-06-15',
 
@@ -30,13 +30,29 @@ Page({
      //UTC时间的转译
      var date = new Date(res.data.result[0].auth_time);
      var localeString = date.toLocaleString();
+
      res.data.result[0].auth_time = localeString;
+     if (res.data.result[0].user_name==null){
+       that.setData({
+         name: res.data.result[0].wechat_name,
+       });
+     }else{
+       that.setData({
+         name: res.data.result[0].user_name,
+       });
+     }
+     if (res.data.result[0].birth ==null) {
+     
+     } else {
+       that.setData({
+         date: res.data.result[0].birth
+       });
+     }
+     var t =new Date(res.data.result[0].auth_time);
      //保存
      that.setData({
-       determineTime: "认证时间:" + res.data.result[0].auth_time,
-       name: res.data.result[0].user_name,
+       determineTime: "认证时间:" + t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds(),
        index: res.data.result[0].gender,
-       date: res.data.result[0].birth
      });
 
    })

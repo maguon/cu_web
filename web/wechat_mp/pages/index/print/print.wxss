@@ -60,6 +60,10 @@ background: #efeff4;
 color: red;
 font-size: 15px;
 }
+.right-text01{
+color: #8c8c8c;
+font-size: 15px;
+}
 .sign{
  height: 15px;
  width: 15px;

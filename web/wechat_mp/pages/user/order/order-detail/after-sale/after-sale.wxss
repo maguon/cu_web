@@ -45,6 +45,9 @@ align-items: center;
   justify-content: center;
 }
 .apply-content{
+  width: 90%;
+  height: 40px;
+  background: white;
   margin-left: 15px;
   margin-top: 5px;
   font-size: 12px;
@@ -110,8 +113,10 @@ justify-content: center;
 }
 
 .weui-footer{
-  margin-top: 20px;
- margin-bottom: 10px;
+  position: fixed;
+  bottom: 20px;
+  left: 3%;
+  right: 3%;
 }
 
 .weui-footer__link{
@@ -120,4 +125,20 @@ justify-content: center;
 .weui-footer-number{
   color: rgb(107, 105, 105);
   font-size: 15px;
+  }
+
+   .btn{
+  width: 100%;
+}
+  .btn-area{
+    position: fixed;
+    bottom: 100px;
+    left: 5%;
+    height: 40px;
+    width: 90%;
+    background: #0096e3;
+    color: white;
+}
+  .weui-cell_active{
+  background-color: #017ac0;
   }

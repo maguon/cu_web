@@ -1,3 +1,4 @@
 export const host = {
-  "apiHost": "https://stg.myxxjs.com"
+  "apiHost": "https://stg.myxxjs.com",
+  "imageHost" : "http://stg.myxxjs.com:9002"
 }

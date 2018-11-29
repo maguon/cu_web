@@ -8,8 +8,9 @@ Page({
    */
   data: {
     payList:[],
-    totalPrice:1,
+    totalPrice:0,
     orderId:'',
+    order:[],
     name:'',
     goodsList:[
       { goods_name:"商品二维码"}
@@ -20,8 +21,12 @@ Page({
    * 生命周期函数--监听页面加载
    */ 
   onLoad: function (e) {
+  var order=JSON.parse(e.orderList);
+    console.log(order)
     this.setData({
-      orderId: e.orderId,
+      orderId: order.id,
+      totalPrice:e.price,
+      order:order,
       name:e.name,
     })
   
@@ -89,7 +94,7 @@ Page({
     var params = {
       //用户的openid
       openid: app.globalData.openid,
-      totalFee:1, //支付金额
+      totalFee: that.data.totalPrice, //支付金额
       status: 1,//支付商品的名称
     }
     console.log(app.globalData.openid)
@@ -105,8 +110,15 @@ Page({
           signType: "MD5",
           paySign: res.data.result[0].paySign,
           success: (res)=> {
+            console.log(that.data.order.order_name)
+            console.log(that.data.order.remark)
+            console.log(that.data.order.prod_count)
+            var param={
+              productDes: that.data.order.order_name + that.data.order.remark + that.data.order.prod_count,
+              type:0,
+            }
             console.log('支付成功');
-             reqUtil.httpPut(config.host.apiHost + "/api/user/"+userId+"/order/"+orderId+"/paymentStatus/"+0, params, (err, res) => {
+             reqUtil.httpPut(config.host.apiHost + "/api/user/"+userId+"/order/"+orderId+"/paymentStatus/"+1, param, (err, res) => {
                console.log("存取成功");
              })
             wx.showToast({
@@ -116,6 +128,10 @@ Page({
             })
            if(this.data.name=="payment"){
              wx.navigateBack({
+             })
+           } else if (this.data.name == "order") {
+             wx.navigateBack({
+               delta: 2
              })
            }else{
             wx.navigateBack({
