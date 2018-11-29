@@ -571,6 +571,11 @@ body {
 /** modal 样式定义部分 start */
 .modal {
     min-width: 900px;
+    z-index: 1000 !important;
+}
+
+.modal-overlay {
+    z-index: 999 !important;
 }
 
 .modal-title {
