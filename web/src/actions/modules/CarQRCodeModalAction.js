@@ -11,7 +11,7 @@ export const getQRCode = () => async (dispatch, getState) => {
         const res = await httpUtil.httpPost(url, {});
 
         if (res.success === true) {
-            let qrCodeText = apiHost + '/api/qrCode/' + res.result.code;
+            let qrCodeText = 'http://' + apiHost + '/api/qrCode/' + res.result.code;
             QRCode.toCanvas(document.getElementById('canvas'), qrCodeText, {width: 270}, function (error) {});
         } else if (res.success === false) {
             swal('获取车辆二维码失败', res.msg, 'warning');
