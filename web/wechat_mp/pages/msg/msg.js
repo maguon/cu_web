@@ -33,7 +33,8 @@ Page({
         }
         var date = new Date(res.data.result[i].created_on);
         var localeString = date.toLocaleString();
-        res.data.result[i].created_on = localeString;
+        var t = new Date(localeString);
+        res.data.result[i].created_on=t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
       }
       if(count!=0){
       //获得消息数量

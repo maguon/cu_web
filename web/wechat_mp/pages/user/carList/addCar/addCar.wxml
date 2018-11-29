@@ -1,5 +1,4 @@
- 
-<form bindsubmit='saveAddress'>
+
 
 <view class="weui-cells__title">请输入有效的车牌号码，提交后车牌号码将不可以修改</view>
 <view class="weui-cells weui-cells_after-title">
@@ -8,7 +7,7 @@
       <view class="weui-label">车牌号</view>
   </view>
     <view class="weui-cell__bd">
-    <input class="weui-input" type="text"  placeholder="输入车牌号码" name='header'/>
+    <input class="weui-input" type="text" bindinput='header' placeholder="输入车牌号码" name='header'/>
     </view>
   </view>
 
@@ -17,7 +16,7 @@
       <view class="weui-label">车辆识别码</view>
   </view>
     <view class="weui-cell__bd">
-    <input class="weui-input" type="text"  placeholder="输入车辆识别码" name='vin'/>
+    <input class="weui-input" type="text"  bindinput='vin'  placeholder="输入车辆识别码" name='vin'/>
      </view>
   </view>
 
@@ -26,11 +25,11 @@
       <view class="weui-label">发动机号</view>
   </view>
     <view class="weui-cell__bd">
-    <input class="weui-input" type="text" placeholder="输入车辆发动机号" name='carNumber'/>
+    <input class="weui-input" type="text" bindinput='carNumber' placeholder="输入车辆发动机号" name='carNumber'/>
      </view>
   </view>
  </view>
- <button form-type='submit' class="weui-btn" hover-class='weui-cell_active'>保存并生成二维码</button>
+ <button bindtap='saveQrcode' class="weui-btn" hover-class='weui-cell_active'>保存并生成二维码</button>
 
-</form> 
+
     

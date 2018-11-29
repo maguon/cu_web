@@ -9,6 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+   name:'',
+   phone:'',
+   address:'',
    userId:'',
    addressList:[],
    add:"添加",
@@ -19,40 +22,67 @@ Page({
    */
   onLoad: function (e) {
     var addressList = JSON.parse(e.addressList);
+    console.log(addressList)
+    if (addressList!=""){
+     this.setData({
+       addressList: addressList,
+       name: addressList.ship_name,
+       phone:addressList.phone,
+       address:addressList.address,
+     })
+    }else{
     this.setData({
       addressList: addressList,
     })
+    }
   },
-
+  addName: function (e) {
+    var name = e.detail.value;
+    this.setData({
+      name:name,
+    })
+  },
+ userPhone: function (e) {
+   var phone = e.detail.value;
+    this.setData({
+      phone: phone,
+    })
+  },
+  addRess: function (e) {
+    var address = e.detail.value;
+    this.setData({
+      address: address,
+    })
+  },
  /**
    * 添加地址
    */
   saveAddress: function (e) {
+    var that = this;
     var warn='';
     var flag=true;
-    var consignee = e.detail.value.consignee;
-    var mobile = e.detail.value.mobile;
-    var address = e.detail.value.address;
-    var len=mobile.length;
-    var arr = wx.getStorageSync('addressList') || [];
+    var name = that.data.name;
+    var phone =that.data.phone;
+    var address = that.data.address;
+    var len = phone.length;
+    // var arr = wx.getStorageSync('addressList') || [];
     var userId = app.globalData.userId;
 
    //判断用户输入
-   if(consignee==""){
+    if (name==""){
      warn="请输入您的姓名！";
-   }else if(mobile==""){
+    } else if (phone==""){
      warn="请输入您的手机号！";
-   } else if (!(/^1(3|4||5|7|8)\d{9}$/.test(mobile)) || len!=11||mobile.charAt(0)!='1'){
+    } else if (!(/^1(3|4||5|7|8)\d{9}$/.test(phone)) || len != 11 || phone.charAt(0)!='1'){
      warn="手机号码格式不正确";
    }else if(address==""){
      warn="请输入您的具体地址";
    }else{
      flag=false;
-     var that=this;
      if(that.data.addressList!=""){
        var params = {
-         userName: consignee,
-         phone: mobile,
+         userName: name,
+         phone: phone,
          address: address
        }
        //发送请求
@@ -60,8 +90,8 @@ Page({
      }else{
      //获取要传递的参数
      var params={
-       userName: consignee,
-       phone: mobile,
+       userName: name,
+       phone: phone,
        address: address
      }
      //发送Post请求
@@ -69,7 +99,6 @@ Page({
    }
      //跳转地址管理界面
      wx.navigateBack({
-       url: "/pages/index/addressList/addressList"
      })
    }
    //输入错误弹窗提示

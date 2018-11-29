@@ -7,11 +7,11 @@
     </view> 
 
       <view class="weui-media-box">
-      <view class='time'>{{queryBean.created_on}}</view>
+      <!-- <view class='time'>{{queryBean.created_on}}</view> -->
       <view class="box__desc">{{queryBean.content}}</view>
       </view>
   
-  <view bindtap='listenerBtnGetLocation' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+  <!-- <view bindtap='listenerBtnGetLocation' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
       <image class="thumb" src="../../../assets/images/pos.png" />
     </view>
@@ -33,6 +33,6 @@
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg image">
       <image class="weui-media-box__thumb" bindtap='previewImg' src="" data-value='4' />
     </view>
-  </view>
- </view>
+  </view> -->
+ </view> 
 </view>

@@ -71,7 +71,7 @@ page{
   }
   .unbind{
   position: fixed;
-  bottom: 20px;
+  bottom: 40px;
   left: 5%;
   height: 40px;
   width: 90%;

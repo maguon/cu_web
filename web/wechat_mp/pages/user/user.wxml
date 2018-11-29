@@ -12,13 +12,16 @@
 
       <block wx:else>
        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{avatarUrl}}" mode="cover"></image>
-      <view class="userinfo-nickname">{{wechatName}}
-       <view class="phone-img">
-      <image class="phone" src="../../../assets/images/phone.png"></image>
-      <text hidden='{{hidden}}' class="userinfo-phone">未绑定手机</text>
-        <text hidden='{{!hidden}}' class="userinfo-phone">{{Phone}}</text>
-      </view>
-      </view>
+       <view class='head'>
+      <view class="userinfo-nickname">{{wechatName}}</view>
+
+       <view hidden='{{!hidden}}' class="phone-img">
+        <image class="phone" src="../../assets/images/phone.png"></image>
+       <view  class="userinfo-phone" >{{Phone}}</view>
+       </view>
+     </view>
+       <text hidden='{{hidden}}' class="userinfo-phone">未绑定手机</text>
+
     </block>
   </view>
 
@@ -83,7 +86,7 @@
           <view class="weui-cell__bd">{{userSections[4].text}}
           <image class='arrow' src='../../../assets/images/arrow.png'></image>
           </view>
-          <view class='weui-cell__right'>{{userSections[5].version}}</view>
+          <view class='weui-cell__right'>{{userSections[4].version}}</view>
       </view>
        <view class="access"></view>
       </navigator>

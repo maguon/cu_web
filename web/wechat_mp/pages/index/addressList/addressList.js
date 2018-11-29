@@ -5,6 +5,7 @@ Page({
   // 页面的初始数据
   data: {
     addressList: [],
+    hidden: false,
   },
   
    //生命周期函数--监听页面加载
@@ -19,6 +20,18 @@ onLoad: function (options) {
     var userId = app.globalData.userId;
     //发送get请求
     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/userShipAddress", (err, res) => {
+      if(res.data.result==""){
+        this.setData({
+          hidden: true,
+        })
+      }else{
+        this.setData({
+          hidden: false,
+        })
+      }
+      if (res.data.result.length ==1){
+         res.data.result[0].status=true;
+      }
       //赋值本地
       this.setData({
         addressList: res.data.result,

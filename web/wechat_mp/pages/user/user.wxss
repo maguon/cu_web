@@ -19,13 +19,12 @@ page{
 }
 .userinfo-nickname{
   color: #fff;
-  margin-left: 30px;
+  margin-left: 15rpx;
   font-size: 18px;
 }
 .userinfo-phone{
   color:#89d2f3;
   font-size: 15px;
-  margin-top: 13px;
 }
 .phone-img{
   display: flex;
@@ -34,11 +33,18 @@ page{
   justify-content: center;
 
 }
+.head{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 10px;
+}
 .phone{
  width: 15px;
  height: 15px;
- margin-top: 13px;
- margin-right: 5px;
+ margin-left: 15rpx;
+ margin-right: 15rpx;
+ /* background: red */
 }
 
 .weui-cell_access{

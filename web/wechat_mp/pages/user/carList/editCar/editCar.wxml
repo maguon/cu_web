@@ -46,7 +46,7 @@
   </view>
  </view>
   <loading hidden="{{loadingHidden}}">加载中</loading>
-<button disabled='{{hidden}}' bindtap='sure' class="weui-btn" hover-class='weui-cell_active'>确定</button>
+<!-- <button disabled='{{hidden}}' bindtap='sure' class="weui-btn" hover-class='weui-cell_active'>确定</button> -->
 <button bindtap='unbind' class="unbind" type="default" style='color:red; border:1rpx solid red'>解绑车辆</button>
 </view>
 
