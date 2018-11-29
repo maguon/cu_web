@@ -180,7 +180,8 @@ class UserManagerDetail extends React.Component {
                                     </div>
                                     {/* 基本信息：认证状态 */}
                                     <div className="input-field col s6 right-align blue-font">
-                                        {sysConst.AUTH_STATUS[userManagerDetailReducer.userInfo[0].auth_status].label}
+                                        {(userManagerDetailReducer.userInfo[0].auth_status !== 0 && userManagerDetailReducer.userInfo[0].auth_status !==1)
+                                            ? '未知' : sysConst.AUTH_STATUS[userManagerDetailReducer.userInfo[0].auth_status].label}
                                     </div>
                                 </div>
                                 <div className="row divider margin-top20 margin-left10 margin-right10"/>
