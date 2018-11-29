@@ -46,20 +46,25 @@ Page({
           loadingHidden: true,
         })
       }, 500); 
+      if (res.data.result[0].user_name==''){
+        this.setData({
+          wechatName: res.data.result[0].wechat_name,
+        })      
+      }else{
+        this.setData({
+          wechatName: res.data.result[0].user_name,
+        }) 
+      }
+      console.log(res.data.result)
       this.setData({
         userInfo: res.data,
-        wechatName: res.data.result[0].wechat_name,
         avatarUrl: res.data.result[0].avatar_image,
-        userPhone: res.data.result[0].phone,
         hasUserInfo: true
       })
       if (res.data.result[0].phone != null && res.data.result[0].phone!= "") {
-        console.log(res.data.result)
-        console.log(res.data.result[0].phone != "")
-        console.log(res.data.result[0].phone != null)
-        console.log('11111111')
         this.setData({
           flag: true,
+          userPhone: res.data.result[0].phone,
         })
       }
     })
@@ -142,7 +147,13 @@ Page({
         title: '提示',
         showCancel: false,
         content: '请先绑定您的手机',
-        success: function (res) { }
+        success: function (res) { 
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/user/bind/bind',
+            })
+          } 
+        }
       })
     } else {
     wx.request({

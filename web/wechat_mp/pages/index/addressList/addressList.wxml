@@ -1,5 +1,5 @@
 <scroll-view class="scroll" scroll-y="true">
-<view class="weui-cells weui-cells_after-title">
+<view  hidden='{{hidden}}' class="weui-cells weui-cells_after-title">
  <radio-group bindchange="radioChange">
  <label class="weui-cell weui-check__label" wx:for="{{addressList}}" wx:key='u'>
     <radio class="weui-check" value="{{index}}"  checked="{{item.checked}}"/>

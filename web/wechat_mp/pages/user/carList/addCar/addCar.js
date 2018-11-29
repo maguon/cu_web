@@ -13,22 +13,44 @@ Page({
      engine_num:'',
      vin:''
    }],
+    license_plate: '',
+    engine_num:'',
+    vin:'',
     imagePath: '',
     content:'',
     placeholder: 'http://wxapp-union.com'//默认二维码生成文本
   },
  
-
+  header:function(e){
+ var header=e.detail.value;
+ this.setData({
+   license_plate:header,
+ })
+  },
+  vin:function(e){
+    var vin = e.detail.value;
+    this.setData({
+      vin: vin,
+    })
+  },
+  carNumber:function(e){
+    var carNumber = e.detail.value;
+    this.setData({
+      engine_num: carNumber ,
+    })
+  },
  /**
    * 保存信息
    */
-  saveAddress: function (e) {
+  saveQrcode: function (e) {
+    console.log("00000000000000")
     var that = this;
     var warn = '';
     var flag = true;
-    var header = e.detail.value.header;
-    var vin = e.detail.value.vin;
-    var carNumber = e.detail.value.carNumber;
+
+    var header = that.data.license_plate;
+    var vin = that.data.vin;
+    var carNumber = that.data.engine_num;
     var userId = app.globalData.userId;
  
     //判断用户输入
