@@ -1,6 +1,7 @@
 export MainPanel from "./MainPanel";
 export CheckCar from "./CheckCar";
 export CheckCarDetail from "./CheckCarDetail";
+export CheckCarStatistic from "./CheckCarStatistic";
 export FeedBack from "./FeedBack";
 export FeedBackDetail from "./FeedBackDetail";
 export LogCompany from "./LogCompany";

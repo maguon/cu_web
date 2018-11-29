@@ -1,5 +1,5 @@
 import {handleActions} from 'redux-actions';
-import {UserStatisticActionType} from '../../actionTypes';
+import {CheckCarStatisticActionType} from '../../actionTypes';
 
 const initialState = {
     // 按月统计：开始月
@@ -11,19 +11,19 @@ const initialState = {
 };
 
 export default handleActions({
-    [UserStatisticActionType.setMonthStart]: (state, action) => {
+    [CheckCarStatisticActionType.setMonthStart]: (state, action) => {
         return {
             ...state,
             monthStart: action.payload
         }
     },
-    [UserStatisticActionType.setMonthEnd]: (state, action) => {
+    [CheckCarStatisticActionType.setMonthEnd]: (state, action) => {
         return {
             ...state,
             monthEnd: action.payload
         }
     },
-    [UserStatisticActionType.setDataSize]: (state, action) => {
+    [CheckCarStatisticActionType.setDataSize]: (state, action) => {
         return {
             ...state,
             dataSize: action.payload

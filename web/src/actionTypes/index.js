@@ -4,6 +4,7 @@ import * as LoginActionType from './layout/LoginActionType';
 import * as CommonActionType from './main/CommonActionType';
 import * as CheckCarActionType from './main/CheckCarActionType';
 import * as CheckCarDetailActionType from './main/CheckCarDetailActionType';
+import * as CheckCarStatisticActionType from './main/CheckCarStatisticActionType';
 import * as FeedBackActionType from './main/FeedBackActionType';
 import * as FeedBackDetailActionType from './main/FeedBackDetailActionType';
 import * as LogActionType from './main/LogActionType';
@@ -43,6 +44,7 @@ export {
     CommonActionType,
     CheckCarActionType,
     CheckCarDetailActionType,
+    CheckCarStatisticActionType,
     FeedBackActionType,
     FeedBackDetailActionType,
     LogActionType,

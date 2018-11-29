@@ -6,6 +6,7 @@ import LoginReducer from './layout/LoginReducer';
 import CommonReducer from './main/CommonReducer';
 import CheckCarReducer from './main/CheckCarReducer';
 import CheckCarDetailReducer from './main/CheckCarDetailReducer'
+import CheckCarStatisticReducer from './main/CheckCarStatisticReducer';
 import FeedBackReducer from './main/FeedBackReducer';
 import FeedBackDetailReducer from './main/FeedBackDetailReducer'
 import LogCompanyReducer from './main/LogCompanyReducer';
@@ -46,6 +47,7 @@ export default combineReducers({
     CommonReducer,
     CheckCarReducer,
     CheckCarDetailReducer,
+    CheckCarStatisticReducer,
     FeedBackReducer,
     FeedBackDetailReducer,
     OrderReducer,

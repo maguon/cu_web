@@ -9,6 +9,7 @@ import {
     TrafficPoliceDetail,
     CheckCar,
     CheckCarDetail,
+    CheckCarStatistic,
 
     UserManager,
     UserManagerDetail,
@@ -55,6 +56,12 @@ const routes = [
         path: "/user_statistic",
         exact: true,
         component: UserStatistic
+    },
+    // 扫码统计
+    {
+        path: "/check_car_statistic",
+        exact: true,
+        component: CheckCarStatistic
     },
 
     // 交警管理
@@ -264,6 +271,8 @@ class Container extends React.Component {
                                             <li><Link to="/message_statistic"><i className="mdi mdi-chevron-right"/>消息发送</Link></li>
                                             <li><div className="divider"/></li>
                                             <li><Link to="/user_statistic"><i className="mdi mdi-chevron-right"/>新增用户</Link></li>
+                                            <li><div className="divider"/></li>
+                                            <li><Link to="/check_car_statistic"><i className="mdi mdi-chevron-right"/>扫码统计</Link></li>
                                         </ul>
                                     </div>
                                 </li>
