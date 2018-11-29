@@ -250,7 +250,7 @@ class UserManager extends React.Component {
                                                 <td>{item.wechat_name}</td>
                                                 <td>{item.phone}</td>
                                                 <td>{item.user_name}</td>
-                                                <td className="center">{sysConst.GENDER[item.gender].label}</td>
+                                                <td className="center">{(item.gender!==0 && item.gender !== 1) ? '未知' : sysConst.GENDER[item.gender].label}</td>
                                                 <td className="center">{item.num}</td>
                                                 <td className="center">{formatUtil.getDateTime(item.created_on)}</td>
                                                 <td className="center">{formatUtil.getDateTime(item.auth_time)}</td>
