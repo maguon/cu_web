@@ -25,17 +25,17 @@ onLoad: function (options) {
           hidden: true,
         })
       }else{
+
+        console.log(res.data.result);
+    
+        if (res.data.result.length==1) {
+          res.data.result[0].status = true;
+        }
         this.setData({
           hidden: false,
+          addressList: res.data.result,
         })
-      }
-      if (res.data.result.length ==1){
-         res.data.result[0].status=true;
-      }
-      //赋值本地
-      this.setData({
-        addressList: res.data.result,
-      })
+      } 
     })
   },
 
@@ -65,6 +65,7 @@ delAddress: function (e) {
     var index = e.currentTarget.dataset.id;
     var userId = app.globalData.userId;
     var addressList =JSON.stringify(this.data.addressList[index]);
+    console.log(addressList)
     wx.navigateTo({ 
       url: '../address/address?addressList='+addressList, 
       });

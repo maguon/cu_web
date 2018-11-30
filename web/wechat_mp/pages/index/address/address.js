@@ -14,7 +14,7 @@ Page({
    address:'',
    userId:'',
    addressList:[],
-   add:"添加",
+    add:"确认添加",
   },
 
   /**
@@ -27,8 +27,9 @@ Page({
      this.setData({
        addressList: addressList,
        name: addressList.ship_name,
-       phone:addressList.phone,
+       phone: addressList.ship_phone,
        address:addressList.address,
+       add:'确定修改'
      })
     }else{
     this.setData({
@@ -64,6 +65,9 @@ Page({
     var name = that.data.name;
     var phone =that.data.phone;
     var address = that.data.address;
+    console.log(phone)
+    console.log(name)
+    console.log(address)
     var len = phone.length;
     // var arr = wx.getStorageSync('addressList') || [];
     var userId = app.globalData.userId;

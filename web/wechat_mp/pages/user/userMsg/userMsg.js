@@ -27,11 +27,6 @@ Page({
   //发送请求
    reqUtil.httpGet(config.host.apiHost + "/api/user?userId=" + userid, (err, res) => {
      console.log(res)
-     //UTC时间的转译
-     var date = new Date(res.data.result[0].auth_time);
-     var localeString = date.toLocaleString();
-
-     res.data.result[0].auth_time = localeString;
      if (res.data.result[0].user_name==null){
        that.setData({
          name: res.data.result[0].wechat_name,
@@ -49,9 +44,22 @@ Page({
        });
      }
      var t =new Date(res.data.result[0].auth_time);
+     var Minutes = t.getMinutes();
+     var Seconds = t.getSeconds();
+     if (Minutes < 10) {
+       Minutes = "0" + Minutes;
+     }
+     if (Seconds < 10) {
+       Seconds = "0" + Seconds;
+     }
+
+     var olddata =t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + Minutes + ':' + Seconds;
+     var olddata2 = olddata.replace(/-/g, "/");
+
+
      //保存
      that.setData({
-       determineTime: "认证时间:" + t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds(),
+       determineTime: "认证时间:" + olddata2,
        index: res.data.result[0].gender,
      });
 

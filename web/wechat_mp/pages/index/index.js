@@ -56,11 +56,19 @@ Page({
         }) 
       }
       console.log(res.data.result)
+      if (res.data.result[0].avatar_image==''){
       this.setData({
         userInfo: res.data,
-        avatarUrl: res.data.result[0].avatar_image,
+        avatarUrl: app.globalData.userInfo.avatarUrl,
         hasUserInfo: true
       })
+      }else{
+        this.setData({
+          userInfo: res.data,
+          avatarUrl: res.data.result[0].avatar_image,
+          hasUserInfo: true
+        })
+      }
       if (res.data.result[0].phone != null && res.data.result[0].phone!= "") {
         this.setData({
           flag: true,

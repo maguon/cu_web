@@ -21,15 +21,19 @@ Page({
    * 生命周期函数--监听页面加载
    */ 
   onLoad: function (e) {
-  var order=JSON.parse(e.orderList);
-    console.log(order)
+    var userId=app.globalData.userId;
+
     this.setData({
-      orderId: order.id,
-      totalPrice:e.price,
-      order:order,
+      orderId: e.orderId,
+      totalPrice:this.money(e.price),
       name:e.name,
     })
-  
+    reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/order?orderId="+e.orderId, (err, res) => {
+      console.log(res.data.result[0])
+      this.setData({
+        order:res.data.result[0],
+      })
+    })
   },
 
   /**
@@ -114,11 +118,11 @@ Page({
             console.log(that.data.order.remark)
             console.log(that.data.order.prod_count)
             var param={
-              productDes: that.data.order.order_name + that.data.order.remark + that.data.order.prod_count,
+              productDes: that.data.order.order_name +" "+ "("+that.data.order.remark+")" + " "+"*"+that.data.order.prod_count,
               type:0,
             }
             console.log('支付成功');
-             reqUtil.httpPut(config.host.apiHost + "/api/user/"+userId+"/order/"+orderId+"/paymentStatus/"+1, param, (err, res) => {
+            reqUtil.httpPut(config.host.apiHost + "/api/user/" + userId + "/order/" + orderId + "/paymentStatus/" + 1 +"/orderFeedback", param, (err, res) => {
                console.log("存取成功");
              })
             wx.showToast({
@@ -150,6 +154,12 @@ Page({
       }
       })  
     })
+  },
+  money: function (e) {
+    //钱数小数点后二位设定
+    var total_price = Number(e);
+    var money = total_price.toFixed(2);
+    return money;
   },
 
 })

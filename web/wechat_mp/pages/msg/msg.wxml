@@ -1,10 +1,10 @@
 
 <block wx:if="{{falg}}">
  <view class="none-msg">
-  <view class="title">暂无消息</view>
-   <view class="motto">交警会通过短信方式向您发送通知</view>
+  <text class="title">{{msg}}</text>
+   <text class="motto">{{msgmaott}}</text>
  </view>
-</block>
+</block> 
 <block wx:else>
 <block wx:for='{{msgList}}' wx:key='u'>
 <view hidden='{{!item.type}}' class="weui-panel weui-panel_access" >

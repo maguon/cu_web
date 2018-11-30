@@ -18,41 +18,18 @@ Page({
 
     hidden: false,
     imagePath:'',
-    placeholder: "https://developers.weixin.qq.com/"//默认二维码生成文本
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (e) {
-    
-    //加载动画
-    setTimeout(() => {
-      this.setData({
-        loadingHidden: true,
-      })
-    }, 500);
-    var that = this
+  onLoad: function (e) {    
     //解析json
     var queryBean = JSON.parse(e.queryBean);
     console.log(e)
-    that.setData({
+   this.setData({
       queryBean: queryBean,
       name:e.name
-    })
-  
-    var userId=app.globalData.userId;
-    var params='';
-    var carId = that.data.queryBean.id;
-    //获取code
-    reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + '/userCar/' + carId + '/qrCode', params,(err,res)=>{
-      //发送get请求
-      // reqUtil.httpGet(config.host.apiHost + '/api/qrCode/' + res.data.result.code, (err,date ) => {
-      //   if (res.data.result.success) {
-          var initUrl = config.host.apiHost + '/api/qrCode/' + res.data.result.code;
-          this.createQrCode(initUrl, "mycanvas", 100, 100);
-      //   }
-      // })
     })
   },
 
@@ -60,6 +37,17 @@ Page({
  * 生命周期函数--监听页面初次渲染完成
  */
   onShow:function(){
+    this.setData({
+      loadingHidden: false,
+    })
+    var userId = app.globalData.userId;
+    var carId = this.data.queryBean.id;
+    //获取code
+    reqUtil.httpPost(config.host.apiHost + "/api/user/" + userId + '/userCar/' + carId + '/qrCode', "", (err, res) => {
+      var initUrl = config.host.apiHost + '/api/qrCode/' + res.data.result.code;
+      this.createQrCode(initUrl, "mycanvas", 100, 100);
+    })
+    //设置确定按钮
     if (this.data.name != "") {
     this.setData({
       hidden:true,
@@ -69,14 +57,7 @@ Page({
         hidden: false,
       })
     }
-    this.setData({
-      loadingHidden: false,
-    })
-    setTimeout(() => {
-      this.setData({
-        loadingHidden: true,
-      })
-    }, 500);
+  
   },
 /**
  * 请求生成二维码
@@ -84,25 +65,42 @@ Page({
   createQrCode: function (url, canvasId, cavW, cavH) {
     //调用插件中的draw方法，绘制二维码图片
     QR.api.draw(url, canvasId, cavW, cavH);
-    setTimeout(() => { this.canvasToTempImage(); }, 100);
+    setTimeout(() => { 
+      this.canvasToTempImage();
+     }, 1000);
 
   },
   //获取临时缓存照片路径，存入data中
   canvasToTempImage: function () {
     var that = this;
     wx.canvasToTempFilePath({
-      canvasId: 'mycanvas',
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0,
+      destWidth: 100,
+      destHeight:100,
+      canvasId: "mycanvas",
       success: function (res) {
         var tempFilePath = res.tempFilePath;
         that.setData({
-          imagePath: tempFilePath,
+         imagePath: tempFilePath,
+         loadingHidden: true,
         });
       },
       fail: function (err) {
-        var tempFilePath = res.tempFilePath;
-        that.setData({
-          imagePath: tempFilePath,
-        });
+      //   // 可能会有其他报错 还是拦截一下吧
+      //   if (err.errMsg === "canvasToTempFilePath: fail canvas is empty") {
+      //     // 一次不行再试一遍 两次都不过就放弃吧
+      //     console.log("000000000")
+      //     count += 1;
+      //     if (count < 3) {
+      //      this.canvasToTempImage();
+      //     }
+      //     else {
+      //       // 错了这么多遍基本没救了
+      //     }
+      //  }
         console.log(err);
       }
     });

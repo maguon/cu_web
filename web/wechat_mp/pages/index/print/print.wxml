@@ -9,7 +9,7 @@
       <view class='left'>{{product.product_name}}</view>
       <view class='right'>
       <image class='right-img' src='../../../assets/images/money.png'></image>
-      <view class='right-text'>{{product.unit_price}}.00</view>
+      <view class='right-text'>{{product.unit_price}}</view>
     </view>
    </view>
   </view>
@@ -24,14 +24,14 @@
  </view>
  <view class='right'>
       <image class='right-img' src='../../../assets/images/money.png'></image>
-      <view class='right-text'>{{sumPrice}}.00</view>
+      <view class='right-text'>{{sumPrice}}</view>
     </view> 
 </view>
 
    <view class='divline'></view>
-  <view class='choose'>
+  <view  bindtap='product' class='choose'>
   <view class='left'>商品详情 </view>
-  <view bindtap='product' class='right'>
+  <view class='right'>
   <image class='sign' src='../../../assets/images/arrow.png'></image>
   </view>
   </view>
@@ -46,10 +46,10 @@
 
   <view class='mail'>收货地址</view>
   <block wx:if="{{!flag}}">
-  <view class='input'>
+  <view bindtap='addRess'  class='input'>
   <view hidden='{{!hidden}}' class="section">{{addressList.address+"  "+addressList.ship_name+"  "+addressList.ship_phone}}</view>
   <view hidden='{{hidden}}' class="section">请选择您的收货地址</view>
-    <view bindtap='addRess' class='address'>
+    <view class='address'>
   <image class='site' src='../../../assets/images/arrow.png'></image>
   </view>
    </view>

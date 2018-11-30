@@ -46,10 +46,10 @@
   </view>
  </view>
   <loading hidden="{{loadingHidden}}">加载中</loading>
-<!-- <button disabled='{{hidden}}' bindtap='sure' class="weui-btn" hover-class='weui-cell_active'>确定</button> -->
+<button hidden='{{hidden}}' bindtap='sure' class="weui-btn" hover-class='weui-cell_active'>确定</button>
 <button bindtap='unbind' class="unbind" type="default" style='color:red; border:1rpx solid red'>解绑车辆</button>
 </view>
 
-<view class="canvas-box">
-  <canvas  hidden="{{canvasHidden}}" style="width: 100px;height: 100px;background:#f1f1f1;" canvas-id="mycanvas"/>   
+<view class="canvas-box" hidden="{{canvasHidden}}">
+  <canvas  style="width: 100px;height: 100px;background:#f1f1f1;" canvas-id="mycanvas"/>   
 </view>

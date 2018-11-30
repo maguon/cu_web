@@ -64,11 +64,19 @@ Page({
  * 共通编译时间
  */
   Time: function (e) {
-    var date = new Date(e);
-    var localeString = date.toLocaleString();
-    var t = new Date(localeString);
-    var time=t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
-    return time;
+    var t = new Date(e);
+    var Minutes = t.getMinutes();
+    var Seconds = t.getSeconds();
+    if (Minutes < 10) {
+      Minutes = "0" + Minutes;
+    }
+    if (Seconds < 10) {
+      Seconds = "0" + Seconds;
+    }
+
+    var time = t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + Minutes + ':' + Seconds;
+    var olddata = time.replace(/-/g, "/");
+    return olddata;
   },
 
   bindFormSubmit:function(e){

@@ -26,6 +26,7 @@ Page({
     console.log(e)
     var queryBean = JSON.parse(e.queryBean);
     var product = JSON.parse(e.product);
+    product.unit_price=this.money(product.unit_price);
     this.setData({
       product: product,
       queryBean: queryBean ,
@@ -42,18 +43,31 @@ Page({
     var userId = app.globalData.userId;
     //发送get请求
     reqUtil.httpGet(config.host.apiHost + '/api/user/' + userId + "/userShipAddress", (err, res) => {
-     //遍历列表并设置默认
-      for(var i=0;i<res.data.result.length;i++){
-        if (res.data.result[i].status==1){
-          this.setData({
-            addressList: res.data.result[i],
-            hidden: true,
-          })
+      if (res.data.result.length==1){
+        res.data.result[0].status==1
+        this.setData({
+          addressList: res.data.result[0],
+          hidden: true,
+        })
+      }else{
+        //遍历列表并设置默认
+        for (var i = 0; i < res.data.result.length; i++) {
+          if (res.data.result[i].status == 1) {
+            this.setData({
+              addressList: res.data.result[i],
+              hidden: true,
+            })
+          }
         }
       }
     })
   },
-
+  money: function (e) {
+      //钱数小数点后二位设定
+      var total_price = Number(e);
+      var money = total_price.toFixed(2);
+      return money;
+  },
   /**
    *  点击减号 
    */
@@ -81,8 +95,8 @@ Page({
     var num = this.data.num;
     // 不作过多考虑自增1  
     num++;
-    if (num >= 10) {
-      num = 10;
+    if (num >= 50) {
+      num = 50;
       wx.showModal({
         title: '提示',
         content: "最多可选打印数量为10个",
@@ -147,6 +161,13 @@ Page({
       wx.showModal({
         title: '提示',
         content: '请添加您的收货地址',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/index/addressList/addressList',
+            })
+          }
+        }
       })
       return;
     }
