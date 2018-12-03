@@ -191,8 +191,8 @@ class UserManagerDetail extends React.Component {
                                     <div className="input-field col s4 margin-top3">
                                         姓名：{userManagerDetailReducer.userInfo[0].user_name}
                                         {userManagerDetailReducer.userInfo[0].gender === sysConst.GENDER[0].value ?
-                                            <i className="mdi mdi-human-male margin-left20 blue-font fz24"/> :
-                                            <i className="mdi mdi-human-female margin-left20 pink-text text-lighten-2 fz24"/>}
+                                            <i className="mdi mdi-human-female margin-left20 pink-text text-lighten-2 fz24"/> :
+                                            <i className="mdi mdi-human-male margin-left20 blue-font fz24"/>}
                                     </div>
                                     <div className="input-field col s3">
                                         出生年月日：{formatUtil.getDate(userManagerDetailReducer.userInfo[0].birth)}
