@@ -97,7 +97,7 @@ class UserManager extends React.Component {
     };
 
     /**
-     * 查询绑定车辆列表
+     * 查询用户列表
      */
     queryUserList = () => {
         // 默认第一页
