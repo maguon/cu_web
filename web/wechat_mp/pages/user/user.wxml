@@ -19,9 +19,8 @@
         <image class="phone" src="../../assets/images/phone.png"></image>
        <view  class="userinfo-phone" >{{Phone}}</view>
        </view>
+        <text hidden='{{hidden}}' class="userinfo-phone">未绑定手机</text>
      </view>
-       <text hidden='{{hidden}}' class="userinfo-phone">未绑定手机</text>
-
     </block>
   </view>
 

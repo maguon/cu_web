@@ -54,7 +54,8 @@ color: #8a8a8a;
   width: 15px;
   height: 15px;
   margin-left: 15px;
-  margin-bottom:-15px;
+  margin-right: 5px;
+  margin-top: 18px;
 }
 .num{
   font-size: 18px;

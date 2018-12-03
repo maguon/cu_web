@@ -58,8 +58,10 @@ Page({
       warn = "请输入您的车牌号";
     } else if (vin=='') {
       warn = "请您输入车辆识别码";
-    } else if (vin.length != 17) {
+    } else if (vin.length <17) {
       warn = "您输入的车辆识别码不足17位";
+    } else if (vin.length > 17) {
+      warn = "您输入的车辆识别码超出17位";
     }else if (carNumber == "") {
       warn = "请您输入车辆发动机号";
     } else {

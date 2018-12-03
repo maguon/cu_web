@@ -59,7 +59,7 @@ page{
 
 .weui-btn{
   position: fixed;
-  bottom: 70px;
+  bottom: 90px;
   left: 5%;
   height: 40px;
   width: 90%;

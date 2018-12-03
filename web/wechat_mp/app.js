@@ -28,6 +28,7 @@ App({
         console.log(res.code)
         //发送code 请求openid
         reqUtil.httpGet(config.host.apiHost + "/api/wechat/" + code + "/openid", (err, res) => {
+       
           //保存openid 到全局
           that.globalData.openid=res.data.result.openid;
           console.log(res.data.result)
@@ -36,6 +37,7 @@ App({
           if (this.userInfoReadyCallback) {
             this.userInfoReadyCallback(res)
           }
+       
         })
        }
     })

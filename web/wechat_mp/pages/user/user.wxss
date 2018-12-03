@@ -25,6 +25,7 @@ page{
 .userinfo-phone{
   color:#89d2f3;
   font-size: 15px;
+  margin-left: 6px;
 }
 .phone-img{
   display: flex;
@@ -42,9 +43,7 @@ page{
 .phone{
  width: 15px;
  height: 15px;
- margin-left: 15rpx;
- margin-right: 15rpx;
- /* background: red */
+ margin-left: 5px;
 }
 
 .weui-cell_access{

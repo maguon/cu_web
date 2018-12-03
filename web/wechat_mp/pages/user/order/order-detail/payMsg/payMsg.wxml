@@ -10,7 +10,7 @@
                 <view >{{payState[item.type]}}</view>
                 <view class='right'>
                 <image class='money'src='../../../../../../assets/images/money.png'></image>
-            <view class='total'>{{item.total_fee}}.00</view>
+            <view class='total'>{{item.total_fee}}</view>
                </view>
                </view>
                 <view class='div-line'></view> 

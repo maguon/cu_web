@@ -3,6 +3,8 @@ const config = require('../../config.js');
 const reqUtil = require('../../utils/ReqUtil.js')
 Page({
   data: {
+    msg:"暂无消息",
+    msgmaott:"交警会通过短信方式向您发送通知",
     falg:false,
     msgList:[],
     color: '',
@@ -31,10 +33,20 @@ Page({
         if (res.data.result[i].type== 1) {
           res.data.result[i].type=false;
         }
-        var date = new Date(res.data.result[i].created_on);
-        var localeString = date.toLocaleString();
-        var t = new Date(localeString);
-        res.data.result[i].created_on=t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
+
+        var t = new Date(res.data.result[i].created_on);
+        var Minutes = t.getMinutes();
+        var Seconds = t.getSeconds();
+        if (Minutes < 10) {
+          Minutes = "0" + Minutes;
+        }
+        if (Seconds < 10) {
+          Seconds = "0" + Seconds;
+        }
+
+        var olddata=t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + Minutes + ':' + Seconds;
+        var olddata2 = olddata.replace(/-/g, "/");
+        res.data.result[i].created_on = olddata2;
       }
       if(count!=0){
       //获得消息数量

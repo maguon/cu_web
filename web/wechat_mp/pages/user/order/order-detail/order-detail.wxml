@@ -14,8 +14,8 @@
             <view class='price'>
             <view class='test'>单价</view>
             <view class='right'>
-            <image class='money'src='../../../../../assets/images/money.png'></image>
-            <view class='num'>{{price}}.00</view>
+            <image class='money'src='../../../../assets/images/money.png'></image>
+            <view class='num'>{{price}}</view>
             </view>
             </view>
             <view class='ima-line'></view>  
@@ -31,8 +31,8 @@
              <view class='price'>
             <view class='test'>运费</view>
             <view class='right'>
-            <image class='money'src='../../../../../assets/images/money.png'></image>
-            <view class='num'>{{product.total_freight}}.00</view>
+            <image class='money'src='../../../../assets/images/money.png'></image>
+            <view class='num'>{{product.total_freight}}</view>
             </view>
             </view>
             <view class='ima-line'></view> 
@@ -40,8 +40,8 @@
              <view class='price'>
             <view class='test'>合计费用</view>
             <view class='right'>
-            <image class='money'src='../../../../../assets/images/money.png'></image>
-            <view class='total'>{{price}}.00</view>
+            <image class='money'src='../../../../assets/images/money.png'></image>
+            <view class='total'>{{sum}}</view>
             </view>
             </view>
             <view class='div-line'></view> 
@@ -130,8 +130,10 @@
                 </view>  
 
           <button class='service' disabled='true' hidden='{{!isPay}}'>
-          <image class='service-image' src='../../../../../assets/images/service.png'></image>
+          <view>
+         <image  class='service-image' src='../../../../assets/images/service.png'></image>
           <text class='number'>400-800-3562</text>
+          </view>
           </button>
 
      </view>

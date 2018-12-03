@@ -1,5 +1,5 @@
  <view hidden='{{hidden}}' >
-        <view class="page__desc">暂无订单</view>
+        <view class="page__desc">{{text}}</view>
 </view>
 <loading hidden="{{loadingHidden}}">加载中</loading>
 
@@ -16,9 +16,9 @@
                 </view>
                 <view class='money'> 
                 <view class="weui-cell__hd">
-                    <image class='image' src="../../../../assets/images/money.png" ></image>
+                    <image class='image' src="../../../assets/images/money.png" ></image>
                 </view>
-                <view class="num">{{item.total_price}}.00</view>
+                <view class="num">{{item.total_price}}</view>
                 </view>
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
             </view>

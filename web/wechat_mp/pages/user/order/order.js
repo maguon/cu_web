@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+  text:"暂无订单",
   hidden:false,
   orderList:[],
   state: ['未支付','待发货','已发货','已退款','已补发','已付款'],
@@ -55,12 +56,23 @@ Page({
           res.data.result[i].page_state = 5;
    
         }
-        
-        var date = new Date(len.created_on);
-        var localeString = date.toLocaleString();
-        var t = new Date(localeString);
-        var time = t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
-        res.data.result[i].created_on = time;
+        //钱数小数点后二位设定
+       var  total_price =Number(res.data.result[i].total_price);
+        res.data.result[i].total_price=total_price.toFixed(2);
+
+        var t = new Date(len.created_on);
+        var Minutes = t.getMinutes();
+        var Seconds = t.getSeconds();
+        if (Minutes < 10) {
+          Minutes = "0" + Minutes;
+        }
+        if (Seconds < 10) {
+          Seconds = "0" + Seconds;
+        }
+
+        var time = t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + Minutes + ':' + Seconds;
+        let olddata = time .replace(/-/g, "/");
+        res.data.result[i].created_on = olddata;
       }
       this.setData({
         orderList: res.data.result,
@@ -101,10 +113,10 @@ Page({
     console.log(e)
     var index = e.currentTarget.dataset.index;
     var name = e.currentTarget.dataset.name;
-    var orderList = JSON.stringify(that.data.orderList[index]);
+    var orderId = that.data.orderList[index].id;
     var total_price = that.data.orderList[index].total_price;
     wx.navigateTo({
-      url: '/pages/index/pay/wxpay/wxpay?orderList=' + orderList + "&price=" + total_price+"&name="+name,
+      url: '/pages/index/pay/wxpay/wxpay?orderId=' + orderId + "&price=" + total_price+"&name="+name,
     })
   },
   /**
@@ -120,6 +132,7 @@ Page({
     var imgPath='';
     var imgPathIndex='';
     reqUtil.httpGet(config.host.apiHost + "/api/user/" + userId + '/product', (err, res) => {
+      console.log(res.data.result)
       for (var i = 0; i < res.data.result.length; i++) {
         if (res.data.result[i].id == 1000) {
            var price= res.data.result[i].unit_price;

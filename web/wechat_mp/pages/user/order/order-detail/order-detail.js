@@ -53,12 +53,14 @@ Page({
        isPay: true,
      })  
     }
-     var sum = res.data.result[0].total_freight + res.data.result[0].total_price;
+      
+     var sum = this.money(res.data.result[0].total_freight + res.data.result[0].total_price);
      var created_on = this.Time(res.data.result[0].created_on);
      var updated_on = this.Time(res.data.result[0].updated_on);
+     res.data.result[0].total_freight = this.money(res.data.result[0].total_freight);
      this.setData({
        product :res.data.result[0],
-       price:e.price,
+       price:this.money(e.price),
        sum:sum,
        staterTime: created_on,
        payTime: updated_on,
@@ -108,16 +110,30 @@ Page({
 
   },
 
+money:function(e){
+  //钱数小数点后二位设定
+  var total_price = Number(e);
+  var money= total_price.toFixed(2);
+  return money;
+},
 
 /**
  * 共通编译时间
  */
   Time: function (e) {
-    var date = new Date(e);
-    var localeString = date.toLocaleString();
-    var t = new Date(localeString);
-    var time = t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
-    return time;
+    var t = new Date(e);
+    var Minutes = t.getMinutes();
+    var Seconds = t.getSeconds();
+    if (Minutes < 10) {
+      Minutes = "0" + Minutes;
+    }
+    if (Seconds < 10) {
+      Seconds = "0" + Seconds;
+    }
+
+    var time = t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate() + ' ' + t.getHours() + ':' + Minutes + ':' + Seconds;
+    var olddata = time.replace(/-/g, "/");
+    return olddata;
   },
  /**
   * 取消订单
