@@ -26,7 +26,7 @@ export const getPoliceList = () => async (dispatch, getState) => {
         const conditionStatus = getState().TrafficPoliceReducer.conditionStatus;
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/supervise?start=' + start + '&size=' + size;
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/supervise?start=' + start + '&size=' + size;
 
         // 检索条件
         let conditionsObj = {
@@ -84,7 +84,7 @@ export const addPolice = () => async (dispatch, getState) => {
                 status: status,
                 type: position.value
             };
-            const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/supervise';
+            const url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/supervise';
             const res = await httpUtil.httpPost(url, params);
 
             if (res.success === true) {

@@ -25,7 +25,7 @@ export const getCheckCarList = () => async (dispatch, getState) => {
         const conditionEndDate = getState().CheckCarReducer.conditionEndDate;
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/checkCar?start=' + start + '&size=' + size;
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/checkCar?start=' + start + '&size=' + size;
 
         // 检索条件
         let conditionsObj = {

@@ -15,7 +15,7 @@ export const getLogCompanyList = () => async (dispatch, getState) => {
         const conditionPhone = getState().LogCompanyReducer.conditionPhone.trim();
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/logCompany?start=0';
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/logCompany?start=0';
 
         // 检索条件
         let conditionsObj = {

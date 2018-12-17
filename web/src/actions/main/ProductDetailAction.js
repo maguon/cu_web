@@ -9,7 +9,7 @@ const sysConst = require('../../util/SysConst');
 export const getProductInfo = (id) => async (dispatch) => {
     try {
         // 基本检索URL
-        const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        const url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/product?productId=' + id;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -73,7 +73,7 @@ export const saveProductInfo = () => async (dispatch, getState) => {
                 remark: remark
             };
             // 基本url
-            let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/product';
+            let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/product';
             let res = null;
             // 编辑时,需要拼接 商品信息 中的商品id
             if (pageType === 'edit') {
@@ -132,7 +132,7 @@ export const changeProductStatus = () => async (dispatch, getState) => {
                         status: status
                     };
                     // 基本url
-                    let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+                    let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
                         + '/product/' + productInfo[0].id  + '/status';
                     let res = await httpUtil.httpPut(url, params);
 
@@ -154,7 +154,7 @@ export const changeProductStatus = () => async (dispatch, getState) => {
 export const uploadProductImg = (formData) => (dispatch) => {
     try {
         // 基本url
-        let url = fileHost + '/api/user/' + localUtil.getLocalItem(sysConst.USER_ID) + '/image?imageType=1';
+        let url = fileHost + '/api/user/' + localUtil.getSessionItem(sysConst.USER_ID) + '/image?imageType=1';
         httpUtil.httpAsyncFormPost(url, formData, function (result) {
             if (result.success === true) {
                 // 上传图片成功后，刷新画面显示图片
@@ -195,7 +195,7 @@ export const saveProductImg = () => async (dispatch, getState) => {
                 img: productImgId
             };
             // 基本url
-            let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+            let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
                 + '/product/' + productId + '/productImg';
             let res = await httpUtil.httpPut(url, params);
             if (res.success === true) {
@@ -240,7 +240,7 @@ export const saveProductDesc = () => async (dispatch, getState) => {
                 productRemark: productDes
             };
             // 基本url
-            let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/product/' + productId + '/productRemark';
+            let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/product/' + productId + '/productRemark';
             let res = await httpUtil.httpPut(url, params);
             if (res.success === true) {
                 swal("保存成功", "", "success");

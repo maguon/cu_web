@@ -9,7 +9,7 @@ const sysConst = require('../../util/SysConst');
 export const getPaymentInfo = (paymentId) => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/payment?paymentId=' + paymentId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -28,7 +28,7 @@ export const getPaymentInfo = (paymentId) => async (dispatch) => {
 export const getRelPaymentList = (paymentId) => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/paymentRefund?paymentId=' + paymentId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {

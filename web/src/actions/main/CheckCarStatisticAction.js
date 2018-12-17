@@ -18,7 +18,7 @@ export const getCheckCarStatByMonth = () => async (dispatch, getState) => {
             monthEnd = getState().CheckCarStatisticReducer.monthEnd;
         }
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/checkCarByMonth?yMonthStart=' + monthStart + '&yMonthEnd=' + monthEnd;
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -53,7 +53,7 @@ export const getCheckCarStatByDay = () => async (dispatch, getState) => {
     try {
         let dateSize = getState().CheckCarStatisticReducer.dataSize;
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/checkCarByDay?dateSize=' + dateSize;
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {

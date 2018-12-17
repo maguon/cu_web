@@ -8,7 +8,7 @@ const sysConst = require('../../util/SysConst');
 export const getLogCoList = () => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/logCompany';
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -24,7 +24,7 @@ export const getLogCoList = () => async (dispatch) => {
 export const getOrderInfo = (orderId) => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/order?orderId=' + orderId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -40,7 +40,7 @@ export const getOrderInfo = (orderId) => async (dispatch) => {
 export const getOrderDetail = (orderId) => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/orderItem?orderId=' + orderId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {

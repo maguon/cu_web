@@ -28,7 +28,7 @@ export const getOrderList = () => async (dispatch, getState) => {
         const conditionLogStatus = getState().OrderReducer.conditionLogStatus;
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/order?start=' + start + '&size=' + size;
 
         // 检索条件

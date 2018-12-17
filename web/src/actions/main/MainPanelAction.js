@@ -9,7 +9,7 @@ const formatUtil = require('../../util/FormatUtil');
 export const getUserStat = () => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/userStat';
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/userStat';
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {
             if (res.result.length > 0) {
@@ -28,7 +28,7 @@ export const getUserStat = () => async (dispatch) => {
 export const getUserCarStat = () => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/userCarStat';
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/userCarStat';
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {
             if (res.result.length > 0) {
@@ -47,7 +47,7 @@ export const getUserCarStat = () => async (dispatch) => {
 export const getSuperviseStat = () => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/superviseStat';
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/superviseStat';
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {
             if (res.result.length > 0) {
@@ -66,7 +66,7 @@ export const getSuperviseStat = () => async (dispatch) => {
 export const getCheckCarStatByMonth = () => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/checkCarStatByMonth?yMonth=' + formatUtil.formatDate(new Date(), 'yyyyMM');
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -86,7 +86,7 @@ export const getCheckCarStatByMonth = () => async (dispatch) => {
 export const getOrderStatByMonth = () => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/orderStatByMonth?yMonth=' + formatUtil.formatDate(new Date(), 'yyyyMM');
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -115,7 +115,7 @@ export const getOrderStatByMonth = () => async (dispatch) => {
 export const getPaymentFeeByMonth = () => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/paymentFeeByMonth?yMonth=' + formatUtil.formatDate(new Date(), 'yyyyMM');
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -147,7 +147,7 @@ export const getPaymentFeeByMonth = () => async (dispatch) => {
 export const getLogStatByMonth = () => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/logStatByMonth?yMonth=' + formatUtil.formatDate(new Date(), 'yyyyMM');
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -176,7 +176,7 @@ export const getLogStatByMonth = () => async (dispatch) => {
 export const getOrderFeedbackStatByMonth = () => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/orderFeedbackStatByMonth?yMonth=' + formatUtil.formatDate(new Date(), 'yyyyMM');
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {

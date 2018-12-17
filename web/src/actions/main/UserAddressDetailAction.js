@@ -8,7 +8,7 @@ const sysConst = require('../../util/SysConst');
 export const getUserAddressInfo = (id) => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/userShipAddress?shipAddressId=' + id;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {

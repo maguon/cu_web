@@ -8,7 +8,7 @@ const sysConst = require('../../util/SysConst');
 export const getSaleInfo = (id) => async (dispatch) => {
     try {
         // 基本检索URL
-        const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        const url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/orderItem?orderItemId=' + id;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {

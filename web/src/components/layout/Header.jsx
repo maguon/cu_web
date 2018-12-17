@@ -24,9 +24,9 @@ class Header extends React.Component {
      */
     componentDidMount() {
         const {getUserDetail} = this.props;
-        const userId = localUtil.getLocalItem(sysConst.USER_ID);
-        const userType = localUtil.getLocalItem(sysConst.USER_TYPE);
-        const token = localUtil.getLocalItem(sysConst.AUTH_TOKEN);
+        const userId = localUtil.getSessionItem(sysConst.USER_ID);
+        const userType = localUtil.getSessionItem(sysConst.USER_TYPE);
+        const token = localUtil.getSessionItem(sysConst.AUTH_TOKEN);
         httpHeaders.set(sysConst.USER_ID, userId);
         httpHeaders.set(sysConst.USER_TYPE, userType);
         httpHeaders.set(sysConst.AUTH_TOKEN, token);

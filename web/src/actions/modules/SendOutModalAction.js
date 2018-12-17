@@ -27,7 +27,7 @@ export const sendOut = () => async (dispatch, getState) => {
                 logCompanyId: logCompany.value,
                 freight: freight
             };
-            const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+            const url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
                 + '/log/' + logInfo[0].id + '/logInfo';
             const res = await httpUtil.httpPut(url, params);
             if (res.success === true) {

@@ -18,7 +18,7 @@ export const getUserStatByMonth = () => async (dispatch, getState) => {
             monthEnd = getState().UserStatisticReducer.monthEnd;
         }
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/userStatByMonth?yMonthStart=' + monthStart + '&yMonthEnd=' + monthEnd;
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -53,7 +53,7 @@ export const getUserStatByDay = () => async (dispatch, getState) => {
     try {
         let dateSize = getState().UserStatisticReducer.dataSize;
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/userStatByDay?dateSize=' + dateSize;
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {

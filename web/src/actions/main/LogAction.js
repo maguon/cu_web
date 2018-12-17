@@ -34,7 +34,7 @@ export const getLogList = () => async (dispatch, getState) => {
         const conditionUpdatedOnEnd = getState().LogReducer.conditionUpdatedOnEnd;
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/log?start=' + start + '&size=' + size;
 
         // 检索条件

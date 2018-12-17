@@ -30,7 +30,7 @@ export const getUserCarList = () => async (dispatch, getState) => {
         const conditionBindTimeEnd = getState().UserCarReducer.conditionBindTimeEnd;
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/userCar?start=' + start + '&size=' + size;
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/userCar?start=' + start + '&size=' + size;
 
         // 检索条件
         let conditionsObj = {

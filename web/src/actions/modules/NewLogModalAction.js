@@ -12,7 +12,7 @@ export const getOrderInfo = () => async (dispatch, getState) => {
         const orderId = getState().NewLogModalReducer.orderId;
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/order?orderId=' + orderId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -38,7 +38,7 @@ export const getOrderInfo = () => async (dispatch, getState) => {
 export const getOrderItemList = (orderId) => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/orderItem?orderId=' + orderId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -79,7 +79,7 @@ export const addLog = () => async (dispatch, getState) => {
                 type: sysConst.LOG_RESEND_STATUS[0].value
             };
 
-            const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/log';
+            const url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/log';
             const res = await httpUtil.httpPost(url, params);
             if (res.success === true) {
                 swal("添加成功", "", "success");

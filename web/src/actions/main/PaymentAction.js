@@ -27,7 +27,7 @@ export const getPaymentList = () => async (dispatch, getState) => {
         const conditionCreatedOnEnd = getState().PaymentReducer.conditionCreatedOnEnd;
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/payment?start=' + start + '&size=' + size;
 
         // 检索条件

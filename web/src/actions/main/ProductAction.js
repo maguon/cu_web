@@ -25,7 +25,7 @@ export const getProductList = () => async (dispatch, getState) => {
         const conditionSaleStatus = getState().ProductReducer.conditionSaleStatus;
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/product?start=' + start + '&size=' + size;
 
         // 检索条件

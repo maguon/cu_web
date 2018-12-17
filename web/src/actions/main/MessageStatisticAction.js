@@ -18,7 +18,7 @@ export const getMsgStatByMonth = () => async (dispatch, getState) => {
             monthEnd = getState().MessageStatisticReducer.monthEnd;
         }
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/msgStatByMonth?monthStart=' + monthStart + '&monthEnd=' + monthEnd;
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -74,7 +74,7 @@ export const getMsgStatByDay = () => async (dispatch, getState) => {
     try {
         let dateSize = getState().MessageStatisticReducer.dataSize;
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/msgStatByDay?dateSize=' + dateSize;
         let res = await httpUtil.httpGet(url);
         if (res.success === true) {

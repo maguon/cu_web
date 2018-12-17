@@ -10,7 +10,7 @@ const sysConst = require('../../util/SysConst');
 export const getOrderInfo = (orderId) => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/order?orderId=' + orderId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -42,7 +42,7 @@ export const refund = () => async (dispatch, getState) => {
                 refundFee: refundMoney,
                 remark: remark
             };
-            const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+            const url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
                 + '/user/' + orderInfo[0].user_id + '/order/' + orderInfo[0].id + '/wechatRefund';
             const res = await httpUtil.httpPost(url, params);
             if (res.success === true) {

@@ -8,7 +8,7 @@ const sysConst = require('../../util/SysConst');
 export const getUserCarInfo = (id) => async (dispatch) => {
     try {
         // 基本检索URL
-        const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        const url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/userCar?userCarId=' + id;
 
         const res = await httpUtil.httpGet(url);
@@ -34,7 +34,7 @@ export const getCheckCarList = (id) => async (dispatch, getState) => {
         const userId = userCarInfo.length > 0 ? userCarInfo[0].user_id : '';
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/checkCar?start=' + start + '&size=' + size + '&userCarId=' + id + '&userId=' + userId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {

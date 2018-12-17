@@ -9,7 +9,7 @@ const sysConst = require('../../util/SysConst');
 export const getLogInfo = (logId) => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/log?logId=' + logId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {

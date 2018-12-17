@@ -8,7 +8,7 @@ const sysConst = require('../../util/SysConst');
 export const getFeedBackInfo = (id) => async (dispatch) => {
     try {
         // 基本检索URL
-        const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        const url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/orderFeedback?orderFeedbackId=' + id;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -45,7 +45,7 @@ export const updateFeedBack = (feedBackId, orderId) => async (dispatch, getState
                 processRemark: processRemark,
                 processMethod: processMethod
             };
-            const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+            const url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
                 + '/order/' + orderId + '/orderFeedback/' + feedBackId + '/orderFeedbackPayment';
             const res = await httpUtil.httpPut(url, params);
             if (res.success === true) {
@@ -64,7 +64,7 @@ export const getOrderInfo = (id) => async (dispatch) => {
 
     try {
         // 基本检索URL
-        const url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        const url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/order?orderId=' + id;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -80,7 +80,7 @@ export const getOrderInfo = (id) => async (dispatch) => {
 export const getOrderDetail = (orderId) => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/orderItem?orderId=' + orderId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -96,7 +96,7 @@ export const getOrderDetail = (orderId) => async (dispatch) => {
 export const getPaymentInfo = (orderId) => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/payment?orderId=' + orderId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {
@@ -112,7 +112,7 @@ export const getPaymentInfo = (orderId) => async (dispatch) => {
 export const getLogInfo = (orderId) => async (dispatch) => {
     try {
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID)
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID)
             + '/log?orderId=' + orderId;
         const res = await httpUtil.httpGet(url);
         if (res.success === true) {

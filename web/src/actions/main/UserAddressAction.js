@@ -24,7 +24,7 @@ export const getUserAddressList = () => async (dispatch, getState) => {
         const conditionBindPhone = getState().UserAddressReducer.conditionBindPhone.trim();
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/userShipAddress?start=' + start + '&size=' + size;
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/userShipAddress?start=' + start + '&size=' + size;
 
         // 检索条件
         let conditionsObj = {

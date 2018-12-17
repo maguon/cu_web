@@ -28,7 +28,7 @@ export const getMessageList = () => async (dispatch, getState) => {
         const conditionStatus = getState().MessageReducer.conditionStatus;
 
         // 基本检索URL
-        let url = apiHost + '/api/admin/' + localUtil.getLocalItem(sysConst.USER_ID) + '/getMessage?start=' + start + '&size=' + size;
+        let url = apiHost + '/api/admin/' + localUtil.getSessionItem(sysConst.USER_ID) + '/getMessage?start=' + start + '&size=' + size;
 
         // 检索条件
         let conditionsObj = {
