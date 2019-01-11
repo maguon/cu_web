@@ -45,7 +45,7 @@ class CheckCarStatistic extends React.Component {
                         <div className="col s6 margin-top15">扫码-按月统计</div>
 
                         <div className="col s6 right">
-                            <div className="col s3 left"/>
+                            <div className="col s4 left"/>
 
                             <div className="col s3 position-relative">
                                 <input type="text" className="margin-bottom0" readOnly id="monthStart" value={checkCarStatisticReducer.monthStart}/>
@@ -58,7 +58,7 @@ class CheckCarStatistic extends React.Component {
                                 <input type="text" className="margin-bottom0" readOnly id="monthEnd" value={checkCarStatisticReducer.monthEnd}/>
                                 <i className="mdi mdi-table-large table-icon"/>
                             </div>
-                            <div className="col s2 center padding-top10">
+                            <div className="col s1 center padding-top10">
                                 <i className="mdi mdi-magnify fz24 pointer" onClick={getCheckCarStatByMonth}/>
                             </div>
 
