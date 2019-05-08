@@ -111,6 +111,7 @@ class TrafficPoliceDetail extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">职务</label>
                             </div>

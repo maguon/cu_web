@@ -155,6 +155,7 @@ class TrafficPolice extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">性别</label>
                             </div>
@@ -172,6 +173,7 @@ class TrafficPolice extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">职务</label>
                             </div>
@@ -189,6 +191,7 @@ class TrafficPolice extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">状态</label>
                             </div>
@@ -298,6 +301,7 @@ class TrafficPolice extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={false}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">职务</label>
                             </div>

@@ -226,6 +226,9 @@ export const DATE_PICKER_OPTION = {
  * 单选下拉菜单样式
  */
 export const CUSTOM_REACT_SELECT_STYLE = {
+    // 整体容器
+    // container: styles => ({ ...styles,  border:'1px solid #ff0000'}),
+    // 控制器
     control: (styles, {isFocused}) => ({
         ...styles,
         height: 'calc(3rem + 1px)',
@@ -241,6 +244,16 @@ export const CUSTOM_REACT_SELECT_STYLE = {
             borderColor: "#26a69a"
         }
     }),
+    // 下拉菜单和输入框距离
+    menu: styles => ({ ...styles, marginTop:'1px'}),
+    // 指示器（删除/下拉）分隔符(竖线)
     indicatorSeparator: styles => ({...styles, display: 'none'}),
-    valueContainer: styles => ({...styles, paddingLeft: '0'})
+    // 检索输入框
+    input: styles => ({...styles, margin: '0', paddingTop: '0',paddingBottom: '0',height: 'calc(3rem)'}),
+    // 选中内容显示区域
+    valueContainer: styles => ({
+        ...styles,
+        paddingLeft: '0',
+        height: 'calc(3rem + 1px)'
+    })
 };

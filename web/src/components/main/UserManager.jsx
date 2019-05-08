@@ -155,6 +155,7 @@ class UserManager extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">认证状态</label>
                             </div>
@@ -192,6 +193,7 @@ class UserManager extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">关注状态</label>
                             </div>

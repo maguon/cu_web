@@ -132,6 +132,7 @@ class Message extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">消息类型</label>
                             </div>
@@ -164,6 +165,7 @@ class Message extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">是否成功</label>
                             </div>

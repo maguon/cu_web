@@ -145,6 +145,7 @@ class Sale extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">付款状态</label>
                             </div>

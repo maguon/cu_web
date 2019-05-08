@@ -173,6 +173,7 @@ class Log extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">发货状态</label>
                             </div>
@@ -187,6 +188,7 @@ class Log extends React.Component {
                                     placeholder={"请选择"}
                                     styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                     isClearable={true}
+                                    backspaceRemovesValue={false}
                                 />
                                 <label className="active">快递公司</label>
                             </div>

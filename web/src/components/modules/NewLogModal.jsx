@@ -143,6 +143,7 @@ class NewLogModal extends React.Component {
                                             placeholder={"请选择"}
                                             styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                             isClearable={false}
+                                            backspaceRemovesValue={false}
                                         />
                                         <label className="active">发货商品</label>
                                     </div>

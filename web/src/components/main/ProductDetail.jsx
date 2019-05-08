@@ -145,6 +145,7 @@ class ProductDetail extends React.Component {
                                             placeholder={"请选择"}
                                             styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                             isClearable={false}
+                                            backspaceRemovesValue={false}
                                         />
                                         <label className="active">商品类型</label>
                                     </div>
@@ -178,6 +179,7 @@ class ProductDetail extends React.Component {
                                             placeholder={"请选择"}
                                             styles={sysConst.CUSTOM_REACT_SELECT_STYLE}
                                             isClearable={false}
+                                            backspaceRemovesValue={false}
                                         />
                                         <label className="active">商品类型</label>
                                     </div>
